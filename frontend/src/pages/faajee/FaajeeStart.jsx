@@ -5,7 +5,7 @@ type RoomType = 'fan' | 'verified';
 type PrivacyType = 'public' | 'private';
 type ThemeColor = 'blue' | 'red' | 'green';
 
-const CreateRoomPage = () => {
+const FaajeeStart = () => {
   // Form state
   const [roomType, setRoomType] = useState<RoomType>('fan');
   const [artistName, setArtistName] = useState('');
@@ -384,4 +384,4 @@ const CreateRoomPage = () => {
   );
 };
 
-export default CreateRoomPage;
+export default FaajeeStart;
