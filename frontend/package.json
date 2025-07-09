@@ -20,6 +20,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "postinstall": "npm run setup:tailwind",
-  "setup:tailwind": "node scripts/setup-tailwind.js"
+    "setup:tailwind": "node scripts/setup-tailwind.js"
   }
 }
