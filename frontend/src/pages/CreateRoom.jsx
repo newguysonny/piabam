@@ -1,10 +1,4 @@
 import React, { useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export default function CreateRoom() {
   const [roomType, setRoomType] = useState("fan");
@@ -25,30 +19,38 @@ export default function CreateRoom() {
 
       {/* Room Type */}
       <div>
-        <Label className="mb-2 block">Room Type</Label>
-        <RadioGroup
-          defaultValue="fan"
-          onValueChange={setRoomType}
-          className="flex gap-6"
-        >
-          <div>
-            <RadioGroupItem value="fan" id="fan" />
-            <Label htmlFor="fan">Fan Room</Label>
-          </div>
-          <div>
-            <RadioGroupItem value="verified" id="verified" disabled />
-            <Label htmlFor="verified" className="opacity-50">
-              Artist-Verified (Coming Soon)
-            </Label>
-          </div>
-        </RadioGroup>
+        <label className="block mb-2 font-medium">Room Type</label>
+        <div className="flex gap-6">
+          <label className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="roomType"
+              value="fan"
+              checked={roomType === "fan"}
+              onChange={() => setRoomType("fan")}
+            />
+            Fan Room
+          </label>
+          <label className="flex items-center gap-2 opacity-50">
+            <input
+              type="radio"
+              name="roomType"
+              value="verified"
+              disabled
+            />
+            Artist-Verified (Coming Soon)
+          </label>
+        </div>
       </div>
 
       {/* Artist Name */}
       {roomType === "fan" && (
         <div>
-          <Label className="mb-2 block">Artist Name</Label>
-          <Input placeholder="e.g., BTS" />
+          <label className="block mb-2 font-medium">Artist Name</label>
+          <input
+            placeholder="e.g., BTS"
+            className="w-full px-4 py-2 border rounded-md"
+          />
           <p className="text-xs mt-1 text-gray-500 italic">
             This is a fan-led room. Not official.
           </p>
@@ -57,19 +59,25 @@ export default function CreateRoom() {
 
       {/* Room Name */}
       <div>
-        <Label className="mb-2 block">Room Name</Label>
-        <Input placeholder="e.g., Vinyl & Veggie Night" />
+        <label className="block mb-2 font-medium">Room Name</label>
+        <input
+          placeholder="e.g., Vinyl & Veggie Night"
+          className="w-full px-4 py-2 border rounded-md"
+        />
       </div>
 
       {/* Description */}
       <div>
-        <Label className="mb-2 block">Description</Label>
-        <Textarea placeholder="e.g., Chill beats for plant-based eats" />
+        <label className="block mb-2 font-medium">Description</label>
+        <textarea
+          placeholder="e.g., Chill beats for plant-based eats"
+          className="w-full px-4 py-2 border rounded-md resize-none"
+        />
       </div>
 
       {/* Tags */}
       <div>
-        <Label className="mb-2 block">Tags</Label>
+        <label className="block mb-2 font-medium">Tags</label>
         <div className="flex flex-wrap gap-2 mb-2">
           {tags.map((tag, idx) => (
             <span key={idx} className="px-3 py-1 bg-gray-200 rounded-full text-sm">
@@ -78,31 +86,37 @@ export default function CreateRoom() {
           ))}
         </div>
         <div className="flex gap-2">
-          <Input
+          <input
             value={newTag}
             onChange={(e) => setNewTag(e.target.value.replace("#", ""))}
             placeholder="Add tag"
+            className="flex-1 px-4 py-2 border rounded-md"
           />
-          <Button onClick={addTag}>Add</Button>
+          <button
+            onClick={addTag}
+            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+          >
+            Add
+          </button>
         </div>
       </div>
 
       {/* Spotify Sync */}
       <div className="flex justify-between items-center">
         <div>
-          <Label className="block">Music</Label>
-          <Button variant="outline">Connect Spotify</Button>
+          <label className="block font-medium mb-1">Music</label>
+          <button className="border px-4 py-2 rounded-md">Connect Spotify</button>
         </div>
-        <div className="flex items-center gap-2">
-          <Label>Sync Playback</Label>
-          <Switch />
-        </div>
+        <label className="flex items-center gap-2">
+          <span>Sync Playback</span>
+          <input type="checkbox" className="w-5 h-5 accent-blue-500" />
+        </label>
       </div>
 
       {/* Food Partner */}
       <div>
-        <Label className="mb-2 block">Food Partner</Label>
-        <select className="w-full border p-2 rounded-lg">
+        <label className="block mb-2 font-medium">Food Partner</label>
+        <select className="w-full border px-4 py-2 rounded-md">
           <option>McDonald's</option>
           <option>No Food</option>
         </select>
@@ -110,45 +124,48 @@ export default function CreateRoom() {
 
       {/* Privacy */}
       <div>
-        <Label className="mb-2 block">Privacy</Label>
-        <RadioGroup defaultValue="public" className="flex gap-6">
-          <div>
-            <RadioGroupItem value="public" id="public" />
-            <Label htmlFor="public">Public</Label>
-          </div>
-          <div>
-            <RadioGroupItem value="private" id="private" />
-            <Label htmlFor="private">Private</Label>
-          </div>
-        </RadioGroup>
+        <label className="block mb-2 font-medium">Privacy</label>
+        <div className="flex gap-6">
+          <label className="flex items-center gap-2">
+            <input type="radio" name="privacy" value="public" defaultChecked />
+            Public
+          </label>
+          <label className="flex items-center gap-2">
+            <input type="radio" name="privacy" value="private" />
+            Private
+          </label>
+        </div>
       </div>
 
       {/* Co-hosts */}
       <div>
-        <Label className="mb-2 block">Co-Hosts</Label>
-        <Input placeholder="@Username1, @Username2" />
+        <label className="block mb-2 font-medium">Co-Hosts</label>
+        <input
+          placeholder="@Username1, @Username2"
+          className="w-full px-4 py-2 border rounded-md"
+        />
       </div>
 
       {/* Monetization */}
       <div>
-        <Label className="mb-2 block">Monetization</Label>
-        <RadioGroup defaultValue="none" className="flex flex-col gap-2">
-          <div>
-            <RadioGroupItem value="tips" id="tips" />
-            <Label htmlFor="tips">Enable Tips</Label>
-          </div>
-          <div>
-            <RadioGroupItem value="sponsor" id="sponsor" />
-            <Label htmlFor="sponsor">Sponsor Room</Label>
-          </div>
-        </RadioGroup>
+        <label className="block mb-2 font-medium">Monetization</label>
+        <div className="flex flex-col gap-2">
+          <label className="flex items-center gap-2">
+            <input type="radio" name="monetization" value="tips" />
+            Enable Tips
+          </label>
+          <label className="flex items-center gap-2">
+            <input type="radio" name="monetization" value="sponsor" />
+            Sponsor Room
+          </label>
+        </div>
       </div>
 
       {/* Customize */}
       <div>
-        <Label className="mb-2 block">Customize</Label>
+        <label className="block mb-2 font-medium">Customize</label>
         <div className="flex items-center gap-4">
-          <Input type="file" />
+          <input type="file" />
           <div className="flex gap-2">
             {["blue", "red", "green"].map((color) => (
               <button
@@ -166,8 +183,10 @@ export default function CreateRoom() {
 
       {/* Actions */}
       <div className="flex justify-end gap-4 pt-4">
-        <Button variant="outline">Preview Room</Button>
-        <Button>Go Live!</Button>
+        <button className="border px-4 py-2 rounded-md">Preview Room</button>
+        <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+          Go Live!
+        </button>
       </div>
     </div>
   );
