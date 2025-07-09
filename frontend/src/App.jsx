@@ -12,7 +12,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />   // Not login.html!
         <Route path="/signup" element={<Signup />} /> // Not signup.html!
         <Route path="/room/start" element={<CreateRoom />} />
-        <Route path="/music" element={<FaajeeStart />} />
+        <Route path="/music" element={<FaajeeStart />} /> // for testing type script 
       </Routes>
     </BrowserRouter>
   );
