@@ -19,7 +19,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "postinstall": "npm run setup:tailwind",
-    "setup:tailwind": "node scripts/setup-tailwind.js"
+    "postinstall": "npm run setup:tailwind && npm run setup:ui",
+    "setup:tailwind": "node scripts/setup-tailwind.js",
+    "setup:ui": "node scripts/setup-ui.js"
   }
 }
