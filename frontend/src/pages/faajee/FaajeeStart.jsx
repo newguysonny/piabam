@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FiMusic, FiLock, FiUserPlus, FiDollarSign, FiImage, FiCheck, FiX } from 'react-icons/fi';
 
 const FaajeeStart = () => {
-  // Form state
+  // Form states
   const [roomType, setRoomType] = useState('fan');
   const [artistName, setArtistName] = useState('');
   const [roomName, setRoomName] = useState('');
