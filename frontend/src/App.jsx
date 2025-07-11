@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import CreateRoom from './pages/CreateRoom';
 import FaajeeStart from './pages/faajee/FaajeeStart';
+import RoomPage from './pages/faajee/RoomPage';
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/signup" element={<Signup />} /> // Not signup.html!
         <Route path="/room/start" element={<CreateRoom />} />
         <Route path="/music" element={<FaajeeStart />} /> // for testing type script 
+        <Route path="/room" element={<RoomPage />} />
       </Routes>
     </BrowserRouter>
   );
