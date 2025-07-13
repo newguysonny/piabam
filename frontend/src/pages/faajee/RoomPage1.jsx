@@ -86,7 +86,7 @@ const RoomPage1 = () => {
         </div>
       </div>
 
-      {/* Connect Button */}
+      {/* Connect Button  */}
       <button 
         onClick={() => setIsConnected(true)}
         className={`w-full py-3 rounded-full mb-6 flex items-center justify-center gap-2 font-medium ${
