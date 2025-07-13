@@ -10,6 +10,63 @@ export default function SpotifyConnect({ isHost, onConnectSuccess }) {
     const error = params.get('error');
 
     if (error) {
+      console.error('Spotify auth error:', error);
+      return;
+    }
+
+    if (token) {
+      onConnectSuccess(token);
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, [onConnectSuccess]);
+
+  const handleConnect = () => {
+    const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
+    
+    // Spotify-compliant redirect URIs
+    const redirectUri = window.location.hostname.match(/127\.0\.0\.1|\[::1\]/)
+      ? `http://${window.location.hostname}:${window.location.port}/callback`
+      : `https://piabam.vercel.app/callback`;
+
+    const scopes = [
+      'streaming',
+      'user-read-email',
+      ...(isHost ? ['user-modify-playback-state'] : [])
+    ].join(' ');
+
+    const authUrl = new URL('https://accounts.spotify.com/authorize');
+    authUrl.searchParams.append('response_type', 'token');
+    authUrl.searchParams.append('client_id', clientId);
+    authUrl.searchParams.append('redirect_uri', redirectUri);
+    authUrl.searchParams.append('scope', scopes);
+    authUrl.searchParams.append('show_dialog', 'true');
+
+    console.log('Auth URL:', authUrl.toString());
+    window.location = authUrl.toString();
+  };
+
+  return (
+    <button
+      onClick={handleConnect}
+      className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-medium"
+    >
+      Connect Spotify
+    </button>
+  );
+}
+
+/*import { useEffect } from 'react';
+
+export default function SpotifyConnect({ isHost, onConnectSuccess }) {
+  useEffect(() => {
+    const hash = window.location.hash.substring(1);
+    if (!hash) return;
+
+    const params = new URLSearchParams(hash);
+    const token = params.get('access_token');
+    const error = params.get('error');
+
+    if (error) {
       console.error('Spotify auth error:', params.toString());
       return;
     }
@@ -50,7 +107,7 @@ export default function SpotifyConnect({ isHost, onConnectSuccess }) {
     </button>
   );
 }
-
+*/
 /*
 export default function SpotifyConnect({ isHost, onConnectSuccess }) {
   const handleConnect = () => {
