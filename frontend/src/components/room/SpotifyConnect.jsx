@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useState } from 'react';
 
 export default function SpotifyConnect({ isHost, onAuthComplete }) {
   const [isLoading, setIsLoading] = useState(false);
