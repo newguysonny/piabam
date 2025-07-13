@@ -1,3 +1,5 @@
+/*
+
 export default function SpotifyConnect({ isHost, onConnectSuccess }) {
   const handleConnect = () => {
     const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
@@ -24,5 +26,21 @@ export default function SpotifyConnect({ isHost, onConnectSuccess }) {
         {isHost ? 'Requires playback control permissions' : 'Needs basic streaming access'}
       </p>
     </div>
+  );
+}
+
+*/
+
+export default function SpotifyConnect({ onConnect }) {
+  const handleConnect = () => {
+    // Simulate Spotify connection (replace with real OAuth)
+    const fakeToken = 'spotify_fake_token_123';
+    onConnect(fakeToken);
+  };
+
+  return (
+    <button onClick={handleConnect}>
+      Connect Spotify to Join Room
+    </button>
   );
 }
