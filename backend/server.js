@@ -29,116 +29,92 @@ const {
 const sessions = {};
 
 // PKCE Helpers
+// Add these endpoints to your Express server
+
+// PKCE helper functions
 const generateRandomString = (length) => {
-  return crypto.randomBytes(length)
+  return require('crypto').randomBytes(length)
     .toString('base64')
     .replace(/[^a-zA-Z0-9]/g, '')
     .substring(0, length);
 };
 
-const generateCodeChallenge = (codeVerifier) => {
-  const hash = crypto.createHash('sha256')
-    .update(codeVerifier)
-    .digest('base64')
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=+$/, '');
-  return hash;
-};
-
-// Routes
+// Login endpoint
 app.get('/api/auth/login', (req, res) => {
-  const state = generateRandomString(16);
-  const codeVerifier = generateRandomString(64);
-  const codeChallenge = generateCodeChallenge(codeVerifier);
+  try {
+    const isHost = req.query.isHost === 'true';
+    const state = generateRandomString(16);
+    const codeVerifier = generateRandomString(64);
+    const codeChallenge = require('crypto')
+      .createHash('sha256')
+      .update(codeVerifier)
+      .digest('base64')
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+      .replace(/=+$/, '');
 
-  // Store session
-  sessions[state] = { codeVerifier };
-  
-  const authUrl = new URL('https://accounts.spotify.com/authorize');
-  authUrl.searchParams.append('response_type', 'code');
-  authUrl.searchParams.append('client_id', SPOTIFY_CLIENT_ID);
-  authUrl.searchParams.append('scope', 'streaming user-read-email user-modify-playback-state');
-  authUrl.searchParams.append('redirect_uri', SPOTIFY_REDIRECT_URI);
-  authUrl.searchParams.append('state', state);
-  authUrl.searchParams.append('code_challenge_method', 'S256');
-  authUrl.searchParams.append('code_challenge', codeChallenge);
+    // Store codeVerifier in session/database
+    req.session.codeVerifier = codeVerifier;
+    req.session.state = state;
 
-  res.json({ url: authUrl.toString() });
+    const scopes = [
+      'streaming',
+      'user-read-email',
+      ...(isHost ? ['user-modify-playback-state'] : [])
+    ].join(' ');
+
+    const authUrl = new URL('https://accounts.spotify.com/authorize');
+    authUrl.searchParams.append('response_type', 'code');
+    authUrl.searchParams.append('client_id', process.env.SPOTIFY_CLIENT_ID);
+    authUrl.searchParams.append('scope', scopes);
+    authUrl.searchParams.append('redirect_uri', process.env.SPOTIFY_REDIRECT_URI);
+    authUrl.searchParams.append('state', state);
+    authUrl.searchParams.append('code_challenge_method', 'S256');
+    authUrl.searchParams.append('code_challenge', codeChallenge);
+
+    res.json({ url: authUrl.toString() });
+  } catch (error) {
+    console.error('Login endpoint error:', error);
+    res.status(500).json({ error: 'Failed to generate auth URL' });
+  }
 });
 
+// Callback endpoint
 app.get('/api/auth/callback', async (req, res) => {
   try {
-    const { code, state, error } = req.query;
-    
-    if (error) {
-      throw new Error(`Spotify error: ${error}`);
+    const { code } = req.query;
+    const codeVerifier = req.session.codeVerifier;
+
+    if (!codeVerifier) {
+      throw new Error('Missing code verifier');
     }
 
-    // Validate state
-    if (!state || !sessions[state]) {
-      throw new Error('Invalid state parameter');
+    const params = new URLSearchParams();
+    params.append('grant_type', 'authorization_code');
+    params.append('code', code);
+    params.append('redirect_uri', process.env.SPOTIFY_REDIRECT_URI);
+    params.append('client_id', process.env.SPOTIFY_CLIENT_ID);
+    params.append('code_verifier', codeVerifier);
+
+    const tokenResponse = await fetch('https://accounts.spotify.com/api/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: params
+    });
+
+    if (!tokenResponse.ok) {
+      const errorData = await tokenResponse.json();
+      throw new Error(errorData.error_description || 'Token exchange failed');
     }
 
-    const { codeVerifier } = sessions[state];
-    delete sessions[state]; // Clean up
-
-    const response = await axios.post('https://accounts.spotify.com/api/token', 
-      new URLSearchParams({
-        grant_type: 'authorization_code',
-        code,
-        redirect_uri: SPOTIFY_REDIRECT_URI,
-        client_id: SPOTIFY_CLIENT_ID,
-        code_verifier: codeVerifier
-      }), {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': `Basic ${Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64')}`
-        }
-      }
-    );
-
-    // Set secure HTTP-only cookie
-    res.cookie('spotify_token', response.data.access_token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: 3600 * 1000, // 1 hour
-      sameSite: 'strict'
-    });
-
-    res.redirect(`${FRONTEND_URL}/room`);
+    const tokenData = await tokenResponse.json();
+    res.json({ access_token: tokenData.access_token });
   } catch (error) {
-    console.error('Auth callback error:', error.message);
-    res.redirect(`${FRONTEND_URL}/error?message=auth_failed`);
+    console.error('Callback endpoint error:', error);
+    res.status(500).json({ error: error.message });
   }
-});
-
-app.post('/api/auth/refresh', async (req, res) => {
-  try {
-    const { refresh_token } = req.body;
-    if (!refresh_token) throw new Error('No refresh token provided');
-
-    const response = await axios.post('https://accounts.spotify.com/api/token', 
-      new URLSearchParams({
-        grant_type: 'refresh_token',
-        refresh_token,
-        client_id: SPOTIFY_CLIENT_ID,
-        client_secret: SPOTIFY_CLIENT_SECRET
-      })
-    );
-
-    res.json({
-      access_token: response.data.access_token,
-      expires_in: response.data.expires_in
-    });
-  } catch (error) {
-    console.error('Refresh error:', error.response?.data || error.message);
-    res.status(401).json({ error: 'Token refresh failed' });
-  }
-});
-
-app.get('/api/auth/status', (req, res) => {
-  res.json({ authenticated: !!req.cookies.spotify_token });
 });
 
 // Start server
