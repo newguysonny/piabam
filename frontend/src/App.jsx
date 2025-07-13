@@ -5,6 +5,7 @@ import Signup from './pages/Signup';
 import CreateRoom from './pages/CreateRoom';
 import FaajeeStart from './pages/faajee/FaajeeStart';
 import RoomPage from './pages/faajee/RoomPage';
+import SpotifyPlaylistManager from './pages/faajee/SpotifyPlaylistManager';
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/room/start" element={<CreateRoom />} />
         <Route path="/music" element={<FaajeeStart />} /> // for testing type script 
         <Route path="/room" element={<RoomPage />} />
+        <Route path="/playlist" element={<SpotifyPlaylistManager />} />
       </Routes>
     </BrowserRouter>
   );
