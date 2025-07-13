@@ -10,7 +10,7 @@ export default function SpotifyConnect({ isHost, onConnectSuccess }) {
     const error = params.get('error');
 
     if (error) {
-      console.error('Spotify auth error:', error);
+      console.error('Spotify auth error:', params.toString());
       return;
     }
 
@@ -21,9 +21,8 @@ export default function SpotifyConnect({ isHost, onConnectSuccess }) {
   }, [onConnectSuccess]);
 
   const handleConnect = () => {
-    const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-    // Must match EXACTLY what's in your Spotify Dashboard
-    const redirectUri = encodeURIComponent('https://piabam.vercel.app/callback');
+    const clientId = '618a08287c804a5398da8f3e2b6a95ea'; // Replace with your actual client ID
+    const redirectUri = 'https://piabam.vercel.app/callback'; // Must match EXACTLY
     
     const scopes = [
       'streaming',
@@ -31,8 +30,15 @@ export default function SpotifyConnect({ isHost, onConnectSuccess }) {
       ...(isHost ? ['user-modify-playback-state'] : [])
     ].join(' ');
 
-    // Critical: Use 'token' (not 'code') for implicit grant flow
-    window.location = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=${encodeURIComponent(scopes)}&redirect_uri=${redirectUri}&show_dialog=true`;
+    const authUrl = new URL('https://accounts.spotify.com/authorize');
+    authUrl.searchParams.append('response_type', 'token');
+    authUrl.searchParams.append('client_id', clientId);
+    authUrl.searchParams.append('scope', scopes);
+    authUrl.searchParams.append('redirect_uri', redirectUri);
+    authUrl.searchParams.append('show_dialog', 'true');
+
+    console.log('Redirecting to:', authUrl.toString()); // Debug the exact URL
+    window.location = authUrl.toString();
   };
 
   return (
