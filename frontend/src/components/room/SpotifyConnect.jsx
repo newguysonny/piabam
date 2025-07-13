@@ -31,11 +31,11 @@ export default function SpotifyConnect({ isHost, onConnectSuccess }) {
 
 */
 
-export default function SpotifyConnect({ onConnect }) {
+export default function SpotifyConnect({ isHost, onConnectSuccess }) {
   const handleConnect = () => {
     // Simulate Spotify connection (replace with real OAuth)
     const fakeToken = 'spotify_fake_token_123';
-    onConnect(fakeToken);
+    onConnectSuccess(fakeToken);
   };
 
   return (
