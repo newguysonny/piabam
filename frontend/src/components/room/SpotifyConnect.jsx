@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useState } from 'react';
 
 export default function SpotifyConnect({ isHost, onAuthComplete }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -8,7 +9,11 @@ export default function SpotifyConnect({ isHost, onAuthComplete }) {
     try {
       // 1. Get auth URL from backend
       const response = await fetch(`/api/auth/login?isHost=${isHost}`);
-      if (!response.ok) throw new Error('Failed to get auth URL');
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to get auth URL');
+      }
       
       const data = await response.json();
       
