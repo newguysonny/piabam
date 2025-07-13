@@ -3,6 +3,7 @@ export default function SpotifyConnect({ isHost, onConnectSuccess }) {
   const handleConnect = () => {
     const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
     const redirectUri = encodeURIComponent(window.location.href);
+    const redirectUri = process.env.REACT_APP_REDIRECT_URI;
     
     const scopes = [
       'streaming',
