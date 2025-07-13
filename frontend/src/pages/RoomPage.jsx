@@ -21,26 +21,42 @@ export default function RoomPage() {
   // Check if current user is the host
   const isHost = currentUserId === room.host_id;
 
-  // Handle Spotify auth callback from URL hash
-  useEffect(() => {
-    const hash = window.location.hash.substring(1);
-    if (!hash) return;
-
-    const params = new URLSearchParams(hash);
-    const token = params.get('access_token');
-    const error = params.get('error');
+  // Handle Spotify auth callback from backend
+   useEffect(() => {
+  const handleCallback = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    const error = urlParams.get('error');
 
     if (error) {
-      setAuthError(`Spotify connection failed: ${error}`);
+      console.error('Spotify auth error:', error);
       return;
     }
 
-    if (token) {
-      setSpotifyToken(token);
-      // Clean URL after getting token
-      window.history.replaceState({}, document.title, window.location.pathname);
+    if (code) {
+      try {
+        // Exchange code for token via backend
+        const response = await fetch(`/api/auth/callback?code=${encodeURIComponent(code)}`);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Receive token from backend
+        onAuthComplete(data.access_token);
+        
+        // Clean URL
+        window.history.replaceState({}, '', window.location.pathname);
+      } catch (err) {
+        console.error('Token exchange failed:', err);
+      }
     }
-  }, []);
+  };
+
+  handleCallback();
+}, [onAuthComplete]);
 
   return (
     <div className="min-h-screen bg-gray-100">
