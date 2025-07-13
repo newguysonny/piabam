@@ -1,4 +1,3 @@
-/*
 
 export default function SpotifyConnect({ isHost, onConnectSuccess }) {
   const handleConnect = () => {
@@ -29,7 +28,7 @@ export default function SpotifyConnect({ isHost, onConnectSuccess }) {
   );
 }
 
-*/
+/*
 
 export default function SpotifyConnect({ isHost, onConnectSuccess }) {
   const handleConnect = () => {
@@ -44,3 +43,4 @@ export default function SpotifyConnect({ isHost, onConnectSuccess }) {
     </button>
   );
 }
+*/
