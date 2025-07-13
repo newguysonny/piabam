@@ -7,7 +7,7 @@
 
      useEffect(() => {
        // This will be caught by SpotifyConnect's useEffect
-       navigate('/room/your-room-id'); // Redirect back to your room
+       navigate('/room'); // Redirect back to your room
      }, [navigate]);
 
      return <div>Processing Spotify login...</div>;
