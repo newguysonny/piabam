@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 
 export default function SpotifyConnect({ isHost, onAuthComplete }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -8,12 +7,13 @@ export default function SpotifyConnect({ isHost, onAuthComplete }) {
     setIsLoading(true);
     try {
       // 1. Get auth URL from backend
-      const response = await axios.get('/api/auth/login', {
-        params: { isHost }
-      });
+      const response = await fetch(`/api/auth/login?isHost=${isHost}`);
+      if (!response.ok) throw new Error('Failed to get auth URL');
+      
+      const data = await response.json();
       
       // 2. Redirect to Spotify
-      window.location = response.data.url;
+      window.location = data.url;
       
     } catch (error) {
       console.error('Auth initiation failed:', error);
@@ -23,7 +23,6 @@ export default function SpotifyConnect({ isHost, onAuthComplete }) {
     }
   };
 
-  // Check for callback (handled in RoomPage)
   return (
     <button
       onClick={handleConnect}
