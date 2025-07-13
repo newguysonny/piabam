@@ -7,14 +7,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
 const app = express();
-
-// Middleware
-app.use(cors({
-  origin: process.env.FRONTEND_URL,
-  credentials: true
-}));
 app.use(express.json());
-app.use(cookieParser());
 
 // Environment variables
 const {
@@ -25,19 +18,40 @@ const {
   SESSION_SECRET
 } = process.env;
 
-// In-memory session store (replace with Redis in production)
-const sessions = {};
 
-// PKCE Helpers
-// Add these endpoints to your Express server
+// Middleware
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  credentials: true
+}));
+app.use(express.json());
+app.use(cookieParser());
+
+
+
+// In-memory session store (replace with Redis in production)
+
+
 
 // PKCE helper functions
 const generateRandomString = (length) => {
-  return require('crypto').randomBytes(length)
+  return crypto.randomBytes(length)
     .toString('base64')
     .replace(/[^a-zA-Z0-9]/g, '')
     .substring(0, length);
 };
+
+const generateCodeChallenge = (codeVerifier) => {
+  return crypto.createHash('sha256')
+    .update(codeVerifier)
+    .digest('base64')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '');
+};
+
+// Temporary storage (use Redis in production)
+const sessions = {};
 
 // Login endpoint
 app.get('/api/auth/login', (req, res) => {
@@ -45,17 +59,10 @@ app.get('/api/auth/login', (req, res) => {
     const isHost = req.query.isHost === 'true';
     const state = generateRandomString(16);
     const codeVerifier = generateRandomString(64);
-    const codeChallenge = require('crypto')
-      .createHash('sha256')
-      .update(codeVerifier)
-      .digest('base64')
-      .replace(/\+/g, '-')
-      .replace(/\//g, '_')
-      .replace(/=+$/, '');
+    const codeChallenge = generateCodeChallenge(codeVerifier);
 
-    // Store codeVerifier in session/database
-    req.session.codeVerifier = codeVerifier;
-    req.session.state = state;
+    // Store session (use database in production)
+    sessions[state] = { codeVerifier, isHost };
 
     const scopes = [
       'streaming',
@@ -82,12 +89,13 @@ app.get('/api/auth/login', (req, res) => {
 // Callback endpoint
 app.get('/api/auth/callback', async (req, res) => {
   try {
-    const { code } = req.query;
-    const codeVerifier = req.session.codeVerifier;
+    const { code, state, error } = req.query;
 
-    if (!codeVerifier) {
-      throw new Error('Missing code verifier');
-    }
+    if (error) throw new Error(`Spotify error: ${error}`);
+    if (!state || !sessions[state]) throw new Error('Invalid state parameter');
+
+    const { codeVerifier } = sessions[state];
+    delete sessions[state]; // Clean up
 
     const params = new URLSearchParams();
     params.append('grant_type', 'authorization_code');
@@ -117,6 +125,5 @@ app.get('/api/auth/callback', async (req, res) => {
   }
 });
 
-// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
