@@ -4,7 +4,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import CreateRoom from './pages/CreateRoom';
 import FaajeeStart from './pages/faajee/FaajeeStart';
-import RoomPage from './pages/pages/RoomPage';
+import RoomPage from './pages/RoomPage';
 import RoomPage2 from './pages/faajee/RoomPage2';
 import SpotifyPlaylistManager from './pages/faajee/SpotifyPlaylistManager';
 
