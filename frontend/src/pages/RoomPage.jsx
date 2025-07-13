@@ -13,7 +13,7 @@ export default function RoomPage() {
     host_id: 'dj456',  // From database
     is_live: true 
   });
-  const currentUserId = 'dj456'; //'user123';  From  auth context
+  const currentUserId = 'user123'; // From auth context
   
   const [spotifyToken, setSpotifyToken] = useState(null);
   const [authError, setAuthError] = useState(null);
@@ -43,29 +43,29 @@ export default function RoomPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
-      {/* Room Header */}
-      <div className="bg-white rounded-lg shadow p-4 mb-4">
-        <h1 className="text-xl font-bold">Room: {roomId}</h1>
-        <p className="text-gray-600">
-          {isHost ? 'You are the host' : 'You are a listener'}
-        </p>
-      </div>
-
-      {/* Auth Status */}
-      {authError && (
-        <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
-          {authError}
-        </div>
-      )}
-
-      {/* Main Content */}
+    <div className="min-h-screen bg-gray-100">
       {!spotifyToken ? (
-        <div className="bg-white rounded-lg shadow p-6 text-center">
-          <SpotifyConnect 
-            isHost={isHost} 
-            onConnectSuccess={setSpotifyToken} 
-          />
+        <div className="p-4">
+          {/* Show header only during auth phase */}
+          <div className="bg-white rounded-lg shadow p-4 mb-4">
+            <h1 className="text-xl font-bold">Room: {roomId}</h1>
+            <p className="text-gray-600">
+              {isHost ? 'You are the host' : 'You are a listener'}
+            </p>
+          </div>
+
+          {authError && (
+            <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
+              {authError}
+            </div>
+          )}
+
+          <div className="bg-white rounded-lg shadow p-6 text-center">
+            <SpotifyConnect 
+              isHost={isHost} 
+              onConnectSuccess={setSpotifyToken} 
+            />
+          </div>
         </div>
       ) : isHost ? (
         <DjView spotifyToken={spotifyToken} />
