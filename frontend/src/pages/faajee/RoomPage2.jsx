@@ -4,7 +4,7 @@ import DjView from '.../components/room/DjView';
 import ListenerView from '.../components/room/ListenerView';
 import SpotifyConnect from '.../components/room/SpotifyConnect';
 
-export default function RoomPage() {
+export default function RoomPage2() {
   const { roomId } = useParams();
   
   // Mock data - replace with real API calls
