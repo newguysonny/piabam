@@ -41,6 +41,7 @@ export default function SpotifyConnect({ isHost, onAuthComplete }) {
   );
 }
 
+
 /*import { useEffect } from 'react';
 
 export default function SpotifyConnect({ isHost, onConnectSuccess }) {
