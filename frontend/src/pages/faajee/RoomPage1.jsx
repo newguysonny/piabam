@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { FiHeart, FiShare2, FiShoppingCart, FiMessageSquare, FiMusic, FiUser } from 'react-icons/fi';
 
-const RoomPage = () => {
+const RoomPage1 = () => {
   // Room state
   const [isConnected, setIsConnected] = useState(false);
   const [likes, setLikes] = useState(1200);
@@ -167,4 +167,4 @@ const RoomPage = () => {
   );
 };
 
-export default RoomPage;
+export default RoomPage1;
