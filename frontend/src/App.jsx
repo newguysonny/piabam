@@ -5,7 +5,7 @@ import Signup from './pages/Signup';
 import CreateRoom from './pages/CreateRoom';
 import FaajeeStart from './pages/faajee/FaajeeStart';
 import RoomPage from './pages/RoomPage';
-import CallbackPage from './pages/CallbackPage';
+/* import CallbackPage from './pages/CallbackPage'; // for Spotify callback*/
 import RoomPage1 from './pages/faajee/RoomPage1';
 import SpotifyPlaylistManager from './pages/faajee/SpotifyPlaylistManager';
 
@@ -13,7 +13,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/callback" element={<CallbackPage />} />
+        
         <Route path="/login" element={<Login />} />   // Not login.html!
         <Route path="/signup" element={<Signup />} /> // Not signup.html!
         <Route path="/room/start" element={<CreateRoom />} />
