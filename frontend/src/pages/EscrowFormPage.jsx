@@ -1,420 +1,603 @@
-import React, { useState, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function EscrowFormPage() {
-  const [step, setStep] = useState(1);
-  const formRef = useRef(null);
-  const [items, setItems] = useState([]);
-  const [currentItem, setCurrentItem] = useState({
-    name: '',
-    price: '',
-    shippingFee: '0',
-    shippingMethod: 'standard'
+  // Form data state
+  const [formData, setFormData] = useState({
+    title: '',
+    role: 'buyer',
+    currency: 'NGN',
+    duration: 7,
+    items: [],
+    editingIndex: null,
+    escrowPayer: 'buyer',
+    otherParty: { email: '', phone: '' },
+    termsAccepted: false
   });
-  const [editingIndex, setEditingIndex] = useState(null);
 
-  // Navigation
-  const nextStep = () => setStep(step + 1);
-  const prevStep = () => setStep(step - 1);
+  const [currentStep, setCurrentStep] = useState(1);
+  const [transactionId, setTransactionId] = useState('');
+  const [transactionLink, setTransactionLink] = useState('');
+
+  // Form input handlers
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleOtherPartyChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      otherParty: { ...prev.otherParty, [name]: value }
+    }));
+  };
+
+  // Step navigation
+  const nextStep = (step) => {
+    if (validateStep(currentStep)) {
+      setCurrentStep(step);
+      
+      if (step === 3) {
+        updateOtherPartyHeader();
+      }
+    }
+  };
+
+  const prevStep = (step) => {
+    setCurrentStep(step);
+    
+    if (step === 2) {
+      setFormData(prev => ({ ...prev, editingIndex: null }));
+    }
+  };
+
+  // Validation
+  const validateStep = (step) => {
+    if (step === 1) {
+      if (!formData.title) {
+        alert('Please enter a transaction title');
+        return false;
+      }
+      
+      if (formData.duration < 1 || formData.duration > 30) {
+        alert('Duration must be between 1-30 days');
+        return false;
+      }
+      return true;
+    }
+    
+    if (step === 2) {
+      if (formData.items.length === 0) {
+        alert('Please add at least one item');
+        return false;
+      }
+      return true;
+    }
+    
+    return true;
+  };
 
   // Item management
-  const handleAddItem = () => {
-    if (!currentItem.name || !currentItem.price) return;
+  const [itemForm, setItemForm] = useState({
+    category: '',
+    itemName: '',
+    price: '',
+    description: '',
+    shippingMethod: 'standard',
+    shippingFee: '0'
+  });
 
-    const newItem = {
-      ...currentItem,
-      price: parseFloat(currentItem.price) || 0,
-      shippingFee: parseFloat(currentItem.shippingFee) || 0
-    };
+  const handleItemInputChange = (e) => {
+    const { name, value } = e.target;
+    setItemForm(prev => ({ ...prev, [name]: value }));
+  };
 
-    if (editingIndex !== null) {
-      const updatedItems = [...items];
-      updatedItems[editingIndex] = newItem;
-      setItems(updatedItems);
-      setEditingIndex(null);
-    } else {
-      setItems([...items, newItem]);
+  const addItem = () => {
+    if (!itemForm.category || !itemForm.itemName || !itemForm.price || parseFloat(itemForm.price) <= 0) {
+      alert('Please fill all required fields for the item');
+      return;
     }
+    
+    const newItem = {
+      category: itemForm.category,
+      itemName: itemForm.itemName,
+      price: parseFloat(itemForm.price),
+      description: itemForm.description,
+      shippingMethod: itemForm.shippingMethod,
+      shippingFee: parseFloat(itemForm.shippingFee) || 0
+    };
+    
+    if (formData.editingIndex !== null) {
+      const updatedItems = [...formData.items];
+      updatedItems[formData.editingIndex] = newItem;
+      setFormData(prev => ({
+        ...prev,
+        items: updatedItems,
+        editingIndex: null
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        items: [...prev.items, newItem]
+      }));
+    }
+    
+    resetItemForm();
+  };
 
-    setCurrentItem({
-      name: '',
+  const resetItemForm = () => {
+    setItemForm({
+      category: '',
+      itemName: '',
       price: '',
-      shippingFee: '0',
-      shippingMethod: 'standard'
+      description: '',
+      shippingMethod: 'standard',
+      shippingFee: '0'
     });
   };
 
-  const handleEditItem = (index) => {
-    setCurrentItem(items[index]);
-    setEditingIndex(index);
+  const editItem = (index) => {
+    const item = formData.items[index];
+    setItemForm({
+      category: item.category,
+      itemName: item.itemName,
+      price: item.price.toString(),
+      description: item.description,
+      shippingMethod: item.shippingMethod,
+      shippingFee: item.shippingFee.toString()
+    });
+    setFormData(prev => ({ ...prev, editingIndex: index }));
   };
 
-  const handleDeleteItem = (index) => {
-    setItems(items.filter((_, i) => i !== index));
+  const deleteItem = (index) => {
+    const newItems = formData.items.filter((_, i) => i !== index);
+    setFormData(prev => ({
+      ...prev,
+      items: newItems,
+      editingIndex: prev.editingIndex === index ? null : 
+                  prev.editingIndex > index ? prev.editingIndex - 1 : prev.editingIndex
+    }));
+    
+    if (formData.editingIndex === index) {
+      resetItemForm();
+    }
+  };
+
+  // Other party header
+  const updateOtherPartyHeader = () => {
+    return `${formData.role === 'buyer' ? 'Seller' : 'Buyer'} Details`;
   };
 
   // Calculations
-  const calculateTotals = () => {
-    const formData = formRef.current ? new FormData(formRef.current) : null;
-    const escrowPayer = formData?.get('escrowPayer') || 'buyer';
-
-    const subtotal = items.reduce((sum, item) => sum + item.price, 0);
-    const shippingTotal = items.reduce((sum, item) => sum + item.shippingFee, 0);
+  const calculateEscrowFee = (subtotal) => {
+    const minimumFee = 1600;
+    const additionalFee = Math.floor(subtotal / 10000) * 500;
+    const totalFee = Math.max(minimumFee + additionalFee);
     
-    const escrowBaseFee = 1600;
-    const escrowAdditional = Math.floor(subtotal / 10000) * 500;
-    const escrowFee = Math.max(escrowBaseFee, escrowBaseFee + escrowAdditional);
-    
-    const buyerPays = escrowPayer === 'buyer'
-      ? subtotal + shippingTotal + escrowFee
-      : subtotal + shippingTotal;
-      
-    const sellerReceives = escrowPayer === 'buyer'
-      ? subtotal + shippingTotal
-      : subtotal + shippingTotal - escrowFee;
+    return {
+      base: minimumFee,
+      additional: additionalFee,
+      total: totalFee
+    };
+  };
 
+  const calculateSummary = () => {
+    const subtotal = formData.items.reduce((sum, item) => sum + item.price, 0);
+    const totalShippingFee = formData.items.reduce((sum, item) => sum + item.shippingFee, 0);
+    const escrowFee = calculateEscrowFee(subtotal);
+    
+    let buyerPrice, sellerProceeds;
+    
+    if (formData.escrowPayer === 'buyer') {
+      buyerPrice = subtotal + totalShippingFee + escrowFee.total;
+      sellerProceeds = subtotal + totalShippingFee;
+    } else {
+      buyerPrice = subtotal + totalShippingFee;
+      sellerProceeds = subtotal + totalShippingFee - escrowFee.total;
+    }
+    
     return {
       subtotal,
-      shippingTotal,
+      totalShippingFee,
       escrowFee,
-      escrowBaseFee,
-      escrowAdditional,
-      buyerPays,
-      sellerReceives,
-      currency: formData?.get('currency') || 'NGN'
+      buyerPrice,
+      sellerProceeds
     };
   };
 
-  // Form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(formRef.current);
-    const transactionData = {
-      ...Object.fromEntries(formData),
-      items,
-      ...calculateTotals()
-    };
-    console.log('Transaction Data:', transactionData);
-    nextStep(); // Move to success step
+  const summary = calculateSummary();
+
+  // Transaction submission
+  const generateTransactionId = () => {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let result = 'TRX-';
+    for (let i = 0; i < 8; i++) {
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
   };
 
-  // Step components
-  const BasicInfoStep = () => (
-    <div className="space-y-4">
-      <h2 className="text-2xl font-bold">Start Transaction</h2>
-      
-      <div>
-        <label className="block mb-1">Transaction Title*</label>
-        <input
-          name="title"
-          type="text"
-          required
-          className="w-full p-2 border rounded"
-        />
-      </div>
-
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="block mb-1">Your Role*</label>
-          <select name="role" className="w-full p-2 border rounded" defaultValue="buyer">
-            <option value="buyer">Buyer</option>
-            <option value="seller">Seller</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block mb-1">Currency*</label>
-          <select name="currency" className="w-full p-2 border rounded" defaultValue="NGN">
-            <option value="NGN">NGN (₦)</option>
-            <option value="USD">USD ($)</option>
-          </select>
-        </div>
-      </div>
-
-      <div>
-        <label className="block mb-1">Escrow Duration (days)</label>
-        <input
-          name="duration"
-          type="number"
-          min="1"
-          max="30"
-          placeholder="Max 30 days"
-          className="w-full p-2 border rounded"
-        />
-      </div>
-
-      <button
-        type="button"
-        onClick={nextStep}
-        className="px-4 py-2 bg-blue-600 text-white rounded"
-      >
-        Next
-      </button>
-    </div>
-  );
-
-  const TransactionDetailsStep = () => (
-    <div className="space-y-4">
-      <h2 className="text-2xl font-bold">Transaction Details</h2>
-
-      {/* Items List */}
-      <div className="space-y-2">
-        {items.map((item, index) => (
-          <div key={index} className="p-3 border rounded relative">
-            <div className="flex justify-between">
-              <div>
-                <h3 className="font-medium">{item.name}</h3>
-                <p>Price: {item.price}</p>
-                <p>Shipping: {item.shippingMethod} ({item.shippingFee})</p>
-              </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => handleEditItem(index)}
-                  className="text-blue-600"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDeleteItem(index)}
-                  className="text-red-600"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Add Item Form */}
-      <div className="border-t pt-4 space-y-4">
-        <h3 className="font-medium">
-          {editingIndex !== null ? 'Edit Item' : 'Add New Item'}
-        </h3>
-        
-        <div>
-          <label className="block mb-1">Item Name*</label>
-          <input
-            value={currentItem.name}
-            onChange={(e) => setCurrentItem({...currentItem, name: e.target.value})}
-            className="w-full p-2 border rounded"
-          />
-        </div>
-        
-        <div className="grid grid-cols-3 gap-4">
-          <div>
-            <label className="block mb-1">Price*</label>
-            <input
-              type="number"
-              value={currentItem.price}
-              onChange={(e) => setCurrentItem({...currentItem, price: e.target.value})}
-              className="w-full p-2 border rounded"
-            />
-          </div>
-          
-          <div>
-            <label className="block mb-1">Shipping Method</label>
-            <select
-              value={currentItem.shippingMethod}
-              onChange={(e) => setCurrentItem({...currentItem, shippingMethod: e.target.value})}
-              className="w-full p-2 border rounded"
-            >
-              <option value="standard">Standard</option>
-              <option value="express">Express</option>
-            </select>
-          </div>
-          
-          <div>
-            <label className="block mb-1">Shipping Fee</label>
-            <input
-              type="number"
-              value={currentItem.shippingFee}
-              onChange={(e) => setCurrentItem({...currentItem, shippingFee: e.target.value})}
-              className="w-full p-2 border rounded"
-            />
-          </div>
-        </div>
-        
-        <div>
-          <label className="block mb-1">Escrow Fee Payer</label>
-          <select
-            name="escrowPayer"
-            className="w-full p-2 border rounded"
-            defaultValue="buyer"
-          >
-            <option value="buyer">Buyer Pays Fee</option>
-            <option value="seller">Seller Pays Fee</option>
-          </select>
-        </div>
-        
-        <button
-          type="button"
-          onClick={handleAddItem}
-          className="px-4 py-2 bg-green-600 text-white rounded"
-        >
-          {editingIndex !== null ? 'Update Item' : 'Add Item'}
-        </button>
-      </div>
-      
-      <div className="flex justify-between pt-4">
-        <button
-          type="button"
-          onClick={prevStep}
-          className="px-4 py-2 bg-gray-300 rounded"
-        >
-          Back
-        </button>
-        <button
-          type="button"
-          onClick={nextStep}
-          disabled={items.length === 0}
-          className="px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50"
-        >
-          Review Transaction
-        </button>
-      </div>
-    </div>
-  );
-
-  const ConfirmStep = () => {
-    const {
-      subtotal,
-      shippingTotal,
-      escrowFee,
-      buyerPays,
-      sellerReceives,
-      currency
-    } = calculateTotals();
+  const submitTransaction = () => {
+    if (!formData.termsAccepted) {
+      alert('You must accept the terms and conditions');
+      return;
+    }
     
-    const currencySymbol = currency === 'NGN' ? '₦' : '$';
-
-    return (
-      <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
-        <h2 className="text-2xl font-bold">Confirm Transaction</h2>
-        
-        {/* Items Review */}
-        <div className="space-y-2">
-          {items.map((item, index) => (
-            <div key={index} className="p-3 border rounded">
-              <h3 className="font-medium">{item.name}</h3>
-              <p>Price: {currencySymbol}{item.price.toLocaleString()}</p>
-              <p>Shipping: {currencySymbol}{item.shippingFee.toLocaleString()}</p>
-            </div>
-          ))}
-        </div>
-        
-        {/* Transaction Summary */}
-        <div className="p-4 border rounded space-y-2">
-          <div className="flex justify-between">
-            <span>Subtotal:</span>
-            <span>{currencySymbol}{subtotal.toLocaleString()}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Shipping Fee:</span>
-            <span>{currencySymbol}{shippingTotal.toLocaleString()}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Escrow Fee:</span>
-            <span>{currencySymbol}{escrowFee.toLocaleString()}</span>
-          </div>
-          
-          <hr className="my-2" />
-          
-          <div className="flex justify-between font-bold">
-            <span>Buyer Pays:</span>
-            <span>{currencySymbol}{buyerPays.toLocaleString()}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Seller Receives:</span>
-            <span>{currencySymbol}{sellerReceives.toLocaleString()}</span>
-          </div>
-        </div>
-        
-        {/* Counterparty Details */}
-        <div className="p-4 border rounded space-y-3">
-          <h3 className="font-medium">
-            {formRef.current?.role?.value === 'buyer' ? 'Seller' : 'Buyer'} Details
-          </h3>
-          
-          <div>
-            <label className="block mb-1">Email*</label>
-            <input
-              name="otherPartyEmail"
-              type="email"
-              required
-              className="w-full p-2 border rounded"
-            />
-          </div>
-          
-          <div>
-            <label className="block mb-1">Phone</label>
-            <input
-              name="otherPartyPhone"
-              type="tel"
-              className="w-full p-2 border rounded"
-            />
-          </div>
-        </div>
-        
-        {/* Terms Agreement */}
-        <div className="flex items-center">
-          <input
-            name="termsAccepted"
-            type="checkbox"
-            required
-            className="mr-2"
-          />
-          <label>I agree to the terms and conditions</label>
-        </div>
-        
-        <div className="flex justify-between pt-4">
-          <button
-            type="button"
-            onClick={prevStep}
-            className="px-4 py-2 bg-gray-300 rounded"
-          >
-            Back
-          </button>
-          <button
-            type="submit"
-            className="px-4 py-2 bg-blue-600 text-white rounded"
-          >
-            Confirm Transaction
-          </button>
-        </div>
-      </form>
-    );
+    if (!formData.otherParty.email || !formData.otherParty.phone) {
+      alert('Please fill in all required party details');
+      return;
+    }
+    
+    const id = generateTransactionId();
+    const link = `${window.location.origin}/transaction/${id}`;
+    
+    setTransactionId(id);
+    setTransactionLink(link);
+    
+    console.log('Transaction submitted:', {
+      ...formData,
+      transactionId: id,
+      transactionLink: link
+    });
+    
+    setCurrentStep(4);
   };
 
-  const SuccessStep = () => {
-    const transactionId = `TRX-${Math.random().toString(36).substr(2, 8).toUpperCase()}`;
-    
-    return (
-      <div className="text-center p-6 bg-green-50 rounded-lg">
-        <h2 className="text-2xl font-bold text-green-600">Transaction Created!</h2>
-        <p className="my-4">Transaction ID: {transactionId}</p>
-        
-        <button
-          onClick={() => {
-            formRef.current?.reset();
-            setItems([]);
-            setStep(1);
-          }}
-          className="px-4 py-2 bg-blue-600 text-white rounded"
-        >
-          New Transaction
-        </button>
-      </div>
-    );
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    alert("Copied to clipboard!");
+  };
+
+  const startNewTransaction = () => {
+    setFormData({
+      title: '',
+      role: 'buyer',
+      currency: 'NGN',
+      duration: 7,
+      items: [],
+      editingIndex: null,
+      escrowPayer: 'buyer',
+      otherParty: { email: '', phone: '' },
+      termsAccepted: false
+    });
+    setCurrentStep(1);
+    resetItemForm();
   };
 
   return (
-    <div className="max-w-lg mx-auto p-4">
-      <div className="bg-white rounded-lg shadow p-6">
-        {step === 1 && <BasicInfoStep />}
-        {step === 2 && <TransactionDetailsStep />}
-        {step === 3 && <ConfirmStep />}
-        {step === 4 && <SuccessStep />}
-      </div>
+    <div className="max-w-2xl mx-auto p-5 font-sans text-gray-800">
+      {/* Step 1: Basic Transaction Info */}
+      {currentStep === 1 && (
+        <div className="animate-fade-in">
+          <h2 className="text-2xl font-bold mb-6">Start Transaction</h2>
+          
+          <input
+            type="text"
+            name="title"
+            value={formData.title}
+            onChange={handleInputChange}
+            placeholder="Transaction Title"
+            className="w-full p-3 mb-4 border border-gray-300 rounded-md"
+            required
+          />
+          
+          <select
+            name="role"
+            value={formData.role}
+            onChange={handleInputChange}
+            className="w-full p-3 mb-4 border border-gray-300 rounded-md"
+          >
+            <option value="buyer">Buyer</option>
+            <option value="seller">Seller</option>
+          </select>
+          
+          <select
+            name="currency"
+            value={formData.currency}
+            onChange={handleInputChange}
+            className="w-full p-3 mb-4 border border-gray-300 rounded-md"
+          >
+            <option value="NGN">Naira (₦)</option>
+            <option value="USD">Dollar ($)</option>
+            <option value="EUR">Euro (€)</option>
+            <option value="GBP">Pound (£)</option>
+          </select>
+          
+          <input
+            type="number"
+            name="duration"
+            value={formData.duration}
+            onChange={handleInputChange}
+            placeholder="Escrow Duration (days)"
+            min="1"
+            max="30"
+            className="w-full p-3 mb-1 border border-gray-300 rounded-md"
+          />
+          {(formData.duration < 1 || formData.duration > 30) && (
+            <p className="text-red-500 text-sm mb-4">Duration must be between 1-30 days</p>
+          )}
+          
+          <div className="mt-6">
+            <button
+              onClick={() => nextStep(2)}
+              className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-md"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      )}
+      
+      {/* Step 2: Transaction Details */}
+      {currentStep === 2 && (
+        <div className="animate-fade-in">
+          <h2 className="text-2xl font-bold mb-6">Transaction Details</h2>
+          
+          <div id="items-container" className="mb-6">
+            {formData.items.map((item, index) => (
+              <div key={index} className="bg-gray-50 p-4 rounded-md mb-4 relative">
+                <p className="font-bold">{item.itemName}</p>
+                <p>Category: {item.category}</p>
+                <p>Price: {item.price} {formData.currency}</p>
+                <p>Shipping: {item.shippingMethod} ({item.shippingFee} {formData.currency})</p>
+                <div className="absolute top-4 right-4">
+                  <button
+                    onClick={() => editItem(index)}
+                    className="bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-3 rounded-md mr-2"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => deleteItem(index)}
+                    className="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-md"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <select
+            name="category"
+            value={itemForm.category}
+            onChange={handleItemInputChange}
+            className="w-full p-3 mb-4 border border-gray-300 rounded-md"
+          >
+            <option value="">Select Category</option>
+            <option value="freight">Freight</option>
+            <option value="goods">Goods</option>
+          </select>
+          
+          <input
+            type="text"
+            name="itemName"
+            value={itemForm.itemName}
+            onChange={handleItemInputChange}
+            placeholder="Item Name"
+            className="w-full p-3 mb-4 border border-gray-300 rounded-md"
+          />
+          
+          <input
+            type="number"
+            name="price"
+            value={itemForm.price}
+            onChange={handleItemInputChange}
+            placeholder="Price"
+            className="w-full p-3 mb-4 border border-gray-300 rounded-md"
+          />
+          
+          <textarea
+            name="description"
+            value={itemForm.description}
+            onChange={handleItemInputChange}
+            placeholder="Item Description"
+            className="w-full p-3 mb-4 border border-gray-300 rounded-md"
+          />
+          
+          <select
+            name="shippingMethod"
+            value={itemForm.shippingMethod}
+            onChange={handleItemInputChange}
+            className="w-full p-3 mb-4 border border-gray-300 rounded-md"
+          >
+            <option value="standard">Standard</option>
+            <option value="cargo">Cargo</option>
+            <option value="none">No Shipping</option>
+          </select>
+          
+          <input
+            type="number"
+            name="shippingFee"
+            value={itemForm.shippingFee}
+            onChange={handleItemInputChange}
+            placeholder="Shipping Fee (₦)"
+            className="w-full p-3 mb-4 border border-gray-300 rounded-md"
+          />
+          
+          <select
+            name="escrowPayer"
+            value={formData.escrowPayer}
+            onChange={handleInputChange}
+            className="w-full p-3 mb-4 border border-gray-300 rounded-md"
+          >
+            <option value="buyer">Buyer Pays Escrow Fee</option>
+            <option value="seller">Seller Pays Escrow Fee</option>
+          </select>
+          
+          <div className="mt-6 flex gap-3">
+            <button
+              onClick={() => prevStep(1)}
+              className="bg-gray-500 hover:bg-gray-600 text-white py-3 px-6 rounded-md"
+            >
+              Back
+            </button>
+            <button
+              onClick={addItem}
+              className="bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-md"
+            >
+              {formData.editingIndex !== null ? 'Update Item' : 'Add Item'}
+            </button>
+            <button
+              onClick={() => nextStep(3)}
+              className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-md"
+            >
+              Review Transaction
+            </button>
+          </div>
+        </div>
+      )}
+      
+      {/* Step 3: Confirm Transaction */}
+      {currentStep === 3 && (
+        <div className="animate-fade-in">
+          <h2 className="text-2xl font-bold mb-6">Confirm Transaction</h2>
+          
+          <div id="items-review" className="mb-6">
+            {formData.items.map((item, index) => (
+              <div key={index} className="bg-gray-50 p-4 rounded-md mb-4">
+                <p className="font-bold">{item.itemName}</p>
+                <p>Price: {item.price} {formData.currency}</p>
+                <p>Shipping: {item.shippingMethod} ({item.shippingFee} {formData.currency})</p>
+              </div>
+            ))}
+          </div>
+          
+          <div id="transaction-summary" className="mb-6">
+            <div className="mb-2">Subtotal: {summary.subtotal.toFixed(2)} {formData.currency}</div>
+            <div className="mb-2">Shipping Fee: {summary.totalShippingFee.toFixed(2)} {formData.currency}</div>
+            <div className="mb-2">Escrow Fee: {summary.escrowFee.total.toFixed(2)} {formData.currency}</div>
+            <div className="text-sm text-gray-600 mb-4">
+              Escrow fee = ₦{summary.escrowFee.base} (base) + ₦{summary.escrowFee.additional} (₦500 per every ₦10,000)
+            </div>
+            <hr className="my-4" />
+            <div className="font-bold mb-2">
+              Buyer Price: {summary.buyerPrice.toFixed(2)} {formData.currency}
+            </div>
+            <div className="mb-2">
+              Seller Proceeds: {summary.sellerProceeds.toFixed(2)} {formData.currency}
+            </div>
+            <div className="text-sm text-gray-600">
+              {formData.escrowPayer === 'buyer' 
+                ? 'Escrow fee added to buyer' 
+                : 'Escrow fee deducted from seller'} | 
+              Shipping fee included in seller proceeds
+            </div>
+          </div>
+          
+          <div className="bg-gray-50 p-4 rounded-md mb-6">
+            <h3 className="text-xl font-semibold mb-4">{updateOtherPartyHeader()}</h3>
+            <input
+              type="email"
+              name="email"
+              value={formData.otherParty.email}
+              onChange={handleOtherPartyChange}
+              placeholder="Email Address"
+              className="w-full p-3 mb-4 border border-gray-300 rounded-md"
+              required
+            />
+            <input
+              type="tel"
+              name="phone"
+              value={formData.otherParty.phone}
+              onChange={handleOtherPartyChange}
+              placeholder="Phone Number"
+              className="w-full p-3 mb-4 border border-gray-300 rounded-md"
+              required
+            />
+          </div>
+          
+          <div className="flex items-center mb-6">
+            <input
+              type="checkbox"
+              id="acceptTerms"
+              checked={formData.termsAccepted}
+              onChange={(e) => setFormData(prev => ({ ...prev, termsAccepted: e.target.checked }))}
+              className="mr-2"
+              required
+            />
+            <label htmlFor="acceptTerms">I agree to the terms and conditions</label>
+          </div>
+          
+          <div className="flex gap-3">
+            <button
+              onClick={() => prevStep(2)}
+              className="bg-gray-500 hover:bg-gray-600 text-white py-3 px-6 rounded-md"
+            >
+              Add More Items
+            </button>
+            <button
+              onClick={submitTransaction}
+              className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-md"
+            >
+              Start Transaction
+            </button>
+          </div>
+        </div>
+      )}
+      
+      {/* Step 4: Success Page */}
+      {currentStep === 4 && (
+        <div className="text-center p-8 bg-blue-50 rounded-lg animate-fade-in">
+          <h2 className="text-2xl font-bold mb-4">Transaction Created!</h2>
+          <p className="mb-6">
+            Your transaction has been created, waiting for both parties to agree. Share the transaction via the URL or QR code so that the other party can agree to the terms.
+          </p>
+          
+          <div className="bg-white p-6 rounded-md mb-6 text-left border border-gray-200">
+            <h3 className="text-xl font-semibold mb-4">Transaction Details</h3>
+            
+            <div className="flex mb-4">
+              <input
+                type="text"
+                value={transactionId}
+                readOnly
+                className="flex-1 p-3 border border-gray-300 rounded-l-md bg-gray-50"
+              />
+              <button
+                onClick={() => copyToClipboard(transactionId)}
+                className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-4 rounded-r-md"
+              >
+                Copy
+              </button>
+            </div>
+            
+            <div className="flex mb-6">
+              <input
+                type="text"
+                value={transactionLink}
+                readOnly
+                className="flex-1 p-3 border border-gray-300 rounded-l-md bg-gray-50"
+              />
+              <button
+                onClick={() => copyToClipboard(transactionLink)}
+                className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-4 rounded-r-md"
+              >
+                Copy
+              </button>
+            </div>
+            
+            <div className="w-40 h-40 mx-auto bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center mb-4">
+              <p className="text-gray-500">[QR Code]</p>
+            </div>
+          </div>
+          
+          <div className="flex gap-3 justify-center">
+            <button
+              onClick={() => alert("In a real app, this would take you to your dashboard")}
+              className="bg-gray-500 hover:bg-gray-600 text-white py-3 px-6 rounded-md"
+            >
+              Go to Dashboard
+            </button>
+            <button
+              onClick={startNewTransaction}
+              className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-md"
+            >
+              Create New Transaction
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
