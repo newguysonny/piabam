@@ -5,6 +5,7 @@ import Signup from './pages/Signup';
 import CreateRoom from './pages/CreateRoom';
 import FaajeeStart from './pages/faajee/FaajeeStart';
 import RoomPage from './pages/RoomPage';
+import EscrowForm from './pages/EscrowForm';
 /* import CallbackPage from './pages/CallbackPage'; // for Spotify callback*/
 import RoomPage1 from './pages/faajee/RoomPage1';
 import SpotifyPlaylistManager from './pages/faajee/SpotifyPlaylistManager';
@@ -13,7 +14,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        
+        <Route path="/escrow" element={<EscrowForm />} />
         <Route path="/login" element={<Login />} />   // Not login.html!
         <Route path="/signup" element={<Signup />} /> // Not signup.html!
         <Route path="/room/start" element={<CreateRoom />} />
