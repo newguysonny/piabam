@@ -6,7 +6,7 @@ export default function EscrowFormPage() {
     title: '',
     role: 'buyer',
     currency: 'NGN',
-    duration: 7,
+    duration: '',
     items: [],
     editingIndex: null,
     escrowPayer: 'buyer',
@@ -84,7 +84,7 @@ export default function EscrowFormPage() {
     price: '',
     description: '',
     shippingMethod: 'standard',
-    shippingFee: '0'
+    shippingFee: ''
   });
 
   const handleItemInputChange = (e) => {
