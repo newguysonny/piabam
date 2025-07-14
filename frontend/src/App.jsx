@@ -6,6 +6,7 @@ import CreateRoom from './pages/CreateRoom';
 import FaajeeStart from './pages/faajee/FaajeeStart';
 import RoomPage from './pages/RoomPage';
 import EscrowForm from './pages/EscrowForm';
+import BasicInfoStep from './components/escrow/BasicInfoStep';
 /* import CallbackPage from './pages/CallbackPage'; // for Spotify callback*/
 import RoomPage1 from './pages/faajee/RoomPage1';
 import SpotifyPlaylistManager from './pages/faajee/SpotifyPlaylistManager';
