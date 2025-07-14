@@ -1,8 +1,8 @@
 // components/EscrowForm.jsx
 import { useState } from 'react';
-import BasicInfoStep from './BasicInfoStep';
-import TransactionDetailsStep from './TransactionDetailsStep';
-import ConfirmTransactionStep from './ConfirmTransactionStep';
+import BasicInfoStep from './components/escrow/BasicInfoStep';
+import TransactionDetailsStep from './components/escrow/TransactionDetailsStep';
+import ConfirmTransactionStep from './components/escrow/ConfirmTransactionStep';
 import SuccessStep from './SuccessStep';
 
 const EscrowForm = () => {
