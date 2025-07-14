@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 
-export default function EscrowForm() {
+export default function EscrowFormPage() {
   const [step, setStep] = useState(1);
   const formRef = useRef(null);
   const [items, setItems] = useState([]);
