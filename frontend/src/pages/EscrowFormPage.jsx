@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const EscrowForm = () => {
+const EscrowFormPage = () => {
   // Main form state
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -556,4 +556,4 @@ const EscrowForm = () => {
   );
 };
 
-export default EscrowForm;
+export default EscrowFormPage;
