@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
-const EscrowFormPage = () => {
+const EscrowForm = () => {
+  // Main form state
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     title: '',
@@ -12,7 +13,9 @@ const EscrowFormPage = () => {
     otherParty: { email: '', phone: '' },
     termsAccepted: false
   });
-  const [newItem, setNewItem] = useState({
+
+  // Temporary item being added/edited
+  const [currentItem, setCurrentItem] = useState({
     category: '',
     name: '',
     price: '',
@@ -28,54 +31,43 @@ const EscrowFormPage = () => {
 
   const prevStep = () => setStep(step - 1);
 
-  // Validation
+  // Form validation
   const validateStep = () => {
-    if (step === 1) {
-      if (!formData.title) {
-        alert('Please enter a transaction title');
-        return false;
-      }
-      if (formData.duration && formData.duration > 30) {
-        alert('Maximum escrow duration is 30 days');
-        return false;
-      }
+    if (step === 1 && !formData.title) {
+      alert('Please enter a transaction title');
+      return false;
     }
     if (step === 2 && formData.items.length === 0) {
       alert('Please add at least one item');
       return false;
     }
-    if (step === 3) {
-      if (!formData.otherParty.email || !formData.otherParty.phone) {
-        alert('Please enter counterparty details');
-        return false;
-      }
-      if (!formData.termsAccepted) {
-        alert('You must accept the terms');
-        return false;
-      }
+    if (step === 3 && (!formData.otherParty.email || !formData.termsAccepted)) {
+      alert('Please complete all required fields');
+      return false;
     }
     return true;
   };
 
-  // Item Management
+  // Item management
   const handleAddItem = () => {
-    if (!newItem.category || !newItem.name || !newItem.price) {
+    if (!currentItem.category || !currentItem.name || !currentItem.price) {
       alert('Please fill required item fields');
       return;
     }
 
-    const item = {
-      ...newItem,
-      price: parseFloat(newItem.price),
-      shippingFee: parseFloat(newItem.shippingFee) || 0
+    const newItem = {
+      ...currentItem,
+      price: parseFloat(currentItem.price) || 0,
+      shippingFee: parseFloat(currentItem.shippingFee) || 0
     };
 
     setFormData({
       ...formData,
-      items: [...formData.items, item]
+      items: [...formData.items, newItem]
     });
 
-    setNewItem({
+    // Reset item form
+    setCurrentItem({
       category: '',
       name: '',
       price: '',
@@ -85,12 +77,28 @@ const EscrowFormPage = () => {
     });
   };
 
-  // Calculations
+  // Delete item
+  const handleDeleteItem = (index) => {
+    setFormData({
+      ...formData,
+      items: formData.items.filter((_, i) => i !== index)
+    });
+  };
+
+  // Edit item
+  const handleEditItem = (index) => {
+    setCurrentItem(formData.items[index]);
+    handleDeleteItem(index);
+  };
+
+  // Calculate transaction totals
   const calculateTotals = () => {
     const subtotal = formData.items.reduce((sum, item) => sum + item.price, 0);
-    const shipping = formData.items.reduce((sum, item) => sum + (item.shippingFee || 0), 0);
+    const shipping = formData.items.reduce((sum, item) => sum + item.shippingFee, 0);
     
-    const escrowFee = Math.max(1600, 1600 + Math.floor(subtotal / 10000) * 500);
+    const escrowBaseFee = 1600;
+    const escrowAdditional = Math.floor(subtotal / 10000) * 500;
+    const escrowFee = Math.max(escrowBaseFee, escrowBaseFee + escrowAdditional);
     
     const buyerPays = formData.escrowPayer === 'buyer' 
       ? subtotal + shipping + escrowFee 
@@ -100,32 +108,41 @@ const EscrowFormPage = () => {
       ? subtotal + shipping 
       : subtotal + shipping - escrowFee;
 
-    return { subtotal, shipping, escrowFee, buyerPays, sellerReceives };
+    return { 
+      subtotal, 
+      shipping, 
+      escrowFee, 
+      escrowBaseFee,
+      escrowAdditional,
+      buyerPays, 
+      sellerReceives 
+    };
   };
 
-  // Step Components
+  // Step 1: Basic Information
   const BasicInfoStep = () => (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-800">Start Transaction</h2>
+    <div className="space-y-4">
+      <h2 className="text-2xl font-bold">Start Transaction</h2>
       
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Transaction Title*</label>
+        <label className="block mb-1">Transaction Title*</label>
         <input
           type="text"
           value={formData.title}
           onChange={(e) => setFormData({...formData, title: e.target.value})}
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="e.g. Laptop Purchase"
+          className="w-full p-2 border rounded"
           required
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Your Role*</label>
+          <label className="block mb-1">Your Role*</label>
           <select
             value={formData.role}
             onChange={(e) => setFormData({...formData, role: e.target.value})}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full p-2 border rounded"
           >
             <option value="buyer">Buyer</option>
             <option value="seller">Seller</option>
@@ -133,11 +150,11 @@ const EscrowFormPage = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Currency*</label>
+          <label className="block mb-1">Currency*</label>
           <select
             value={formData.currency}
             onChange={(e) => setFormData({...formData, currency: e.target.value})}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full p-2 border rounded"
           >
             <option value="NGN">NGN (₦)</option>
             <option value="USD">USD ($)</option>
@@ -147,25 +164,25 @@ const EscrowFormPage = () => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Escrow Duration (days)</label>
+        <label className="block mb-1">Escrow Duration (days)</label>
         <input
           type="number"
           value={formData.duration}
           onChange={(e) => setFormData({...formData, duration: e.target.value})}
           min="1"
           max="30"
-          placeholder="Enter duration (max 30 days)"
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Max 30 days"
+          className="w-full p-2 border rounded"
         />
         {formData.duration > 30 && (
-          <p className="text-red-500 text-xs mt-1">Maximum duration is 30 days</p>
+          <p className="text-red-500 text-sm">Maximum duration is 30 days</p>
         )}
       </div>
 
-      <div className="flex justify-end pt-4">
+      <div className="flex justify-end">
         <button
           onClick={nextStep}
-          className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="px-4 py-2 bg-blue-600 text-white rounded"
         >
           Next
         </button>
@@ -173,39 +190,31 @@ const EscrowFormPage = () => {
     </div>
   );
 
+  // Step 2: Transaction Details
   const TransactionDetailsStep = () => (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-800">Transaction Details</h2>
+    <div className="space-y-4">
+      <h2 className="text-2xl font-bold">Transaction Details</h2>
 
       {/* Items List */}
-      <div className="space-y-3">
+      <div className="space-y-2">
         {formData.items.map((item, index) => (
-          <div key={index} className="p-4 bg-gray-50 rounded-lg border border-gray-200 relative">
-            <div className="flex justify-between items-start">
+          <div key={index} className="p-3 border rounded relative">
+            <div className="flex justify-between">
               <div>
-                <h3 className="font-medium text-gray-800">{item.name}</h3>
-                <p className="text-sm text-gray-600">Price: {item.price} {formData.currency}</p>
-                <p className="text-sm text-gray-600">Shipping: {item.shippingMethod} ({item.shippingFee} {formData.currency})</p>
+                <h3 className="font-medium">{item.name}</h3>
+                <p>Price: {item.price} {formData.currency}</p>
+                <p>Shipping: {item.shippingFee} {formData.currency}</p>
               </div>
-              <div className="flex space-x-2">
-                <button
-                  onClick={() => {
-                    setNewItem(formData.items[index]);
-                    setFormData({
-                      ...formData,
-                      items: formData.items.filter((_, i) => i !== index)
-                    });
-                  }}
-                  className="p-1 text-yellow-600 hover:text-yellow-800"
+              <div className="flex gap-2">
+                <button 
+                  onClick={() => handleEditItem(index)}
+                  className="text-blue-600"
                 >
                   Edit
                 </button>
-                <button
-                  onClick={() => setFormData({
-                    ...formData,
-                    items: formData.items.filter((_, i) => i !== index)
-                  })}
-                  className="p-1 text-red-600 hover:text-red-800"
+                <button 
+                  onClick={() => handleDeleteItem(index)}
+                  className="text-red-600"
                 >
                   Delete
                 </button>
@@ -216,85 +225,84 @@ const EscrowFormPage = () => {
       </div>
 
       {/* Add Item Form */}
-      <div className="space-y-4 border-t pt-4">
-        <h3 className="font-medium text-gray-800">Add New Item</h3>
+      <div className="border-t pt-4 space-y-4">
+        <h3 className="font-medium">Add New Item</h3>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Category*</label>
+            <label className="block mb-1">Category*</label>
             <select
-              value={newItem.category}
-              onChange={(e) => setNewItem({...newItem, category: e.target.value})}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              value={currentItem.category}
+              onChange={(e) => setCurrentItem({...currentItem, category: e.target.value})}
+              className="w-full p-2 border rounded"
             >
-              <option value="">Select Category</option>
+              <option value="">Select</option>
               <option value="goods">Goods</option>
-              <option value="freight">Freight</option>
+              <option value="services">Services</option>
             </select>
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Item Name*</label>
+            <label className="block mb-1">Item Name*</label>
             <input
               type="text"
-              value={newItem.name}
-              onChange={(e) => setNewItem({...newItem, name: e.target.value})}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              value={currentItem.name}
+              onChange={(e) => setCurrentItem({...currentItem, name: e.target.value})}
+              className="w-full p-2 border rounded"
             />
           </div>
         </div>
         
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+          <label className="block mb-1">Description</label>
           <textarea
-            value={newItem.description}
-            onChange={(e) => setNewItem({...newItem, description: e.target.value})}
+            value={currentItem.description}
+            onChange={(e) => setCurrentItem({...currentItem, description: e.target.value})}
+            className="w-full p-2 border rounded"
             rows={3}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Price*</label>
+            <label className="block mb-1">Price*</label>
             <input
               type="number"
-              value={newItem.price}
-              onChange={(e) => setNewItem({...newItem, price: e.target.value})}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              value={currentItem.price}
+              onChange={(e) => setCurrentItem({...currentItem, price: e.target.value})}
+              className="w-full p-2 border rounded"
             />
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Shipping Method</label>
+            <label className="block mb-1">Shipping Method</label>
             <select
-              value={newItem.shippingMethod}
-              onChange={(e) => setNewItem({...newItem, shippingMethod: e.target.value})}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              value={currentItem.shippingMethod}
+              onChange={(e) => setCurrentItem({...currentItem, shippingMethod: e.target.value})}
+              className="w-full p-2 border rounded"
             >
               <option value="standard">Standard</option>
               <option value="express">Express</option>
-              <option value="pickup">Pickup</option>
             </select>
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Shipping Fee</label>
+            <label className="block mb-1">Shipping Fee</label>
             <input
               type="number"
-              value={newItem.shippingFee}
-              onChange={(e) => setNewItem({...newItem, shippingFee: e.target.value})}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              value={currentItem.shippingFee}
+              onChange={(e) => setCurrentItem({...currentItem, shippingFee: e.target.value})}
+              className="w-full p-2 border rounded"
             />
           </div>
         </div>
         
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Escrow Fee Payer</label>
+          <label className="block mb-1">Escrow Fee Payer</label>
           <select
             value={formData.escrowPayer}
             onChange={(e) => setFormData({...formData, escrowPayer: e.target.value})}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full p-2 border rounded"
           >
             <option value="buyer">Buyer Pays Fee</option>
             <option value="seller">Seller Pays Fee</option>
@@ -302,89 +310,100 @@ const EscrowFormPage = () => {
         </div>
       </div>
       
-      <div className="flex flex-col sm:flex-row justify-between gap-3 pt-6">
+      <div className="flex justify-between pt-4">
         <button
           onClick={prevStep}
-          className="px-6 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+          className="px-4 py-2 bg-gray-300 rounded"
         >
           Back
         </button>
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex gap-2">
           <button
             onClick={handleAddItem}
-            className="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+            className="px-4 py-2 bg-green-600 text-white rounded"
           >
-            {newItem.name ? 'Update Item' : 'Add Item'}
+            Add Item
           </button>
           <button
             onClick={nextStep}
             disabled={formData.items.length === 0}
-            className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50"
           >
-            Review Transaction
+            Review
           </button>
         </div>
       </div>
     </div>
   );
 
+  // Step 3: Confirm Transaction
   const ConfirmTransactionStep = () => {
-    const { subtotal, shipping, escrowFee, buyerPays, sellerReceives } = calculateTotals();
-    const currencySymbol = formData.currency === 'NGN' ? '₦' : formData.currency === 'USD' ? '$' : '€';
+    const { 
+      subtotal, 
+      shipping, 
+      escrowFee, 
+      escrowBaseFee,
+      escrowAdditional,
+      buyerPays, 
+      sellerReceives 
+    } = calculateTotals();
+    
+    const currencySymbol = formData.currency === 'NGN' ? '₦' : 
+                         formData.currency === 'USD' ? '$' : '€';
 
     return (
-      <div className="space-y-6">
-        <h2 className="text-2xl font-bold text-gray-800">Confirm Transaction</h2>
+      <div className="space-y-4">
+        <h2 className="text-2xl font-bold">Confirm Transaction</h2>
         
         {/* Items Review */}
-        <div className="space-y-3">
+        <div className="space-y-2">
           {formData.items.map((item, index) => (
-            <div key={index} className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-              <h3 className="font-medium text-gray-800">{item.name}</h3>
-              <p className="text-sm text-gray-600">Price: {currencySymbol}{item.price.toLocaleString()}</p>
-              <p className="text-sm text-gray-600">Shipping: {item.shippingMethod} ({currencySymbol}{item.shippingFee.toLocaleString()})</p>
+            <div key={index} className="p-3 border rounded">
+              <h3 className="font-medium">{item.name}</h3>
+              <p>Price: {currencySymbol}{item.price.toLocaleString()}</p>
+              <p>Shipping: {currencySymbol}{item.shippingFee.toLocaleString()}</p>
             </div>
           ))}
         </div>
         
         {/* Transaction Summary */}
-        <div className="p-4 bg-gray-50 rounded-lg border border-gray-200 space-y-3">
+        <div className="p-4 border rounded space-y-2">
           <div className="flex justify-between">
-            <span className="text-gray-700">Subtotal:</span>
-            <span className="font-medium">{currencySymbol}{subtotal.toLocaleString()}</span>
+            <span>Subtotal:</span>
+            <span>{currencySymbol}{subtotal.toLocaleString()}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-700">Shipping Fee:</span>
-            <span className="font-medium">{currencySymbol}{shipping.toLocaleString()}</span>
+            <span>Shipping Fee:</span>
+            <span>{currencySymbol}{shipping.toLocaleString()}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-700">Escrow Fee:</span>
-            <span className="font-medium">{currencySymbol}{escrowFee.toLocaleString()}</span>
+            <span>Escrow Fee:</span>
+            <span>{currencySymbol}{escrowFee.toLocaleString()}</span>
           </div>
-          <div className="text-xs text-gray-500">
-            Escrow fee = {currencySymbol}1600 (base) + {currencySymbol}{Math.floor(subtotal / 10000) * 500} ({currencySymbol}500 per {currencySymbol}10,000)
+          <div className="text-sm text-gray-600">
+            (Base: {currencySymbol}{escrowBaseFee} + Additional: {currencySymbol}{escrowAdditional})
           </div>
           
-          <hr className="my-2 border-gray-300" />
+          <hr className="my-2" />
           
           <div className="flex justify-between font-bold">
-            <span className="text-gray-800">Buyer Pays:</span>
-            <span className="text-blue-600">{currencySymbol}{buyerPays.toLocaleString()}</span>
+            <span>Buyer Pays:</span>
+            <span>{currencySymbol}{buyerPays.toLocaleString()}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-700">Seller Receives:</span>
-            <span className="text-green-600">{currencySymbol}{sellerReceives.toLocaleString()}</span>
+            <span>Seller Receives:</span>
+            <span>{currencySymbol}{sellerReceives.toLocaleString()}</span>
           </div>
         </div>
         
         {/* Counterparty Details */}
-        <div className="p-4 bg-gray-50 rounded-lg border border-gray-200 space-y-4">
-          <h3 className="font-medium text-gray-800">
+        <div className="p-4 border rounded space-y-3">
+          <h3 className="font-medium">
             {formData.role === 'buyer' ? 'Seller' : 'Buyer'} Details
           </h3>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email Address*</label>
+            <label className="block mb-1">Email*</label>
             <input
               type="email"
               value={formData.otherParty.email}
@@ -392,13 +411,13 @@ const EscrowFormPage = () => {
                 ...formData,
                 otherParty: {...formData.otherParty, email: e.target.value}
               })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full p-2 border rounded"
               required
             />
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number*</label>
+            <label className="block mb-1">Phone</label>
             <input
               type="tel"
               value={formData.otherParty.phone}
@@ -406,118 +425,99 @@ const EscrowFormPage = () => {
                 ...formData,
                 otherParty: {...formData.otherParty, phone: e.target.value}
               })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              required
+              className="w-full p-2 border rounded"
             />
           </div>
         </div>
         
         {/* Terms Agreement */}
-        <div className="flex items-start">
-          <div className="flex items-center h-5">
-            <input
-              type="checkbox"
-              id="terms"
-              checked={formData.termsAccepted}
-              onChange={(e) => setFormData({
-                ...formData,
-                termsAccepted: e.target.checked
-              })}
-              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-              required
-            />
-          </div>
-          <div className="ml-3">
-            <label htmlFor="terms" className="text-sm text-gray-700">
-              I agree to the escrow terms and conditions
-            </label>
-          </div>
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            id="terms"
+            checked={formData.termsAccepted}
+            onChange={(e) => setFormData({
+              ...formData,
+              termsAccepted: e.target.checked
+            })}
+            className="mr-2"
+            required
+          />
+          <label htmlFor="terms">I agree to the terms</label>
         </div>
         
         <div className="flex justify-between pt-4">
           <button
             onClick={prevStep}
-            className="px-6 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+            className="px-4 py-2 bg-gray-300 rounded"
           >
-            Add More Items
+            Back
           </button>
           <button
             onClick={nextStep}
-            className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="px-4 py-2 bg-blue-600 text-white rounded"
           >
-            Start Transaction
+            Confirm
           </button>
         </div>
       </div>
     );
   };
 
+  // Step 4: Success
   const SuccessStep = () => {
     const transactionId = `TRX-${Math.random().toString(36).substr(2, 8).toUpperCase()}`;
-    const transactionLink = `${window.location.origin}/transaction/${transactionId}`;
+    const transactionLink = `${window.location.origin}/tx/${transactionId}`;
 
     const copyToClipboard = (text) => {
       navigator.clipboard.writeText(text);
-      alert('Copied to clipboard!');
+      alert('Copied!');
     };
 
     return (
-      <div className="text-center p-6 bg-blue-50 rounded-lg border border-blue-100">
-        <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-          <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h2 className="mt-3 text-2xl font-bold text-gray-800">Transaction Created!</h2>
-        <p className="mt-2 text-gray-600">
-          Your transaction is pending confirmation. Share the details below with the other party.
-        </p>
+      <div className="text-center p-6 bg-blue-50 rounded-lg">
+        <h2 className="text-2xl font-bold text-green-600">Success!</h2>
+        <p className="my-4">Your transaction has been created.</p>
         
-        <div className="mt-6 bg-white p-4 rounded-lg border border-gray-200 text-left">
-          <h3 className="text-lg font-medium text-gray-800 mb-4">Transaction Details</h3>
-          
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Transaction ID</label>
-            <div className="flex rounded-md shadow-sm">
+        <div className="bg-white p-4 rounded border text-left">
+          <div className="mb-3">
+            <label className="block mb-1">Transaction ID</label>
+            <div className="flex">
               <input
                 type="text"
-                readOnly
                 value={transactionId}
-                className="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-l-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                readOnly
+                className="flex-1 p-2 border rounded-l"
               />
               <button
                 onClick={() => copyToClipboard(transactionId)}
-                className="inline-flex items-center px-3 py-2 border border-l-0 border-gray-300 rounded-r-md bg-gray-50 text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                className="px-3 bg-gray-200 border-t border-r border-b rounded-r"
               >
                 Copy
               </button>
             </div>
           </div>
           
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Transaction Link</label>
-            <div className="flex rounded-md shadow-sm">
+          <div className="mb-4">
+            <label className="block mb-1">Shareable Link</label>
+            <div className="flex">
               <input
                 type="text"
-                readOnly
                 value={transactionLink}
-                className="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-l-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                readOnly
+                className="flex-1 p-2 border rounded-l"
               />
               <button
                 onClick={() => copyToClipboard(transactionLink)}
-                className="inline-flex items-center px-3 py-2 border border-l-0 border-gray-300 rounded-r-md bg-gray-50 text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                className="px-3 bg-gray-200 border-t border-r border-b rounded-r"
               >
                 Copy
               </button>
             </div>
           </div>
-          
-          <div className="w-40 h-40 mx-auto bg-gray-100 border-2 border-dashed border-gray-300 rounded flex items-center justify-center mb-4">
-            <span className="text-gray-400 text-sm">QR Code</span>
-          </div>
         </div>
         
-        <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
+        <div className="mt-6 flex justify-center gap-3">
           <button
             onClick={() => {
               setFormData({
@@ -532,12 +532,12 @@ const EscrowFormPage = () => {
               });
               setStep(1);
             }}
-            className="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+            className="px-4 py-2 bg-green-600 text-white rounded"
           >
             New Transaction
           </button>
-          <button className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-            Go to Dashboard
+          <button className="px-4 py-2 bg-blue-600 text-white rounded">
+            Dashboard
           </button>
         </div>
       </div>
@@ -545,8 +545,8 @@ const EscrowFormPage = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-4 sm:p-6">
-      <div className="bg-white rounded-xl shadow-md overflow-hidden p-6 sm:p-8">
+    <div className="max-w-lg mx-auto p-4">
+      <div className="bg-white rounded-lg shadow p-6">
         {step === 1 && <BasicInfoStep />}
         {step === 2 && <TransactionDetailsStep />}
         {step === 3 && <ConfirmTransactionStep />}
@@ -556,4 +556,4 @@ const EscrowFormPage = () => {
   );
 };
 
-export default EscrowFormPage;
+export default EscrowForm;
