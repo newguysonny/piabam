@@ -21,7 +21,7 @@ const SignupForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle sign up submission
+    // Handle sign up submission to backend or database
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords don't match!");
       return;
