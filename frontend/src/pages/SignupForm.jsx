@@ -168,7 +168,7 @@ const SignupForm = () => {
           <div className="text-center text-gray-400 text-sm">
             Already have an account?{' '}
             
-             <Link to="/SigninForm" className="text-purple-400 hover:text-purple-300">
+             <Link to="/signin" className="text-purple-400 hover:text-purple-300">
             Sign in
            </Link>
           </div>
