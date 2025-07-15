@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FiMail, FiLock, FiUser, FiCheck } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 
@@ -122,9 +123,9 @@ const SigninForm = () => {
           {/* Sign Up Link */}
           <div className="text-center text-gray-400 text-sm">
             Not a member yet?{' '}
-            <a href="#" className="text-purple-400 hover:text-purple-300">
+            <Link to="/signup" className="text-purple-400 hover:text-purple-300">
               Sign up now
-            </a>
+            </Link>
           </div>
         </form>
       </div>
