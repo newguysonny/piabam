@@ -1,7 +1,7 @@
 // App.jsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SigninForm from './pages/SigninForm';
-import Signup from './pages/Signup';
+import SignupForm from './pages/SignupForm';
 import CreateRoom from './pages/CreateRoom';
 import FaajeeStart from './pages/faajee/FaajeeStart';
 import RoomPage from './pages/RoomPage';
@@ -16,7 +16,7 @@ export default function App() {
       <Routes>
         <Route path="/escrow" element={<EscrowFormPage />} />
         <Route path="/signin" element={<SigninForm />} />   // Not signin.html!
-        <Route path="/signup" element={<Signup />} /> // Not signup.html!
+        <Route path="/signup" element={<SignupForm />} /> // Not signup.html!
         <Route path="/room/start" element={<CreateRoom />} />
         <Route path="/music" element={<FaajeeStart />} /> // for testing type script 
         <Route path="/room" element={<RoomPage />} />
