@@ -15,7 +15,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/escrow" element={<EscrowFormPage />} />
-        <Route path="/signin" element={<SigninForm />} />   // Not login.html!
+        <Route path="/signin" element={<SigninForm />} />   // Not signin.html!
         <Route path="/signup" element={<Signup />} /> // Not signup.html!
         <Route path="/room/start" element={<CreateRoom />} />
         <Route path="/music" element={<FaajeeStart />} /> // for testing type script 
