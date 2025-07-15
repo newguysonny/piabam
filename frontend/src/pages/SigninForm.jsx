@@ -1,10 +1,10 @@
+import { useState } from 'react';
 import { FiMail, FiLock, FiUser, FiCheck } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 
 const SigninForm = () => {
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
+    usernameOrEmail: '',
     password: '',
     rememberMe: false
   });
@@ -19,7 +19,7 @@ const SigninForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
+    // Handle sign in submission
     console.log(formData);
   };
 
@@ -30,47 +30,27 @@ const SigninForm = () => {
         <div className="bg-gradient-to-r from-purple-600 to-blue-500 p-6 text-center">
           <h1 className="text-2xl font-bold flex items-center justify-center gap-2">
             <FiUser className="text-white" /> 
-            Login to your Account
+            Sign In to Your Account
           </h1>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
-          {/* Username Field or Email*/}
+          {/* Username/Email Field */}
           <div className="space-y-2">
-            <label htmlFor="username" className="block text-sm font-medium text-gray-300">
-              Username
-            </label>
-            <div className="relative">
-              <FiUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              <input
-                type="text"
-                id="username"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-                className="w-full pl-10 pr-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                placeholder="Enter your username"
-                required
-              />
-            </div>
-          </div>
-
-          {/* Email Field or Username*/}
-          <div className="space-y-2">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-300">
-              Email Address
+            <label htmlFor="usernameOrEmail" className="block text-sm font-medium text-gray-300">
+              Username or Email
             </label>
             <div className="relative">
               <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
+                type="text"
+                id="usernameOrEmail"
+                name="usernameOrEmail"
+                value={formData.usernameOrEmail}
                 onChange={handleChange}
                 className="w-full pl-10 pr-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                placeholder="Enter your email"
+                placeholder="Enter your username or email"
                 required
               />
             </div>
