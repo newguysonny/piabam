@@ -1,7 +1,3 @@
-// pages/Dashboard.jsx
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-
 import { FiMail, FiLock, FiUser, FiCheck } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 
