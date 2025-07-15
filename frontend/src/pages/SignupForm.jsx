@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FiMail, FiLock, FiUser, FiCheck } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 
@@ -166,9 +167,10 @@ const SignupForm = () => {
           {/* Sign In Link */}
           <div className="text-center text-gray-400 text-sm">
             Already have an account?{' '}
-            <a href="#" className="text-purple-400 hover:text-purple-300">
-              Sign in
-            </a>
+            
+             <Link to="/SigninForm" className="text-purple-400 hover:text-purple-300">
+            Sign in
+           </Link>
           </div>
         </form>
       </div>
