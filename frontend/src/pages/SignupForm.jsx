@@ -5,7 +5,6 @@ import { FiMail, FiLock, FiUser, FiCheck } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 
 
-
 const SignupForm = () => {
   const [formData, setFormData] = useState({
     username: '',
