@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { supabase } from '../lib/supabase';
 import { Link } from 'react-router-dom';
 import { FiMail, FiLock, FiUser, FiCheck } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
+
+
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -20,14 +23,57 @@ const SignupForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {  // Made this async
     e.preventDefault();
-    // Handle sign up submission to backend or database
+    
+    // Validation
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords don't match!");
       return;
     }
-    console.log(formData);
+    
+    if (!/^[a-z0-9_]{3,20}$/i.test(formData.username)) {
+      alert('Username must be 3-20 chars (letters, numbers, _)');
+      return;
+    }
+    
+    if (!formData.agreeToTerms) {
+      alert('You must agree to the terms');
+      return;
+    }
+
+    try {
+      // 1. Auth sign-up
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/account`,
+          data: {  // Store username in user_metadata
+            username: formData.username
+          }
+        }
+      });
+
+      if (authError) throw authError;
+
+      // 2. Create user profile
+      const { error: profileError } = await supabase
+        .from('users')
+        .insert([{
+          id: authData.user.id,
+          email: formData.email,
+          username: formData.username,
+          created_at: new Date().toISOString()
+        }]);
+
+      if (profileError) throw profileError;
+
+      alert('Sign-up successful! Check your email for confirmation.');
+    } catch (error) {
+      alert(`Error: ${error.message}`);
+      console.error(error);
+    }
   };
 
   return (
@@ -179,6 +225,10 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
+
+
+
+
 
 
 
