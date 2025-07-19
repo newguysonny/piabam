@@ -182,7 +182,7 @@ export default function Navbar() {
       }`}
       >
       {item === 'Start' ? (
-      <div className="bg-red-600 rounded-full p-2 -mt-6">
+      <div className="bg-purple-600 rounded-full p-2 -mt-6">
       <FiPlus className="w-6 h-6 text-white" />
       </div>
       ) : item === 'More' ? (
