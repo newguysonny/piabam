@@ -76,7 +76,7 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           {/* PIABAM Column */}
           <div>
-            <h3 className="text-lg font-bold mb-3">PIABAM</h3>
+            <h3 className="text-lg font-semibold mb-3">PIABAM</h3>
             <div className="flex gap-3">
               <SocialButton platform="facebook" />
               <SocialButton platform="instagram" />
@@ -88,7 +88,7 @@ const Footer = () => {
 
           {/* LEM Column */}
           <div>
-            <h3 className="text-lg font-bold mb-3">LEM</h3>
+            <h3 className="text-lg font-semibold mb-3">LEM</h3>
             <div className="flex gap-3">
               <SocialButton platform="facebook" />
               <SocialButton platform="instagram" />
@@ -100,7 +100,7 @@ const Footer = () => {
 
           {/* FAAJEE Column */}
           <div>
-            <h3 className="text-lg font-bold mb-3">FAAJEE</h3>
+            <h3 className="text-lg font-semibold mb-2">FAAJEE</h3>
             <div className="flex gap-3">
               <SocialButton platform="facebook" />
               <SocialButton platform="instagram" />
