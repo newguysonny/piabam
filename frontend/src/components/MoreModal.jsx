@@ -1,6 +1,13 @@
 import { FiX, FiBox, FiDatabase, FiMusic, FiClock } from 'react-icons/fi';
 
-export default function ({ isOpen, onClose }) => {
+const ModalItem = ({ icon, label }) => (
+  <button className="flex items-center w-full p-3 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors">
+    <span className="mr-3">{icon}</span>
+    <span>{label}</span>
+  </button>
+);
+
+export default function MoreModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
@@ -35,11 +42,4 @@ export default function ({ isOpen, onClose }) => {
       </div>
     </div>
   );
-};
-
-const ModalItem = ({ icon, label }) => (
-  <button className="flex items-center w-full p-3 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors">
-    <span className="mr-3">{icon}</span>
-    <span>{label}</span>
-  </button>
-);
+}
