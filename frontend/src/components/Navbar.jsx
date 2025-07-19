@@ -10,8 +10,8 @@ import {
   FiBox,
   FiGlobe
 } from 'react-icons/fi';
-import { StartModal } from './StartModal';
-import { MoreModal } from './MoreModal';
+import  StartModal  from './StartModal';
+import  MoreModal  from './MoreModal';
 
 export default function Navbar() {
   const [showStartModal, setShowStartModal] = useState(false);
