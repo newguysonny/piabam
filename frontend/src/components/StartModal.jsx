@@ -1,6 +1,13 @@
 import { FiX, FiEdit, FiCalendar, FiFolder } from 'react-icons/fi';
 
-export default function StartModal ({ isOpen, onClose }) => {
+const ActionButton = ({ icon, label, fullWidth = false }) => (
+  <button className={`flex flex-col items-center justify-center ${fullWidth ? 'w-full p-4' : 'p-3'} rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors`}>
+    <span className="mb-2">{icon}</span>
+    <span className="text-sm font-medium">{label}</span>
+  </button>
+);
+
+export default function StartModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
@@ -38,11 +45,4 @@ export default function StartModal ({ isOpen, onClose }) => {
       </div>
     </div>
   );
-};
-
-const ActionButton = ({ icon, label, fullWidth = false }) => (
-  <button className={`flex flex-col items-center justify-center ${fullWidth ? 'w-full p-4' : 'p-3'} rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors`}>
-    <span className="mb-2">{icon}</span>
-    <span className="text-sm font-medium">{label}</span>
-  </button>
-);
+}
