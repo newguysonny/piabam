@@ -8,7 +8,7 @@ const Footer = () => {
       facebook: <FiFacebook className="text-white" />,
       instagram: <FiInstagram className="text-white" />,
       twitter: <FiTwitter className="text-white" />,
-      tiktok: <FiMusic className="text-white" />,
+      tiktok: <FiTiktok className="text-white" />,
     };
 
     const bgColors = {
