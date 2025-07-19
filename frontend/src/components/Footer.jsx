@@ -112,8 +112,8 @@ const Footer = () => {
 
           {/* Quick Links Column */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Quick Links</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <div className="grid grid-cols-2 gap-4 text-sm">
               <a href="#" className="hover:text-purple-400 transition-colors">About</a>
               <a href="#" className="hover:text-purple-400 transition-colors">FAQ</a>
               <a href="#" className="hover:text-purple-400 transition-colors">About Us</a>
@@ -128,8 +128,8 @@ const Footer = () => {
         {/* Work With Us Section */}
        
         <div className="mt-16">
-          <h3 className="text-2xl font-bold text-center mb-8">Work With Us</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+          <h3 className="text-lg font-semibold text-center mb-4">Work With Us</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-sm">
             <a href="#" className="text-center hover:text-purple-400 transition-colors">Business/Partnership</a>
             <a href="#" className="text-center hover:text-purple-400 transition-colors">Advertise/Marketing</a>
             <a href="#" className="text-center hover:text-purple-400 transition-colors">Add Your Restaurant</a>
@@ -137,16 +137,7 @@ const Footer = () => {
           </div>
         </div>
 
-           <div className="mt-16">
-  <h3 className="text-lg font-semibold text-center mb-4 text-gray-700">Work With Us</h3>
-  <div className="grid grid-cols-2 md:grid-cols-4 text-sm gap-4 max-w-4xl mx-auto">
-    <a href="#" className="text-center hover:text-purple-400 transition-colors">Business/Partnership</a>
-    <a href="#" className="text-center hover:text-purple-400 transition-colors">Advertise/Marketing</a>
-    <a href="#" className="text-center hover:text-purple-400 transition-colors">Add Your Restaurant</a>
-    <a href="#" className="text-center hover:text-purple-400 transition-colors">Sign Up to Deliver</a>
-  </div>
-</div>
-        
+           
  
         {/* Copyright */}
         <div className="mt-16 pt-6 border-t border-gray-800 flex items-center justify-center text-gray-400 text-sm">
