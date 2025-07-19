@@ -28,6 +28,32 @@ export default function Navbar() {
 
   return (
     <>
+       {/* Mobile Top Navbar (Updated per your request) */}
+      <nav className="md:hidden sticky top-0 bg-white shadow-sm z-40 px-4 py-3">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <div className="flex items-center">
+            <div className="w-8 h-8 bg-red-600 rounded mr-2"></div>
+            <span className="font-bold text-red-600 text-lg">PIABAM</span>
+          </div>
+
+          {/* Right-Aligned Icons + Sign In */}
+          <div className="flex items-center gap-4">
+            <button className="text-gray-600 hover:text-red-600">
+              <FiSearch className="w-5 h-5" /> {/* 🔍 */}
+            </button>
+            <button className="text-gray-600 hover:text-red-600 relative">
+              <FiBell className="w-5 h-5" /> {/* 🔔 */}
+              <span className="absolute top-0 right-0 w-2 h-2 bg-red-600 rounded-full"></span>
+            </button>
+            <button className="text-sm text-red-600 font-medium">
+              Sign in {/* Text button */}
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      
       {/* Desktop Navbar */}
       <nav className="hidden md:block sticky top-0 bg-white shadow-sm z-40">
       <div className="container mx-auto px-6 py-3 flex items-center justify-between">
