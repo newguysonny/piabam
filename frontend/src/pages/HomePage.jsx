@@ -1,6 +1,6 @@
 import Footer from '../components/Footer';
 
-function HomePage() {
+export default function HomePage() {
   return (
     <>
       {/* Page content */}
