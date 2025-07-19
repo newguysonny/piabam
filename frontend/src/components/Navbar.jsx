@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';  // Add this import
 import { throttle } from 'lodash';
 import { 
   FiSearch, 
@@ -67,7 +68,7 @@ export default function Navbar() {
             </button>
             <button className="text-white hover:text-purple-700 relative">
               <FiBell className="w-5 h-5" /> {/* 🔔 */}
-              <span className="absolute top-0 right-0 w-2 h-2 bg-red rounded-full"></span>
+              <span className="absolute top-0 right-0 w-2 h-2 bg-red-600 rounded-full"></span>
             </button>
             <button className="text-sm font-medium">
                <Link 
