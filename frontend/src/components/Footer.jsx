@@ -1,6 +1,6 @@
 import { FiFacebook, FiInstagram, FiTwitter, FiMusic, FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
-import { FaRegCopyright } from 'react-icons/fa';
-import { FaTiktok } from 'react-icons/fa';
+import { FaRegCopyright, FaTiktok } from 'react-icons/fa';
+
 
 const Footer = () => {
   // Social button component
