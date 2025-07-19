@@ -112,8 +112,8 @@ const Footer = () => {
 
           {/* Quick Links Column */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <div className="grid grid-cols-2 gap-4 text-sm">
+            <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
+            <div className="grid grid-cols-2 gap-4 text-xs">
               <a href="#" className="hover:text-purple-400 transition-colors">About</a>
               <a href="#" className="hover:text-purple-400 transition-colors">FAQ</a>
               <a href="#" className="hover:text-purple-400 transition-colors">About Us</a>
