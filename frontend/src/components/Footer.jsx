@@ -6,10 +6,10 @@ const Footer = () => {
   // Social button component
   const SocialButton = ({ platform }) => {
     const icons = {
-      facebook: <FiFacebook className="text-white" />,
-      instagram: <FiInstagram className="text-white" />,
-      twitter: <FiTwitter className="text-white" />,
-      tiktok: <FaTiktok className="text-white" />,
+      facebook: <FiFacebook size={16} className="text-white" />,
+      instagram: <FiInstagram size={14} className="text-white" />,
+      twitter: <FiTwitter size={12} className="text-white" />,
+      tiktok: <FaTiktok size={10} className="text-white" />,
     };
 
     const bgColors = {
