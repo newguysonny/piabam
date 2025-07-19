@@ -69,7 +69,7 @@ export default function Navbar() {
               <FiBell className="w-5 h-5" /> {/* 🔔 */}
               <span className="absolute top-0 right-0 w-2 h-2 bg-text-white rounded-full"></span>
             </button>
-            <button className="text-sm text-white font-medium">
+            <button className="text-sm text-white hover:text-purple-700 font-medium">
               Sign in {/* Text button */}
             </button>
           </div>
@@ -178,7 +178,7 @@ export default function Navbar() {
       else setActiveTab(item);
       }}
       className={`flex flex-col items-center justify-center py-1 ${
-      activeTab === item ? 'text-red-600' : 'text-gray-600'
+      activeTab === item ? 'text-purple-700' : 'text-gray-600'
       }`}
       >
       {item === 'Start' ? (
