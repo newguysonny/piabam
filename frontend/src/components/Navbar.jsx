@@ -70,7 +70,10 @@ export default function Navbar() {
               <span className="absolute top-0 right-0 w-2 h-2 bg-red rounded-full"></span>
             </button>
             <button className="text-sm text-white hover:text-purple-700 font-medium">
-              Sign in {/* Text button */}
+              <Link to="/signin" className="text-white hover:text-purple-600">
+              Sign in
+            </Link>
+           
             </button>
           </div>
         </div>
