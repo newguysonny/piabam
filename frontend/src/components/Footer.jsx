@@ -1,5 +1,6 @@
 import { FiFacebook, FiInstagram, FiTwitter, FiMusic, FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
 import { FaRegCopyright } from 'react-icons/fa';
+import { FaTiktok } from 'react-icons/fa';
 
 const Footer = () => {
   // Social button component
@@ -8,7 +9,7 @@ const Footer = () => {
       facebook: <FiFacebook className="text-white" />,
       instagram: <FiInstagram className="text-white" />,
       twitter: <FiTwitter className="text-white" />,
-      tiktok: <FiTiktok className="text-white" />,
+      tiktok: <FaTiktok className="text-white" />,
     };
 
     const bgColors = {
