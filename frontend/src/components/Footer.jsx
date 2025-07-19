@@ -139,7 +139,7 @@ const Footer = () => {
 
            <div className="mt-16">
   <h3 className="text-lg font-semibold text-center mb-4 text-gray-700">Work With Us</h3>
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+  <div className="grid grid-cols-2 md:grid-cols-4 text-sm gap-4 max-w-4xl mx-auto">
     <a href="#" className="text-center hover:text-purple-400 transition-colors">Business/Partnership</a>
     <a href="#" className="text-center hover:text-purple-400 transition-colors">Advertise/Marketing</a>
     <a href="#" className="text-center hover:text-purple-400 transition-colors">Add Your Restaurant</a>
