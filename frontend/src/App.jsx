@@ -12,7 +12,6 @@ import SpotifyPlaylistManager from './pages/faajee/SpotifyPlaylistManager';
 import HomePage from './pages/HomePage';
 
 
-
 export default function App() {
   return (
     <BrowserRouter>
