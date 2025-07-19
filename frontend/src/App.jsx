@@ -9,11 +9,15 @@ import EscrowFormPage from './pages/EscrowFormPage';
 /* import CallbackPage from './pages/CallbackPage'; // for Spotify callback*/
 import RoomPage1 from './pages/faajee/RoomPage1';
 import SpotifyPlaylistManager from './pages/faajee/SpotifyPlaylistManager';
+import HomePage from './pages/HomePage';
+
+
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<HomePage />} />
         <Route path="/escrow" element={<EscrowFormPage />} />
         <Route path="/signin" element={<SigninForm />} />   // Not signin.html!
         <Route path="/signup" element={<SignupForm />} /> // Not signup.html!
