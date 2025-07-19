@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <>
      <Navbar/>
-      {/* Page content.. */}
+      {/* Page content */}
       <Footer />
     </>
   );
