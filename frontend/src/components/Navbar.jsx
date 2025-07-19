@@ -57,19 +57,19 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex items-center">
             <div className="w-8 h-8 bg-red-600 rounded mr-2"></div>
-            <span className="font-bold text-red-600 text-lg">PIABAM</span>
+            <span className="font-bold text-white text-lg">PIABAM</span>
           </div>
 
           {/* Right-Aligned Icons + Sign In */}
           <div className="flex items-center gap-4">
-            <button className="text-gray-600 hover:text-red-600">
+            <button className="text-gray-600 hover:text-text-white">
               <FiSearch className="w-5 h-5" /> {/* 🔍 */}
             </button>
-            <button className="text-gray-600 hover:text-red-600 relative">
+            <button className="text-gray-600 hover:text-text-white relative">
               <FiBell className="w-5 h-5" /> {/* 🔔 */}
-              <span className="absolute top-0 right-0 w-2 h-2 bg-red-600 rounded-full"></span>
+              <span className="absolute top-0 right-0 w-2 h-2 bg-text-white rounded-full"></span>
             </button>
-            <button className="text-sm text-red-600 font-medium">
+            <button className="text-sm text-white font-medium">
               Sign in {/* Text button */}
             </button>
           </div>
