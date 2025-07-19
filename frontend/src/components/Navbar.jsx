@@ -3,7 +3,7 @@ import { FiSearch, FiSettings, FiBell, FiChevronDown } from 'react-icons/fi';
 import { StartModal } from './StartModal';
 import { MoreModal } from './MoreModal';
 
-export const Navbar = () => {
+export default function () => {
   const [showStartModal, setShowStartModal] = useState(false);
   const [showMoreModal, setShowMoreModal] = useState(false);
   const [activeTab, setActiveTab] = useState('Home');
