@@ -62,12 +62,12 @@ export default function Navbar() {
 
           {/* Right-Aligned Icons + Sign In */}
           <div className="flex items-center gap-4">
-            <button className="text-gray-600 hover:text-purple-700">
+            <button className="text-white hover:text-purple-700">
               <FiSearch className="w-5 h-5" /> {/* 🔍 */}
             </button>
-            <button className="text-gray-600 hover:text-purple-700 relative">
+            <button className="text-white hover:text-purple-700 relative">
               <FiBell className="w-5 h-5" /> {/* 🔔 */}
-              <span className="absolute top-0 right-0 w-2 h-2 bg-text-white rounded-full"></span>
+              <span className="absolute top-0 right-0 w-2 h-2 bg-red rounded-full"></span>
             </button>
             <button className="text-sm text-white hover:text-purple-700 font-medium">
               Sign in {/* Text button */}
