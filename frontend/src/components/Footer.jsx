@@ -32,7 +32,7 @@ const Footer = () => {
 
   // Company info component
   const CompanyInfo = ({ name }) => (
-    <div className="mt-4 text-gray-400 text-sm space-y-1">
+    <div className="mt-4 text-gray-400 text-xs space-y-1">
       {name === 'PIABAM' && (
         <>
           <p>PIABAM LTD. | CEO Daejun Park</p>
