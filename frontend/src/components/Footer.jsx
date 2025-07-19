@@ -76,7 +76,7 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           {/* PIABAM Column */}
           <div>
-            <h3 className="text-xl font-bold mb-4">PIABAM</h3>
+            <h3 className="text-lg font-bold mb-3">PIABAM</h3>
             <div className="flex gap-3">
               <SocialButton platform="facebook" />
               <SocialButton platform="instagram" />
@@ -88,7 +88,7 @@ const Footer = () => {
 
           {/* LEM Column */}
           <div>
-            <h3 className="text-xl font-bold mb-4">LEM</h3>
+            <h3 className="text-lg font-bold mb-3">LEM</h3>
             <div className="flex gap-3">
               <SocialButton platform="facebook" />
               <SocialButton platform="instagram" />
@@ -100,7 +100,7 @@ const Footer = () => {
 
           {/* FAAJEE Column */}
           <div>
-            <h3 className="text-xl font-bold mb-4">FAAJEE</h3>
+            <h3 className="text-lg font-bold mb-3">FAAJEE</h3>
             <div className="flex gap-3">
               <SocialButton platform="facebook" />
               <SocialButton platform="instagram" />
@@ -128,8 +128,8 @@ const Footer = () => {
         {/* Work With Us Section */}
        
         <div className="mt-16">
-          <h3 className="text-lg font-semibold text-center mb-4">Work With Us</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-sm">
+          <h3 className="text-lg font-semibold text-center mb-3">Work With Us</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-xs">
             <a href="#" className="text-center hover:text-purple-400 transition-colors">Business/Partnership</a>
             <a href="#" className="text-center hover:text-purple-400 transition-colors">Advertise/Marketing</a>
             <a href="#" className="text-center hover:text-purple-400 transition-colors">Add Your Restaurant</a>
