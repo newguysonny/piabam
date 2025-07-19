@@ -52,7 +52,7 @@ export default function Navbar() {
   return (
     <>
        {/* Mobile Top Navbar (Updated per your request) */}
-      <nav className="md:hidden sticky top-0 bg-white shadow-sm z-40 px-4 py-3">
+      <nav className="md:hidden sticky top-0 bg-gradient-to-r from-purple-600 to-blue-500 shadow-sm z-40 px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
@@ -78,7 +78,7 @@ export default function Navbar() {
 
       
       {/* Desktop Navbar */}
-      <nav className="hidden md:block sticky top-0 bg-white shadow-sm z-40">
+      <nav className="hidden md:block sticky top-0 bg-gradient-to-r from-purple-600 to-blue-500 shadow-sm z-40">
       <div className="container mx-auto px-6 py-3 flex items-center justify-between">
       {/* Left: Logo */}
       <div className="flex items-center">
