@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { throttle } from 'lodash';
 import { 
   FiSearch, 
   FiSettings, 
@@ -14,6 +15,9 @@ import  StartModal  from './StartModal';
 import  MoreModal  from './MoreModal';
 
 export default function Navbar() {
+  const [showBottomNav, setShowBottomNav] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const bottomNavRef = useRef(null);
   const [showStartModal, setShowStartModal] = useState(false);
   const [showMoreModal, setShowMoreModal] = useState(false);
   const [activeTab, setActiveTab] = useState('Home');
@@ -25,7 +29,26 @@ export default function Navbar() {
       <FiChevronDown className="w-4 h-4 text-gray-600" />
     </div>
   );
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
 
+      if (currentScrollY > lastScrollY && currentScrollY > 10) {
+        setShowBottomNav(false);
+      } else if (currentScrollY < lastScrollY) {
+        setShowBottomNav(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+     
+
+    const throttledScroll = throttle(handleScroll, 200);
+    window.addEventListener('scroll', throttledScroll);
+
+    return () => window.removeEventListener('scroll', throttledScroll);
+     }, [lastScrollY]);
+  
   return (
     <>
        {/* Mobile Top Navbar (Updated per your request) */}
@@ -139,7 +162,12 @@ export default function Navbar() {
       </nav>
       
       {/* Mobile Footer Nav */}
-      <div className="md:hidden fixed bottom-0 w-full bg-white border-t shadow-lg z-40">
+      <div 
+        ref={bottomNavRef}
+        className={`md:hidden fixed bottom-0 w-full bg-white border-t shadow-lg z-40 transition-transform duration-300 ${
+          showBottomNav ? 'translate-y-0' : 'translate-y-full'
+        }`}
+      >
       <div className="grid grid-cols-5 py-2">
       {['Home', 'Lem', 'Start', 'Faajee', 'More'].map((item) => (
       <button
