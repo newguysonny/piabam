@@ -1,6 +1,6 @@
 import { FiX, FiBox, FiDatabase, FiMusic, FiClock } from 'react-icons/fi';
 
-export const MoreModal = ({ isOpen, onClose }) => {
+export default function ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
