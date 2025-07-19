@@ -1,6 +1,6 @@
 import { FiX, FiEdit, FiCalendar, FiFolder } from 'react-icons/fi';
 
-export default function StartModal = ({ isOpen, onClose }) => {
+export default function StartModal ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
