@@ -69,12 +69,14 @@ export default function Navbar() {
               <FiBell className="w-5 h-5" /> {/* 🔔 */}
               <span className="absolute top-0 right-0 w-2 h-2 bg-red rounded-full"></span>
             </button>
-            <button className="text-sm text-white hover:text-purple-700 font-medium">
-              <Link to="/signin" className="text-white hover:text-purple-600">
-              Sign in
-            </Link>
-           
-            </button>
+            <button className="text-sm font-medium">
+               <Link 
+             to="/signin" 
+             className="text-white hover:text-purple-600 transition-colors"
+                >
+                  Sign in
+                </Link>
+           </button>
           </div>
         </div>
       </nav>
