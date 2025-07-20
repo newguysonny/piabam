@@ -6,6 +6,7 @@ import CreateRoom from './pages/CreateRoom';
 import FaajeeStart from './pages/faajee/FaajeeStart';
 import RoomPage from './pages/RoomPage';
 import EscrowFormPage from './pages/EscrowFormPage';
+import CrewForm from './pages/CrewForm';
 /* import CallbackPage from './pages/CallbackPage'; // for Spotify callback*/
 import RoomPage1 from './pages/faajee/RoomPage1';
 import SpotifyPlaylistManager from './pages/faajee/SpotifyPlaylistManager';
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/room/start" element={<CreateRoom />} />
         <Route path="/music" element={<FaajeeStart />} /> // for testing type script 
         <Route path="/room" element={<RoomPage />} />
+        <Route path="/crew" element={<CrewForm />} />
         <Route path="/try" element={<RoomPage1 />} />
         <Route path="/playlist" element={<SpotifyPlaylistManager />} />
       </Routes>
