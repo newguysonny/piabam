@@ -33,7 +33,7 @@ interface ServiceCardProps {
   onClick?: () => void;
 }
 
-export const UserProfileModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
+export default function UserProfileModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   return (
     <AnimatePresence>
       {isOpen && (
