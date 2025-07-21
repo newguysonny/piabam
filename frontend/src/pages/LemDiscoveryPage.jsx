@@ -58,7 +58,7 @@ export default function LemDiscoveryPage() {
     );
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    
     <div className="bg-gray-50 min-h-screen">
       {/* Search Box */}
       <div className="sticky top-0 z-20 bg-white p-4 border-b">
