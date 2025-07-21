@@ -7,6 +7,7 @@ export default function LemDiscoveryPage() {
   const [location, setLocation] = useState('');
   const [distance, setDistance] = useState('5 miles');
   const [sortBy, setSortBy] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Sample data
   const listings = [
