@@ -13,7 +13,7 @@ import {
   FiArrowRight
 } from 'react-icons/fi';
 
-// 1. Main Modal Component
+// 1. Main Modal Components
 export default function UserProfileModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
