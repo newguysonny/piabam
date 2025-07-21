@@ -49,6 +49,12 @@ export default function LemDiscoveryPage() {
     }
   ];
 
+   // Prevent form submission
+  const handleSearchSubmit = (e) => {
+    e.preventDefault(); // This stops the page from refreshing/blanking
+    // search logic here (already implemented in filtering)
+  };
+
         // Filter listings based on search and other filters
   const filteredListings = listings
     .filter(item => activeTab === 'restaurants' ? item.type === 'restaurant' : item.type === 'crew')
@@ -62,7 +68,8 @@ export default function LemDiscoveryPage() {
     
     <div className="bg-gray-50 min-h-screen">
       {/* Search Box */}
-      <div className="sticky top-0 z-20 bg-white p-4 border-b">
+       {/* Search Box - now wrapped in form with onSubmit handler */}
+      <form onSubmit={handleSearchSubmit} className="sticky top-0 z-20 bg-white p-4 border-b">
         <div className="relative">
           <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           <input
@@ -74,6 +81,7 @@ export default function LemDiscoveryPage() {
           />
           {searchQuery && (
             <button 
+              type="button" // Important: prevents form submission
               onClick={() => setSearchQuery('')}
               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
             >
@@ -81,7 +89,7 @@ export default function LemDiscoveryPage() {
             </button>
           )}
         </div>
-      </div>
+      </form>
 
       {/* Main Tabs - now positioned below search */}
       <div className="flex border-b sticky top-16 z-10 bg-white">
