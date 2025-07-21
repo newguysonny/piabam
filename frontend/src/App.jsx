@@ -7,7 +7,7 @@ import FaajeeStart from './pages/faajee/FaajeeStart';
 import RoomPage from './pages/RoomPage';
 import EscrowFormPage from './pages/EscrowFormPage';
 import CrewForm from './pages/CrewForm';
-/* import CallbackPage from './pages/CallbackPage'; // for Spotify callback*/
+/* import CallbackPage from './pages/CallbackPage'; // for the Spotify callback*/
 import RoomPage1 from './pages/faajee/RoomPage1';
 import SpotifyPlaylistManager from './pages/faajee/SpotifyPlaylistManager';
 import HomePage from './pages/HomePage';
