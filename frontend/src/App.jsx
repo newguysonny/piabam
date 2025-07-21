@@ -8,6 +8,7 @@ import RoomPage from './pages/RoomPage';
 import EscrowFormPage from './pages/EscrowFormPage';
 import CrewForm from './pages/CrewForm';
 import LemDiscoveryPage from './pages/LemDiscoveryPage';
+import StreamingDiscoveryPage from './pages/StreamingDiscoveryPage';
 /* import CallbackPage from './pages/CallbackPage'; // for the Spotify callback*/
 import RoomPage1 from './pages/faajee/RoomPage1';
 import SpotifyPlaylistManager from './pages/faajee/SpotifyPlaylistManager';
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/room" element={<RoomPage />} />
         <Route path="/crew" element={<CrewForm />} />
         <Route path="/lem" element={<LemDiscoveryPage />} />
+        <Route path="/party" element={<StreamingDiscoveryPage />} />
         <Route path="/try" element={<RoomPage1 />} />
         <Route path="/playlist" element={<SpotifyPlaylistManager />} />
       </Routes>
