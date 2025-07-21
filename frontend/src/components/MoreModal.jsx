@@ -126,16 +126,35 @@ function LevelProgress() {
 // 7. Services Grid
 function ServicesGrid({ mobile = false }) {
   const services = [
-    { icon: <FiClock className="text-amber-400" />, label: "Escrow", bg: "bg-amber-900/30" },
-    { icon: <FiBox className="text-blue-400" />, label: "Lem Orders", bg: "bg-blue-900/30" },
-    { icon: <FiDatabase className="text-purple-400" />, label: "Backed Projects", bg: "bg-purple-900/30" },
-    { icon: <FiMusic className="text-pink-400" />, label: "Events", bg: "bg-pink-900/30" },
-    { icon: <FiClock className="text-amber-400" />, label: "Party History", bg: "bg-amber-900/30" },
-    
+    { 
+      icon: <FiBox className="text-blue-400" />, 
+      label: "Escrow Dashboard", 
+      bg: "bg-blue-900/30" 
+    },
+    { 
+      icon: <FiDatabase className="text-purple-400" />, 
+      label: "Lem Orders", 
+      bg: "bg-purple-900/30" 
+    },
+    { 
+      icon: <FiMusic className="text-pink-400" />, 
+      label: "Events", 
+      bg: "bg-pink-900/30" 
+    },
+    { 
+      icon: <FiClock className="text-amber-400" />, 
+      label: "Party History", 
+      bg: "bg-amber-900/30" 
+    },
+    { 
+      icon: <FiShield className="text-emerald-400" />, 
+      label: "Backed Projects", 
+      bg: "bg-emerald-900/30" 
+    }
   ];
 
   return (
-    <div className={`grid ${mobile ? 'grid-cols-2' : 'grid-cols-4'} gap-3 px-4 pb-6`}>
+    <div className={`grid ${mobile ? 'grid-cols-2' : 'grid-cols-3'} gap-3 px-4 pb-6`}>
       {services.map((service, index) => (
         <ServiceCard 
           key={index}
