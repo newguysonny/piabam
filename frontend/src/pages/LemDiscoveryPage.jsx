@@ -68,14 +68,22 @@ export default function LemDiscoveryPage() {
         <div className="relative">
           <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           <input
-            type="text"
+            type="search"
             placeholder="Search restaurants, crews, or dishes..."
             className="w-full bg-gray-100 rounded-full pl-10 pr-10 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white"
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
               // Your search/filter logic here if needed
+             e.stopPropagation();  // Prevent event bubbling
+              e.preventDefault();   // Double protection
             }}
+            onKeyDown={(e) => {
+           if (e.key === 'Enter') {
+             e.preventDefault();
+            e.stopPropagation();
+             }
+           }}
           />
           {searchQuery && (
             <button 
