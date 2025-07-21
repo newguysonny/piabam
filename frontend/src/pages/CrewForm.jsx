@@ -50,32 +50,49 @@ export default function CrewForm() {
   };
 
   const handleSyncLocation = async () => {
-    if (!navigator.geolocation) {
-      alert("Geolocation not supported");
-      return;
-    }
+  if (!navigator.geolocation) {
+    alert("Geolocation not supported by your browser.");
+    return;
+  }
 
-    navigator.geolocation.getCurrentPosition(async (position) => {
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
       const { latitude: lat, longitude: lng } = position.coords;
       
+      // Update form state
+      setForm(prev => ({ ...prev, location: `${lat.toFixed(6)}, ${lng.toFixed(6)}` }));
+
+      // Update map view and marker
+      if (!mapRef.current) {
+        mapRef.current = L.map("map").setView([lat, lng], 15);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(mapRef.current);
+      } else {
+        mapRef.current.setView([lat, lng], 15);
+      }
+
+      if (markerRef.current) {
+        markerRef.current.setLatLng([lat, lng]);
+      } else {
+        markerRef.current = L.marker([lat, lng]).addTo(mapRef.current);
+      }
+
+      // Reverse geocoding (optional)
       try {
         const res = await fetch(
           `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
         );
         const data = await res.json();
-        const city = data.address.city || data.address.town || data.address.village || "Unknown";
-        const country = data.address.country || "Unknown";
-        const flag = country === "China" ? "🇨🇳" : "🌍";
-
-        setLocationText(`${flag} ${country}, ${city}`);
-        setLocationTime(new Date().toLocaleString());
-        updateLocation(lat, lng);
-        mapRef.current.setView([lat, lng], 15);
+        const city = data.address.city || "Unknown location";
+        setLocationText(`📍 ${city}`);
       } catch (error) {
-        console.error("Geocoding error:", error);
+        console.error("Geocoding failed:", error);
       }
-    });
-  };
+    },
+    (error) => {
+      alert(`Location access denied: ${error.message}`);
+    }
+  );
+};
 
   const handleSubmit = (e) => {
     e.preventDefault();
