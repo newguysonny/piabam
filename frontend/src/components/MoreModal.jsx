@@ -131,7 +131,7 @@ function ServicesGrid({ mobile = false }) {
     { icon: <FiDatabase className="text-purple-400" />, label: "Backed Projects", bg: "bg-purple-900/30" },
     { icon: <FiMusic className="text-pink-400" />, label: "Events", bg: "bg-pink-900/30" },
     { icon: <FiClock className="text-amber-400" />, label: "Party History", bg: "bg-amber-900/30" },
-    { icon: <FiClock className="text-amber-400" />, label: "Party History", bg: "bg-amber-900/30" }
+    
   ];
 
   return (
