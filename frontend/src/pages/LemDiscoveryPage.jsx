@@ -48,10 +48,42 @@ export default function LemDiscoveryPage() {
     }
   ];
 
+        // Filter listings based on search and other filters
+  const filteredListings = listings
+    .filter(item => activeTab === 'restaurants' ? item.type === 'restaurant' : item.type === 'crew')
+    .filter(item => 
+      searchQuery === '' || 
+      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.category.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
   return (
     <div className="bg-gray-50 min-h-screen">
-      {/* Main Tabs */}
-      <div className="flex border-b sticky top-0 bg-white z-10">
+    <div className="bg-gray-50 min-h-screen">
+      {/* Search Box */}
+      <div className="sticky top-0 z-20 bg-white p-4 border-b">
+        <div className="relative">
+          <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search restaurants, crews, or dishes..."
+            className="w-full bg-gray-100 rounded-full pl-10 pr-10 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          {searchQuery && (
+            <button 
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            >
+              <FiX size={18} />
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Main Tabs - now positioned below search */}
+      <div className="flex border-b sticky top-16 z-10 bg-white">
         <button
           className={`flex-1 py-4 font-medium ${activeTab === 'restaurants' ? 'text-purple-600 border-b-2 border-purple-600' : 'text-gray-500'}`}
           onClick={() => setActiveTab('restaurants')}
