@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FiSearch, FiFilter, FiMapPin, FiRefreshCw, FiX, FiClock, FiBox, FiDatabase, FiMusic, FiUser, FiStar, FiSettings, FiArrowRight } from 'react-icons/fi';
 
-const DiscoveryPage = () => {
+const LemDiscoveryPage = () => {
   // State management
   const [activeTab, setActiveTab] = useState('restaurants');
   const [searchQuery, setSearchQuery] = useState('');
@@ -278,4 +278,4 @@ useEffect(() => {
   );
 };
 
-export default DiscoveryPage;
+export default LemDiscoveryPage;
