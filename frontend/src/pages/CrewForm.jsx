@@ -137,6 +137,5 @@ return ( <div className="max-w-2xl mx-auto p-4 bg-white rounded-xl shadow"> <h2 
 
 ); }
 
-// Tailwind utility: 
-input style const inputClass = "w-full border rounded px-3 py-2 mt-1"; const input = document.createElement('style'); input.innerHTML = .input { ${inputClass} }; document.head.appendChild(input);
+// Tailwind utility: input style const inputClass = "w-full border rounded px-3 py-2 mt-1"; const input = document.createElement('style'); input.innerHTML = .input { ${inputClass} }; document.head.appendChild(input);
 
