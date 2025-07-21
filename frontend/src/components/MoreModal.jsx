@@ -126,9 +126,11 @@ function LevelProgress() {
 // 7. Services Grid
 function ServicesGrid({ mobile = false }) {
   const services = [
-    { icon: <FiBox className="text-blue-400" />, label: "Lem Order", bg: "bg-blue-900/30" },
+    { icon: <FiClock className="text-amber-400" />, label: "Escrow", bg: "bg-amber-900/30" },
+    { icon: <FiBox className="text-blue-400" />, label: "Lem Orders", bg: "bg-blue-900/30" },
     { icon: <FiDatabase className="text-purple-400" />, label: "Backed Projects", bg: "bg-purple-900/30" },
     { icon: <FiMusic className="text-pink-400" />, label: "Events", bg: "bg-pink-900/30" },
+    { icon: <FiClock className="text-amber-400" />, label: "Party History", bg: "bg-amber-900/30" },
     { icon: <FiClock className="text-amber-400" />, label: "Party History", bg: "bg-amber-900/30" }
   ];
 
