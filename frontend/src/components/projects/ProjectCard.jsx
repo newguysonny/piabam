@@ -42,7 +42,7 @@ const ProjectCard = ({ project }) => {
           </div>
         </div>
 
-        {/* Text content */}
+        {/* Text content  */}
         <h3 className="font-bold text-lg mb-1 line-clamp-1">{project.title}</h3>
         <p className="text-gray-600 text-sm line-clamp-1 mb-2">Hosted by {project.host}</p> {/* Added line-clamp */}
         
