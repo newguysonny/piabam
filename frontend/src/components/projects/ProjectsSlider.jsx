@@ -4,7 +4,7 @@ import ProjectCard from './ProjectCard';
 
 const ProjectsSlider = ({ projects }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const slidesToShow = 3; // Adjust for mobile later
+const [slidesToShow, setSlidesToShow] = useState(3);
 
    useEffect(() => {
   const handleResize = () => {
@@ -17,7 +17,7 @@ const ProjectsSlider = ({ projects }) => {
 }, []);
   
   // Add "View More" slide
-  const slides = [...projects, { id: 'view-more', isLastSlide: true }];
+  const slides = [...projects, { id: `view-more-${projects.length}`, isLastSlide: true }];
 
   const nextSlide = () => {
     setCurrentIndex((prev) => 
