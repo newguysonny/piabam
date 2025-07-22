@@ -1,18 +1,19 @@
 import { useState } from 'react';
 import { FiUsers, FiClock, FiMapPin } from 'react-icons/fi';
 
+
 const ProjectCard = ({ project }) => {
   const calculateProgress = (current, goal) => Math.min(100, (current / goal) * 100);
 
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 h-full mx-1.5"> {/* Added mx-1.5 for gap */}
+    <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 h-full mx-1.5">
       {/* Image with fixed aspect ratio */}
-      <div className="relative aspect-[4/3] bg-gray-100"> {/* Changed to 4:3 ratio */}
+      <div className="relative aspect-[4/3] bg-gray-100">
         <img
           src={project.image}
           alt={project.title}
           className="w-full h-full object-cover"
-          loading="lazy" {/* Added lazy loading */}
+          loading="lazy"
         />
         <div className="absolute bottom-2 left-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded-full text-xs flex items-center">
           {project.type === 'food' ? '🍔' : '🎵'}
@@ -23,7 +24,7 @@ const ProjectCard = ({ project }) => {
       </div>
 
       {/* Content - Fixed height */}
-      <div className="p-4 flex flex-col" style={{ height: '180px' }}> {/* Fixed height */}
+      <div className="p-4 flex flex-col" style={{ height: '180px' }}>
         {/* Progress bar */}
         <div className="mb-3">
           <div className="flex justify-between text-xs mb-1">
@@ -42,14 +43,14 @@ const ProjectCard = ({ project }) => {
           </div>
         </div>
 
-        {/* Text content  */}
+        {/* Text content */}
         <h3 className="font-bold text-lg mb-1 line-clamp-1">{project.title}</h3>
-        <p className="text-gray-600 text-sm line-clamp-1 mb-2">Hosted by {project.host}</p> {/* Added line-clamp */}
+        <p className="text-gray-600 text-sm line-clamp-1 mb-2">Hosted by {project.host}</p>
         
         {/* Location */}
         <div className="flex items-center text-xs text-gray-500 mt-auto">
-          <FiMapPin size={12} className="mr-1 flex-shrink-0" /> {/* Prevent icon shrink */}
-          <span className="line-clamp-1">{project.location}</span> {/* Added line-clamp */}
+          <FiMapPin size={12} className="mr-1 flex-shrink-0" />
+          <span className="line-clamp-1">{project.location}</span>
         </div>
 
         {/* CTA Button */}
@@ -61,4 +62,4 @@ const ProjectCard = ({ project }) => {
   );
 };
 
-export default ProjectCard;
+export default ProjectCard; 
