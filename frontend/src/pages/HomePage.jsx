@@ -1,5 +1,5 @@
 
-
+/*
 import React from 'react'; // Add this if using React 17 or earlier
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
@@ -40,10 +40,10 @@ const featuredProjects = [
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col"> {/* Added container */}
+    <div className="min-h-screen flex flex-col"> 
       <Navbar />
       
-      <main className="flex-grow"> {/* Ensures content pushes footer down */}
+      <main className="flex-grow"> 
         <section className="py-12">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl font-bold mb-8">Featured Community Projects</h2>
@@ -58,9 +58,9 @@ export default function HomePage() {
 }
 
 
+*/
 
 
-/*
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import ProjectsSlider from '../components/projects/ProjectsSlider';
@@ -130,14 +130,12 @@ export default function HomePage() {
       <section className="py-12">
       <div className="container mx-auto px-4">
         <h2 className="text-2xl font-bold mb-8">Featured Community Projects</h2>
-        <div style={{ minHeight: '500px' }}>
-          <ProjectsSlider projects={featuredProjects} />
-         </div>
+        
       </div>
     </section>
-      {/* Page content /}
+      {/* Page content */}
       <Footer />
     </>
   );
 }
-*/
+
