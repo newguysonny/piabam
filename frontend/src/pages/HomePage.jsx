@@ -67,7 +67,9 @@ export default function HomePage() {
       <section className="py-12">
       <div className="container mx-auto px-4">
         <h2 className="text-2xl font-bold mb-8">Featured Community Projects</h2>
-        <ProjectsSlider projects={featuredProjects} />
+        <div style={{ minHeight: '500px' }}>
+          <ProjectsSlider projects={featuredProjects} />
+         </div>
       </div>
     </section>
       {/* Page content */}
