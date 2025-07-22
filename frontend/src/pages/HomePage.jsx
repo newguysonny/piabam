@@ -16,7 +16,7 @@ import ProjectsSlider from '../components/projects/ProjectsSlider';
     current: 3614,
   },
        {
-    id: 1,
+    id: 2,
     title: "Wizkid Album Listening Party",
     host: "'s Fan Club",
     type: "music",
@@ -26,7 +26,7 @@ import ProjectsSlider from '../components/projects/ProjectsSlider';
     current: 3614,
   },
        {
-    id: 1,
+    id: 3,
     title: "Wizkid Album Listening Party",
     host: "tin's Fan Club",
     type: "music",
@@ -36,7 +36,7 @@ import ProjectsSlider from '../components/projects/ProjectsSlider';
     current: 3614,
   },
        {
-    id: 1,
+    id: 4,
     title: "Wizkid Album Listening Party",
     host: "As Fan Club",
     type: "music",
@@ -46,7 +46,7 @@ import ProjectsSlider from '../components/projects/ProjectsSlider';
     current: 3614,
   },
        {
-    id: 1,
+    id: 5,
     title: "Wizkid Album Listening Party",
     host: "Ati's Fan Club",
     type: "music",
