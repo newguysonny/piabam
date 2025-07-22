@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { FiUsers, FiClock, FiMapPin } from 'react-icons/fi';
 
 const ProjectCard = ({ project }) => {
