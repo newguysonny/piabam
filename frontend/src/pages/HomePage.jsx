@@ -1,6 +1,6 @@
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
-import ProjectsSlider from '../../components/projects/ProjectsSlider';
+import ProjectsSlider from '../components/projects/ProjectsSlider';
 
 
    const featuredProjects = [
