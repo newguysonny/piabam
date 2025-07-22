@@ -8,12 +8,12 @@ import RoomPage from './pages/RoomPage';
 import EscrowFormPage from './pages/EscrowFormPage';
 import CrewForm from './pages/CrewForm';
 import LemDiscoveryPage from './pages/LemDiscoveryPage';
-import StreamingDiscoveryPage from './pages/StreamingDiscoveryPage';
+//import StreamingDiscoveryPage from './pages/StreamingDiscoveryPage';
 /* import CallbackPage from './pages/CallbackPage'; // for the Spotify callback*/
 import RoomPage1 from './pages/faajee/RoomPage1';
 import SpotifyPlaylistManager from './pages/faajee/SpotifyPlaylistManager';
 import HomePage from './pages/HomePage';
-
+import StreamingDiscoveryPage from './path/to/StreamingDiscoveryPage';
 
 export default function App() {
   return (
