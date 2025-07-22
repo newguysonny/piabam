@@ -1,93 +1,130 @@
-import { useState, useEffect } from 'react';
-import { FiChevronLeft, FiChevronRight, FiArrowRight } from 'react-icons/fi';
+import { useState, useEffect, useRef } from 'react';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import ProjectCard from './ProjectCard';
 
 const ProjectsSlider = ({ projects }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-const [slidesToShow, setSlidesToShow] = useState(3);
+  const [slidesToShow, setSlidesToShow] = useState(3);
+  const [showArrows, setShowArrows] = useState(false);
+  const sliderRef = useRef(null);
 
-   useEffect(() => {
-  const handleResize = () => {
-    setSlidesToShow(window.innerWidth < 768 ? 1 : 3);
-  };
-  
-  window.addEventListener('resize', handleResize);
-  handleResize(); // Set initial value
-  return () => window.removeEventListener('resize', handleResize);
-}, []);
-  
-  // Add "View More" slide
-  const slides = [...projects, { id: `view-more-${projects.length}`, isLastSlide: true }];
+  // Responsive slides calculation
+  useEffect(() => {
+    const updateSlides = () => {
+      const isMobile = window.innerWidth < 768;
+      setSlidesToShow(isMobile ? 1.2 : 3.2);
+      setShowArrows(!isMobile);
+    };
 
-  const nextSlide = () => {
-    setCurrentIndex((prev) => 
-      prev >= slides.length - slidesToShow ? 0 : prev + 1
-    );
-  };
+    updateSlides();
+    window.addEventListener('resize', updateSlides);
+    return () => window.removeEventListener('resize', updateSlides);
+  }, []);
 
-  const prevSlide = () => {
-    setCurrentIndex((prev) => 
-      prev <= 0 ? slides.length - slidesToShow : prev - 1
-    );
-  };
+  // Touch scroll handling
+  useEffect(() => {
+    const slider = sliderRef.current;
+    let isDragging = false;
+    let startPos = 0;
+    let currentTranslate = 0;
+
+    const handleTouchStart = (e) => {
+      isDragging = true;
+      startPos = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+    };
+
+    const handleTouchMove = (e) => {
+      if (!isDragging) return;
+      const currentPosition = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+      currentTranslate = currentPosition - startPos;
+    };
+
+    const handleTouchEnd = () => {
+      isDragging = false;
+      if (currentTranslate < -50) nextSlide();
+      if (currentTranslate > 50) prevSlide();
+    };
+
+    slider.addEventListener('mousedown', handleTouchStart);
+    slider.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('mousemove', handleTouchMove);
+    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('mouseup', handleTouchEnd);
+    window.addEventListener('touchend', handleTouchEnd);
+
+    return () => {
+      slider.removeEventListener('mousedown', handleTouchStart);
+      slider.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('mousemove', handleTouchMove);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('mouseup', handleTouchEnd);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, []);
+
+  const nextSlide = () => setCurrentIndex(prev => Math.min(prev + 1, projects.length - 1));
+  const prevSlide = () => setCurrentIndex(prev => Math.max(prev - 1, 0));
 
   return (
-    <div className="relative px-8">
+    <div 
+      className="relative"
+      onMouseEnter={() => setShowArrows(true)}
+      onMouseLeave={() => setShowArrows(false)}
+    >
       {/* Slider Container */}
-      <div className="overflow-hidden">
+      <div 
+        ref={sliderRef}
+        className="overflow-hidden select-none"
+      >
         <div 
-          className="flex transition-transform duration-300 gap-4"
+          className="flex transition-transform duration-300 ease-out gap-4"
           style={{ 
-            transform: `translateX(-${currentIndex * (100/slidesToShow)}%)`,
-            width: `${(slides.length * 100)/slidesToShow}%`
+            transform: `translateX(calc(-${currentIndex * (100 / slidesToShow)}%))`,
+            width: `${(projects.length * 100) / slidesToShow}%`
           }}
         >
-          {slides.map((slide) => (
+          {projects.map((project) => (
             <div 
-              key={slide.id} 
+              key={project.id}
               className="flex-shrink-0"
-              style={{ width: `${100/slidesToShow}%` }}
+              style={{ width: `${100 / slidesToShow}%` }}
             >
-              {slide.isLastSlide ? (
-                <div className="bg-gray-50 rounded-xl p-6 h-full flex flex-col items-center justify-center border-2 border-dashed border-gray-200">
-                  <h3 className="text-xl font-bold mb-4 text-center">
-                    Explore All Community Projects
-                  </h3>
-                  <button className="bg-purple-600 text-white px-5 py-2 rounded-lg font-medium flex items-center gap-2 hover:bg-purple-700 transition">
-                    View More <FiArrowRight />
-                  </button>
-                </div>
-              ) : (
-                <ProjectCard project={slide} />
-              )}
+              <ProjectCard project={project} />
             </div>
           ))}
         </div>
       </div>
 
-      {/* Navigation Arrows */}
-      <button 
-        onClick={prevSlide}
-        className="absolute left-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg z-10 hover:bg-gray-100"
-      >
-        <FiChevronLeft size={24} />
-      </button>
-      <button 
-        onClick={nextSlide}
-        className="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg z-10 hover:bg-gray-100"
-      >
-        <FiChevronRight size={24} />
-      </button>
+      {/* Desktop Arrows */}
+      {showArrows && (
+        <div className="absolute top-2 right-2 flex gap-2 z-10">
+          <button
+            onClick={prevSlide}
+            className="p-2 rounded-full bg-white bg-opacity-80 shadow-md hover:bg-opacity-100 transition-all"
+            disabled={currentIndex === 0}
+          >
+            <FiChevronLeft className="text-purple-600" size={20} />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="p-2 rounded-full bg-white bg-opacity-80 shadow-md hover:bg-opacity-100 transition-all"
+            disabled={currentIndex >= projects.length - slidesToShow}
+          >
+            <FiChevronRight className="text-purple-600" size={20} />
+          </button>
+        </div>
+      )}
 
-      {/* View All Link (Below Slider) */}
-      <div className="text-center mt-8">
-        <a 
-          href="/discover" 
-          className="inline-flex items-center text-purple-600 hover:text-purple-800 font-medium group"
-        >
-          View all current projects
-          <FiArrowRight className="ml-1 transition-transform group-hover:translate-x-1" />
-        </a>
+      {/* Scroll Indicator (Mobile) */}
+      <div className="md:hidden mt-4 flex justify-center">
+        <div className="flex gap-1">
+          {projects.map((_, i) => (
+            <div 
+              key={i}
+              className={`h-1 rounded-full ${i === currentIndex ? 'bg-purple-600 w-4' : 'bg-gray-300 w-2'}`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
