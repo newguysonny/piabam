@@ -1,5 +1,5 @@
 
-/*
+
 import React from 'react'; // Add this if using React 17 or earlier
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
@@ -58,9 +58,9 @@ export default function HomePage() {
 }
 
 
-*/
 
 
+/*
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import ProjectsSlider from '../components/projects/ProjectsSlider';
@@ -135,9 +135,9 @@ export default function HomePage() {
          </div> 
       </div>
     </section>
-      {/* Page content */}
+      {/* Page content /}
       <Footer />
     </>
   );
 }
-
+*/
