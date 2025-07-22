@@ -10,6 +10,7 @@ import CrewForm from './pages/CrewForm';
 import LemDiscoveryPage from './pages/LemDiscoveryPage';
 import StreamingDiscoveryPage from './pages/StreamingDiscoveryPage';
 import CrowdfundingDiscoveryPage from './pages/projects/CrowdfundingDiscoveryPage';
+import MomentumDiscoveryPage from './pages/projects/MomentumDiscoveryPage';
 /* import CallbackPage from './pages/CallbackPage'; // for the Spotify callback*/
 import RoomPage1 from './pages/faajee/RoomPage1';
 import SpotifyPlaylistManager from './pages/faajee/SpotifyPlaylistManager';
@@ -30,6 +31,7 @@ export default function App() {
         <Route path="/lem" element={<LemDiscoveryPage />} />
         <Route path="/party" element={<StreamingDiscoveryPage />} />
         <Route path="/projects" element={<CrowdfundingDiscoveryPage  />} />
+        <Route path="/funding" element={<MomentumDiscoveryPage  />} />
         <Route path="/try" element={<RoomPage1 />} />
         <Route path="/playlist" element={<SpotifyPlaylistManager />} />
       </Routes>
