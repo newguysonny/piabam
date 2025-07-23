@@ -77,6 +77,7 @@ import Footer from '../components/Footer';
 
 export default function Homepage() {
      return (
+  <> 
   <div className="max-w-7xl mx-auto px-4">
     <h2 className="text-2xl font-bold mb-6">Featured Projects</h2>
     
@@ -94,6 +95,7 @@ export default function Homepage() {
       <div className="hidden md:block absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10" />
     </div>
   </div>
+ </>
 );
 }
 
