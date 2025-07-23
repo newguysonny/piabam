@@ -65,7 +65,7 @@ import Footer from '../components/Footer';
 
 
 
-const Homepage = () => {
+export default function Homepage() => {
   return (
     <>
     <section className="py-12 px-4">
@@ -78,8 +78,7 @@ const Homepage = () => {
   );
 };
 
-export default HomePage;
-
+ 
 /*
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
