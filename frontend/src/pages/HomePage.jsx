@@ -74,19 +74,20 @@ import Footer from '../components/Footer';
 
 
 
-
-export default function Homepage() {
-  const standardizedProjects = featuredProjects.map(proj => ({
-    id: proj.id,
-    title: proj.title,
-    creator: proj.host || proj.creator, // Handle both formats
-    category: proj.type || proj.category,
-    image: proj.image,
-    current: proj.current,
-    goal: proj.goal,
-    backers: proj.backers || Math.floor(proj.current / 20), // Default if missing
-    daysLeft: proj.daysLeft || 7 // Default if missing
+        export default function Homepage() {
+  const normalizeProject = (project) => ({
+    id: project.id,
+    title: project.title,
+    creator: project.host || project.creator,
+    category: project.type || project.category,
+    image: project.image,
+    current: project.current,
+    goal: project.goal,
+    backers: project.backers || Math.floor(project.current / 20),
+    daysLeft: project.daysLeft || 7
   });
+
+  const standardizedProjects = featuredProjects.map(normalizeProject);
 
   return (
     <>
@@ -105,8 +106,7 @@ export default function Homepage() {
     </>
   );
 }
-);
-}
+
 
 
 /*
