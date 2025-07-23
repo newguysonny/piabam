@@ -86,7 +86,7 @@ export default function Homepage() {
     goal: proj.goal,
     backers: proj.backers || Math.floor(proj.current / 20), // Default if missing
     daysLeft: proj.daysLeft || 7 // Default if missing
-  }));
+  });
 
   return (
     <>
