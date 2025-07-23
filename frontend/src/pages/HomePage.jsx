@@ -65,7 +65,7 @@ import Footer from '../components/Footer';
 
 
 
-export default function Homepage() => {
+export default function Homepage() {
   return (
     <>
     <section className="py-12 px-4">
