@@ -79,16 +79,23 @@ import Footer from '../components/Footer';
 
 export default function Homepage() {
      return (
-  <section className="container mx-auto px-4 py-12">
-    <h2 className="text-2xl font-bold mb-6">Trending Music Projects</h2>
-    <ProjectsSlider projects={featuredProjects} />
+  <div className="max-w-7xl mx-auto px-4">
+    <h2 className="text-2xl font-bold mb-6">Featured Projects</h2>
     
-    <div className="mt-8 text-center">
-      <a href="/discover" className="inline-block px-6 py-2 border border-purple-600 text-purple-600 rounded-md hover:bg-purple-50 transition">
-        View All Projects →
-      </a>
+    {/* Constrained slider container */}
+    <div className="relative">
+      {/* Left gradient for desktop peek */}
+      <div className="hidden md:block absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10" />
+      
+      {/* Slider with max-width */}
+      <div className="mx-auto" style={{ maxWidth: 'calc(3 * 320px + 2 * 16px + 80px)' }}>
+        <ProjectsSlider projects={projects} />
+      </div>
+      
+      {/* Right gradient for desktop peek */}
+      <div className="hidden md:block absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10" />
     </div>
-  </section>
+  </div>
 );
 }
 
