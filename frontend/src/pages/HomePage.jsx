@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from 'react';
 import ProjectsSlider from '../components/projects/ProjectsSlider';
 import Navbar from '../components/Navbar';
@@ -89,7 +87,7 @@ export default function Homepage() {
       
       {/* Slider with max-width */}
       <div className="mx-auto" style={{ maxWidth: 'calc(3 * 320px + 2 * 16px + 80px)' }}>
-        <ProjectsSlider projects={projects} />
+          {/*  <ProjectsSlider projects={projects} />*/}
       </div>
       
       {/* Right gradient for desktop peek */}
