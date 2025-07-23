@@ -5,6 +5,66 @@ import ProjectsSlider from '../components/projects/ProjectsSlider';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
+
+
+    const featuredProjects = [
+  // Your featured projects data
+  {
+    id: 1,
+    title: "Wizkid Album Listening Party",
+    host: "Atin's Fan Club",
+    type: "music",
+    image: "https://placehold.co/600x400/7E22CE/FFFFFF?text=Wizkid+Party",
+    location: "Lagos, Nigeria",
+    goal: 5000,
+    current: 3614,
+  },
+       {
+    id: 2,
+    title: "Wizkid Album Listening Party",
+    host: "'s Fan Club",
+    type: "music",
+    image: "https://placehold.co/600x400/7E22CE/FFFFFF?text=Wizkid+Party",
+    location: "Lagos, Nigeria",
+    goal: 5000,
+    current: 3614,
+  },
+       {
+    id: 3,
+    title: "Wizkid Album Listening Party",
+    host: "tin's Fan Club",
+    type: "music",
+    image: "https://placehold.co/600x400/7E22CE/FFFFFF?text=Wizkid+Party",
+    location: "Lagos, Nigeria",
+    goal: 5000,
+    current: 3614,
+  },
+       {
+    id: 4,
+    title: "Wizkid Album Listening Party",
+    host: "As Fan Club",
+    type: "music",
+    image: "https://placehold.co/600x400/7E22CE/FFFFFF?text=Wizkid+Party",
+    location: "Lagos, Nigeria",
+    goal: 5000,
+    current: 3614,
+  },
+       {
+    id: 5,
+    title: "Wizkid Album Listening Party",
+    host: "Ati's Fan Club",
+    type: "music",
+    image: "https://placehold.co/600x400/7E22CE/FFFFFF?text=Wizkid+Party",
+    location: "Lagos, Nigeria",
+    goal: 5000,
+    current: 3614,
+  },
+   
+];
+
+
+
+
 const Homepage = () => {
   return (
     <section className="py-12 px-4">
