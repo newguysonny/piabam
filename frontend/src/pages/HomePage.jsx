@@ -76,7 +76,7 @@ const Homepage = () => {
   );
 };
 
-
+export default HomePage;
 
 /*
 import Footer from '../components/Footer';
