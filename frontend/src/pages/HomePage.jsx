@@ -77,7 +77,7 @@ import Footer from '../components/Footer';
 
 
 
-const Homepage = () => (
+export default function Homepage() (
   <section className="container mx-auto px-4 py-12">
     <h2 className="text-2xl font-bold mb-6">Trending Music Projects</h2>
     <ProjectsSlider projects={featuredProjects} />
@@ -90,7 +90,6 @@ const Homepage = () => (
   </section>
 );
 
-export default HomePage;
 
 
 /*
