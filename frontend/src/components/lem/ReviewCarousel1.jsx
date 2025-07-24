@@ -57,7 +57,7 @@ const ReviewCarousel1 = ({ reviews }) => {
     setIsDragging(false);
   };
 
-  // Render card groups
+  // Render card groupss
   const renderCardGroups = () => {
     const isMobile = window.innerWidth < 768;
     const cardsPerGroup = isMobile ? mobileCardsToShow : desktopCardsToShow;
