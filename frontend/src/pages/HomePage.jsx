@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import ReviewsCarousel from '../components/lem/ReviewsCarousel';
-import ReviewsCarousel1 from '../components/lem/ReviewCarousel1';
+import ReviewCarousel1 from '../components/lem/ReviewCarousel1';
 import ProjectsSlider from '../components/projects/ProjectsSlider';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -252,7 +252,7 @@ const sampleReviews1 = [
       <ReviewsCarousel reviews={sampleReviews} />
     </div>
          <div className="py-12">
-      <ReviewsCarousel1 reviews={sampleReviews1} />
+      <ReviewCarousel1 reviews={sampleReviews1} />
     </div>
         
       <Footer />
