@@ -12,7 +12,7 @@ const ReviewCard1 = ({
 }) => (
   <div className="h-full bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden flex flex-col">
     <div className="p-5 flex flex-col h-full">
-      {/* Rating + Cuisine */}
+      {/* Ratings + Cuisine */}
       <div className="flex items-center gap-2 mb-2">
         <div className="text-yellow-400">
           {'★'.repeat(rating)}{'☆'.repeat(5 - rating)}
