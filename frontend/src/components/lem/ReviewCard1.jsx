@@ -1,3 +1,6 @@
+import { useState, useEffect, useRef } from 'react';
+import { FiMapPin } from 'react-icons/fi';
+
 const ReviewCard1 = ({
   restaurantName,
   rating,
