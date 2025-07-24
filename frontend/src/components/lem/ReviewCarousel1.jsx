@@ -3,49 +3,51 @@ import { FiMapPin } from 'react-icons/fi';
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import ReviewCard1 from './ReviewCard1';
 
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import ReviewCard1 from './ReviewCard1';
 
-const ReviewCarousel1 = ({ reviews }) => {
-  const [currentGroup, setCurrentGroup] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-  const carouselRef = useRef(null);
-  const x = useMotionValue(0);
+const ReviewCarousel1 = ({ reviews = [] }) => {
+  const [[currentIndex, direction], setCurrentIndex] = useState([0, 0]);
+  const [cardsToShow, setCardsToShow] = useState(2);
 
   // Responsive setup
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    const handleResize = () => {
+      setCardsToShow(window.innerWidth < 768 ? 2 : 4);
+      // Reset to first group on resize
+      setCurrentIndex([0, 0]);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
-  console.log('Rendered reviews:', reviews);
-}, [reviews]);
+  // Animated navigation
+  const paginate = (newDirection) => {
+    const newIndex = Math.max(
+      0,
+      Math.min(currentIndex + newDirection, reviews.length - cardsToShow)
+    );
+    setCurrentIndex([newIndex, newDirection]);
+  };
 
-  // Configuration
-  const CARD_WIDTH = 300;
-  const CARD_GAP = 16;
-  const cardsPerGroup = isMobile ? 2 : 4;
-  const groupWidth = (CARD_WIDTH * cardsPerGroup) + (CARD_GAP * (cardsPerGroup - 1));
-  const totalGroups = Math.ceil(reviews.length / cardsPerGroup);
-
-  // Handle drag gestures
-  const handleDragEnd = (_, info) => {
-    const threshold = 100;
-    if (Math.abs(info.offset.x) > threshold) {
-      const direction = info.offset.x > 0 ? -1 : 1;
-      const newGroup = Math.min(Math.max(currentGroup + direction, 0), totalGroups - 1);
-      
-      animate(x, -newGroup * groupWidth, {
-        type: "spring",
-        stiffness: 300,
-        damping: 30,
-      });
-      
-      setCurrentGroup(newGroup);
-    } else {
-      animate(x, -currentGroup * groupWidth, { type: "spring" });
-    }
+  // Animation variants
+  const slideVariants = {
+    enter: (direction) => ({
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 0
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      transition: { type: 'spring', stiffness: 300, damping: 30 }
+    },
+    exit: (direction) => ({
+      x: direction > 0 ? '-100%' : '100%',
+      opacity: 0,
+      transition: { duration: 0.2 }
+    })
   };
 
   return (
@@ -56,47 +58,57 @@ const ReviewCarousel1 = ({ reviews }) => {
         <a href="/reviews" className="text-purple-600 hover:underline">more ></a>
       </div>
 
-      {/* Carousel */}
-      <div className="relative" style={{ minHeight: '400px' }}>
-        <motion.div
-          ref={carouselRef}
-          drag="x"
-          dragConstraints={{
-            left: -((totalGroups - 1) * groupWidth),
-            right: 0,
-          }}
-          onDragEnd={handleDragEnd}
-          style={{ x }}
-          className="flex gap-4 cursor-grab active:cursor-grabbing"
+      {/* Carousel Container */}
+      <div className="relative overflow-hidden h-[400px]">
+        <AnimatePresence custom={direction} initial={false}>
+          <motion.div
+            key={currentIndex}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            className="absolute top-0 left-0 grid grid-cols-2 md:grid-cols-4 gap-4 w-full"
+          >
+            {reviews
+              .slice(currentIndex, currentIndex + cardsToShow)
+              .map((review) => (
+                <motion.div 
+                  key={review.id}
+                  whileHover={{ y: -5 }}
+                  transition={{ type: 'spring' }}
+                >
+                  <ReviewCard {...review} />
+                </motion.div>
+              ))}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation Arrows */}
+        <button 
+          onClick={() => paginate(-1)}
+          className="absolute left-2 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg z-10"
+          disabled={currentIndex === 0}
         >
-          {Array.from({ length: totalGroups }).map((_, groupIndex) => (
-            <div 
-              key={`group-${groupIndex}`}
-              className="flex gap-4"
-              style={{ minWidth: groupWidth }}
-            >
-              {reviews
-                .slice(groupIndex * cardsPerGroup, (groupIndex + 1) * cardsPerGroup)
-                .map((review) => (
-                  <ReviewCard1 key={review.id} {...review} />
-                ))
-              }
-            </div>
-          ))}
-        </motion.div>
+          &larr;
+        </button>
+        <button 
+          onClick={() => paginate(1)}
+          className="absolute right-2 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg z-10"
+          disabled={currentIndex >= reviews.length - cardsToShow}
+        >
+          &rarr;
+        </button>
       </div>
 
       {/* Pagination */}
       <div className="flex justify-center gap-2 mt-6">
-        {Array.from({ length: totalGroups }).map((_, i) => (
+        {Array.from({ length: Math.ceil(reviews.length / cardsToShow) }).map((_, i) => (
           <button
             key={i}
-            onClick={() => {
-              setCurrentGroup(i);
-              animate(x, -i * groupWidth, { type: "spring" });
-            }}
-            className={`w-2 h-2 rounded-full transition ${
-              i === currentGroup ? 'bg-purple-600' : 'bg-gray-300'
+            onClick={() => setCurrentIndex([i * cardsToShow, i > currentIndex ? 1 : -1])}
+            className={`w-2 h-2 rounded-full ${
+              i === Math.floor(currentIndex / cardsToShow) ? 'bg-purple-600' : 'bg-gray-300'
             }`}
           />
         ))}
@@ -104,7 +116,5 @@ const ReviewCarousel1 = ({ reviews }) => {
     </div>
   );
 };
+
 export default ReviewCarousel1;
-
-// Keep your existing ReviewCard1 component
-
