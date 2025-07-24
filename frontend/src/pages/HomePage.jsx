@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ReviewsCarousel from '../components/lem/ReviewsCarousel';
 import ProjectsSlider from '../components/projects/ProjectsSlider';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
