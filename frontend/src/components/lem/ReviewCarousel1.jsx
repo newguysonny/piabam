@@ -1,11 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { FiMapPin } from 'react-icons/fi';
-import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
+import { motion, useMotionValue, useTransform, AnimatePresence, animate } from 'framer-motion';
 import ReviewCard1 from './ReviewCard1';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import ReviewCard1 from './ReviewCard1';
 
 const ReviewCarousel1 = ({ reviews = [] }) => {
   const [[currentIndex, direction], setCurrentIndex] = useState([0, 0]);
@@ -78,7 +75,7 @@ const ReviewCarousel1 = ({ reviews = [] }) => {
                   whileHover={{ y: -5 }}
                   transition={{ type: 'spring' }}
                 >
-                  <ReviewCard {...review} />
+                  <ReviewCard1 {...review} />
                 </motion.div>
               ))}
           </motion.div>
