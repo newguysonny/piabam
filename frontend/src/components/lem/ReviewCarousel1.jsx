@@ -77,7 +77,7 @@ const ReviewCarousel1 = ({ reviews }) => {
           }}
         >
           {groupReviews.map((review) => (
-            <ReviewCard key={review.id} {...review} />
+            <ReviewCard1 key={review.id} {...review} />
           ))}
           
           {/* Empty state placeholders */}
