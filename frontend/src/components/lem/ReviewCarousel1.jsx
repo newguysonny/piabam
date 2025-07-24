@@ -57,7 +57,7 @@ const ReviewCarousel1 = ({ reviews }) => {
       </div>
 
       {/* Carousel */}
-      <div className="relative overflow-hidden">
+      <div className="relative" style={{ minHeight: '400px' }}>
         <motion.div
           ref={carouselRef}
           drag="x"
