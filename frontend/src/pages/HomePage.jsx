@@ -98,6 +98,30 @@ import Footer from '../components/Footer';
     date: "June 2024",
     showFullAddress: true
   },
+    {
+    id: 3,
+    restaurantName: "La Taquería",
+    rating: 4,
+    cuisine: "Mexican",
+    distance: "0.3mi",
+    neighborhood: "Downtown",
+    comment: "The al pastor tacos are life-changing. Perfectly spiced and juicy!",
+    author: "Maria G.",
+    date: "May 2024",
+    showFullAddress: false
+  },
+  {
+    id: 4,
+    restaurantName: "Pasta Bar",
+    rating: 5,
+    cuisine: "Italian",
+    distance: "1.2mi",
+    neighborhood: "West End",
+    comment: "Homemade rigatoni with truffle cream sauce was divine.",
+    author: "James L.",
+    date: "June 2024",
+    showFullAddress: true
+  },
   // Add 2-10 more reviews
 ];
 
