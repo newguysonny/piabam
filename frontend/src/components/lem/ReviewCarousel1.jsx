@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { FiMapPin } from 'react-icons/fi';
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
+import ReviewCard1 from './ReviewCard1';
 
 const ReviewCarousel1 = ({ reviews }) => {
   const [currentGroup, setCurrentGroup] = useState(0);
