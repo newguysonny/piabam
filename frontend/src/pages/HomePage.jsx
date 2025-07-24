@@ -72,6 +72,35 @@ import Footer from '../components/Footer';
    
 ];
 
+       const sampleReviews = [
+  {
+    id: 1,
+    restaurantName: "La Taquería",
+    rating: 4,
+    cuisine: "Mexican",
+    distance: "0.3mi",
+    neighborhood: "Downtown",
+    comment: "The al pastor tacos are life-changing. Perfectly spiced and juicy!",
+    author: "Maria G.",
+    date: "May 2024",
+    showFullAddress: false
+  },
+  {
+    id: 2,
+    restaurantName: "Pasta Bar",
+    rating: 5,
+    cuisine: "Italian",
+    distance: "1.2mi",
+    neighborhood: "West End",
+    comment: "Homemade rigatoni with truffle cream sauce was divine.",
+    author: "James L.",
+    date: "June 2024",
+    showFullAddress: true
+  },
+  // Add 2-10 more reviews
+];
+
+
 
 
         export default function Homepage() {
@@ -102,6 +131,10 @@ import Footer from '../components/Footer';
           <div className="hidden md:block absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10" />
         </div>
       </div>
+           <div className="py-12">
+      <ReviewsCarousel reviews={sampleReviews} />
+    </div>
+        
       <Footer />
     </>
   );
