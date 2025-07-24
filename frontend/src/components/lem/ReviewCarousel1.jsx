@@ -100,5 +100,7 @@ const ReviewCarousel1 = ({ reviews }) => {
     </div>
   );
 };
-
 export default ReviewCarousel1;
+
+// Keep your existing ReviewCard1 component
+
