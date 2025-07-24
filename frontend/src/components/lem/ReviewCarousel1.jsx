@@ -18,6 +18,10 @@ const ReviewCarousel1 = ({ reviews }) => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  useEffect(() => {
+  console.log('Rendered reviews:', reviews);
+}, [reviews]);
+
   // Configuration
   const CARD_WIDTH = 300;
   const CARD_GAP = 16;
