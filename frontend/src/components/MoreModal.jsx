@@ -134,7 +134,7 @@ function ServicesGrid({ mobile = false }) {
       bg: "bg-blue-900/30" 
     },
     { 
-      to: "/lem-orders",
+      to: "/escrow-dashboard",
       icon: <FiDatabase className="text-purple-400" />, 
       label: "Lem Orders",
       bg: "bg-purple-900/30" 
