@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FiMenu, FiX, FiChevronDown, FiFilter } from 'react-icons/fi';
+import EscrowCard from '../components/escrow/EscrowCard';
 
 const EscrowDashboard = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -165,9 +166,29 @@ const EscrowDashboard = () => {
         {/* Transactions List */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
           {/* Placeholder for transaction items */}
-          <div className="p-6 text-center text-gray-500">
-            {activeTab === 'Active' ? 'No active transactions' : 'No transactions found'}
-          </div>
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+  {activeTab === 'Active' ? (
+    activeTransactions.length > 0 ? (
+      activeTransactions.map((transaction) => (
+        <EscrowCard key={transaction.id} transaction={transaction} />
+      ))
+    ) : (
+      <div className="p-6 text-center text-gray-500">
+        No active transactions
+      </div>
+    )
+  ) : (
+    allTransactions.length > 0 ? (
+      allTransactions.map((transaction) => (
+        <EscrowCard key={transaction.id} transaction={transaction} />
+      ))
+    ) : (
+      <div className="p-6 text-center text-gray-500">
+        No transactions found
+      </div>
+    )
+  )}
+</div>
         </div>
       </main>
     </div>
