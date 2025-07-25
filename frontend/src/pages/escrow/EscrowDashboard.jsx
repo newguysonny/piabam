@@ -10,6 +10,35 @@ const EscrowDashboard = () => {
   const [showTypeDropdown, setShowTypeDropdown] = useState(false);
   const [showStatusDropdown, setShowStatusDropdown] = useState(false);
 
+
+   const [activeTransactions] = useState([
+  {
+    id: 1,
+    title: 'Lem Transaction #123',
+    date: 'Jul 25, 2023',
+    description: 'Payment for monthly subscription',
+    status: 'Active'
+  }
+]);
+
+const [allTransactions] = useState([
+  {
+    id: 1,
+    title: 'Lem Transaction #123',
+    date: 'Jul 25, 2023',
+    description: 'Payment for monthly subscription',
+    status: 'Active'
+  },
+  {
+    id: 2,
+    title: 'Faajee Order #456',
+    date: 'Jul 20, 2023',
+    description: 'Food delivery order',
+    status: 'Completed'
+  }
+]);
+
+  
   // Sample data
   const transactionTypes = ['All Types', 'Lem', 'Faajee'];
   const statusOptions = [
