@@ -25,7 +25,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
              {/*Escrow Section and Dashboard */}
         <Route path="/escrow" element={<EscrowFormPage />} />
-        <Route path="/dashboard" element={<EscrowDashboard />} />
+        <Route path="/escrow-dashboard" element={<EscrowDashboard />} />
              {/*Auth Section*/}
         <Route path="/signin" element={<SigninForm />} />   // Not signin.html!
         <Route path="/signup" element={<SignupForm />} /> // Not signup.html!
