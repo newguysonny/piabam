@@ -141,17 +141,19 @@ function ServicesGrid({ mobile = false }) {
     },
     { 
 
-      
+      to: "#",
       icon: <FiMusic className="text-pink-400" />, 
       label: "Events", 
       bg: "bg-pink-900/30" 
     },
     { 
+      to: "#",
       icon: <FiClock className="text-amber-400" />, 
       label: "Party History", 
       bg: "bg-amber-900/30" 
     },
     { 
+      
       to: "/backed-projects",
       icon: <FiShield className="text-emerald-400" />, 
       label: "Backed Projects", 
@@ -206,7 +208,7 @@ function Button({ icon, label, mobile = false }) {
 function ServiceCard({ icon, label, bg, mobile = false }) {
   return (
     <Link 
-      to={to}  className={`${bg} hover:bg-opacity-50 transition-all rounded-lg p-4 flex flex-col items-center border border-gray-800`}>
+      to: {to}  className={`${bg} hover:bg-opacity-50 transition-all rounded-lg p-4 flex flex-col items-center border border-gray-800`}>
       <div className={`${mobile ? 'text-xl' : 'text-2xl'} mb-2 p-3 rounded-full`}>
         {icon}
       </div>
