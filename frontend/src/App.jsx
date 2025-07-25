@@ -38,6 +38,7 @@ export default function App() {
                {/*Lem and Restaurants Section */}
         <Route path="/crew" element={<CrewForm />} />
         <Route path="/lem" element={<LemDiscoveryPage />} />
+        <Route path="/crew-room/:id" element={<CrewRoom />} />
                {/*Crowdfunding Section */}
         <Route path="/projects" element={<CrowdfundingDiscoveryPage  />} />
         <Route path="/funding" element={<MomentumDiscoveryPage  />} />
