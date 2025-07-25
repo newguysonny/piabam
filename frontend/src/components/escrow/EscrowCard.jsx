@@ -5,6 +5,7 @@ const EscrowCard = ({ transaction }) => {
     <div className="border-b border-gray-200 last:border-0 p-4 hover:bg-gray-50">
       <div className="flex justify-between items-start">
         <div>
+          <h3 className="font-medium">{transaction.host}</h3>
           <h3 className="font-medium">{transaction.title}</h3>
           <p className="text-sm text-gray-500">{transaction.date}</p>
           <p className="text-sm mt-1">{transaction.description}</p>
@@ -33,6 +34,7 @@ const EscrowCard = ({ transaction }) => {
 
 EscrowCard.propTypes = {
   transaction: PropTypes.shape({
+    host: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     description: PropTypes.string,
