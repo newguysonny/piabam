@@ -205,10 +205,10 @@ function Button({ icon, label, mobile = false }) {
   );
 }
 
-function ServiceCard({ icon, label, bg, mobile = false }) {
+function ServiceCard({ icon, label, bg, mobile = false, to }) {
   return (
     <Link 
-      to: {to}  className={`${bg} hover:bg-opacity-50 transition-all rounded-lg p-4 flex flex-col items-center border border-gray-800`}>
+      to={to}  className={`${bg} hover:bg-opacity-50 transition-all rounded-lg p-4 flex flex-col items-center border border-gray-800`}>
       <div className={`${mobile ? 'text-xl' : 'text-2xl'} mb-2 p-3 rounded-full`}>
         {icon}
       </div>
