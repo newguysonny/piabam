@@ -166,6 +166,7 @@ function ServicesGrid({ mobile = false }) {
       {services.map((service, index) => (
         <ServiceCard 
           key={index}
+          to={service.to}
           icon={service.icon}
           label={service.label}
           bg={service.bg}
