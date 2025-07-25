@@ -8,7 +8,7 @@ import RoomPage from './pages/RoomPage';
 import EscrowFormPage from './pages/EscrowFormPage';
 import EscrowDashboard from './pages/escrow/EscrowDashboard';
 import CrewForm from './pages/CrewForm';
-import CrewForm from './pages/lem/CrewRoom';
+import CrewRoom from './pages/lem/CrewRoom';
 import LemDiscoveryPage from './pages/LemDiscoveryPage';
 import StreamingDiscoveryPage from './pages/StreamingDiscoveryPage';
 import CrowdfundingDiscoveryPage from './pages/projects/CrowdfundingDiscoveryPage';
