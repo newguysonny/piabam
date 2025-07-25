@@ -14,6 +14,7 @@ const EscrowDashboard = () => {
    const [activeTransactions] = useState([
   {
     id: 1,
+    host: 'people',
     title: 'Lem Transaction #123',
     date: 'Jul 25, 2023',
     description: 'Payment for monthly subscription',
@@ -24,6 +25,7 @@ const EscrowDashboard = () => {
 const [allTransactions] = useState([
   {
     id: 1,
+    host: 'men',
     title: 'Lem Transaction #123',
     date: 'Jul 25, 2023',
     description: 'Payment for monthly subscription',
@@ -31,6 +33,8 @@ const [allTransactions] = useState([
   },
   {
     id: 2,
+    host:'boys',
+
     title: 'Faajee Order #456',
     date: 'Jul 20, 2023',
     description: 'Food delivery order',
