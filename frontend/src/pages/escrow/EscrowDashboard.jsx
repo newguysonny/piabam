@@ -90,6 +90,63 @@ import EscrowCard from '../../components/escrow/EscrowCard';
       </header>
 
       {/* Mobile Menu (unchanged) */}
+      {isMenuOpen && (
+  <div 
+    className="fixed inset-0 z-50 bg-black bg-opacity-50"
+    onClick={() => setIsMenuOpen(false)}
+  >
+    <div 
+      className="w-64 h-full bg-white p-4"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="flex justify-end mb-6">
+        <button 
+          onClick={() => setIsMenuOpen(false)}
+          className="text-gray-600 hover:text-gray-900"
+        >
+          <FiX size={24} />
+        </button>
+      </div>
+      
+      <nav>
+        <ul className="space-y-4">
+          <li>
+            <button 
+              className="w-full text-left py-2 px-3 rounded hover:bg-gray-100"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Contact Us
+            </button>
+          </li>
+          <li>
+            <button 
+              className="w-full text-left py-2 px-3 rounded hover:bg-gray-100"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Payment Method
+            </button>
+          </li>
+          <li>
+            <button 
+              className="w-full text-left py-2 px-3 rounded hover:bg-gray-100"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Verification
+            </button>
+          </li>
+          <li>
+            <button 
+              className="w-full text-left py-2 px-3 rounded hover:bg-gray-100"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Help
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+)}
 
       <main className="container mx-auto px-4 py-6">
         {/* Updated Tabs */}
