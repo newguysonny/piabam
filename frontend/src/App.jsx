@@ -6,7 +6,7 @@ import CreateRoom from './pages/CreateRoom';
 import FaajeeStart from './pages/faajee/FaajeeStart';
 import RoomPage from './pages/RoomPage';
 import EscrowFormPage from './pages/EscrowFormPage';
-import EscrowDashboard from './pages/EscrowDashboard';
+import EscrowDashboard from './pages/escrow/EscrowDashboard';
 import CrewForm from './pages/CrewForm';
 import LemDiscoveryPage from './pages/LemDiscoveryPage';
 import StreamingDiscoveryPage from './pages/StreamingDiscoveryPage';
