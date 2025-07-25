@@ -12,6 +12,7 @@ import {
   FiSettings,
   FiArrowRight
 } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 // 1. Main Modal Components
 export default function UserProfileModal({ isOpen, onClose }) {
@@ -127,16 +128,20 @@ function LevelProgress() {
 function ServicesGrid({ mobile = false }) {
   const services = [
     { 
+      to="/escrow-dashboard",
       icon: <FiBox className="text-blue-400" />, 
       label: "Escrow Dashboard", 
       bg: "bg-blue-900/30" 
     },
     { 
+      to="/lem-orders",
       icon: <FiDatabase className="text-purple-400" />, 
-      label: "Lem Orders", 
+      label: "Lem Orders",
       bg: "bg-purple-900/30" 
     },
     { 
+
+      
       icon: <FiMusic className="text-pink-400" />, 
       label: "Events", 
       bg: "bg-pink-900/30" 
@@ -199,11 +204,12 @@ function Button({ icon, label, mobile = false }) {
 
 function ServiceCard({ icon, label, bg, mobile = false }) {
   return (
-    <button className={`${bg} hover:bg-opacity-50 transition-all rounded-lg p-4 flex flex-col items-center border border-gray-800`}>
+    <Link 
+      to={to}  className={`${bg} hover:bg-opacity-50 transition-all rounded-lg p-4 flex flex-col items-center border border-gray-800`}>
       <div className={`${mobile ? 'text-xl' : 'text-2xl'} mb-2 p-3 rounded-full`}>
         {icon}
       </div>
       <span className="text-white text-sm">{label}</span>
-    </button>
+    </Link>
   );
 }
