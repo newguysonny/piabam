@@ -6,6 +6,7 @@ import CreateRoom from './pages/CreateRoom';
 import FaajeeStart from './pages/faajee/FaajeeStart';
 import RoomPage from './pages/RoomPage';
 import EscrowFormPage from './pages/EscrowFormPage';
+import EscrowDashboard from './pages/EscrowDashboard';
 import CrewForm from './pages/CrewForm';
 import LemDiscoveryPage from './pages/LemDiscoveryPage';
 import StreamingDiscoveryPage from './pages/StreamingDiscoveryPage';
@@ -21,19 +22,27 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
+             {/*Escrow Section and Dashboard */}
         <Route path="/escrow" element={<EscrowFormPage />} />
+        <Route path="/dashboard" element={<EscrowDashboard />} />
+             {/*Auth Section*/}
         <Route path="/signin" element={<SigninForm />} />   // Not signin.html!
         <Route path="/signup" element={<SignupForm />} /> // Not signup.html!
+              {/*Room and party streaming Section and Dashboard */}
         <Route path="/room/start" element={<CreateRoom />} />
         <Route path="/music" element={<FaajeeStart />} /> // for testing type script 
         <Route path="/room" element={<RoomPage />} />
-        <Route path="/crew" element={<CrewForm />} />
-        <Route path="/lem" element={<LemDiscoveryPage />} />
-        <Route path="/party" element={<StreamingDiscoveryPage />} />
-        <Route path="/projects" element={<CrowdfundingDiscoveryPage  />} />
-        <Route path="/funding" element={<MomentumDiscoveryPage  />} />
         <Route path="/try" element={<RoomPage1 />} />
         <Route path="/playlist" element={<SpotifyPlaylistManager />} />
+        <Route path="/party" element={<StreamingDiscoveryPage />} />
+               {/*Lem and Restaurants Section */}
+        <Route path="/crew" element={<CrewForm />} />
+        <Route path="/lem" element={<LemDiscoveryPage />} />
+               {/*Crowdfunding Section */}
+        <Route path="/projects" element={<CrowdfundingDiscoveryPage  />} />
+        <Route path="/funding" element={<MomentumDiscoveryPage  />} />
+        
+       
       </Routes>
     </BrowserRouter>
   );
