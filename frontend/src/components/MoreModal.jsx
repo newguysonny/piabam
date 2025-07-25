@@ -128,13 +128,13 @@ function LevelProgress() {
 function ServicesGrid({ mobile = false }) {
   const services = [
     { 
-      to="/escrow-dashboard",
+      to: "/escrow-dashboard",
       icon: <FiBox className="text-blue-400" />, 
       label: "Escrow Dashboard", 
       bg: "bg-blue-900/30" 
     },
     { 
-      to="/lem-orders",
+      to: "/lem-orders",
       icon: <FiDatabase className="text-purple-400" />, 
       label: "Lem Orders",
       bg: "bg-purple-900/30" 
@@ -152,6 +152,7 @@ function ServicesGrid({ mobile = false }) {
       bg: "bg-amber-900/30" 
     },
     { 
+      to: "/backed-projects",
       icon: <FiShield className="text-emerald-400" />, 
       label: "Backed Projects", 
       bg: "bg-emerald-900/30" 
