@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FiMenu, FiX, FiChevronDown, FiFilter } from 'react-icons/fi';
-import EscrowCard from '../components/escrow/EscrowCard';
+import EscrowCard from '../../components/escrow/EscrowCard';
 
 const EscrowDashboard = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
