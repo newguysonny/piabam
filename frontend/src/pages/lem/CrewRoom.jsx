@@ -117,45 +117,44 @@ export default function CommentStream() {
 
       {/* Input Bar */}
       <div className="p-3 bg-black">
-        <div className="flex items-center gap-2 h-10">
-          {/* Comment Input */}
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Enter a message..."
-            className="flex-1 h-full bg-gray-800 text-white text-sm px-4 rounded-full placeholder-gray-400 outline-none"
-          />
+        <div className="flex items-center gap-2 h-[60px]">
+  {/* Input */}
+  <input
+    type="text"
+    value={input}
+    onChange={(e) => setInput(e.target.value)}
+    placeholder="Enter a message..."
+    className="flex-1 h-full bg-gray-800 text-white text-base px-4 rounded-full placeholder-gray-400 outline-none overflow-hidden truncate min-w-0"
+  />
 
-          {/* Send Button (↗️) */}
-          {input.trim() && (
-            <button
-              onClick={handleSend}
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-gray-600 transition"
-              title="Send"
-            >
-              <FiSend className="text-xl" />
-            </button>
-          )}
+  {/* Send */}
+  <button
+    onClick={handleSend}
+    className={`w-[60px] h-[60px] flex items-center justify-center rounded-full bg-gray-700 text-white transition 
+      ${input.trim() ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+    title="Send"
+  >
+    <FiSend className="text-2xl" />
+  </button>
 
-          {/* Share Icon */}
-          <button
-            onClick={handleShare}
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-gray-600 transition"
-            title="Share"
-          >
-            <FiShare2 className="text-xl" />
-          </button>
+  {/* Share */}
+  <button
+    onClick={handleShare}
+    className="w-[60px] h-[60px] flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-gray-600 transition"
+    title="Share"
+  >
+    <FiShare2 className="text-2xl" />
+  </button>
 
-          {/* Store Icon */}
-          <a
-            href="/store"
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-gray-600 transition"
-            title="Visit Store"
-          >
-            <FiShoppingBag className="text-xl" />
-          </a>
-        </div>
+  {/* Store */}
+  <a
+    href="/store"
+    className="w-[60px] h-[60px] flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-gray-600 transition"
+    title="Store"
+  >
+    <FiShoppingBag className="text-2xl" />
+  </a>
+</div>
       </div>
     </div>
   );
