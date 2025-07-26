@@ -128,16 +128,14 @@ export default function CrewRoom() {
           />
 
           {/* Send Button (↗️) */}
-          {input.trim() && (
-            <button
-              onClick={handleSend}
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-gray-600 transition"
-              title="Send"
-            >
-              <FiSend className="text-xl" />
-            </button>
-          )}
-
+          <button
+  onClick={handleSend}
+  className={`w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 text-white transition 
+    ${input.trim() ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+  title="Send"
+>
+  <FiSend className="text-xl" />
+</button>
           {/* Share Icon */}
           <button
             onClick={handleShare}
