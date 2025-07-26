@@ -29,6 +29,7 @@ export default function CrewRoom() {
   */
   // Mock data
   import { useState, useRef, useEffect } from "react";
+import { FiSend, FiShare2, FiShoppingBag } from "react-icons/fi";
 
 export default function CrewRoom() {
   const [comments, setComments] = useState([
@@ -43,7 +44,7 @@ export default function CrewRoom() {
       id: 2,
       user: 'benzrain',
       avatar: '/avatars/benz.png',
-      comment: 'AHAHAHAWHWAHHAHA.. THIS SONG HAS MY HEART',
+      comment: 'AHAHAHA THIS SONG HAS MY HEART',
       timestamp: 'just now'
     },
     {
@@ -55,23 +56,22 @@ export default function CrewRoom() {
     }
   ]);
 
-  const [newComment, setNewComment] = useState("");
+  const [input, setInput] = useState("");
   const scrollRef = useRef(null);
 
   const handleSend = () => {
-    if (newComment.trim()) {
-      setComments(prev => [
-        ...prev,
-        {
-          id: prev.length + 1,
-          user: 'you',
-          avatar: '/avatars/you.png',
-          comment: newComment,
-          timestamp: 'just now'
-        }
-      ]);
-      setNewComment("");
-    }
+    if (!input.trim()) return;
+    setComments(prev => [
+      ...prev,
+      {
+        id: prev.length + 1,
+        user: 'you',
+        avatar: '/avatars/you.png',
+        comment: input,
+        timestamp: 'just now'
+      }
+    ]);
+    setInput("");
   };
 
   const handleShare = () => {
@@ -92,7 +92,7 @@ export default function CrewRoom() {
 
   return (
     <div className="flex flex-col h-screen bg-blue-900 text-white">
-      {/* Comments Area (Bottom-up) */}
+      {/* Chat Area */}
       <div
         ref={scrollRef}
         className="flex-1 overflow-y-auto flex flex-col-reverse p-4 space-y-reverse space-y-3"
@@ -115,36 +115,46 @@ export default function CrewRoom() {
         ))}
       </div>
 
-      {/* Input Row */}
-      <div className="border-t border-blue-700 p-2 bg-blue-900">
-        <div className="flex items-center space-x-2">
+      {/* Input Bar */}
+      <div className="p-3 bg-black">
+        <div className="flex items-center gap-2 h-10">
+          {/* Comment Input */}
           <input
             type="text"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            placeholder="Comment"
-            className="flex-1 bg-blue-800 text-white px-3 py-1.5 rounded-full text-sm placeholder-gray-300 outline-none"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Enter a message..."
+            className="flex-1 h-full bg-gray-800 text-white text-sm px-4 rounded-full placeholder-gray-400 outline-none"
           />
-          <button
-            onClick={handleSend}
-            className="bg-white text-black px-3 py-1.5 rounded-full text-sm font-semibold"
-          >
-            Send
-          </button>
-          <a
-            href="/store"
-            className="text-xl text-white hover:text-yellow-300 transition"
-            title="Go to Store"
-          >
-            🛍️
-          </a>
+
+          {/* Send Button (↗️) */}
+          {input.trim() && (
+            <button
+              onClick={handleSend}
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-gray-600 transition"
+              title="Send"
+            >
+              <FiSend className="text-xl" />
+            </button>
+          )}
+
+          {/* Share Icon */}
           <button
             onClick={handleShare}
-            className="text-xl text-white hover:text-yellow-300 transition"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-gray-600 transition"
             title="Share"
           >
-            🔗
+            <FiShare2 className="text-xl" />
           </button>
+
+          {/* Store Icon */}
+          <a
+            href="/store"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-gray-600 transition"
+            title="Visit Store"
+          >
+            <FiShoppingBag className="text-xl" />
+          </a>
         </div>
       </div>
     </div>
