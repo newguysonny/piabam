@@ -91,11 +91,11 @@ export default function CommentStream() {
   }, [comments]);
 
   return (
-    <div className="flex flex-col h-screen bg-blue-900 text-white">
+    <div className="relative flex flex-col h-screen bg-blue-900 text-white">
       {/* Chat Area */}
       <div
         ref={scrollRef}
-        className="flex-1 overflow-y-auto p-4 pb-[70px] space-y-3"
+        className="flex-1 overflow-y-auto p-4 pb-[80px] flex flex-col-reverse space-y-reverse space-y-3"
       >
         {[...comments].reverse().map((c) => (
           <div key={c.id} className="flex items-start space-x-2">
@@ -115,46 +115,46 @@ export default function CommentStream() {
         ))}
       </div>
 
-      {/* Input Bar */}
-      <div className="fixed bottom-0 left-0 right-0 p-3 bg-black z-50">
+      {/* Input Bar (Fixed) */}
+      <div className="fixed bottom-0 left-0 right-0 bg-black p-2 z-50">
         <div className="flex items-center gap-2 h-[45px]">
-  {/* Input */}
-  <input
-    type="text"
-    value={input}
-    onChange={(e) => setInput(e.target.value)}
-    placeholder="Enter a message..."
-    className="flex-1 h-full bg-gray-800 text-white text-base px-4 rounded-full placeholder-gray-400 outline-none overflow-hidden truncate min-w-0"
-  />
+          {/* Input */}
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Enter a message..."
+            className="flex-1 h-full bg-gray-800 text-white text-sm px-4 rounded-full placeholder-gray-400 outline-none overflow-hidden truncate min-w-0"
+          />
 
-  {/* Send */}
-  <button
-    onClick={handleSend}
-    className={`w-[45px] h-[45px] flex items-center justify-center rounded-full bg-gray-700 text-white transition 
-      ${input.trim() ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-    title="Send"
-  >
-    <FiSend className="text-2xl" />
-  </button>
+          {/* Send (conditionally visible) */}
+          <button
+            onClick={handleSend}
+            className={`w-[45px] h-[45px] flex items-center justify-center rounded-full bg-gray-700 text-white transition 
+              ${input.trim() ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+            title="Send"
+          >
+            <FiSend className="text-xl" />
+          </button>
 
-  {/* Share */}
-  <button
-    onClick={handleShare}
-    className="w-[45px] h-[45px] flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-gray-600 transition"
-    title="Share"
-  >
-    <FiShare2 className="text-2xl" />
-  </button>
+          {/* Share */}
+          <button
+            onClick={handleShare}
+            className="w-[45px] h-[45px] flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-gray-600 transition"
+            title="Share"
+          >
+            <FiShare2 className="text-xl" />
+          </button>
 
-  {/* Store */}
-  <a
-    href="/store"
-    className="w-[45px] h-[45px] flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-gray-600 transition"
-    title="Store"
-  >
-    <FiShoppingBag className="text-2xl" />
-  </a>
-</div>
+          {/* Store */}
+          <a
+            href="/store"
+            className="w-[45px] h-[45px] flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-gray-600 transition"
+            title="Store"
+          >
+            <FiShoppingBag className="text-xl" />
+          </a>
+        </div>
       </div>
     </div>
   );
