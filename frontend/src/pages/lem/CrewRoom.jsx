@@ -93,7 +93,7 @@ export default function CommentStream() {
   }
 }, [comments]);
   return (
-    <div className="relative flex flex-col h-screen bg-blue-900 text-white">
+    <div className="relative flex flex-col h-screen bg-black text-white">
       {/* Chat Area */}
       <div
         ref={scrollRef}
