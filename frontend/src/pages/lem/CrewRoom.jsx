@@ -1,6 +1,6 @@
 
 
-import { FiChevronLeft, FiMoreVertical, FiHeart } from "react-icons/fi"; import Image from "next/image";
+import { FiChevronLeft, FiMoreVertical, FiHeart } from "react-icons/fi"; 
 
 export default function MealCrewLayout() { return ( <div className="flex flex-col min-h-screen bg-blue-900 text-white">
 
