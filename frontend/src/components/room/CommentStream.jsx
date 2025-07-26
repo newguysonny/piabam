@@ -54,16 +54,18 @@ export default function CommentStream() {
     }
   };
 
+  // Auto-scroll to bottom (top of reversed list)
   useEffect(() => {
-  if (scrollRef.current) {
-    scrollRef.current.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  }
-}, [comments]);
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+  }, [comments]);
+
   return (
-    <div className="relative flex flex-col h-screen bg-black text-white">
+    <div className="relative flex flex-col h-screen bg-neutral-900 text-white">
       {/* Chat Area */}
       <div
         ref={scrollRef}
@@ -78,17 +80,17 @@ export default function CommentStream() {
             />
             <div className="flex-1">
               <div className="flex items-center space-x-1">
-                <span className="text-sm font-semibold">{c.user}</span>
-                <span className="text-xs text-gray-300">{c.timestamp}</span>
+                <span className="text-sm font-semibold text-gray-400">{c.user}</span>
+                <span className="text-xs text-gray-500">{c.timestamp}</span>
               </div>
-              <div className="text-sm">{c.comment}</div>
+              <div className="text-sm text-white">{c.comment}</div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Input Bar (Fixed) */}
-      <div className="fixed bottom-0 left-0 right-0 bg-black p-2 z-50">
+      {/* Input Bar (Fixed at bottom) */}
+      <div className="fixed bottom-0 left-0 right-0 bg-neutral-900 p-2 z-50 border-t border-neutral-800">
         <div className="flex items-center gap-2 h-[45px]">
           {/* Input */}
           <input
@@ -99,15 +101,16 @@ export default function CommentStream() {
             className="flex-1 h-full bg-gray-800 text-white text-sm px-4 rounded-full placeholder-gray-400 outline-none overflow-hidden truncate min-w-0"
           />
 
-          {/* Send (conditionally visible) */}
-          <button
-            onClick={handleSend}
-            className={`w-[45px] h-[45px] flex items-center justify-center rounded-full bg-gray-700 text-white transition 
-              ${input.trim() ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-            title="Send"
-          >
-            <FiSend className="text-xl" />
-          </button>
+          {/* Send (only when typing, no spacing reserved) */}
+          {input.trim() && (
+            <button
+              onClick={handleSend}
+              className="w-[45px] h-[45px] flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-gray-600 transition"
+              title="Send"
+            >
+              <FiSend className="text-xl" />
+            </button>
+          )}
 
           {/* Share */}
           <button
