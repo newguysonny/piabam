@@ -28,8 +28,10 @@ export default function CrewRoom() {
   const navigate = useNavigate();
   */
   // Mock data
-  export default function CrewRoom() {
-  const comments = [
+  import { useState } from "react";
+
+export default function CrewRoom {
+  const [comments, setComments] = useState([
     {
       id: 1,
       user: 'cocoa22',
@@ -37,62 +39,96 @@ export default function CrewRoom() {
       comment: 'SEE UU',
       timestamp: 'just now',
       badge: { icon: '🔥', count: 127 }
-    },
-    {
-      id: 2,
-      user: 'benzrain',
-      avatar: '/avatars/benz.png',
-      comment: 'AHAHAHAWHWAHHAHA.. THIS SONG HAS MY HEART',
-      timestamp: 'just now'
-    },
-    {
-      id: 3,
-      user: 'moranghaever',
-      avatar: '/avatars/morang.png',
-      comment: "i remember yeonjun's eyes while recording this",
-      timestamp: 'just now'
-    },
-    {
-      id: 4,
-      user: 'nxdine3000',
-      avatar: '/avatars/nxdine.png',
-      comment: 'what is the Status on the MV view count?',
-      timestamp: 'just now',
-      badge: { icon: '🔥', count: 38, extra: '💖' }
     }
-  ];
+    // Add more seed comments if needed
+  ]);
+
+  const [newComment, setNewComment] = useState("");
+
+  const handleSend = () => {
+    if (newComment.trim()) {
+      setComments([
+        ...comments,
+        {
+          id: comments.length + 1,
+          user: 'you',
+          avatar: '/avatars/you.png',
+          comment: newComment,
+          timestamp: 'just now'
+        }
+      ]);
+      setNewComment("");
+    }
+  };
+
+  const handleShare = () => {
+    const shareText = `Join the stream & comment!`;
+    const shareUrl = window.location.href;
+    if (navigator.share) {
+      navigator.share({
+        title: 'Live Chat Stream',
+        text: shareText,
+        url: shareUrl,
+      });
+    } else {
+      navigator.clipboard.writeText(shareUrl);
+      alert("Link copied to clipboard!");
+    }
+  };
 
   return (
-    <div className="bg-blue-900 text-white p-4 space-y-3 max-w-md mx-auto h-screen overflow-y-auto">
-      {comments.map((c) => (
-        <div key={c.id} className="flex items-start space-x-2">
-          <img
-            src={c.avatar}
-            alt={c.user}
-            className="w-8 h-8 rounded-full border border-yellow-400"
-          />
-          <div className="flex-1">
-            <div className="flex items-center space-x-1">
-              <span className="text-sm font-semibold">{c.user}</span>
-              {c.badge && (
-                <span className="text-xs bg-blue-800 px-1 rounded-full flex items-center space-x-1">
-                  <span>{c.badge.icon}</span>
-                  <span>{c.badge.count}</span>
-                  {c.badge.extra && <span>{c.badge.extra}</span>}
-                </span>
-              )}
-              <span className="text-xs text-gray-300 ml-1">{c.timestamp}</span>
+    <div className="flex flex-col h-screen bg-blue-900 text-white">
+      {/* Comment Stream */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-3">
+        {comments.map((c) => (
+          <div key={c.id} className="flex items-start space-x-2">
+            <img
+              src={c.avatar}
+              alt={c.user}
+              className="w-8 h-8 rounded-full border border-yellow-400"
+            />
+            <div className="flex-1">
+              <div className="flex items-center space-x-1">
+                <span className="text-sm font-semibold">{c.user}</span>
+                {c.badge && (
+                  <span className="text-xs bg-blue-800 px-1 rounded-full flex items-center space-x-1">
+                    <span>{c.badge.icon}</span>
+                    <span>{c.badge.count}</span>
+                  </span>
+                )}
+                <span className="text-xs text-gray-300 ml-1">{c.timestamp}</span>
+              </div>
+              <div className="text-sm">{c.comment}</div>
             </div>
-            <div className="text-sm">{c.comment}</div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
-      {/* New Comments Pill */}
-      <div className="flex justify-center pt-4">
-        <button className="bg-white text-black text-sm px-4 py-1 rounded-full shadow">
-          ⬇️ New Comments
-        </button>
+      {/* Comment Input Box */}
+      <div className="border-t border-blue-700 p-3 bg-blue-900">
+        <div className="flex items-center space-x-2 mb-2">
+          <input
+            type="text"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="Comment"
+            className="flex-1 bg-blue-800 text-white px-4 py-2 rounded-full text-sm placeholder-gray-300 outline-none"
+          />
+          <button
+            onClick={handleSend}
+            className="bg-white text-black px-3 py-2 rounded-full font-semibold text-sm"
+          >
+            Send
+          </button>
+        </div>
+
+        {/* Icon Bar */}
+        <div className="flex justify-between text-xl text-white px-2">
+          <a href="/store" className="hover:scale-105 transition">🛍️</a>
+          <button onClick={handleShare} className="hover:scale-105 transition">📤</button>
+          <button className="hover:scale-105 transition">😊</button>
+          <button className="hover:scale-105 transition">GIF</button>
+        </div>
       </div>
     </div>
   );
