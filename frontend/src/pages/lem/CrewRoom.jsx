@@ -30,7 +30,7 @@ export default function CrewRoom() {
   // Mock data
   import { useState } from "react";
 
-export default function CrewRoom {
+export default function CrewRoom() {
   const [comments, setComments] = useState([
     {
       id: 1,
