@@ -117,7 +117,7 @@ export default function CommentStream() {
 
       {/* Input Bar */}
       <div className="p-3 bg-black">
-        <div className="flex items-center gap-2 h-[60px]">
+        <div className="flex items-center gap-2 h-[45px]">
   {/* Input */}
   <input
     type="text"
@@ -130,7 +130,7 @@ export default function CommentStream() {
   {/* Send */}
   <button
     onClick={handleSend}
-    className={`w-[60px] h-[60px] flex items-center justify-center rounded-full bg-gray-700 text-white transition 
+    className={`w-[45px] h-[45px] flex items-center justify-center rounded-full bg-gray-700 text-white transition 
       ${input.trim() ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
     title="Send"
   >
@@ -140,7 +140,7 @@ export default function CommentStream() {
   {/* Share */}
   <button
     onClick={handleShare}
-    className="w-[60px] h-[60px] flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-gray-600 transition"
+    className="w-[45px] h-[45px] flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-gray-600 transition"
     title="Share"
   >
     <FiShare2 className="text-2xl" />
@@ -149,7 +149,7 @@ export default function CommentStream() {
   {/* Store */}
   <a
     href="/store"
-    className="w-[60px] h-[60px] flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-gray-600 transition"
+    className="w-[45px] h-[45px] flex items-center justify-center rounded-full bg-gray-700 text-white hover:bg-gray-600 transition"
     title="Store"
   >
     <FiShoppingBag className="text-2xl" />
