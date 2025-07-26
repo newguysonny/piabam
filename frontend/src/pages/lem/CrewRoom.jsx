@@ -85,11 +85,13 @@ export default function CommentStream() {
   };
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [comments]);
-
+  if (scrollRef.current) {
+    scrollRef.current.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
+}, [comments]);
   return (
     <div className="relative flex flex-col h-screen bg-blue-900 text-white">
       {/* Chat Area */}
