@@ -95,7 +95,7 @@ export default function CommentStream() {
       {/* Chat Area */}
       <div
         ref={scrollRef}
-        className="flex-1 overflow-y-auto flex flex-col-reverse p-4 space-y-reverse space-y-3"
+        className="flex-1 overflow-y-auto p-4 pb-[70px] space-y-3"
       >
         {[...comments].reverse().map((c) => (
           <div key={c.id} className="flex items-start space-x-2">
@@ -116,7 +116,7 @@ export default function CommentStream() {
       </div>
 
       {/* Input Bar */}
-      <div className="p-3 bg-black">
+      <div className="fixed bottom-0 left-0 right-0 p-3 bg-black z-50">
         <div className="flex items-center gap-2 h-[45px]">
   {/* Input */}
   <input
