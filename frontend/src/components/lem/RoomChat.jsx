@@ -1,7 +1,7 @@
   import { useState, useRef, useEffect } from "react";
 import { FiSend, FiShare2, FiShoppingBag } from "react-icons/fi";
 
-export default function StreamingRoom() {
+export default function RoomChat() {
   const [comments, setComments] = useState([
     {
       id: 1,
