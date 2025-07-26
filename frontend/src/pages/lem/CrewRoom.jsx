@@ -1,3 +1,33 @@
+import MealCrewLayout from "../../components/lem/MealCrewLayout"
+import RoomChat from "../../components/lem/RoomChat";
+
+
+import { useLocation } from 'react-router-dom';
+
+const CrewRoom = () => {
+  const { state } = useLocation();
+  const transaction = state?.transactionData;
+
+  return (
+      <>
+     <MealCrewLayout />
+
+      <RoomChat />
+      </>
+  );
+};
+
+export default CrewRoom;
+
+
+
+
+
+
+
+
+
+/*
 import { useState } from "react"; import { Link } from "react-router-dom"; import { FiChevronLeft, FiMoreVertical, FiHeart } from "react-icons/fi";
 
 export default function MealCrewLayout() { const [showMenu, setShowMenu] = useState(false); const [showMealModal, setShowMealModal] = useState(false);
@@ -6,7 +36,7 @@ const closeMenu = () => setShowMenu(false); const closeMealModal = () => setShow
 
 return ( <div className="bg-neutral-900 text-gray-200 min-h-screen flex justify-center py-4"> <div className="w-full max-w-md bg-neutral-900 rounded-xl shadow-lg overflow-hidden relative">
 
-{/* Header */}
+{/* Header /}
     <div className="flex items-center justify-between px-4 h-[50px] border-b border-neutral-800">
       <div className="flex items-center gap-2">
         <Link to="/escrow-dashboard">
@@ -23,7 +53,7 @@ return ( <div className="bg-neutral-900 text-gray-200 min-h-screen flex justify-
       />
     </div>
 
-    {/* Host */}
+    {/* Host /}
     <div className="flex flex-col items-center py-4">
       <div className="relative">
         <img
@@ -62,7 +92,7 @@ return ( <div className="bg-neutral-900 text-gray-200 min-h-screen flex justify-
       </div>
     </div>
 
-    {/* Meal Card */}
+    {/* Meal Card /}
     <div className="mx-4 mb-4 p-3 bg-neutral-800 rounded-xl flex items-center justify-between">
       <div className="flex items-center gap-3">
         <img
@@ -90,12 +120,12 @@ return ( <div className="bg-neutral-900 text-gray-200 min-h-screen flex justify-
       </div>
     </div>
 
-    {/* Bottom Status */}
+    {/* Bottom Status /}
     <div className="bg-neutral-950 text-white flex items-center justify-between px-4 h-[40px] border-t border-neutral-800">
       <div className="bg-green-600 text-white text-xs font-medium px-3 py-1 rounded-full">READY FOR PICKUP</div>
     </div>
 
-    {/* Overflow Menu Modal */}
+    {/* Overflow Menu Modal /}
     {showMenu && (
       <div
         onClick={closeMenu}
@@ -117,7 +147,7 @@ return ( <div className="bg-neutral-900 text-gray-200 min-h-screen flex justify-
       </div>
     )}
 
-    {/* Meal Modal */}
+    {/* Meal Modal /}
     {showMealModal && (
       <div
         onClick={closeMealModal}
@@ -143,35 +173,23 @@ return ( <div className="bg-neutral-900 text-gray-200 min-h-screen flex justify-
 
 ); }
 
-
-
-
-
-
-
-
-
+*/
 
 
 /*
-import { useLocation } from 'react-router-dom';
-
-const CrewRoom = () => {
-  const { state } = useLocation();
-  const transaction = state?.transactionData;
-
-  return (
-    <div className="p-4">
+<div className="p-4">
       <h1 className="text-2xl font-bold">{transaction?.title}</h1>
       <p className="text-gray-600">Host: {transaction?.host}</p>
       {/* Add your crew room UI here /}
     </div>
-  );
-};
-
-export default CrewRoom;
-
 */
+
+
+
+
+
+
+
 /*
 import { FiChevronLeft, FiMoreVertical, FiHeart, FiMessageSquare, FiShare2 } from 'react-icons/fi';
 import { useParams, useNavigate } from 'react-router-dom';
