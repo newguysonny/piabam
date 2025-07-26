@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { FiMapPin } from 'react-icons/fi';
 import { motion, useMotionValue, useTransform, AnimatePresence, animate } from 'framer-motion';
-import ReviewCard1 from './ReviewCard1';
+import ReviewCard from './ReviewCard';
 
 
 const ReviewCarousel1 = ({ reviews = [] }) => {
