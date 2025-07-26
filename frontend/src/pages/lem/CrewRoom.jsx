@@ -1,19 +1,26 @@
 
 
-import { FiChevronLeft, FiMoreVertical, FiHeart } from "react-icons/fi"; 
+import { useState } from "react"; import { FiChevronLeft, FiMoreVertical, FiHeart } from "react-icons/fi"; import Link from "next/link";
 
-export default function MealCrewLayout() { return ( <div className="flex flex-col min-h-screen bg-blue-900 text-white">
+export default function MealCrewLayout() { const [showMenu, setShowMenu] = useState(false);
+
+return ( <div className="flex flex-col min-h-screen bg-blue-900 text-white relative">
 
 {/* Header Row */}
   <div className="flex items-center justify-between px-4 h-[50px] border-b border-blue-800">
     <div className="flex items-center gap-2">
-      <FiChevronLeft className="text-xl" />
+      <Link href="/escrow-dashboard">
+        <FiChevronLeft className="text-xl cursor-pointer" />
+      </Link>
       <div>
         <div className="font-bold text-sm">Lem Crew – Meal Type</div>
         <div className="text-xs text-blue-200">Nneka and Friends Meal Crew...</div>
       </div>
     </div>
-    <FiMoreVertical className="text-xl" />
+    <FiMoreVertical
+      className="text-xl cursor-pointer"
+      onClick={() => setShowMenu(true)}
+    />
   </div>
 
   {/* Host Section */}
@@ -22,7 +29,7 @@ export default function MealCrewLayout() { return ( <div className="flex flex-co
       <img
         src="/avatars/anna256.png"
         alt="Host Avatar"
-        className="w-20 h-20 rounded-full border-4 border-blue-400 shadow-lg"
+        className="w-14 h-14 rounded-full border-4 border-blue-400 shadow-lg"
       />
       <div className="absolute bottom-0 right-0 bg-black rounded-full p-1 border border-white">
         <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -49,20 +56,32 @@ export default function MealCrewLayout() { return ( <div className="flex flex-co
     </div>
   </div>
 
-  {/* Spacer */}
-  <div className="flex-1" />
-
-  {/* Bottom Status Bar */}
-  <div className="fixed bottom-0 left-0 right-0 bg-blue-950 text-white flex items-center justify-between px-4 h-[40px] border-t border-blue-800">
+  {/* Bottom Status Bar (Not fixed) */}
+  <div className="bg-blue-950 text-white flex items-center justify-between px-4 h-[40px] border-t border-blue-800">
     <div className="bg-green-600 text-white text-xs font-medium px-3 py-1 rounded-full">READY FOR PICKUP</div>
     <div className="flex items-center gap-4 text-sm text-blue-200">
       <span>👤 5.31K</span>
       <span>📈 262M</span>
     </div>
   </div>
+
+  {/* Overflow Menu Modal */}
+  {showMenu && (
+    <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+      <div className="bg-white text-black rounded-lg p-6 w-80 space-y-4">
+        <button className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded">Search</button>
+        <button className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded">Report</button>
+        <button
+          onClick={() => setShowMenu(false)}
+          className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded text-red-600"
+        >Exit</button>
+      </div>
+    </div>
+  )}
 </div>
 
 ); }
+
 
 
 
