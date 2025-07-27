@@ -51,6 +51,10 @@ export default function RoomChat({ transaction }) {
   const scrollRef = useRef(null);
   const messagesEndRef = useRef(null);
 
+  useEffect(() => {
+  scrollToBottom();
+}, [comments]);
+  
   const scrollToBottom = () => {
   messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
 };
@@ -58,7 +62,6 @@ export default function RoomChat({ transaction }) {
   const handleSend = () => {
   if (!input.trim()) return;
 
-  // Create the new message
   const newMessage = {
     id: comments.length + 1,
     user: 'you',
@@ -67,13 +70,10 @@ export default function RoomChat({ transaction }) {
     timestamp: 'just now'
   };
 
-  // Add the new message to the state
   setComments(prev => [...prev, newMessage]);
-
-  // Clear input and scroll to bottom
   setInput("");
-  setTimeout(scrollToBottom, 100);
 };
+  
 
   const handleShare = () => {
     const url = window.location.href;
