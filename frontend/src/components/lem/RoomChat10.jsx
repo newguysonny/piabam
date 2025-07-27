@@ -49,7 +49,12 @@ export default function RoomChat({ transaction }) {
 
   const [input, setInput] = useState("");
   const scrollRef = useRef(null);
+  const messagesEndRef = useRef(null);
 
+  const scrollToBottom = () => {
+  messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+};
+  
   const handleSend = () => {
     if (!input.trim()) return;
     setComments(prev => [
@@ -61,7 +66,12 @@ export default function RoomChat({ transaction }) {
         comment: input,
         timestamp: 'just now'
       }
-    ]);
+    ];
+      setTimeout(scrollToBottom, 100);
+
+    return updated;
+   });
+    
     setInput("");
   };
 
