@@ -10,12 +10,12 @@ const CrewRoom = () => {
 
   return (
       <>
-     <div className="flex flex-col h-screen overflow-hidden">
+     
   <MealCrewLayout />
-  <div className="flex-1 overflow-y-auto">
+  
     <RoomChat />
-  </div>
-</div>
+  
+
       </>
   );
 };
