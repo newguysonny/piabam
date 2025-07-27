@@ -119,7 +119,7 @@ export default function RoomChat({ transaction }) {
             </div>
           </div>
         ))}
-        <div ref={messagesEndRef} className="mt-2 scroll-mb-[80px]" />
+        <div ref={messagesEndRef} className="mt-[80px]" />
       </div>
 
       {/* Input Bar (Fixed at bottom) */}
