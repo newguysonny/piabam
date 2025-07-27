@@ -9,20 +9,18 @@ const CrewRoom = () => {
   const transaction = state?.transactionData;
 
   return (
-      <>
-     
-  <MealCrewLayout />
-  
-    <RoomChat />
-  
-
-      </>
+    <div className="flex flex-col h-screen overflow-hidden">
+      <div className="shrink-0">
+        <MealCrewLayout />
+      </div>
+      <div className="flex-1 overflow-y-auto">
+        <RoomChat />
+      </div>
+    </div>
   );
 };
 
 export default CrewRoom;
-
-
 
 
 
