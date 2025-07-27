@@ -55,8 +55,13 @@ export default function RoomChat({ transaction }) {
   scrollToBottom();
 }, [comments]);
   
+ /* const scrollToBottom = () => {
+  messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+}; */
   const scrollToBottom = () => {
-  messagesEndRef.current?.scrollIntoView({ behavior: 'auto' });
+  if (scrollRef.current) {
+    scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+  }
 };
   
   const handleSend = () => {
