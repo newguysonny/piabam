@@ -119,7 +119,7 @@ export default function RoomChat({ transaction }) {
             </div>
           </div>
         ))}
-        <div style={{ height: '80px' }} ref={messagesEndRef} />
+        <div style={{ height: '40px' }} ref={messagesEndRef} />
       </div>
 
       {/* Input Bar (Fixed at bottom) */}
