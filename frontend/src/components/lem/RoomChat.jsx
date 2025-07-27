@@ -86,7 +86,7 @@ export default function RoomChat({ transaction }) {
   }, [comments]);
 
   return (
-    <div className="relative flex flex-col h-screen bg-neutral-900 text-white">
+    <div className="relative flex flex-col bg-neutral-900 text-white">
       {/* Chat Area */}
       <div
         ref={scrollRef}
