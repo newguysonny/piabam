@@ -2,7 +2,7 @@
 
 import { useState } from "react"; import { Link } from "react-router-dom"; import { FiChevronLeft, FiMoreVertical, FiHeart } from "react-icons/fi";
 
-export default function MealCrewLayout() { const [showMenu, setShowMenu] = useState(false); const [showMealModal, setShowMealModal] = useState(false);
+export default function MealCrewLayout({ transaction }) { const [showMenu, setShowMenu] = useState(false); const [showMealModal, setShowMealModal] = useState(false);
 
 const closeMenu = () => setShowMenu(false); const closeMealModal = () => setShowMealModal(false);
 
