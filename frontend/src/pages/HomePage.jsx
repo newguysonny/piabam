@@ -248,12 +248,8 @@ const sampleReviews1 = [
           <div className="hidden md:block absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10" />
         </div>
       </div>
-           <div className="py-12">
-      <ReviewsCarousel reviews={sampleReviews} />
-    </div>
-         <div className="py-12">
-      <ReviewCarousel1 reviews={sampleReviews1} />
-    </div>
+           
+         
         
       <Footer />
     </>
