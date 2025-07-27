@@ -7,7 +7,7 @@ const CrewRoom = () => {
   const transaction = state?.transactionData;
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden">
+    <div className="flex flex-col bg-neutral-900 h-screen overflow-hidden">
       <div className="shrink-0">
         <MealCrewLayout transaction={transaction} />
       </div>
