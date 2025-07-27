@@ -66,11 +66,11 @@ export default function RoomChat({ transaction }) {
         comment: input,
         timestamp: 'just now'
       }
-    ];
+    ]);
       setTimeout(scrollToBottom, 100);
 
     return updated;
-   });
+  
     
     setInput("");
   };
