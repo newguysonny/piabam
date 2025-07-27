@@ -56,24 +56,24 @@ export default function RoomChat({ transaction }) {
 };
   
   const handleSend = () => {
-    if (!input.trim()) return;
-    setComments(prev => [
-      ...prev,
-      {
-        id: prev.length + 1,
-        user: 'you',
-        avatar: '/avatars/you.png',
-        comment: input,
-        timestamp: 'just now'
-      }
-    ]);
-      setTimeout(scrollToBottom, 100);
+  if (!input.trim()) return;
 
-    return updated;
-  
-    
-    setInput("");
+  // Create the new message
+  const newMessage = {
+    id: comments.length + 1,
+    user: 'you',
+    avatar: '/avatars/you.png',
+    comment: input,
+    timestamp: 'just now'
   };
+
+  // Add the new message to the state
+  setComments(prev => [...prev, newMessage]);
+
+  // Clear input and scroll to bottom
+  setInput("");
+  setTimeout(scrollToBottom, 100);
+};
 
   const handleShare = () => {
     const url = window.location.href;
@@ -86,14 +86,14 @@ export default function RoomChat({ transaction }) {
   };
 
   // Auto-scroll to bottom (top of reversed list)
-  useEffect(() => {
+ /* useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTo({
         top: 0,
         behavior: "smooth"
       });
     }
-  }, [comments]);
+  }, [comments]); */
 
   return (
     <div className="relative flex flex-col bg-neutral-900 text-white">
