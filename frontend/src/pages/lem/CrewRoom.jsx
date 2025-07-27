@@ -1,7 +1,5 @@
-import MealCrewLayout from "../../components/lem/MealCrewLayout"
+import MealCrewLayout from "../../components/lem/MealCrewLayout";
 import RoomChat from "../../components/lem/RoomChat";
-
-
 import { useLocation } from 'react-router-dom';
 
 const CrewRoom = () => {
@@ -11,17 +9,16 @@ const CrewRoom = () => {
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       <div className="shrink-0">
-        <MealCrewLayout />
+        <MealCrewLayout transaction={transaction} />
       </div>
       <div className="flex-1 overflow-y-auto">
-        <RoomChat />
+        <RoomChat transaction={transaction} />
       </div>
     </div>
   );
 };
 
 export default CrewRoom;
-
 
 
 
