@@ -85,7 +85,7 @@ export default function RoomChat({ transaction }) {
     }
   };
 
-  // Auto-scroll to bottom (top of reversed list)
+  // Auto-scroll to bottom (top of reversed llist)
  /* useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTo({
