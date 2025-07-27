@@ -23,7 +23,28 @@ export default function RoomChat({ transaction }) {
       avatar: '/avatars/morang.png',
       comment: "i remember yeonjun's eyes while recording this",
       timestamp: 'just now'
-    }
+    },
+    {
+      id: 4,
+      user: 'cocoa22',
+      avatar: '/avatars/cocoa.png',
+      comment: 'SEE UU',
+      timestamp: 'just now'
+    },
+    {
+      id: 5,
+      user: 'benzrain',
+      avatar: '/avatars/benz.png',
+      comment: 'AHAHAHA THIS SONG HAS MY HEART',
+      timestamp: 'just now'
+    },
+    {
+      id: 6,
+      user: 'moranghaever',
+      avatar: '/avatars/morang.png',
+      comment: "i remember yeonjun's eyes while recording this",
+      timestamp: 'just now'
+}
   ]);
 
   const [input, setInput] = useState("");
