@@ -102,7 +102,7 @@ export default function RoomChat({ transaction }) {
         ref={scrollRef}
         className="flex-1 overflow-y-auto p-4 pb-[80px] flex flex-col space-y-3"
       >
-        {[...comments].reverse().map((c) => (
+        {comments.map((c) => (
           <div key={c.id} className="flex items-start space-x-2">
             <img
               src={c.avatar}
