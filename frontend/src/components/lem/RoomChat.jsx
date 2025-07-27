@@ -1,7 +1,7 @@
   import { useState, useRef, useEffect } from "react";
 import { FiSend, FiShare2, FiShoppingBag } from "react-icons/fi";
 
-export default function RoomChat() {
+export default function RoomChat({ transaction }) {
   const [comments, setComments] = useState([
     {
       id: 1,
