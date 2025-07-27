@@ -35,7 +35,7 @@ const fallbackCrew = {
 
 export default function CrewPreview({ crew = fallbackCrew }) {
   return (
-    <div className="w-full max-w-[500px] h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-xl p-4 space-y-4">
+    <div className="w-full max-w-[500px] h-[40vh] overflow-y-auto bg-white rounded-2xl shadow-xl p-4 space-y-4">
       {/* Thumbnail + Stats */}
       <div className="flex items-center gap-4">
         <img
