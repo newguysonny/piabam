@@ -1,127 +1,77 @@
-import React from "react";
+import React from 'react';
 
-// Mock Data (used if no `crew` prop is passed)
-const fallbackCrew = {
-  name: "Nneka & Friends Meal Crew",
-  description: "Healthy food made from local farmers' products",
-  avatar: "/avatars/nneka.png",
-  participants: 1200,
-  followers: 5000,
-  mealsSold: 26000,
-  rating: 4.8,
-  location: "Lekki Phase 1, Lagos",
-  timeLeft: "2 hours left",
-  price: 1500,
-  attendance: {
-    joined: 20,
-    total: 30
-  },
-  menu: [
-    { name: "Jollof Rice", quantity: 1 },
-    { name: "Moi Moi", quantity: 1 },
-    { name: "Grilled Chicken", quantity: 1 }
-  ],
-  schedule: {
-    breakfast: "7:00 – 8:30am",
-    lunch: "12:00 – 1:30pm",
-    dinner: "6:00 – 7:30pm"
-  },
-  reviews: [
-    { user: "tomiwa22", comment: "🔥🔥🔥 Food was so fresh", rating: 5 },
-    { user: "aytunde", comment: "Loved the vibe and the dishes", rating: 4 },
-    { user: "zainabxo", comment: "Healthy and tasty. Will join again!", rating: 5 }
-  ]
-};
+const CrewPreview = () => {
+  const totalParticipants = 30;
+  const joinedParticipants = 10;
+  const remaining = totalParticipants - joinedParticipants;
+  const progressPercent = (joinedParticipants / totalParticipants) * 100;
 
-export default function CrewPreview({ crew = fallbackCrew }) {
   return (
-    <div className="w-full max-w-[500px] h-[40vh] overflow-y-auto bg-white rounded-2xl shadow-xl p-4 space-y-4">
-      {/* Thumbnail + Stats */}
-      <div className="flex items-center gap-4">
+    <div className="max-w-md mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
+      {/* Image Header */}
+      <div className="relative">
         <img
-          src={crew.avatar}
-          alt={crew.name}
-          className="w-16 h-16 rounded-full border-2 border-yellow-500"
+          src="https://source.unsplash.com/featured/?food,party"
+          alt="Meal Crew"
+          className="w-full h-48 object-cover"
         />
-        <div className="text-xs text-gray-600 space-y-1">
-          <div>👥 {crew.participants.toLocaleString()} participants</div>
-          <div>🌐 {crew.followers.toLocaleString()} followers</div>
-          <div>🍽️ {crew.mealsSold.toLocaleString()} meals sold</div>
-          <div>⭐ {crew.rating}</div>
+        {/* Goal Tag */}
+        <div className="absolute top-3 right-3 bg-yellow-300 text-sm font-medium px-3 py-1 rounded-full shadow">
+          {remaining} of {totalParticipants} participants left
         </div>
       </div>
 
-      {/* Location + Time Left */}
-      <div className="bg-gray-100 p-3 rounded-xl">
-        <div className="text-sm text-gray-500">📍 {crew.location}</div>
-        <div className="text-lg font-semibold text-red-600">⏳ {crew.timeLeft}</div>
-      </div>
-
-      {/* Crew Name + Description */}
-      <div>
-        <h2 className="text-xl font-bold text-gray-900">{crew.name}</h2>
-        <p className="text-sm text-gray-600 mt-1">{crew.description}</p>
-      </div>
-
-      {/* Price + Attendance */}
-      <div className="bg-gray-50 p-3 rounded-xl flex items-center justify-between">
-        <div className="text-2xl font-bold text-green-600">₦{crew.price.toLocaleString()}</div>
-        <div className="text-right">
-          <div className="text-lg font-semibold">
-            {crew.attendance.joined}/{crew.attendance.total}
-          </div>
-          <div className="text-xs text-gray-500">members joined</div>
-        </div>
-      </div>
-
-      {/* Actions */}
-      <div className="flex gap-2">
-        <button className="flex-1 bg-green-600 text-white py-2 rounded-xl font-medium hover:bg-green-700 transition">
-          Join Crew
-        </button>
-        <button className="flex-1 bg-gray-200 text-gray-700 py-2 rounded-xl font-medium hover:bg-gray-300 transition">
-          Save
-        </button>
-      </div>
-
-      {/* Meal Menu */}
-      <div className="bg-gray-100 p-3 rounded-xl">
-        <h3 className="text-sm font-semibold mb-2 text-gray-700">🍽️ Meal Menu</h3>
-        <ul className="text-sm text-gray-600 space-y-1">
-          {crew.menu.map((item, i) => (
-            <li key={i} className="flex justify-between">
-              <span>{item.name}</span>
-              <span>x{item.quantity}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Schedule */}
-      <div className="bg-gray-100 p-3 rounded-xl">
-        <h3 className="text-sm font-semibold mb-2 text-gray-700">🕒 Schedule</h3>
-        <ul className="text-sm text-gray-600 space-y-1">
-          {Object.entries(crew.schedule).map(([meal, time], i) => (
-            <li key={i}>
-              <strong className="capitalize">{meal}</strong>: {time}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Reviews */}
-      <div className="bg-gray-100 p-3 rounded-xl">
-        <h3 className="text-sm font-semibold mb-2 text-gray-700">🗨️ Recent Reviews</h3>
-        <div className="space-y-2">
-          {crew.reviews.slice(0, 3).map((review, i) => (
-            <div key={i} className="text-sm text-gray-700">
-              <span className="font-semibold text-gray-800">{review.user}:</span>{" "}
-              {review.comment}
+      {/* Card Content */}
+      <div className="p-4">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-2">
+          <div>
+            <h2 className="text-xl font-bold">Chananan Birthday Party</h2>
+            <div className="flex items-center text-gray-600 text-sm">
+              <span className="mr-1 text-green-600 font-semibold">₦2500</span>
+              <span className="text-blue-500">✔️</span>
             </div>
-          ))}
+          </div>
         </div>
-        <button className="text-xs text-blue-600 mt-2">View all reviews</button>
+
+        {/* Progress Bar */}
+        <div className="my-3">
+          <div className="w-full bg-gray-200 rounded-full h-2">
+            <div
+              className="bg-green-500 h-2 rounded-full transition-all duration-300"
+              style={{ width: `${progressPercent}%` }}
+            ></div>
+          </div>
+          <div className="text-sm text-gray-600 mt-1">
+            {joinedParticipants} joined / {totalParticipants} total
+          </div>
+        </div>
+
+        {/* Description */}
+        <div className="mb-3">
+          <h3 className="font-semibold mb-1">Hi let’s get to know each other!</h3>
+          <p className="text-gray-700 text-sm">
+            We are a group of 30 people ordering meals every day — fun-filled and built on genuine
+            connection. Join us for daily good food and great vibes.
+          </p>
+        </div>
+
+        {/* Location */}
+        <div className="flex items-center text-sm text-gray-500 mb-4">
+          📍 11 km away
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex justify-around items-center border-t pt-4">
+          <button className="bg-green-500 text-white rounded-full px-5 py-2 text-sm font-medium">
+            ✅ Join Crew
+          </button>
+          <button className="text-red-500 text-2xl hover:scale-110 transition">❤️</button>
+          <button className="text-yellow-500 text-2xl hover:scale-110 transition">👋</button>
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default CrewPreview;
