@@ -1,3 +1,49 @@
+import React from "react";
+
+const mockCrew = { name: "Nneka & Friends Meal Crew", avatar: "/avatars/crew.png", menu: ["Jollof Rice", "Salad"], price: 1500, location: "Yaba, Lagos", joined: 10, capacity: 30, status: "Closed", availableAt: "9:00AM", };
+
+export default function CrewPreviewCard({ crew = mockCrew }) { const progress = (crew.joined / crew.capacity) * 100;
+
+return ( <div className="max-w-sm mx-auto bg-white rounded-2xl shadow-lg p-4 space-y-4 border border-gray-200"> {/* Header */} <div className="flex items-center justify-between"> <div className="flex items-center gap-3"> <img src={crew.avatar} alt={crew.name} className="w-12 h-12 rounded-full object-cover" /> <div> <h2 className="text-lg font-bold text-gray-800">{crew.name}</h2> <p className="text-xs text-gray-500">{crew.menu.length} meals • ₦{crew.price}</p> <p className="text-xs text-gray-500">📍 {crew.location}</p> </div> </div> <div className="text-right"> <div className="text-xl font-bold text-gray-800">{crew.joined}/{crew.capacity}</div> <div className="text-xs text-gray-500">joined</div> </div> </div>
+
+{/* Progress Bar */}
+  <div className="w-full bg-gray-200 rounded-full h-2">
+    <div
+      className="bg-green-600 h-2 rounded-full transition-all duration-300"
+      style={{ width: `${progress}%` }}
+    ></div>
+  </div>
+
+  {/* Status */}
+  <div className="text-sm text-gray-700">
+    <span className={
+      crew.status === "Closed"
+        ? "text-red-600 font-medium"
+        : "text-green-600 font-medium"
+    }>
+      {crew.status}
+    </span>
+    {" • Available at "}
+    <span className="font-semibold text-gray-800">{crew.availableAt}</span>
+  </div>
+
+  {/* Actions */}
+  <div className="space-y-2">
+    <button className="w-full bg-black text-white py-2 rounded-xl font-semibold hover:opacity-90">
+      Join Crew
+    </button>
+    <button className="w-full bg-gray-100 text-gray-800 py-2 rounded-xl font-semibold hover:bg-gray-200">
+      View Details
+    </button>
+  </div>
+</div>
+
+); }
+
+
+
+
+/*
 import React from 'react';
 
 const CrewPreview = () => {
@@ -8,22 +54,22 @@ const CrewPreview = () => {
 
   return (
     <div className="max-w-md mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
-      {/* Image Header */}
+      {/* Image Header /}
       <div className="relative">
         <img
           src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"
           alt="Meal Crew"
           className="w-full h-48 object-cover"
         />
-        {/* Goal Tag */}
+        {/* Goal Tag /}
         <div className="absolute top-3 right-3 bg-yellow-300 text-sm font-medium px-3 py-1 rounded-full shadow">
           {remaining} of {totalParticipants} participants left
         </div>
       </div>
 
-      {/* Card Content */}
+      {/* Card Content //}
       <div className="p-4">
-        {/* Header */}
+        {/* Header /}
         <div className="flex items-center justify-between mb-2">
           <div>
             <h2 className="text-xl font-bold">Chananan Birthday Party</h2>
@@ -34,7 +80,7 @@ const CrewPreview = () => {
           </div>
         </div>
 
-        {/* Progress Bar */}
+        {/* Progress Bar /}
         <div className="my-3">
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
@@ -47,7 +93,7 @@ const CrewPreview = () => {
           </div>
         </div>
 
-        {/* Description */}
+        {/* Description /}
         <div className="mb-3">
           <h3 className="font-semibold mb-1">Hi let’s get to know each other!</h3>
           <p className="text-gray-700 text-sm">
@@ -56,12 +102,12 @@ const CrewPreview = () => {
           </p>
         </div>
 
-        {/* Location */}
+        {/* Location /}
         <div className="flex items-center text-sm text-gray-500 mb-4">
           📍 11 km away
         </div>
 
-        {/* Action Buttons */}
+        {/* Action Buttons /}
         <div className="flex justify-around items-center border-t pt-4">
           <button className="bg-green-500 text-white rounded-full px-5 py-2 text-sm font-medium">
             ✅ Join Crew
@@ -75,3 +121,6 @@ const CrewPreview = () => {
 };
 
 export default CrewPreview;
+
+
+*/
