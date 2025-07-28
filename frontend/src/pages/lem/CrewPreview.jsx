@@ -11,7 +11,7 @@ const CrewPreview = () => {
       {/* Image Header */}
       <div className="relative">
         <img
-          src="https://unsplash.com/photos/a-table-topped-with-lots-of-plates-of-food-hatqfX3b9Vo"
+          src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"
           alt="Meal Crew"
           className="w-full h-48 object-cover"
         />
