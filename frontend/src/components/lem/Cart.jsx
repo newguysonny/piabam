@@ -37,7 +37,9 @@ const Cart = () => {
   const handleDecrement = (id) => {
   alert("Items can only be updated in the crew group");
 };
-  
+  const handleRemove = (id) => {
+  alert("Items can only be updated in the crew group");
+};
   
  /* 
  // to be used only within the crew group 
@@ -60,12 +62,13 @@ const Cart = () => {
         )
     );
   };
-  */
+  
   
   const handleRemove = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
-
+  */
+  
   return (
     <div className="max-w-md mx-auto p-4">
       {cartItems.map((item) => (
