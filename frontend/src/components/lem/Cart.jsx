@@ -138,7 +138,7 @@ const handleDecrement = (id) => {
         </button>
       </div>
     </div>
-    <ToastContainer position="bottom-center" />
+    <ToastContainer position="bottom-center" /></>
   );
 };
 
