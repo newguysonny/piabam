@@ -19,7 +19,7 @@ return ( <div className="max-w-sm mx-auto bg-white rounded-2xl shadow-lg p-4 spa
   </div>
 
   {/* Status */}
-  <div className="text-sm text-gray-700">
+  <div className="text-sm mt-1 text-gray-700">
     <span className={
       crew.status === "Closed"
         ? "text-red-600 font-medium"
