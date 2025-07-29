@@ -1,11 +1,11 @@
 import React from "react";
 import Cart from "../../components/lem/Cart";
 
-const mockCrew = { name: "Nneka & Friends Meal Crew", avatar: "/avatars/crew.png", menu: ["Jollof Rice", "Salad"], price: 1500, location: "Yaba, Lagos", joined: 10, capacity: 30, status: "Closed", availableAt: "9:00AM", };
+const mockCrew = { name: "Nneka & Friends Meal Crew", avatar: "/avatars/crew.png", menu: ["Jollof Rice", "Salad"], price: 1500, location: "Yaba, Lagos", distance: "1 mile", joined: 10, capacity: 30, status: "Closed", availableAt: "9:00AM", };
 
 export default function CrewPreviewCard({ crew = mockCrew }) { const progress = (crew.joined / crew.capacity) * 100;
 
-return ( <div className="max-w-sm mx-auto bg-white rounded-2xl shadow-lg p-4 space-y-4 border border-gray-200"> {/* Header */} <div className="flex items-center justify-between"> <div className="flex items-center gap-3"> <img src={crew.avatar} alt={crew.name} className="w-12 h-12 rounded-full object-cover" /> <div> <h2 className="text-lg font-bold text-gray-800">{crew.name}</h2> <p className="text-xs text-gray-500">{crew.menu.length} meals • ₦{crew.price}</p> <p className="text-xs text-gray-500">📍 {crew.location}</p> </div> </div> <div className="text-right"> <div className="text-xl font-bold text-gray-800">{crew.joined}/{crew.capacity}</div> <div className="text-xs text-gray-500">joined</div> </div> </div>
+return ( <div className="max-w-sm mx-auto bg-white rounded-2xl shadow-lg p-4 space-y-4 border border-gray-200"> {/* Header */} <div className="flex items-center justify-between"> <div className="flex items-center gap-3"> <img src={crew.avatar} alt={crew.name} className="w-12 h-12 rounded-full object-cover" /> <div> <h2 className="text-lg font-bold text-gray-800">{crew.name}</h2> <p className="text-xs text-gray-500">{crew.menu.length} meals • ₦{crew.price}</p> <p className="text-xs text-gray-500">📍 {crew.location}</p> <p className="text-xs text-gray-500">📍 {crew.distance}</p> </div> </div> <div className="text-right"> <div className="text-xl font-bold text-gray-800">{crew.joined}/{crew.capacity}</div> <div className="text-xs text-gray-500">joined</div> </div> </div>
 
 {/* Progress Bar */}
   <div className="w-full bg-gray-200 rounded-full h-2">
