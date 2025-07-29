@@ -1,5 +1,5 @@
 import React from "react";
-import Cart from "Cart";
+import Cart from "../../components/lem/Cart";
 
 const mockCrew = { name: "Nneka & Friends Meal Crew", avatar: "/avatars/crew.png", menu: ["Jollof Rice", "Salad"], price: 1500, location: "Yaba, Lagos", joined: 10, capacity: 30, status: "Closed", availableAt: "9:00AM", };
 
