@@ -32,12 +32,23 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState(initialCart);
 
   const handleIncrement = (id) => {
+  alert("Items can only be updated in the crew group");
+};
+  const handleDecrement = (id) => {
+  alert("Items can only be updated in the crew group");
+};
+  
+  
+ /* 
+ // to be used only within the crew group 
+  const handleIncrement = (id) => {
     setCartItems((prev) =>
       prev.map((item) =>
         item.id === id ? { ...item, quantity: item.quantity + 1 } : item
       )
     );
   };
+  
 
   const handleDecrement = (id) => {
     setCartItems((prev) =>
@@ -49,7 +60,8 @@ const Cart = () => {
         )
     );
   };
-
+  */
+  
   const handleRemove = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
