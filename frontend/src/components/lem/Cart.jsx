@@ -137,8 +137,9 @@ const handleDecrement = (id) => {
           ➕ Add items
         </button>
       </div>
+      <ToastContainer position="bottom-center" />
     </div>
-    <ToastContainer position="bottom-center" /></>
+    
   );
 };
 
