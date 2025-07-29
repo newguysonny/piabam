@@ -13,7 +13,7 @@ return ( <div className="max-w-sm mx-auto bg-white rounded-2xl shadow-lg p-4 spa
       className="bg-green-600 h-2 rounded-full transition-all duration-300"
       style={{ width: `${progress}%` }}
     ></div>
-    <div className="text-sm text-gray-600 mt-1">
+    <div className="text-sm text-gray-600 mt-2">
       {crew.joined} joined / {crew.capacity} total
           </div>
   </div>
