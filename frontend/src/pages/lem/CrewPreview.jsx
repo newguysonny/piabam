@@ -1,4 +1,5 @@
 import React from "react";
+import Cart from "Cart";
 
 const mockCrew = { name: "Nneka & Friends Meal Crew", avatar: "/avatars/crew.png", menu: ["Jollof Rice", "Salad"], price: 1500, location: "Yaba, Lagos", joined: 10, capacity: 30, status: "Closed", availableAt: "9:00AM", };
 
@@ -27,6 +28,8 @@ return ( <div className="max-w-sm mx-auto bg-white rounded-2xl shadow-lg p-4 spa
     <span className="font-semibold text-gray-800">{crew.availableAt}</span>
   </div>
 
+   <Cart />
+  
   {/* Actions */}
   <div className="space-y-2">
     <button className="w-full bg-black text-white py-2 rounded-xl font-semibold hover:opacity-90">
