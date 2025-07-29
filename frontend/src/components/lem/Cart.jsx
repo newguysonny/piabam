@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Sample data
 const initialCart = [
@@ -30,30 +32,32 @@ const initialCart = [
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState(initialCart);
+  const isEditable = false; // toggle based on view
 
-  const handleIncrement = (id) => {
-  alert("Items can only be updated in the crew group");
-};
-  const handleDecrement = (id) => {
-  alert("Items can only be updated in the crew group");
-};
-  const handleRemove = (id) => {
-  alert("Items can only be updated in the crew group");
-};
-  
- /* 
- // to be used only within the crew group 
-  const handleIncrement = (id) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
-  };
-  
+const handleIncrement = (id) => {
+  if (!isEditable) {
+    toast.info("Items can only be updated in the crew group");
+    return;
+  }
 
-  const handleDecrement = (id) => {
-    setCartItems((prev) =>
+  // else actually increment
+  setCartItems((prev) =>
+    prev.map((item) =>
+      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+    )
+  );
+};
+
+  //decrement of item
+
+const handleDecrement = (id) => {
+  if (!isEditable) {
+    toast.info("Items can only be updated in the crew group");
+    return;
+  }
+
+  // else actually Decrement
+  setCartItems((prev) =>
       prev
         .map((item) =>
           item.id === id
@@ -61,13 +65,19 @@ const Cart = () => {
             : item
         )
     );
-  };
-  
-  
+};
+  //Handle Remove
+
   const handleRemove = (id) => {
+  if (!isEditable) {
+    toast.info("Items can only be updated in the crew group");
+    return;
+  }
+    //else delete item
     setCartItems((prev) => prev.filter((item) => item.id !== id));
-  };
-  */
+};
+  
+
   
   return (
     <div className="max-w-md mx-auto p-4">
@@ -128,6 +138,7 @@ const Cart = () => {
         </button>
       </div>
     </div>
+    <ToastContainer position="bottom-center" />
   );
 };
 
