@@ -1,19 +1,40 @@
+import { useState } from "react";
 import MapWrapper from "../../components/lem/MapWrapper";
 import MapFilter from "../../components/lem/MapFilter";
 import CrewMarker from "../../components/lem/CrewMarker";
-import { useState } from "react";
 import { SlidersHorizontal } from "lucide-react";
 
+// 🧪 Mock data for now
+const mockCrews = [
+  {
+    id: 1,
+    name: "Tomiwa & Friends",
+    avatar: "/avatars/crew1.png",
+    joined: 12,
+    capacity: 30,
+    location: { lat: 6.5244, lng: 3.3792 }, // Lagos
+  },
+  {
+    id: 2,
+    name: "Nneka Meal Party",
+    avatar: "/avatars/crew2.png",
+    joined: 25,
+    capacity: 50,
+    location: { lat: 6.4551, lng: 3.3942 }, // Victoria Island
+  },
+];
 
-export default function CrewMap(crews.map((crew) => { 
-  (
+export default function CrewMap() {
   const [showFilter, setShowFilter] = useState(false);
-   
-  <CrewMarker key={crew.id} crew={crew} />
-)
+
   return (
     <div className="relative w-full h-screen">
-      <MapWrapper />
+      {/* Map */}
+      <MapWrapper>
+        {mockCrews.map((crew) => (
+          <CrewMarker key={crew.id} crew={crew} />
+        ))}
+      </MapWrapper>
 
       {/* Filter Button */}
       <button
@@ -24,16 +45,15 @@ export default function CrewMap(crews.map((crew) => {
         <SlidersHorizontal className="w-5 h-5 text-gray-700" />
       </button>
 
-      {/* Slide-in filter  modal */}
+      {/* Slide-in filter modal */}
       {showFilter && (
         <>
-          {/* Dimmed overlay */}
+          {/* Overlay */}
           <div
             className="fixed inset-0 bg-black bg-opacity-40 z-40"
             onClick={() => setShowFilter(false)}
           />
-
-          {/* Filter Panel */}
+          {/* Modal */}
           <MapFilter onClose={() => setShowFilter(false)} />
         </>
       )}
