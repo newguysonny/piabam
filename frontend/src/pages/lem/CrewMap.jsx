@@ -20,7 +20,7 @@ export default function CrewMap() {
         <SlidersHorizontal className="w-5 h-5 text-gray-700" />
       </button>
 
-      {/* Slide-in filter modal */}
+      {/* Slide-in filter  modal */}
       {showFilter && (
         <>
           {/* Dimmed overlay */}
