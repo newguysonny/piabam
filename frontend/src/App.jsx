@@ -10,6 +10,7 @@ import EscrowDashboard from './pages/escrow/EscrowDashboard';
 import CrewForm from './pages/CrewForm';
 import CrewRoom from './pages/lem/CrewRoom';
 import CrewPreview from './pages/lem/CrewPreview';
+import CrewMap from './pages/lem/CrewMap';
 import LemDiscoveryPage from './pages/LemDiscoveryPage';
 import StreamingDiscoveryPage from './pages/StreamingDiscoveryPage';
 import CrowdfundingDiscoveryPage from './pages/projects/CrowdfundingDiscoveryPage';
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="/party" element={<StreamingDiscoveryPage />} />
                {/*Lem and Restaurants Section */}
         <Route path="/crew" element={<CrewForm />} />
+        <Route path="/map" element={<CrewMap />} />
         <Route path="/lem" element={<LemDiscoveryPage />} />
         <Route path="/crew-room/:id" element={<CrewRoom />} />
         <Route path="/preview" element={<CrewPreview />} />
