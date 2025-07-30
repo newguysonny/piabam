@@ -9,7 +9,7 @@ const mockCrews = [
   {
     id: 1,
     name: "Tomiwa & Friends",
-    avatar: "/avatars/crew1.png",
+    avatar: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
     joined: 12,
     capacity: 30,
     location: { lat: 6.5244, lng: 3.3792 }, // Lagos
@@ -17,7 +17,7 @@ const mockCrews = [
   {
     id: 2,
     name: "Nneka Meal Party",
-    avatar: "/avatars/crew2.png",
+    avatar: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
     joined: 25,
     capacity: 50,
     location: { lat: 6.4551, lng: 3.3942 }, // Victoria Island
