@@ -1,12 +1,16 @@
 import MapWrapper from "../../components/lem/MapWrapper";
 import MapFilter from "../../components/lem/MapFilter";
+import CrewMarker from "../../components/lem/CrewMarker";
 import { useState } from "react";
 import { SlidersHorizontal } from "lucide-react";
 
 
-export default function CrewMap() {
+export default function CrewMap(crews.map((crew) => { 
+  (
   const [showFilter, setShowFilter] = useState(false);
-
+   
+  <CrewMarker key={crew.id} crew={crew} />
+)
   return (
     <div className="relative w-full h-screen">
       <MapWrapper />
