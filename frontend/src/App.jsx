@@ -11,7 +11,7 @@ import CrewForm from './pages/CrewForm';
 import CrewRoom from './pages/lem/CrewRoom';
 import CrewPreview from './pages/lem/CrewPreview';
 import CrewMap from './pages/lem/CrewMap';
-import LemDiscoveryPage from './pages/LemDiscoveryPage';
+import LemDiscoveryPage from './pages/lem/LemDiscoveryPage';
 import StreamingDiscoveryPage from './pages/StreamingDiscoveryPage';
 import CrowdfundingDiscoveryPage from './pages/projects/CrowdfundingDiscoveryPage';
 import MomentumDiscoveryPage from './pages/projects/MomentumDiscoveryPage';
