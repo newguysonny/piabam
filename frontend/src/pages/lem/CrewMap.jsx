@@ -29,10 +29,10 @@ export default function CrewMap() {
   const [showFilter, setShowFilter] = useState(false);
 
   return (
-    <div>
-      <Navbar />
-    <div className="relative w-full h-screen">
+    
       
+    <div className="relative w-full h-screen">
+      <Navbar />
       {/* Map */}
       <MapWrapper>
         {mockCrews.map((crew) => (
@@ -64,6 +64,7 @@ export default function CrewMap() {
         </>
       )}
     </div>
-      </div>
+      
+      
   );
 }
