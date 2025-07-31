@@ -23,7 +23,12 @@ export default function Navbar() {
   const [showMoreModal, setShowMoreModal] = useState(false);
   const [activeTab, setActiveTab] = useState('Home');
   const [user, setUser] = useState(null); // Add user state or get from context
-
+  const routeMap = {
+  Home: '/',
+  Lem: '/map',
+  Faajee: '/faajee',
+};
+  
   const ProfileDropdown = () => (
     <div className="flex items-center cursor-pointer">
       <div className="w-8 h-8 bg-gray-300 rounded-full mr-2"></div>
