@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FiMenu, FiX, FiChevronDown, FiFilter, FiSearch } from 'react-icons/fi';
 import EscrowCard from '../../components/escrow/EscrowCard';
-import BottomNavbar from "../../components/navigation/BottomNavbar";
+import Navbar from "../../components/navigation/Navbar";
 import { useNavigate } from 'react-router-dom';
 
 const EscrowDashboard = () => {
@@ -90,6 +90,7 @@ const EscrowDashboard = () => {
   };
 
   return (
+    <> 
     <div className="min-h-screen bg-gray-50">
       
       {/* Header with Search */}
@@ -273,9 +274,9 @@ const EscrowDashboard = () => {
           )}
         </div>
       </main>
-      <BottomNavbar />
+      <Navbar />
     </div>
-
+ </>
   );
 };
 
