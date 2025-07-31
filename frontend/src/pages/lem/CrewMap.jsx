@@ -63,8 +63,9 @@ export default function CrewMap() {
           <MapFilter onClose={() => setShowFilter(false)} />
         </>
       )}
+      <Navbar />
     </div>
-    <Navbar />
+    
       
   );
 }
