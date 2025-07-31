@@ -32,7 +32,7 @@ export default function CrewMap() {
     
       
     <div className="relative w-full h-screen">
-      <Navbar />
+      
       {/* Map */}
       <MapWrapper>
         {mockCrews.map((crew) => (
@@ -64,7 +64,7 @@ export default function CrewMap() {
         </>
       )}
     </div>
-      
+    <Navbar />
       
   );
 }
