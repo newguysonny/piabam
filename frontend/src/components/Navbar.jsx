@@ -175,6 +175,55 @@ export default function Navbar() {
         }`}
       >
       <div className="grid grid-cols-5 py-2">
+        {['Home', 'Lem', 'Start', 'Faajee', 'More'].map((item) => {
+  const isActive = activeTab === item;
+  const baseClass = `flex flex-col items-center justify-center py-1 ${
+    isActive ? 'text-purple-700' : 'text-gray-600'
+  }`;
+
+  if (item === 'Start') {
+    return (
+      <button
+        key={item}
+        onClick={() => setShowStartModal(true)}
+        className={baseClass}
+      >
+        <div className="bg-purple-600 rounded-full p-2 -mt-6">
+          <FiPlus className="w-6 h-6 text-white" />
+        </div>
+        <span className="text-xs mt-1">{item}</span>
+      </button>
+    );
+  }
+
+  if (item === 'More') {
+    return (
+      <button
+        key={item}
+        onClick={() => setShowMoreModal(true)}
+        className={baseClass}
+      >
+        <FiMoreHorizontal className="w-5 h-5" />
+        <span className="text-xs mt-1">{item}</span>
+      </button>
+    );
+  }
+
+  // For Home, Lem, Faajee
+  return (
+    <Link
+      key={item}
+      to={routeMap[item]}
+      onClick={() => setActiveTab(item)}
+      className={baseClass}
+    >
+      <NavIcon name={item} />
+      <span className="text-xs mt-1">{item}</span>
+    </Link>
+  );
+})}
+        
+        { /*
       {['Home', 'Lem', 'Start', 'Faajee', 'More'].map((item) => (
       <button
       key={item}
@@ -199,6 +248,7 @@ export default function Navbar() {
       <span className="text-xs mt-1">{item}</span>
       </button>
       ))}
+      */}
       </div>
       </div>
       
