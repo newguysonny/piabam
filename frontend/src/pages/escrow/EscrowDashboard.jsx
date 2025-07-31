@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FiMenu, FiX, FiChevronDown, FiFilter, FiSearch } from 'react-icons/fi';
 import EscrowCard from '../../components/escrow/EscrowCard';
+import Navbar from "../../components/Navbar";
 import { useNavigate } from 'react-router-dom';
 
 const EscrowDashboard = () => {
@@ -272,6 +273,7 @@ const EscrowDashboard = () => {
         </div>
       </main>
     </div>
+    <Navbar />
   );
 };
 
