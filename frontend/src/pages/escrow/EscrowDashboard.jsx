@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FiMenu, FiX, FiChevronDown, FiFilter, FiSearch } from 'react-icons/fi';
 import EscrowCard from '../../components/escrow/EscrowCard';
 import Navbar from "../../components/navigation/Navbar";
