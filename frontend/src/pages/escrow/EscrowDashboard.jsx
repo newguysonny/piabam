@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const EscrowDashboard = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('Active');
+  const [dashboardTab, setDashboardTab] = useState('Active'); // not 'activeTab'
   const [selectedType, setSelectedType] = useState('All Types');
   const [selectedSubstatus, setSelectedSubstatus] = useState('All Statuses');
   const [searchQuery, setSearchQuery] = useState('');
@@ -74,7 +74,7 @@ const EscrowDashboard = () => {
   ];
 
   // Filter logic
-  const filteredTransactions = (activeTab === 'Active' ? activeTransactions : pastTransactions)
+  const filteredTransactions = (dashboardTab === 'Active' ? activeTransactions : pastTransactions)
     .filter(transaction => {
       const typeMatch = selectedType === 'All Types' || transaction.type === selectedType;
       const substatusMatch = selectedSubstatus === 'All Statuses' || transaction.substatus === selectedSubstatus;
@@ -184,13 +184,13 @@ const EscrowDashboard = () => {
         <div className="flex border-b border-gray-200 mb-6">
           <button
             className={`py-2 px-4 font-medium ${activeTab === 'Active' ? 'text-purple-600 border-b-2 border-purple-600' : 'text-gray-500'}`}
-            onClick={() => setActiveTab('Active')}
+            onClick={() => setDashboardTab('Active')}
           >
             Active
           </button>
           <button
             className={`py-2 px-4 font-medium ${activeTab === 'Past Orders' ? 'text-purple-600 border-b-2 border-purple-600' : 'text-gray-500'}`}
-            onClick={() => setActiveTab('Past Orders')}
+            onClick={() => setDashboardTab('Past Orders')}
           >
             Past Orders
           </button>
