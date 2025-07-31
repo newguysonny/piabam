@@ -36,7 +36,7 @@ export default function CrewMap() {
           <CrewMarker key={crew.id} crew={crew} />
         ))}
       </MapWrapper>
-      </Navbar>
+      <Navbar />
       
 
       {/* Filter Button */}
