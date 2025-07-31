@@ -91,6 +91,7 @@ const EscrowDashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Navbar>
       {/* Header with Search */}
       <header className="bg-white shadow-sm py-4 px-6 flex items-center justify-between">
         <button 
@@ -272,7 +273,7 @@ const EscrowDashboard = () => {
           )}
         </div>
       </main>
-      <Navbar />
+      <Navbar/>
     </div>
 
   );
