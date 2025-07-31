@@ -30,13 +30,14 @@ export default function CrewMap() {
 
   return (
     <div className="relative w-full h-screen">
+      <Navbar />
       {/* Map */}
       <MapWrapper>
         {mockCrews.map((crew) => (
           <CrewMarker key={crew.id} crew={crew} />
         ))}
       </MapWrapper>
-      <Navbar />
+      
       
 
       {/* Filter Button */}
