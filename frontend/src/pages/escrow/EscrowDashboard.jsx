@@ -90,7 +90,8 @@ const EscrowDashboard = () => {
   };
 
   return (
-    <> 
+   <> 
+    <Navbar />
     <div className="min-h-screen bg-gray-50">
       
       {/* Header with Search */}
@@ -274,7 +275,7 @@ const EscrowDashboard = () => {
           )}
         </div>
       </main>
-      <Navbar />
+    
     </div>
  </>
   );
