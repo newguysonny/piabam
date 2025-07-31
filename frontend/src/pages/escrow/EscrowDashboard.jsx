@@ -273,7 +273,7 @@ const EscrowDashboard = () => {
           )}
         </div>
       </main>
-      <Navbar/>
+      </Navbar>
     </div>
 
   );
