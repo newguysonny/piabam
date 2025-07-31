@@ -2,7 +2,7 @@ import { useState } from "react";
 import MapWrapper from "../../components/lem/MapWrapper";
 import MapFilter from "../../components/lem/MapFilter";
 import CrewMarker from "../../components/lem/CrewMarker";
-import Navbar from "../components/Navbar";
+import Navbar from "../../components/Navbar";
 import { SlidersHorizontal } from "lucide-react";
 
 // 🧪 Mock data for now
