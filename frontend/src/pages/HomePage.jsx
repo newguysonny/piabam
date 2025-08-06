@@ -4,7 +4,7 @@ import ReviewCarousel1 from '../components/lem/ReviewCarousel1';
 import ProjectsSlider from '../components/projects/ProjectsSlider';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-
+import { Link } from 'react-router-dom';
 
 
     const featuredProjects = [
@@ -248,7 +248,12 @@ const sampleReviews1 = [
           <div className="hidden md:block absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10" />
         </div>
       </div>
-           
+           <Link
+‎      to="/projects"
+‎      className="text-gray-600 underline inline-flex items-center hover:text-gray-800 transition"
+‎    >
+‎      View all projects <span className="ml-1">→</span>
+‎    </Link>
          
         
       <Footer />
