@@ -10,7 +10,7 @@ export default function ReviewCard({
   date,
 }) {
   return (
-    <div className="bg-white rounded-2xl shadow-md overflow-hidden w-72">
+    <div className="bg-white rounded-2xl shadow-md overflow-hidden w-60">
       {/* Image */}
       <div className="relative h-44">
         <img
