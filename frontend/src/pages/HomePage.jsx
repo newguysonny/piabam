@@ -249,7 +249,7 @@ const sampleReviews1 = [
         </div>
        <Link
   to="/funding"
-  className="mt-4 text-gray-600 underline inline-flex items-center hover:text-gray-800 transition"
+  className="mt-3 text-gray-600 underline inline-flex items-center hover:text-gray-800 transition"
 >
   View all projects <span className="ml-1">→</span>
   </Link>
