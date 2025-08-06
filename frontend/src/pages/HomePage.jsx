@@ -146,9 +146,11 @@ const sampleReviews = [
       </div>
            
     <h2 className="text-2xl font-bold mb-6">🍽️ Latest Reviews</h2>
-‎      <div className="flex flex-wrap gap-6">  
-    <ReviewCard reviews={sampleReviews} />
-    </div>
+<div className="flex flex-wrap gap-6">
+  {sampleReviews.map((review) => (
+    <ReviewCard key={review.id} {...review} />
+  ))}
+</div>
         
       <Footer />
     </>
