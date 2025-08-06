@@ -5,7 +5,8 @@ import ProjectsSlider from '../components/projects/ProjectsSlider';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
-
+import ReviewCard from "../components/lem/ReviewCard";
+‎import { reviews } from "./data/mockReviews";
 
     const featuredProjects = [
   // Your featured projects data
