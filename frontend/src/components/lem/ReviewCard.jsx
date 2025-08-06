@@ -1,61 +1,55 @@
-import { FiMapPin } from 'react-icons/fi';
+import React from "react";
 
-const ReviewCard = ({
-  restaurantName,
+export default function ReviewCard({
+  imageUrl,
   rating,
-  cuisine,
-  distance,
-  neighborhood,
-  comment,
-  author,
+  title,
+  reviewer,
+  tags = [],
+  location,
   date,
-  showFullAddress = false
-}) => {
+}) {
   return (
-    <div className="h-[320px] md:h-[280px] bg-white p-5 rounded-lg shadow-sm border border-gray-100 flex flex-col">
-      {/* Rating + Cuisine */}
-      <div className="flex items-center gap-2 h-8 mb-1">
-        <div className="text-yellow-400">
-          {'★'.repeat(rating)}{'☆'.repeat(5 - rating)}
+    <div className="bg-white rounded-2xl shadow-md overflow-hidden w-72">
+      {/* Image */}
+      <div className="relative h-44">
+        <img
+          src={imageUrl}
+          alt={title}
+          className="object-cover w-full h-full"
+        />
+        {/* Rating */}
+        <div className="absolute bottom-2 left-2 bg-white rounded-full px-3 py-1 shadow text-sm font-semibold flex items-center gap-1">
+          <span className="text-yellow-500">★</span>
+          <span>{rating}</span>
         </div>
-        <span className="text-xs bg-gray-100 px-2 py-1 rounded-full">
-          {cuisine}
-        </span>
       </div>
 
-      {/* Restaurant Name */}
-      <h3 className="font-bold text-lg line-clamp-1">
-        {restaurantName}
-      </h3>
+      {/* Content */}
+      <div className="p-4 space-y-2">
+        {/* Title */}
+        <h3 className="text-lg font-bold text-gray-800">{title}</h3>
 
-      {/* Location */}
-      <div className="flex items-center gap-1.5 mt-1 mb-2 text-sm text-gray-600">
-        <FiMapPin className="text-red-500 flex-shrink-0" size={14} />
-        <span>
-          {distance} • {neighborhood}
-          {showFullAddress && (
-            <span className="block text-xs text-gray-500">
-              123 Main St, {neighborhood}
+        {/* Reviewer */}
+        <p className="text-sm text-gray-500">by @{reviewer}</p>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2 mt-2">
+          {tags.map((tag, idx) => (
+            <span
+              key={idx}
+              className="text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full"
+            >
+              {tag}
             </span>
-          )}
-        </span>
-      </div>
-
-      {/* Review Text */}
-      <p className="mt-2 mb-4 line-clamp-3 flex-grow text-gray-700 italic">
-        "{comment}"
-      </p>
-
-      {/* Author + Date */}
-      <div className="flex items-center gap-3">
-        <div className="w-8 h-8 rounded-full bg-gray-200 flex-shrink-0"></div>
-        <div>
-          <p className="font-medium text-sm">{author}</p>
-          <p className="text-gray-500 text-xs">{date}</p>
+          ))}
         </div>
+
+        {/* Location & Date */}
+        <p className="text-xs text-gray-400 mt-2">
+          {location} — {date}
+        </p>
       </div>
     </div>
   );
-};
-
-export default ReviewCard;
+}
