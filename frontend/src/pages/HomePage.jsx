@@ -5,8 +5,7 @@ import ProjectsSlider from '../components/projects/ProjectsSlider';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
-import ReviewCard from "../components/lem/ReviewCard";
-‎import { reviews } from "../data/mockReviews";
+import ReviewCard from '../components/lem/ReviewCard';
 
     const featuredProjects = [
   // Your featured projects data
@@ -75,153 +74,43 @@ import ReviewCard from "../components/lem/ReviewCard";
    
 ];
 
-       const sampleReviews = [
+
+// mockReviews
+const sampleReviews = [
   {
     id: 1,
-    restaurantName: "La Taquería",
-    rating: 4,
-    cuisine: "Mexican",
-    distance: "0.3mi",
-    neighborhood: "Downtown",
-    comment: "The al pastor tacos are life-changing. Perfectly spiced and juicy!",
-    author: "Maria G.",
-    date: "May 2024",
-    showFullAddress: false
+    imageUrl: "https://source.unsplash.com/featured/?restaurant,dinner",
+    rating: 4.2,
+    title: "Sunset Grill & Vibes",
+    reviewer: "foodiejoan",
+    tags: ["Outdoor", "Live Music", "Buffet"],
+    location: "Lagos, NG",
+    date: "Aug 2025",
   },
   {
     id: 2,
-    restaurantName: "Pasta Bar",
-    rating: 5,
-    cuisine: "Italian",
-    distance: "1.2mi",
-    neighborhood: "West End",
-    comment: "Homemade rigatoni with truffle cream sauce was divine.",
-    author: "James L.",
-    date: "June 2024",
-    showFullAddress: true
-  },
-    {
-    id: 3,
-    restaurantName: "La Taquería",
-    rating: 4,
-    cuisine: "Mexican",
-    distance: "0.3mi",
-    neighborhood: "Downtown",
-    comment: "The al pastor tacos are life-changing. Perfectly spiced and juicy!",
-    author: "Maria G.",
-    date: "May 2024",
-    showFullAddress: false
-  },
-  {
-    id: 4,
-    restaurantName: "Pasta Bar",
-    rating: 5,
-    cuisine: "Italian",
-    distance: "1.2mi",
-    neighborhood: "West End",
-    comment: "Homemade rigatoni with truffle cream sauce was divine.",
-    author: "James L.",
-    date: "June 2024",
-    showFullAddress: true
-  },
-  // Add 2-10 more reviews
-];
-
-const sampleReviews1 = [
-  {
-    id: 1,
-    restaurantName: "La Taquería",
-    rating: 4,
-    cuisine: "Mexican",
-    distance: "0.3mi",
-    neighborhood: "Downtown",
-    comment: "The al pastor tacos are life-changing. Perfectly spiced and juicy!",
-    author: "Maria G.",
-    date: "May 2024"
-  },
-  {
-    id: 2,
-    restaurantName: "Pasta Bar",
-    rating: 5,
-    cuisine: "Italian",
-    distance: "1.2mi",
-    neighborhood: "West End",
-    comment: "Homemade rigatoni with truffle cream sauce was divine. Wine pairing suggestions were perfect.",
-    author: "James L.",
-    date: "June 2024"
+    imageUrl: "https://source.unsplash.com/featured/?party,event",
+    rating: 3.9,
+    title: "Neon Night Bash",
+    reviewer: "partycrasher",
+    tags: ["Open Bar", "Rooftop", "DJ"],
+    location: "Abuja, NG",
+    date: "Aug 2025",
   },
   {
     id: 3,
-    restaurantName: "Sushi Kai",
-    rating: 4,
-    cuisine: "Japanese",
-    distance: "0.7mi",
-    neighborhood: "Harbor District",
-    comment: "Omakase experience worth every penny. The toro melted in my mouth like butter.",
-    author: "Aisha T.",
-    date: "April 2024"
+    imageUrl: "https://source.unsplash.com/featured/?cafe,brunch",
+    rating: 4.8,
+    title: "Morning Glory Café",
+    reviewer: "brunchlover",
+    tags: ["Cozy", "Brunch", "Vegan Options"],
+    location: "Ibadan, NG",
+    date: "July 2025",
   },
-  {
-    id: 4,
-    restaurantName: "The Green Fork",
-    rating: 3,
-    cuisine: "Vegetarian",
-    distance: "0.5mi",
-    neighborhood: "Arts District",
-    comment: "Creative plant-based dishes, though the mushroom burger was underseasoned. Great kale salad!",
-    author: "David K.",
-    date: "July 2024"
-  },
-  {
-    id: 5,
-    restaurantName: "Boulangerie Maison",
-    rating: 5,
-    cuisine: "French",
-    distance: "1.8mi",
-    neighborhood: "Riverside",
-    comment: "Croissants that rival Paris! Their pain au chocolat is my Saturday morning ritual.",
-    author: "Sophie M.",
-    date: "March 2024"
-  },
-  {
-    id: 6,
-    restaurantName: "Spice Route",
-    rating: 4,
-    cuisine: "Indian",
-    distance: "2.1mi",
-    neighborhood: "Eastside",
-    comment: "Best lamb vindaloo in the city. Naan bread is pillowy perfection - order the garlic version!",
-    author: "Raj P.",
-    date: "May 2024"
-  },
-  {
-    id: 7,
-    restaurantName: "Burger Joint",
-    rating: 3,
-    cuisine: "American",
-    distance: "0.9mi",
-    neighborhood: "Midtown",
-    comment: "Solid smash burgers, but fries were soggy. Great craft beer selection though.",
-    author: "Chris B.",
-    date: "June 2024"
-  },
-  {
-    id: 8,
-    restaurantName: "Pho Saigon",
-    rating: 5,
-    cuisine: "Vietnamese",
-    distance: "1.5mi",
-    neighborhood: "Little Asia",
-    comment: "Broth so flavorful it cured my cold overnight. Always order extra bean sprouts!",
-    author: "Linh N.",
-    date: "January 2024"
-  }
 ];
 
 
-
-
-        export default function Homepage() {
+   export default function Homepage() {
   const normalizeProject = (project) => ({
     id: project.id,
     title: project.title,
@@ -256,7 +145,10 @@ const sampleReviews1 = [
   </Link>
       </div>
            
-         
+    <h2 className="text-2xl font-bold mb-6">🍽️ Latest Reviews</h2>
+‎      <div className="flex flex-wrap gap-6">  
+    <ReviewCard reviews={sampleReviews} />
+    </div>
         
       <Footer />
     </>
