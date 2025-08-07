@@ -1,4 +1,4 @@
-imMenudoport React from "react";
+import React from "react";
 import { FiMapPin } from "react-icons/fi";
 import { FaUsers } from "react-icons/fa";
 import { BsClock } from "react-icons/bs";
@@ -63,7 +63,7 @@ export default function CrewPreviewCard({ crew = mockCrew }) {
         </div>
       </div>
       
-          {/*<div className="h-2" /> Spacer for vertical gap */}
+          <div className="h-2" />{/*<div className="h-2" /> Spacer for vertical gap */}
       
       {/* Status */}
       <div className="text-sm mt-3 text-gray-700 flex items-center gap-2">
