@@ -33,7 +33,7 @@ const mockCrew = {
     ],
   },
 ],
-  price: "1500",
+  price: 1500,
   location: "Yaba, Lagos",
   distance: "1 mile",
   joined: 10,
