@@ -57,7 +57,7 @@ export default function CrewPreviewCard({ crew = mockCrew }) {
           className="bg-green-600 h-2 rounded-full transition-all duration-300"
           style={{ width: `${progress}%` }}
         ></div>
-        <div className="text-sm text-gray-600 mb-3">
+        <div className="text-sm text-gray-600 mb-5">
           {crew.joined} joined / {crew.capacity} total
         </div>
       </div>
