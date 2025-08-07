@@ -7,7 +7,7 @@ import Cart from "../../components/lem/Cart";
 const mockCrew = {
   name: "Nneka & Friends Meal Crew",
   avatar: "/avatars/crew.png",
-  
+  menu: [],
   price: 1500,
   location: "Yaba, Lagos",
   distance: "1 mile",
