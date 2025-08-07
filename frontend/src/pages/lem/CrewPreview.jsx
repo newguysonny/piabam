@@ -77,16 +77,18 @@ export default function CrewPreviewCard({ crew = mockCrew }) {
       </div>
 
       {/* Progress Bar */}
-      <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+      <div className="w-full bg-gray-200 rounded-full h-2">
         <div
           className="bg-green-600 h-2 rounded-full transition-all duration-300"
           style={{ width: `${progress}%` }}
         ></div>
-        <div className="text-sm text-gray-600 mb-5">
+        <div className="text-sm text-gray-600">
           {crew.joined} joined / {crew.capacity} total
         </div>
       </div>
-
+      
+         <div className="h-2" /> {/* Spacer for vertical gap */}
+      
       {/* Status */}
       <div className="text-sm mt-3 text-gray-700 flex items-center gap-2">
         <BsClock className="text-gray-600" />
