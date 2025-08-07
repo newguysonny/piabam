@@ -7,11 +7,11 @@ import Cart from "../../components/lem/Cart";
 const mockCrew = {
   name: "Nneka & Friends Meal Crew",
   avatar: "/avatars/crew.png",
-  menu = [
+  cart = [
   {
     id: 1,
     name: 'Sweet Chipotle BBQ Sauce',
-    price: 0.73,
+  /*  price: 0.73,*/
     quantity: 1,
     image: 'https://source.unsplash.com/80x80/?sauce',
     customizations: [],
@@ -19,7 +19,7 @@ const mockCrew = {
   {
     id: 2,
     name: 'Sweet Chipotle BBQ Crispy Chicken Wrap',
-    price: 8.89,
+   /* price: 8.89, */
     quantity: 1,
     image: 'https://source.unsplash.com/80x80/?burrito',
     customizations: [
@@ -33,7 +33,7 @@ const mockCrew = {
     ],
   },
 ],
-  price: 1500,
+  price: "1500",
   location: "Yaba, Lagos",
   distance: "1 mile",
   joined: 10,
@@ -41,6 +41,7 @@ const mockCrew = {
   status: "Closed",
   availableAt: "9:00AM",
 };
+
 
 export default function CrewPreviewCard({ crew = mockCrew }) {
   const progress = (crew.joined / crew.capacity) * 100;
