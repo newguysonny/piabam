@@ -63,7 +63,7 @@ export default function CrewPreviewCard({ crew = mockCrew }) {
       </div>
 
       {/* Status */}
-      <div className="text-sm mt-1 text-gray-700 flex items-center gap-2">
+      <div className="text-sm mt-2 text-gray-700 flex items-center gap-2">
         <BsClock className="text-gray-600" />
         <span
           className={
