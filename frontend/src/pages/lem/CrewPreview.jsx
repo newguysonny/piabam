@@ -7,7 +7,32 @@ import Cart from "../../components/lem/Cart";
 const mockCrew = {
   name: "Nneka & Friends Meal Crew",
   avatar: "/avatars/crew.png",
-  menu: ["Jollof Rice", "Salad"],
+  menu = [
+  {
+    id: 1,
+    name: 'Sweet Chipotle BBQ Sauce',
+    price: 0.73,
+    quantity: 1,
+    image: 'https://source.unsplash.com/80x80/?sauce',
+    customizations: [],
+  },
+  {
+    id: 2,
+    name: 'Sweet Chipotle BBQ Crispy Chicken Wrap',
+    price: 8.89,
+    quantity: 1,
+    image: 'https://source.unsplash.com/80x80/?burrito',
+    customizations: [
+      'Extra Crispy Chicken Strip ($1.83)',
+      'Cheese',
+      'Lettuce',
+      'Pico De Gallo',
+      'Purple Cabbage',
+      'Spicy Ranch',
+      'Sweet Chipotle BBQ Sauce',
+    ],
+  },
+],
   price: 1500,
   location: "Yaba, Lagos",
   distance: "1 mile",
