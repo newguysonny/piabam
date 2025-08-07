@@ -63,7 +63,7 @@ export default function CrewPreviewCard({ crew = mockCrew }) {
         </div>
       </div>
       
-         <div className="h-2" /> {/* Spacer for vertical gap */}
+          {/*<div className="h-2" /> Spacer for vertical gap */}
       
       {/* Status */}
       <div className="text-sm mt-3 text-gray-700 flex items-center gap-2">
