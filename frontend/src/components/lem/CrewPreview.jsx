@@ -27,10 +27,10 @@ export default function CrewPreview({ crew, onClose }) {
           className="w-full h-48 object-cover rounded-lg mt-3"
         />
           <div className="text-left">
-          <div className="text-xl font-bold text-gray-800">
-            {crew.subtotal}
+          <div className="text-xl mt-2 font-bold text-gray-800">
+            ₦{crew.subtotal.toLocaleString()}
           </div>
-          <div className="text-xs text-gray-500">30% discount on checkout</div>
+          <div className="text-sm text-gray-500">30% discount on checkout</div>
         </div>
          
         {/* Progress Bar */}
