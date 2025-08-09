@@ -1,4 +1,4 @@
-import Cart from "./Cart";
+import Cart from "./Cart.jsx";
 
 export default function CrewPreview({ crew, onClose }) {
   return (
