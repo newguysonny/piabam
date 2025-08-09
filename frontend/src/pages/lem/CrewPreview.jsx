@@ -3,6 +3,7 @@ import { FiMapPin } from "react-icons/fi";
 import { FaUsers } from "react-icons/fa";
 import { BsClock } from "react-icons/bs";
 import Cart from "../../components/lem/Cart";
+import Checkout from "../../components/lem/Checkout";
 
 const mockCrew = {
   name: "Nneka & Friends Meal Crew",
@@ -85,6 +86,7 @@ export default function CrewPreviewCard({ crew = mockCrew }) {
 
       {/* Cart (Optional) */}
       <Cart />
+      <Checkout />
 
       {/* Actions */}
       <div className="space-y-2">
