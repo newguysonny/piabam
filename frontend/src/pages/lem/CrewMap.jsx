@@ -2,6 +2,95 @@ import { useState } from "react";
 import MapWrapper from "../../components/lem/MapWrapper";
 import MapFilter from "../../components/lem/MapFilter";
 import CrewMarker from "../../components/lem/CrewMarker";
+import CrewPreview from "../../components/lem/CrewPreview";
+import Navbar from "../../components/Navbar";
+import { SlidersHorizontal } from "lucide-react";
+
+const mockCrews = [
+  {
+    id: 1,
+    name: "Tomiwa & Friends",
+    avatar: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
+    joined: 12,
+    capacity: 30,
+    location: { lat: 6.5244, lng: 3.3792 },
+  },
+  {
+    id: 2,
+    name: "Nneka Meal Party",
+    avatar: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
+    joined: 25,
+    capacity: 50,
+    location: { lat: 6.4551, lng: 3.3942 },
+  },
+];
+
+export default function CrewMap() {
+  const [showFilter, setShowFilter] = useState(false);
+  const [selectedCrew, setSelectedCrew] = useState(null);
+
+  return (
+    <div className="relative w-full h-screen">
+      {/* Map */}
+      <MapWrapper>
+        {mockCrews.map((crew) => (
+          <CrewMarker
+            key={crew.id}
+            crew={crew}
+            onSelect={() => setSelectedCrew(crew)}
+          />
+        ))}
+      </MapWrapper>
+
+      {/* Filter Button */}
+      <button
+        className="absolute top-4 right-4 z-40 bg-white rounded-full shadow-md p-2 hover:bg-gray-100 transition"
+        title="Filter"
+        onClick={() => setShowFilter(true)}
+      >
+        <SlidersHorizontal className="w-5 h-5 text-gray-700" />
+      </button>
+
+      {/* Slide-in filter modal */}
+      {showFilter && (
+        <>
+          <div
+            className="fixed inset-0 bg-black bg-opacity-40 z-40"
+            onClick={() => setShowFilter(false)}
+          />
+          <MapFilter onClose={() => setShowFilter(false)} />
+        </>
+      )}
+
+      {/* Crew Preview Modal */}
+      {selectedCrew && (
+        <CrewPreview
+          crew={selectedCrew}
+          onClose={() => setSelectedCrew(null)}
+        />
+      )}
+
+      <Navbar />
+    </div>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+import { useState } from "react";
+import MapWrapper from "../../components/lem/MapWrapper";
+import MapFilter from "../../components/lem/MapFilter";
+import CrewMarker from "../../components/lem/CrewMarker";
 import Navbar from "../../components/Navbar";
 import { SlidersHorizontal } from "lucide-react";
 
@@ -33,7 +122,7 @@ export default function CrewMap() {
       
     <div className="relative w-full h-screen">
       
-      {/* Map */}
+      {/* Map /}
       <MapWrapper>
         {mockCrews.map((crew) => (
           <CrewMarker key={crew.id} crew={crew} />
@@ -42,7 +131,7 @@ export default function CrewMap() {
       
       
 
-      {/* Filter Button */}
+      {/* Filter Button /}
       <button
         className="absolute top-4 right-4 z-40 bg-white rounded-full shadow-md p-2 hover:bg-gray-100 transition"
         title="Filter"
@@ -51,15 +140,15 @@ export default function CrewMap() {
         <SlidersHorizontal className="w-5 h-5 text-gray-700" />
       </button>
 
-      {/* Slide-in filter modal */}
+      {/* Slide-in filter modal /}
       {showFilter && (
         <>
-          {/* Overlay */}
+          {/* Overlay /}
           <div
             className="fixed inset-0 bg-black bg-opacity-40 z-40"
             onClick={() => setShowFilter(false)}
           />
-          {/* Modal */}
+          {/* Modal /}
           <MapFilter onClose={() => setShowFilter(false)} />
         </>
       )}
@@ -69,3 +158,4 @@ export default function CrewMap() {
       
   );
 }
+*/
