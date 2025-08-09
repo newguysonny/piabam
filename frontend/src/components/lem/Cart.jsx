@@ -126,7 +126,7 @@ const Cart = () => {
             </button>
           </div>
         </div>
-      {/* Add Items Button */}
+      
       <div className="mt-4 flex justify-end">
         <button className="flex items-center bg-gray-100 px-3 py-1 rounded-full hover:bg-gray-200 transition">
           <AiOutlinePlus size={16} className="mr-1" /> Add items
