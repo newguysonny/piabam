@@ -9,7 +9,7 @@ const initialCart = {
     {
       id: 1,
       name: "Sweet Chipotle BBQ Sauce",
-      price: 730, // in Naira
+      price: 1000, // in Naira
       quantity: 1,
       image: "https://source.unsplash.com/80x80/?sauce",
       customizations: [],
@@ -17,11 +17,11 @@ const initialCart = {
     {
       id: 2,
       name: "Sweet Chipotle BBQ Crispy Chicken Wrap",
-      price: 8890, // in Naira
+      price: 5700, // in Naira
       quantity: 1,
       image: "https://source.unsplash.com/80x80/?burrito",
       customizations: [
-        "Extra Crispy Chicken Strip (₦1830)",
+        
         "Cheese",
         "Lettuce",
         "Pico De Gallo",
@@ -31,7 +31,7 @@ const initialCart = {
       ],
     },
   ],
-  subtotal: 9620, // coming from DB
+  subtotal: 6700, // coming from DB
 };
 
 const Cart = () => {
@@ -128,19 +128,6 @@ const Cart = () => {
         </div>
       ))}
 
-      {/* Summary Card */}
-      <div className="mt-6 bg-white shadow-lg rounded-lg p-4 border">
-        <h3 className="text-lg font-bold mb-3">Order Summary</h3>
-        <div className="flex justify-between text-gray-700 mb-2">
-          <span>Subtotal</span>
-          <span className="font-semibold">
-            ₦{cart.subtotal.toLocaleString()}
-          </span>
-        </div>
-        <button className="mt-3 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">
-          Proceed to Checkout
-        </button>
-      </div>
 
       {/* Add Items Button */}
       <div className="mt-4 flex justify-end">
