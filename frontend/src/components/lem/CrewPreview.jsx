@@ -26,11 +26,11 @@ export default function CrewPreview({ crew, onClose }) {
           alt={crew.name}
           className="w-full h-48 object-cover rounded-lg mt-3"
         />
-          <div className="text-right">
+          <div className="text-left">
           <div className="text-xl font-bold text-gray-800">
             {crew.subtotal}
           </div>
-          <div className="text-xs text-gray-500">joined</div>
+          <div className="text-xs text-gray-500">30% discount on checkout</div>
         </div>
          
         {/* Progress Bar */}
