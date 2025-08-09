@@ -69,10 +69,10 @@ export default function CrewPreview({ crew, onClose }) {
             {crew.joined} joined / {crew.capacity} capacity
           </div>
 
-          {/* Cart */}
+          {/* Cart 
           <div className="mt-4">
             <Cart />
-          </div>
+          </div> */}
 
           {/* Fixed Join Button */}
           <div className="sticky bottom-0 left-0 right-0 bg-white py-3 mt-4">
