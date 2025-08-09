@@ -1,3 +1,5 @@
+import React from "react";
+import Cart from "./Cart.jsx";
 
 export default function CrewPreview({ crew, onClose }) {
   return (
@@ -8,8 +10,8 @@ export default function CrewPreview({ crew, onClose }) {
         onClick={onClose}
       />
       {/* Modal */}
-      <div className="fixed inset-0 flex items-center justify-center z-50">
-        <div className="bg-white rounded-2xl p-4 w-full max-w-md shadow-lg relative max-h-[90vh] overflow-y-auto">
+      <div className="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl p-4 z-50 shadow-lg max-h-[80vh] overflow-y-auto">
+        <div className="flex justify-between items-center">
           <h2 className="text-xl font-bold">{crew.name}</h2>
           <button onClick={onClose} className="text-gray-500">
             ✕
@@ -24,13 +26,7 @@ export default function CrewPreview({ crew, onClose }) {
           {crew.joined}/{crew.capacity} joined
         </p>
         {/* Add your crew details, join button, etc. */}
-        {/* Fixed Join Button */}
-          {/* Fixed Join Button */}
-          <div className="sticky bottom-0 left-0 right-0 bg-white py-3 mt-4">
-            <button className="w-full bg-black text-white py-3 rounded-xl font-semibold hover:opacity-90">
-              Join Crew
-            </button>
-          </div>
+        <cart />
       </div>
     </>
   );
