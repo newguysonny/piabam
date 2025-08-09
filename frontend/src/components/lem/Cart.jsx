@@ -9,7 +9,7 @@ const initialCart = {
     {
       id: 1,
       name: "Sweet Chipotle BBQ Sauce",
-      price: 1000,
+      price: 1000, // in Naira
       quantity: 1,
       image: "https://source.unsplash.com/80x80/?sauce",
       customizations: [],
@@ -17,7 +17,7 @@ const initialCart = {
     {
       id: 2,
       name: "Sweet Chipotle BBQ Crispy Chicken Wrap",
-      price: 5700,
+      price: 5700, // in Naira
       quantity: 1,
       image: "https://source.unsplash.com/80x80/?burrito",
       customizations: [
@@ -30,14 +30,15 @@ const initialCart = {
       ],
     },
   ],
-  subtotal: 6700,
+  subtotal: 6700, // coming from DB
 };
 
 const Cart = () => {
   const [cart, setCart] = useState(initialCart);
-  const isEditable = false; // toggle this to true for editing
+  const isEditable = false;
 
   const handleIncrement = (id) => {
+    if (!isEditable) return;
     setCart((prev) => ({
       ...prev,
       items: prev.items.map((item) =>
@@ -47,6 +48,7 @@ const Cart = () => {
   };
 
   const handleDecrement = (id) => {
+    if (!isEditable) return;
     setCart((prev) => ({
       ...prev,
       items: prev.items.map((item) =>
@@ -58,6 +60,7 @@ const Cart = () => {
   };
 
   const handleRemove = (id) => {
+    if (!isEditable) return;
     setCart((prev) => ({
       ...prev,
       items: prev.items.filter((item) => item.id !== id),
@@ -91,33 +94,41 @@ const Cart = () => {
             </p>
           </div>
 
-          {isEditable && (
-            <div className="flex items-center bg-gray-100 rounded-full px-2 py-1 space-x-2">
+          {/* Quantity + Buttons */}
+          <div className="flex items-center bg-gray-100 rounded-full px-2 py-1 space-x-2">
+            {isEditable && (
               <button
                 onClick={() => handleRemove(item.id)}
                 className="text-gray-600 hover:text-red-500"
               >
                 <FiTrash2 size={16} />
               </button>
+            )}
+
+            {isEditable && (
               <button
                 onClick={() => handleDecrement(item.id)}
                 className="text-gray-600 hover:text-gray-800"
               >
                 <FiMinus size={16} />
               </button>
-              <span className="text-sm">{item.quantity}</span>
+            )}
+
+            <span className="text-sm">{item.quantity}</span>
+
+            {isEditable && (
               <button
                 onClick={() => handleIncrement(item.id)}
                 className="text-gray-600 hover:text-green-500"
               >
                 <FiPlus size={16} />
               </button>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       ))}
 
-      {/* Add Items Button - only if editable */}
+      {/* Add Items Button */}
       {isEditable && (
         <div className="mt-4 flex justify-end">
           <button className="flex items-center bg-gray-100 px-3 py-1 rounded-full hover:bg-gray-200 transition">
