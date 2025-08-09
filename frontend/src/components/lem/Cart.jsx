@@ -9,7 +9,7 @@ const initialCart = {
     {
       id: 1,
       name: "Sweet Chipotle BBQ Sauce",
-      price: 1000, // in Naira
+      price: 1000,
       quantity: 1,
       image: "https://source.unsplash.com/80x80/?sauce",
       customizations: [],
@@ -17,11 +17,10 @@ const initialCart = {
     {
       id: 2,
       name: "Sweet Chipotle BBQ Crispy Chicken Wrap",
-      price: 5700, // in Naira
+      price: 5700,
       quantity: 1,
       image: "https://source.unsplash.com/80x80/?burrito",
       customizations: [
-        
         "Cheese",
         "Lettuce",
         "Pico De Gallo",
@@ -31,18 +30,14 @@ const initialCart = {
       ],
     },
   ],
-  subtotal: 6700, // coming from DB
+  subtotal: 6700,
 };
 
 const Cart = () => {
   const [cart, setCart] = useState(initialCart);
-  const isEditable = false;
+  const isEditable = false; // toggle this to true for editing
 
   const handleIncrement = (id) => {
-    if (!isEditable) {
-      toast.info("Items can only be updated in the crew group");
-      return;
-    }
     setCart((prev) => ({
       ...prev,
       items: prev.items.map((item) =>
@@ -52,10 +47,6 @@ const Cart = () => {
   };
 
   const handleDecrement = (id) => {
-    if (!isEditable) {
-      toast.info("Items can only be updated in the crew group");
-      return;
-    }
     setCart((prev) => ({
       ...prev,
       items: prev.items.map((item) =>
@@ -67,10 +58,6 @@ const Cart = () => {
   };
 
   const handleRemove = (id) => {
-    if (!isEditable) {
-      toast.info("Items can only be updated in the crew group");
-      return;
-    }
     setCart((prev) => ({
       ...prev,
       items: prev.items.filter((item) => item.id !== id),
@@ -104,40 +91,40 @@ const Cart = () => {
             </p>
           </div>
 
-          <div className="flex items-center bg-gray-100 rounded-full px-2 py-1 space-x-2">
-            <button
-              onClick={() => handleRemove(item.id)}
-              className="text-gray-600 hover:text-red-500"
-            >
-              <FiTrash2 size={16} />
-            </button>
-            <button
-              onClick={() => handleDecrement(item.id)}
-              className="text-gray-600 hover:text-gray-800"
-            >
-              <FiMinus size={16} />
-            </button>
-            <span className="text-sm">{item.quantity}</span>
-            <button
-              onClick={() => handleIncrement(item.id)}
-              className="text-gray-600 hover:text-green-500"
-            >
-              <FiPlus size={16} />
-            </button>
-          </div>
-          
+          {isEditable && (
+            <div className="flex items-center bg-gray-100 rounded-full px-2 py-1 space-x-2">
+              <button
+                onClick={() => handleRemove(item.id)}
+                className="text-gray-600 hover:text-red-500"
+              >
+                <FiTrash2 size={16} />
+              </button>
+              <button
+                onClick={() => handleDecrement(item.id)}
+                className="text-gray-600 hover:text-gray-800"
+              >
+                <FiMinus size={16} />
+              </button>
+              <span className="text-sm">{item.quantity}</span>
+              <button
+                onClick={() => handleIncrement(item.id)}
+                className="text-gray-600 hover:text-green-500"
+              >
+                <FiPlus size={16} />
+              </button>
+            </div>
+          )}
         </div>
-      
-      
       ))}
-         
-{/* Add Items Button */}
-      <div className="mt-4 flex justify-end">
-        <button className="flex items-center bg-gray-100 px-3 py-1 rounded-full hover:bg-gray-200 transition">
-          <AiOutlinePlus size={16} className="mr-1" /> Add items
-        </button>
-      </div>
-      
+
+      {/* Add Items Button - only if editable */}
+      {isEditable && (
+        <div className="mt-4 flex justify-end">
+          <button className="flex items-center bg-gray-100 px-3 py-1 rounded-full hover:bg-gray-200 transition">
+            <AiOutlinePlus size={16} className="mr-1" /> Add items
+          </button>
+        </div>
+      )}
 
       <ToastContainer position="bottom-center" />
     </div>
