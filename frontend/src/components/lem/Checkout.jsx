@@ -30,7 +30,7 @@ const crew = [
   },
 ];
 
-export default function Checkout({ crew.subtotal, escrowFee = 1700, discount = 1500 }) {
+export default function Checkout({ crew, escrowFee = 1700, discount = 1500 }) {
   const navigate = useNavigate();
   const total = crew.subtotal + escrowFee - discount;
   const isEditable = true;
