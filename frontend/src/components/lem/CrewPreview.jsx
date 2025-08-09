@@ -25,11 +25,7 @@ export default function CrewPreview({ crew, onClose }) {
         </p>
         {/* Add your crew details, join button, etc. */}
         {/* Fixed Join Button */}
-          <div className="sticky bottom-0 left-0 right-0 bg-white py-3 mt-4">
-            <button className="w-full bg-black text-white py-3 rounded-xl font-semibold hover:opacity-90">
-              Join Crew
-            </button>
-          </div>
+          
       </div>
     </>
   );
