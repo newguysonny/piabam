@@ -3,38 +3,11 @@ import { useNavigate } from "react-router-dom";
 import Cart from "./Cart.jsx"
 
 
-const mockCrew = [
-  {
-    id: 1,
-    name: "Tomiwa & Friends",
-    avatar: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
-    joined: 12,
-    capacity: 30,
-    address: "Yaba Lagos",
-    subtotal: 7200,
-    diatance: "1 mile",
-    location: { lat: 6.5244, lng: 3.3792 },
-    description: "Hey! Join the Meal Crew – where good food and great vibes come together. Let’s eat, share, and enjoy every bite. You in? 🍽️😋",
-  },
-  {
-    id: 2,
-    name: "Nneka Meal Party",
-    avatar: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
-    joined: 25,
-    capacity: 50,
-    address: " Presto Close, Victoria Island",
-    subtotal: 5200,
-    diatance: "0.5 mile",
-    location: { lat: 6.4551, lng: 3.3942 },
-    description:" ",
-  },
-];
 
-export default function Checkout({ escrowFee = 1700, discount = 1500 }) {
-  const [crew, setCrew] = useState(mockCrew);
+export default function Checkout({ subtotal= 7200, escrowFee = 1700, discount = 1500 }) {
    
   const navigate = useNavigate();
-  const total = crew.subtotal + escrowFee - discount;
+  const total = subtotal + escrowFee - discount;
   const isEditable = true;
   return (
     <div className="bg-white rounded-t-2xl shadow-lg p-4 w-full max-w-md mx-auto">
@@ -43,7 +16,7 @@ export default function Checkout({ escrowFee = 1700, discount = 1500 }) {
       {/* Subtotal */}
       <div className="flex justify-between text-gray-700 mb-2">
         <span>Subtotal</span>
-        <span>₦{crew.subtotal.toLocaleString()}</span>
+        <span>₦{subtotal.toLocaleString()}</span>
       </div>
 
       {/* Escrow Fee */}
