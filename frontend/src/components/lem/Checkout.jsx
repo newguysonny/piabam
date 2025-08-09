@@ -3,7 +3,7 @@ import Cart from "./Cart.jsx"
 
 export default function Checkout({ subtotal, escrowFee, discount }) {
   const total = subtotal + escrowFee - discount;
-
+  const isEditable = true;
   return (
     <div className="bg-white rounded-t-2xl shadow-lg p-4 w-full max-w-md mx-auto">
       <Cart />
