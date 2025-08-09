@@ -2,6 +2,9 @@
 import Cart from "./Cart.jsx";
 
 export default function CrewPreview({ crew, onClose }) {
+
+    const progress = (crew.joined / crew.capacity) * 100;
+  
   return (
     <>
       {/* Overlay */}
@@ -22,6 +25,13 @@ export default function CrewPreview({ crew, onClose }) {
           alt={crew.name}
           className="w-full h-48 object-cover rounded-lg mt-3"
         />
+        {/* Progress Bar */}
+          <div className="w-full bg-gray-200 rounded-full h-2 mt-4">
+            <div
+              className="bg-green-600 h-2 rounded-full transition-all duration-300"
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
         <p className="mt-3 text-gray-600">
           {crew.joined}/{crew.capacity} joined
         </p>
