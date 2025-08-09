@@ -44,9 +44,9 @@ export default function CrewPreview({ crew, onClose }) {
           {crew.joined}/{crew.capacity} joined
         </p>
 
-          <div>
+          <div className="mt-4 mb-3">
         <span className=" font-bold text-lg">Description</span>
-        <p classname="mt-3 text-gray-600">{crew.description}</p>
+        <p className="mt-3 text-gray-600">{crew.description}</p>
       </div>
         {/* Add your crew details, join button, etc. */}
         <Cart />
