@@ -33,9 +33,9 @@ const initialCart = {
   subtotal: 6700, // coming from DB
 };
 
-const Cart = () => {
+const Cart = ({ isEditable = false }) => {
   const [cart, setCart] = useState(initialCart);
-  const isEditable = false;
+  
 
   const handleIncrement = (id) => {
     if (!isEditable) return;
