@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App'; // Note the curly braces
 import './App.css';
 import "leaflet/dist/leaflet.css";
+@import 'swiper/css';
+@import 'swiper/css/pagination';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
