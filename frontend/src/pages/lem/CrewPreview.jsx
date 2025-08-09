@@ -9,7 +9,7 @@ const mockCrew = {
   name: "Nneka & Friends Meal Crew",
   avatar: "/avatars/crew.png",
   menu: [],
-  price: 1500,
+  subtotal: 7200,
   location: "Yaba, Lagos",
   distance: "1 mile",
   joined: 10,
@@ -35,7 +35,7 @@ export default function CrewPreviewCard({ crew = mockCrew }) {
           <div>
             <h2 className="text-lg font-bold text-gray-800">{crew.name}</h2>
             <p className="text-xs text-gray-500">
-              {crew.menu.length} meals • ₦{crew.price}
+              {crew.menu.length} meals • ₦{crew.subtotal}
             </p>
             <p className="text-xs text-gray-500 flex items-center gap-1">
               <FiMapPin className="inline text-gray-500" /> {crew.location}
