@@ -1,3 +1,5 @@
+import Cart from "../Cart";
+
 export default function CrewPreview({ crew, onClose }) {
   return (
     <>
@@ -22,19 +24,29 @@ export default function CrewPreview({ crew, onClose }) {
         <p className="mt-3 text-gray-600">
           {crew.joined}/{crew.capacity} joined
         </p>
-
+        
+        {/* Progress Bar */}
+      <div className="w-full bg-gray-200 rounded-full h-2">
+        <div
+          className="bg-green-600 h-2 rounded-full transition-all duration-300"
+          style={{ width: `${progress}%` }}
+        ></div>
+        <div className="text-sm text-gray-600">
+          {crew.joined} joined / {crew.capacity} total
+        </div>
+      </div>
+      
+       <Cart />
         
         {/* Actions */}
       <div className="space-y-2">
         <button className="w-full bg-black text-white py-2 rounded-xl font-semibold hover:opacity-90">
           Join Crew
         </button>
-        <button className="w-full bg-gray-100 text-gray-800 py-2 rounded-xl font-semibold hover:bg-gray-200">
-          View Details
-        </button>
+        
       </div>
     </div>
-      </div>
+      
     </>
   );
 }
