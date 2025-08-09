@@ -26,7 +26,7 @@ export default function CrewPreview({ crew, onClose }) {
           {crew.joined}/{crew.capacity} joined
         </p>
         {/* Add your crew details, join button, etc. */}
-        <cart />
+        <Cart />
       </div>
     </>
   );
