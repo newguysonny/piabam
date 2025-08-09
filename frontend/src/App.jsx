@@ -11,6 +11,10 @@ import CrewForm from './pages/CrewForm';
 import CrewRoom from './pages/lem/CrewRoom';
 import CrewPreview from './pages/lem/CrewPreview';
 import CrewMap from './pages/lem/CrewMap';
+import CrewPreview from "./components/lem/CrewPreview";
+‎import Checkout from "./components/lem/Checkout";
+‎import PaymentMethod from "./components/lem/PaymentMethod";
+‎
 import LemDiscoveryPage from './pages/lem/LemDiscoveryPage';
 import StreamingDiscoveryPage from './pages/StreamingDiscoveryPage';
 import CrowdfundingDiscoveryPage from './pages/projects/CrowdfundingDiscoveryPage';
@@ -39,6 +43,9 @@ export default function App() {
         <Route path="/playlist" element={<SpotifyPlaylistManager />} />
         <Route path="/party" element={<StreamingDiscoveryPage />} />
                {/*Lem and Restaurants Section */}
+        <Route path="/marker-preview" element={<CrewPreview />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/payment-method" element={<PaymentMethod />} />
         <Route path="/crew" element={<CrewForm />} />
         <Route path="/map" element={<CrewMap />} />
         <Route path="/lem" element={<LemDiscoveryPage />} />
