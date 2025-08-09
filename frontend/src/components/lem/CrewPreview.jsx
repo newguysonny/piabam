@@ -32,7 +32,7 @@ export default function CrewPreview({ crew, onClose }) {
           </div>
           <div className="text-xs text-gray-500">joined</div>
         </div>
-         </div>
+         
         {/* Progress Bar */}
           <div className="w-full bg-gray-200 rounded-full h-2 mt-4">
             <div
