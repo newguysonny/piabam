@@ -11,14 +11,12 @@ import CrewForm from './pages/CrewForm';
 import CrewRoom from './pages/lem/CrewRoom';
 import CrewMap from './pages/lem/CrewMap';
 import CrewPreview from './components/lem/CrewPreview';
-‎import Checkout from './components/lem/Checkout';
-‎import PaymentMethod from './components/lem/PaymentMethod';
-‎
+import Checkout from "./components/lem/Checkout";
+import PaymentMethod from "./components/lem/PaymentMethod";
 import LemDiscoveryPage from './pages/lem/LemDiscoveryPage';
 import StreamingDiscoveryPage from './pages/StreamingDiscoveryPage';
 import CrowdfundingDiscoveryPage from './pages/projects/CrowdfundingDiscoveryPage';
 import MomentumDiscoveryPage from './pages/projects/MomentumDiscoveryPage';
-/* import CallbackPage from './pages/CallbackPage'; // for the Spotify callback*/
 import RoomPage1 from './pages/faajee/RoomPage1';
 import SpotifyPlaylistManager from './pages/faajee/SpotifyPlaylistManager';
 import HomePage from './pages/HomePage';
