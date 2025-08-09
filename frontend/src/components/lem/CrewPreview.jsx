@@ -22,7 +22,18 @@ export default function CrewPreview({ crew, onClose }) {
         <p className="mt-3 text-gray-600">
           {crew.joined}/{crew.capacity} joined
         </p>
-        {/* Add your crew details, join button, etc. */}
+
+        
+        {/* Actions */}
+      <div className="space-y-2">
+        <button className="w-full bg-black text-white py-2 rounded-xl font-semibold hover:opacity-90">
+          Join Crew
+        </button>
+        <button className="w-full bg-gray-100 text-gray-800 py-2 rounded-xl font-semibold hover:bg-gray-200">
+          View Details
+        </button>
+      </div>
+    </div>
       </div>
     </>
   );
