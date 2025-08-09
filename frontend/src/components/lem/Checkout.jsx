@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Cart from "./Cart.jsx"
 
 
-const Crew = [
+const crew = [
   {
     id: 1,
     name: "Tomiwa & Friends",
