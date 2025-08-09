@@ -1,9 +1,13 @@
 // components/Checkout.jsx
+import Cart from "./Cart.jsx"
+
 export default function Checkout({ subtotal, escrowFee, discount }) {
   const total = subtotal + escrowFee - discount;
 
   return (
     <div className="bg-white rounded-t-2xl shadow-lg p-4 w-full max-w-md mx-auto">
+      <Cart />
+      
       {/* Subtotal */}
       <div className="flex justify-between text-gray-700 mb-2">
         <span>Subtotal</span>
