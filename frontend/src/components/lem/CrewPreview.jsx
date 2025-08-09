@@ -20,6 +20,13 @@ export default function CrewPreview({ crew, onClose }) {
             ✕
           </button>
         </div>
+          <div className="text-right">
+          <div className="text-xl font-bold text-gray-800">
+            {crew.subtotal}
+          </div>
+          <div className="text-xs text-gray-500">30% discount on checkout</div>
+        </div>
+      </div>
         <img
           src={crew.avatar}
           alt={crew.name}
