@@ -1,0 +1,83 @@
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import Cart from "./Cart.jsx";
+
+export default function CrewPreview({ crews, initialIndex = 0, onClose }) {
+  return (
+    <>
+      {/* Overlay */}
+      <div
+        className="fixed inset-0 bg-black bg-opacity-40 z-50"
+        onClick={onClose}
+      />
+
+      {/* Modal */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl p-4 z-50 shadow-lg max-h-[80vh] overflow-y-auto">
+        <Swiper
+          initialSlide={initialIndex}
+          pagination={{ clickable: true }}
+          modules={[Pagination]}
+        >
+          {crews.map((crew) => {
+            const progress = (crew.joined / crew.capacity) * 100;
+            return (
+              <SwiperSlide key={crew.id}>
+                <div>
+                  <div className="flex justify-between items-center">
+                    <h2 className="text-xl font-bold">{crew.name}</h2>
+                    <button onClick={onClose} className="text-gray-500">
+                      ✕
+                    </button>
+                  </div>
+
+                  <img
+                    src={crew.avatar}
+                    alt={crew.name}
+                    className="w-full h-48 object-cover rounded-lg mt-3"
+                  />
+
+                  <div className="text-left">
+                    <div className="text-xl mt-2 font-bold text-gray-800">
+                      ₦{crew.subtotal.toLocaleString()}
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      30% discount on checkout
+                    </div>
+                  </div>
+
+                  {/* Progress Bar */}
+                  <div className="w-full bg-gray-200 rounded-full h-2 mt-4">
+                    <div
+                      className="bg-green-600 h-2 rounded-full transition-all duration-300"
+                      style={{ width: `${progress}%` }}
+                    ></div>
+                  </div>
+
+                  <p className="mt-3 text-gray-600">
+                    {crew.joined}/{crew.capacity} joined
+                  </p>
+
+                  <div className="mt-4 mb-3">
+                    <span className="font-bold text-lg">Description</span>
+                    <p className="mt-3 text-gray-600">{crew.description}</p>
+                  </div>
+
+                  <Cart />
+
+                  {/* Fixed Join Button */}
+                  <div className="sticky bottom-0 left-0 right-0 bg-white py-3 mt-4">
+                    <button className="w-full bg-black text-white py-3 rounded-xl font-semibold hover:opacity-90">
+                      Join Crew
+                    </button>
+                  </div>
+                </div>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </div>
+    </>
+  );
+}
