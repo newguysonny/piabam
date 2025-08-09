@@ -13,6 +13,9 @@ const mockCrews = [
     avatar: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
     joined: 12,
     capacity: 30,
+    address: "Yaba Lagos",
+    subtotal: 7200,
+    diatance: "1 mile",
     location: { lat: 6.5244, lng: 3.3792 },
   },
   {
@@ -21,6 +24,9 @@ const mockCrews = [
     avatar: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
     joined: 25,
     capacity: 50,
+    address: " Presto Close, Victoria Island",
+    subtotal: 5200,
+    diatance: "0.5 mile",
     location: { lat: 6.4551, lng: 3.3942 },
   },
 ];
