@@ -37,7 +37,7 @@ export default function Checkout({ subtotal= 7200, escrowFee = 1700, discount = 
       <hr className="my-3" />
 
       {/* Total */}
-      <div className="flex justify-between font-bold text-lg mb-4">
+      <div className="flex sticky bottom-0 left-0 right-0 justify-between font-bold text-lg mb-4">
         <span>Order total</span>
         <span>₦{total.toLocaleString()}</span>
       </div>
