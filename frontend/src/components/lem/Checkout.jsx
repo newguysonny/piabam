@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Cart from "./Cart.jsx"
 
 
-const mockCrews = [
+const Crew = [
   {
     id: 1,
     name: "Tomiwa & Friends",
@@ -41,7 +41,7 @@ export default function Checkout({ crew.subtotal, escrowFee = 1700, discount = 1
       {/* Subtotal */}
       <div className="flex justify-between text-gray-700 mb-2">
         <span>Subtotal</span>
-        <span>₦{subtotal.toLocaleString()}</span>
+        <span>₦{crew.subtotal.toLocaleString()}</span>
       </div>
 
       {/* Escrow Fee */}
