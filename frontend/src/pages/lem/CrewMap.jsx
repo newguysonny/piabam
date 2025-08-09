@@ -17,6 +17,7 @@ const mockCrews = [
     subtotal: 7200,
     diatance: "1 mile",
     location: { lat: 6.5244, lng: 3.3792 },
+    description: "Hey! Join the Meal Crew – where good food and great vibes come together. Let’s eat, share, and enjoy every bite. You in? 🍽️😋",
   },
   {
     id: 2,
@@ -28,6 +29,7 @@ const mockCrews = [
     subtotal: 5200,
     diatance: "0.5 mile",
     location: { lat: 6.4551, lng: 3.3942 },
+    description:" ",
   },
 ];
 
