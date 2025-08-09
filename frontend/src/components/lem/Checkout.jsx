@@ -40,7 +40,7 @@ export default function Checkout({ subtotal, escrowFee, discount }) {
       </div>
 
       {/* Button */}
-      <buttonon Click={() => navigate("/payment-method")}
+      <button onClick={() => navigate("/payment-method")}
       className="w-full bg-green-500 text-white rounded-lg py-3 font-semibold hover:bg-green-600 transition">
         Confirm order
       </button>
