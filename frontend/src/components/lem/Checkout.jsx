@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Cart from "./Cart.jsx"
 
 
-const crew = [
+const mockCrew = [
   {
     id: 1,
     name: "Tomiwa & Friends",
@@ -30,7 +30,9 @@ const crew = [
   },
 ];
 
-export default function Checkout({ crew, escrowFee = 1700, discount = 1500 }) {
+export default function Checkout({ escrowFee = 1700, discount = 1500 }) {
+  const [crew, setCrew] = useState(mockCrew);
+   
   const navigate = useNavigate();
   const total = crew.subtotal + escrowFee - discount;
   const isEditable = true;
