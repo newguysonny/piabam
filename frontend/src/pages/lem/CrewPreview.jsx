@@ -86,7 +86,7 @@ export default function CrewPreviewCard({ crew = mockCrew }) {
 
       {/* Cart (Optional) */}
       <Cart />
-      <Checkout />
+      <Checkout subtotal={7200} escrowFee={1700} discount={500} />
 
       {/* Actions */}
       <div className="space-y-2">
