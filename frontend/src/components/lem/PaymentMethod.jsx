@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { FiArrowLeft } from "react-icons/fi";
-import { AiOutlinePlus } from "react-icons/ai";
-import { SiPaystack, SiFlutter } from "react-icons/si"; // Payment service icons
+import { FaArrowLeft, FaCreditCard, FaGlobe } from "react-icons/fa"; // Generic icons
 
 export default function PaymentMethod({ amountDue = 7200, onComplete }) {
   const [selectedMethod, setSelectedMethod] = useState("transfer");
@@ -10,9 +8,9 @@ export default function PaymentMethod({ amountDue = 7200, onComplete }) {
   const navigate = useNavigate();
 
   const methods = [
-    { id: "card", label: "Add bank card", type: "link", color: "text-green-600" },
-    { id: "paystack", label: "Pay with Paystack", icon: <SiPaystack className="text-blue-500 text-xl" /> },
-    { id: "flutterwave", label: "Pay with Flutterwave", icon: <SiFlutter className="text-yellow-500 text-xl" /> },
+    { id: "card", label: "Add bank card", icon: <FaCreditCard className="text-green-600" /> },
+    { id: "paystack", label: "Pay with Paystack", icon: <FaGlobe className="text-blue-500" /> },
+    { id: "flutterwave", label: "Pay with Flutterwave", icon: <FaGlobe className="text-yellow-500" /> },
   ];
 
   const handleSubmit = async () => {
@@ -48,42 +46,32 @@ export default function PaymentMethod({ amountDue = 7200, onComplete }) {
         onClick={() => navigate(-1)}
         className="flex items-center mb-8 text-gray-600 hover:text-black"
       >
-        <FiArrowLeft className="text-xl mr-2" /> Back
+        <FaArrowLeft className="mr-2" /> Back
       </button>
 
       <h2 className="text-lg font-semibold mb-4">Payments</h2>
 
-      {/* Add bank card */}
-      <button
-        onClick={() => setSelectedMethod("card")}
-        className="flex items-center text-green-600 font-medium mb-4"
-      >
-        <AiOutlinePlus className="text-xl mr-2" /> Add bank card
-      </button>
-
       {/* Payment Options */}
       <div className="space-y-4">
-        {methods
-          .filter((m) => m.type !== "link")
-          .map((method) => (
-            <label
-              key={method.id}
-              className="flex items-center justify-between border border-gray-200 rounded-lg p-3 cursor-pointer hover:bg-gray-50"
-            >
-              <div className="flex items-center space-x-3">
-                {method.icon}
-                <span className="font-medium">{method.label}</span>
-              </div>
-              <input
-                type="radio"
-                name="paymentMethod"
-                value={method.id}
-                checked={selectedMethod === method.id}
-                onChange={() => setSelectedMethod(method.id)}
-                className="w-5 h-5 text-green-600 focus:ring-green-500"
-              />
-            </label>
-          ))}
+        {methods.map((method) => (
+          <label
+            key={method.id}
+            className="flex items-center justify-between border border-gray-200 rounded-lg p-3 cursor-pointer hover:bg-gray-50"
+          >
+            <div className="flex items-center space-x-3">
+              {method.icon}
+              <span className="font-medium">{method.label}</span>
+            </div>
+            <input
+              type="radio"
+              name="paymentMethod"
+              value={method.id}
+              checked={selectedMethod === method.id}
+              onChange={() => setSelectedMethod(method.id)}
+              className="w-5 h-5 text-green-600 focus:ring-green-500"
+            />
+          </label>
+        ))}
       </div>
 
       {/* Amount Due */}
