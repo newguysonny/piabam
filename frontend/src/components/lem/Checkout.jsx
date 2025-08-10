@@ -1,7 +1,7 @@
 // components/Checkout.jsx
 import { useNavigate } from "react-router-dom";
 import Cart from "./Cart.jsx"
-import  FaArrowLeft from "react-icons/fa";
+import  {FaArrowLeft} from "react-icons/fa";
 
 
 export default function Checkout({ subtotal= 7200, escrowFee = 1700, discount = 1500 }) {
