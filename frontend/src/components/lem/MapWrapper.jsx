@@ -1,3 +1,5 @@
+
+/*
 // src/components/lem/MapWrapper.jsx
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -20,5 +22,30 @@ export default function MapWrapper({ children }) {
         {children}
       </MapContainer>
     </div>
+  );
+}
+*/
+
+import { MapContainer, TileLayer } from "react-leaflet";
+import { useRef, useEffect } from "react";
+
+export default function MapWrapper() {
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      mapRef.current?.invalidateSize();
+    }, 100);
+  }, []);
+
+  return (
+    <MapContainer
+      center={[6.5244, 3.3792]}
+      zoom={13}
+      whenCreated={(mapInstance) => (mapRef.current = mapInstance)}
+      style={{ height: "100%", width: "100%" }}
+    >
+      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+    </MapContainer>
   );
 }
