@@ -38,6 +38,8 @@ export default function CrewMap() {
   const [selectedCrew, setSelectedCrew] = useState(null);
 
   return (
+    <>
+      <Navbar />
     <div className="relative w-full h-screen">
       {/* Map */}
       <MapWrapper>
@@ -78,8 +80,9 @@ export default function CrewMap() {
         />
       )}
 
-      <Navbar />
+      
     </div>
+    </>
   );
 }
 
