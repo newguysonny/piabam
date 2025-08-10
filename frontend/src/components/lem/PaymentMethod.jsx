@@ -16,8 +16,8 @@ export default function PaymentMethod({ amountDue = 7200, onComplete }) {
 
   const methods = [
     { id: "card", label: "Add bank card", type: "link", color: "text-green-600" },
-    { id: "transfer", label: "Pay with transfer" },
-    { id: "pocket", label: "Pay with Pocket App" },
+    { id: "paystack", label: "Pay with Paystack" },
+    { id: "flutterwave", label: "Pay with Flutter wave" },
   ];
 
   return (
