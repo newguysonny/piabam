@@ -21,6 +21,9 @@ export default function Checkout({ subtotal= 7200, escrowFee = 1700, discount = 
        
       <h1 className="text-xl font-bold">Checkout</h1>
       <Cart isEditable={true} />
+
+       <hr className="my-3 h-[20px] bg-gray-200 border-0 rounded" />
+       
       {/* Subtotal */}
       <div className="flex justify-between text-gray-700 mb-2">
         <span>Subtotal</span>
@@ -42,8 +45,7 @@ export default function Checkout({ subtotal= 7200, escrowFee = 1700, discount = 
       )}
 
       {/* Divider */}
-      <hr className="my-3" />
-
+      <hr className="my-3 h-4 bg-gray-200 border-0 rounded" />
       {/* Total */}
    <div className="sticky bottom-0 left-0 right-0">
       <div className="flex  justify-between font-bold text-lg mb-4">
