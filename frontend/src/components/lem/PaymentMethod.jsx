@@ -53,7 +53,7 @@ export default function PaymentMethod({ amountDue = 7200, onComplete, onBack }) 
   return (
     <div className="bg-white p-4 rounded-xl shadow-sm">
       {/* Back Arrow */}
-      <div className="flex items-center mb-4">
+      <div className="flex items-center mb-8">
         <button
           onClick={onBack}
           className="flex items-center text-gray-600 hover:text-black"
