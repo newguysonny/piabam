@@ -1,5 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { FiArrowLeft } from "react-icons/fi";
+import { AiOutlinePlus } from "react-icons/ai";
+import { SiPaystack, SiFlutter } from "react-icons/si"; // Payment service icons
 
 export default function PaymentMethod({ amountDue = 7200, onComplete }) {
   const [selectedMethod, setSelectedMethod] = useState("transfer");
@@ -8,8 +11,8 @@ export default function PaymentMethod({ amountDue = 7200, onComplete }) {
 
   const methods = [
     { id: "card", label: "Add bank card", type: "link", color: "text-green-600" },
-    { id: "paystack", label: "Pay with Paystack" },
-    { id: "flutterwave", label: "Pay with Flutter wave" },
+    { id: "paystack", label: "Pay with Paystack", icon: <SiPaystack className="text-blue-500 text-xl" /> },
+    { id: "flutterwave", label: "Pay with Flutterwave", icon: <SiFlutter className="text-yellow-500 text-xl" /> },
   ];
 
   const handleSubmit = async () => {
@@ -42,10 +45,10 @@ export default function PaymentMethod({ amountDue = 7200, onComplete }) {
     <div className="bg-white p-4 rounded-xl shadow-sm">
       {/* Back button */}
       <button
-        onClick={() => navigate(-1)} // Go back to previous page
+        onClick={() => navigate(-1)}
         className="flex items-center mb-8 text-gray-600 hover:text-black"
       >
-        ← Back
+        <FiArrowLeft className="text-xl mr-2" /> Back
       </button>
 
       <h2 className="text-lg font-semibold mb-4">Payments</h2>
@@ -55,7 +58,7 @@ export default function PaymentMethod({ amountDue = 7200, onComplete }) {
         onClick={() => setSelectedMethod("card")}
         className="flex items-center text-green-600 font-medium mb-4"
       >
-        <span className="text-xl mr-2">＋</span> Add bank card
+        <AiOutlinePlus className="text-xl mr-2" /> Add bank card
       </button>
 
       {/* Payment Options */}
@@ -68,6 +71,7 @@ export default function PaymentMethod({ amountDue = 7200, onComplete }) {
               className="flex items-center justify-between border border-gray-200 rounded-lg p-3 cursor-pointer hover:bg-gray-50"
             >
               <div className="flex items-center space-x-3">
+                {method.icon}
                 <span className="font-medium">{method.label}</span>
               </div>
               <input
