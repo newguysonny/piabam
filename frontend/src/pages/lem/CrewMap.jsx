@@ -40,9 +40,9 @@ export default function CrewMap() {
   return ( 
       /* <div className="relative w-full h-auto"> */
       <div className="flex flex-col h-screen">
-        <Navbar />
+        <Navbar className=" h-8" />
       {/* Map */}
-      <div className="flex-1 relative">
+      <div className="flex-1 ">
       <MapWrapper>
         {mockCrews.map((crew) => (
           <CrewMarker
