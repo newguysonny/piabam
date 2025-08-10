@@ -10,8 +10,9 @@ export default function PaymentMethod() {
 */
 
 import { useState } from "react";
+import { ArrowLeft } from "lucide-react"; // you can also use any icon library or emoji
 
-export default function PaymentMethod({ amountDue = 7200, onComplete }) {
+export default function PaymentMethod({ amountDue = 7200, onComplete, onBack }) {
   const [selectedMethod, setSelectedMethod] = useState("transfer");
   const [loading, setLoading] = useState(false);
 
@@ -40,7 +41,6 @@ export default function PaymentMethod({ amountDue = 7200, onComplete }) {
       const data = await res.json();
       console.log("Payment response:", data);
 
-      // If payment was successful
       if (onComplete) onComplete(data);
     } catch (err) {
       console.error(err);
@@ -52,6 +52,17 @@ export default function PaymentMethod({ amountDue = 7200, onComplete }) {
 
   return (
     <div className="bg-white p-4 rounded-xl shadow-sm">
+      {/* Back Arrow */}
+      <div className="flex items-center mb-4">
+        <button
+          onClick={onBack}
+          className="flex items-center text-gray-600 hover:text-black"
+        >
+          <ArrowLeft size={20} className="mr-1" />
+          Back
+        </button>
+      </div>
+
       {/* Payments Title */}
       <h2 className="text-lg font-semibold mb-4">Payments</h2>
 
