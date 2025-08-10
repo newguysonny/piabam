@@ -27,7 +27,7 @@ const mockCrews = [
     capacity: 50,
     address: " Presto Close, Victoria Island",
     subtotal: 5200,
-    diatance: "0.5 mile",
+    distance: "0.5 mile",
     location: { lat: 6.4551, lng: 3.3942 },
     description:" ",
   },
@@ -44,7 +44,7 @@ export default function CrewMap() {
       <div className="flex flex-col h-screen">
         <Navbar />
       {/* Map */}
-      <div className="flex-1 relative">
+      <div className="flex-1 relative pt-16">
       <MapWrapper>
         {mockCrews.map((crew) => (
           <CrewMarker
@@ -54,6 +54,15 @@ export default function CrewMap() {
           />
         ))}
       </MapWrapper>
+
+        {/* Filter Button */}
+      <button
+        className="absolute top-4 right-4 z-40 bg-white rounded-full shadow-md p-2 hover:bg-gray-100 transition"
+        title="Filter"
+        onClick={() => setShowFilter(true)}
+      >
+        <SlidersHorizontal className="w-5 h-5 text-gray-700" />
+      </button>
       </div>
 
       {/* Filter Button */}
