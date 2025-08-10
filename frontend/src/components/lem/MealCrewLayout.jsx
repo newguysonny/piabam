@@ -1,5 +1,5 @@
 
-
+import Cart from "./Cart";
 import { useState } from "react"; import { Link } from "react-router-dom"; import { FiChevronLeft, FiMoreVertical, FiHeart } from "react-icons/fi";
 
 export default function MealCrewLayout({ transaction }) { const [showMenu, setShowMenu] = useState(false); const [showMealModal, setShowMealModal] = useState(false);
@@ -130,7 +130,9 @@ return ( <div className="flex flex-col w-full bg-neutral-900 text-gray-200 round
         className="bg-neutral-800 text-white p-6 rounded-lg w-80"
       >
         <h3 className="text-lg font-semibold mb-4">Meal Details</h3>
-        <p className="text-sm">More details about the meal can go here...</p>
+        <Cart isEditable={false} />
+        <p className="text-sm">You can order extra or find more items using the store button on the bottom page..</p>
+        
         <button
           onClick={closeMealModal}
           className="mt-4 bg-white text-black px-4 py-2 rounded hover:bg-gray-200"
