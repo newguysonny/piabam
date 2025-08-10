@@ -13,12 +13,42 @@ import { useState } from "react";
 
 export default function PaymentMethod({ amountDue = 7200, onComplete }) {
   const [selectedMethod, setSelectedMethod] = useState("transfer");
+  const [loading, setLoading] = useState(false);
 
   const methods = [
     { id: "card", label: "Add bank card", type: "link", color: "text-green-600" },
     { id: "paystack", label: "Pay with Paystack" },
     { id: "flutterwave", label: "Pay with Flutter wave" },
   ];
+
+  const handleSubmit = async () => {
+    if (!selectedMethod) return;
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          method: selectedMethod,
+          amount: amountDue,
+        }),
+      });
+
+      if (!res.ok) throw new Error("Payment request failed");
+
+      const data = await res.json();
+      console.log("Payment response:", data);
+
+      // If payment was successful
+      if (onComplete) onComplete(data);
+    } catch (err) {
+      console.error(err);
+      alert("Payment failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="bg-white p-4 rounded-xl shadow-sm">
@@ -72,15 +102,15 @@ export default function PaymentMethod({ amountDue = 7200, onComplete }) {
         </div>
 
         <button
-          onClick={onComplete}
-          disabled={!selectedMethod}
+          onClick={handleSubmit}
+          disabled={!selectedMethod || loading}
           className={`w-full py-3 rounded-lg font-semibold ${
-            selectedMethod
+            selectedMethod && !loading
               ? "bg-black text-white hover:opacity-90"
               : "bg-gray-200 text-gray-400 cursor-not-allowed"
           }`}
         >
-          Complete pick up order
+          {loading ? "Processing..." : "Complete pick up order"}
         </button>
       </div>
     </div>
