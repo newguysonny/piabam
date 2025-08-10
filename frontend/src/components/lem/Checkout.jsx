@@ -47,18 +47,20 @@ export default function Checkout({ subtotal= 7200, escrowFee = 1700, discount = 
       {/* Divider */}
       <hr className="my-3 h-4 bg-gray-200 border-0 rounded" />
       {/* Total */}
-   <div className="sticky bottom-0 left-0 right-0">
-      <div className="flex  justify-between font-bold text-lg mb-4">
-        <span>Order total</span>
-        <span>₦{total.toLocaleString()}</span>
-      </div>
+<div className="sticky bottom-0 left-0 right-0 bg-white shadow-lg z-10">
+  <div className="flex justify-between font-bold text-lg mb-4">
+    <span>Order total</span>
+    <span>₦{total.toLocaleString()}</span>
+  </div>
 
-      {/* Button */}
-      <button onClick={() => navigate("/payment-method")}
-      className="w-full bg-green-500 text-white rounded-lg py-3 font-semibold hover:bg-green-600 transition">
-        Confirm order
-      </button>
-    </div>
+  {/* Button */}
+  <button
+    onClick={() => navigate("/payment-method")}
+    className="w-full bg-green-500 text-white rounded-lg py-3 font-semibold hover:bg-green-600 transition"
+  >
+    Confirm order
+  </button>
+</div>
     </div>
   );
 }
