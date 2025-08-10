@@ -1,7 +1,7 @@
 // components/Checkout.jsx
 import { useNavigate } from "react-router-dom";
 import Cart from "./Cart.jsx"
-
+import  FaArrowLeft from "react-icons/fa";
 
 
 export default function Checkout({ subtotal= 7200, escrowFee = 1700, discount = 1500 }) {
@@ -11,6 +11,14 @@ export default function Checkout({ subtotal= 7200, escrowFee = 1700, discount = 
   const isEditable = true;
   return (
     <div className="bg-white rounded-t-2xl shadow-lg p-4 w-full max-w-md mx-auto">
+       {/* Back button */}
+       <button
+        onClick={() => navigate(-1)}
+        className="flex items-center mb-8 text-gray-600 hover:text-black"
+      >
+        <FaArrowLeft className="mr-2" /> Back
+      </button>
+       
       <h1 className="text-xl font-bold">Checkout</h1>
       <Cart isEditable={true} />
       {/* Subtotal */}
