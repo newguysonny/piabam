@@ -9,7 +9,7 @@ export default function Checkout({ subtotal= 7200, escrowFee = 1700, discount = 
    
   const navigate = useNavigate();
   const total = subtotal + escrowFee - discount;
-  const isEditable = true;
+  
   return (
     <div className="bg-white rounded-t-2xl shadow-lg p-4 w-full max-w-md mx-auto">
        {/* Back button */}
@@ -26,7 +26,7 @@ export default function Checkout({ subtotal= 7200, escrowFee = 1700, discount = 
        
        <hr className="my-3 h-[20px] bg-gray-200 border-0 rounded" />
        {/* Cart Summary*/}
-      <Cart isEditable={true} />
+      <Cart isEditable={false} />
 
        <hr className="my-3 h-[20px] bg-gray-200 border-0 rounded" />
        
