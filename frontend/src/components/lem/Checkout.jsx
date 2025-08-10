@@ -48,13 +48,14 @@ export default function Checkout({ subtotal= 7200, escrowFee = 1700, discount = 
       <div className="flex sticky bottom-0 left-0 right-0 justify-between font-bold text-lg mb-4">
         <span>Order total</span>
         <span>₦{total.toLocaleString()}</span>
-      </div>
+      
 
       {/* Button */}
       <button onClick={() => navigate("/payment-method")}
       className="w-full bg-green-500 text-white rounded-lg py-3 font-semibold hover:bg-green-600 transition">
         Confirm order
       </button>
+    </div>
     </div>
   );
 }
