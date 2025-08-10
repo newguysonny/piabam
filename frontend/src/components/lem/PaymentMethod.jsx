@@ -43,7 +43,7 @@ export default function PaymentMethod({ amountDue = 7200, onComplete }) {
       {/* Back button */}
       <button
         onClick={() => navigate(-1)} // Go back to previous page
-        className="flex items-center mb-4 text-gray-600 hover:text-black"
+        className="flex items-center mb-8 text-gray-600 hover:text-black"
       >
         ← Back
       </button>
