@@ -37,10 +37,8 @@ export default function CrewMap() {
   const [showFilter, setShowFilter] = useState(false);
   const [selectedCrew, setSelectedCrew] = useState(null);
 
-  return (
-    
-      
-      {/* <div className="relative w-full h-auto"> */}
+  return ( 
+      /* <div className="relative w-full h-auto"> */
       <div className="flex flex-col h-screen">
         <Navbar />
       {/* Map */}
