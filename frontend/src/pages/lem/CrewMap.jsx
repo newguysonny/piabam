@@ -38,10 +38,13 @@ export default function CrewMap() {
   const [selectedCrew, setSelectedCrew] = useState(null);
 
   return (
-    <>
-      <Navbar />
-    <div className="relative w-full h-screen">
+    
+      
+      {/* <div className="relative w-full h-auto"> */}
+      <div className="flex flex-col h-screen">
+        <Navbar />
       {/* Map */}
+      <div className="flex-1 relative">
       <MapWrapper>
         {mockCrews.map((crew) => (
           <CrewMarker
@@ -51,6 +54,7 @@ export default function CrewMap() {
           />
         ))}
       </MapWrapper>
+      </div>
 
       {/* Filter Button */}
       <button
@@ -82,7 +86,7 @@ export default function CrewMap() {
 
       
     </div>
-    </>
+    
   );
 }
 
