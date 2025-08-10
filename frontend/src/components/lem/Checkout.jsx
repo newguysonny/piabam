@@ -1,6 +1,7 @@
 // components/Checkout.jsx
 import { useNavigate } from "react-router-dom";
 import Cart from "./Cart.jsx"
+import StoreDetails from "./StoreDetails"
 import  {FaArrowLeft} from "react-icons/fa";
 
 
@@ -20,6 +21,11 @@ export default function Checkout({ subtotal= 7200, escrowFee = 1700, discount = 
       </button>
        
       <h1 className="text-xl font-bold">Checkout</h1>
+       {/* Store/Restaurants Details */}
+       <StoreDetails />
+       
+       <hr className="my-3 h-[20px] bg-gray-200 border-0 rounded" />
+       {/* Cart Summary*/}
       <Cart isEditable={true} />
 
        <hr className="my-3 h-[20px] bg-gray-200 border-0 rounded" />
