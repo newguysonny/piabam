@@ -10,6 +10,7 @@ import EscrowDashboard from './pages/escrow/EscrowDashboard';
 import CrewForm from './pages/CrewForm';
 import CrewRoom from './pages/lem/CrewRoom';
 import CrewMap from './pages/lem/CrewMap';
+import ReviewsPage from './pages/lem/ReviewsPage';
 import CrewPreview from './components/lem/CrewPreview';
 import Checkout from "./components/lem/Checkout";
 import PaymentMethod from "./components/lem/PaymentMethod";
@@ -45,6 +46,7 @@ export default function App() {
         <Route path="/payment-method" element={<PaymentMethod />} />
         <Route path="/crew" element={<CrewForm />} />
         <Route path="/map" element={<CrewMap />} />
+        <Route path="/review" element={<ReviewsPage />} />
         <Route path="/lem" element={<LemDiscoveryPage />} />
         <Route path="/crew-room/:id" element={<CrewRoom />} />
         
