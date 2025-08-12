@@ -7,7 +7,7 @@ export default function ReviewCard({ review }) {
   return (
     <div className="border rounded-lg p-4 bg-white shadow-sm">
       {/* Reviewer details */}
-      <ReviewerInfo user={review.user} />
+      <ReviewerInfo user={review.user}  date={review.date} />
 
       {/* Rating */}
       <ReviewRating rating={review.rating} date={review.date} />
