@@ -16,7 +16,7 @@ export default function ReviewCard({ reviews }) {
             </div>
             <p className="text-sm mt-2 font-semibold text-gray-700">{review.crewName}</p>
             
-            <p className="text-sm mt-2 line-clamp-2">{review.reviewText}</p>
+            <p className="text-sm text-gray-600 mt-2 line-clamp-2">{review.reviewText}</p>
           </div>
         ))}
       </div>
