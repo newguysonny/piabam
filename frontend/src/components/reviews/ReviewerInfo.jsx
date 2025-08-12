@@ -1,6 +1,6 @@
 import { Camera, Users, MessageSquare } from "lucide-react";
 
-export default function ReviewerInfo({ user, date }) {
+export default function ReviewerInfo({ user }) {
 
   return (
     <div className="flex items-start space-x-3">
