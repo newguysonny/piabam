@@ -6,7 +6,7 @@ export default function ReviewCard({ reviews }) {
     <div>
       <h2 className="text-lg font-bold mb-4">Reviews With Photos</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {reviews.map((review, idx) => (
+        {reviews.slice(0, 8).map((review, idx) => (
           <div key={idx}>
             <div className="relative aspect-square rounded-xl overflow-hidden">
               <img src={review.imageUrl} alt={review.userName} className="w-full h-full object-cover" />
