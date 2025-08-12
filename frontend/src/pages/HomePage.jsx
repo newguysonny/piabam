@@ -131,9 +131,9 @@ const reviews = [
            
     <h2 className="text-2xl font-bold mb-6">🍽️ Latest Reviews</h2>
 <div className="flex flex-wrap gap-6">
-    {/*{reviews.map((review) => (
+    {reviews.map((review) => (
     <ReviewCard key={review.id} {...review} />
-  ))} */}
+  ))} 
 </div>
         
       <Footer />
