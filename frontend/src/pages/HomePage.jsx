@@ -79,7 +79,7 @@ import ReviewCard from '../components/lem/ReviewCard';
 const reviews = [
   {
     id: 1,
-    imageUrl: "https://placehold.co/400x225/EEE/31343C?text=Smart+Widget",
+    imageUrl: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
     userAvatar: "https://placehold.co/400x225/EEE/31343C?text=profile+photo",
     userName: "Audrey L.",
     reviewText: "Craving a delicious Mediterranean spot in the heart of the Richmond..."
