@@ -15,7 +15,7 @@ export default function ReviewCard({ reviews }) {
                 <span className="text-white font-medium drop-shadow">{review.userName}</span>
               </div>
             </div>
-            <p className="text-sm mt-2 font-semibold text-gray-700">{review.crewName}</p>
+            <p className="text-sm mt-2 font-semibold text-purple-500">{review.crewName}</p>
             
             <p className="text-sm text-gray-600 mt-2 line-clamp-2">{review.reviewText}</p>
           </div>
