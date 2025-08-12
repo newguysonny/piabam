@@ -291,6 +291,19 @@ const mockReviews = [
 ];
 
 export default function ReviewsPage() {
+
+ return (
+    <div className="max-w-3xl">
+      <h1 className="text-2xl font-bold mb-6">Customer Reviews</h1>
+      <div className="space-y-8">
+        {mockReviews.map((review) => (
+          <ReviewerCard key={review.id} review={review} />
+        ))}
+      </div>
+    </div>
+  );
+  
+ /* 
   return (
     <div className="max-w-3xl mx-auto px-4 py-6">
       <h1 className="text-2xl font-bold mb-6">Customer Reviews</h1>
@@ -301,4 +314,5 @@ export default function ReviewsPage() {
       </div>
     </div>
   );
+  */
 }
