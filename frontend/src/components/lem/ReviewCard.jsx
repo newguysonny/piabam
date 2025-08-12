@@ -1,20 +1,5 @@
 import React from "react";
 
-const reviews = [
-  {
-    imageUrl: "/img/review1.jpg",
-    userAvatar: "/img/avatar1.jpg",
-    userName: "Audrey L.",
-    reviewText: "Craving a delicious Mediterranean spot in the heart of the Richmond..."
-  },
-  {
-    imageUrl: "/img/review2.jpg",
-    userAvatar: "/img/avatar2.jpg",
-    userName: "Hannah F.",
-    reviewText: "Just what this neighborhood was missing and BYOB - We tried takeout..."
-  },
-  // ...more
-];
 
 export default function ReviewCard() {
   return (
