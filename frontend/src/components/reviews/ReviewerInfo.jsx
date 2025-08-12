@@ -1,11 +1,6 @@
 import { Camera, Users, MessageSquare } from "lucide-react";
 
 export default function ReviewerInfo({ user, date }) {
-  const timeAgo = new Date(date).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric"
-  });
 
   return (
     <div className="flex items-start space-x-3">
@@ -40,8 +35,7 @@ export default function ReviewerInfo({ user, date }) {
           </span>
         </div>
 
-        {/* Date */}
-        <div className="text-gray-400 text-xs mt-0.5">{timeAgo}</div>
+        
       </div>
     </div>
   );
