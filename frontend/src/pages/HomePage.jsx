@@ -79,15 +79,15 @@ import ReviewCard from '../components/lem/ReviewCard';
 const reviews = [
   {
     id: 1,
-    imageUrl: "/img/review1.jpg",
-    userAvatar: "/img/avatar1.jpg",
+    imageUrl: "https://placehold.co/400x225/EEE/31343C?text=Smart+Widget",
+    userAvatar: "https://placehold.co/400x225/EEE/31343C?text=profile+photo",
     userName: "Audrey L.",
     reviewText: "Craving a delicious Mediterranean spot in the heart of the Richmond..."
   },
   {
     id: 2,
-    imageUrl: "/img/review2.jpg",
-    userAvatar: "/img/avatar2.jpg",
+    imageUrl: "https://placehold.co/400x225/EEE/31343C?text=Smart+Widget",
+    userAvatar: "https://placehold.co/400x225/EEE/31343C?text=Smart+Widget",
     userName: "Hannah F.",
     reviewText: "Just what this neighborhood was missing and BYOB - We tried takeout..."
   },
