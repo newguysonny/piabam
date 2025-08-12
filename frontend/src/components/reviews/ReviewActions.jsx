@@ -9,7 +9,7 @@ export default function ReviewActions({ reactions }) {
   ];
 
   return (
-    <div className="flex justify-between mt-4 pt-2 border-t text-gray-500 text-sm">
+    <div className="flex justify-between mt-4 pt-2 border-t-0 text-gray-500 text-sm">
       {actions.map((a, idx) => (
         <button
           key={idx}
