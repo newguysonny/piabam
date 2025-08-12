@@ -5,7 +5,7 @@ import ReviewActions from "./ReviewActions";
 
 export default function ReviewCard({ review }) {
   return (
-    <div className="border rounded-lg p-4 bg-white shadow-sm">
+    <div className=" m-1 ">
       {/* Reviewer details */}
       <ReviewerInfo user={review.user}  date={review.date} />
 
