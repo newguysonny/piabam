@@ -75,7 +75,7 @@ import ReviewCard from '../components/lem/ReviewCard';
 ];
 
 
-// mockReviews
+/* mockReviews
 const reviews = [
   {
     id: 1,
@@ -95,6 +95,131 @@ const reviews = [
   },
   // ...more
 ];
+*/
+
+const reviews = [
+  {
+    id: 1,
+    imageUrl: "https://placehold.co/400x225/EEE/31343C?text=Restaurant+1",
+    userAvatar: "https://placehold.co/100/EEE/31343C?text=AL",
+    userName: "Audrey L.",
+    crewName: "Mr P Party",
+    reviewText: "Craving a delicious Mediterranean spot in the heart of the Richmond...",
+    rating: 4.8,
+    date: "3 days ago"
+  },
+  {
+    id: 2,
+    imageUrl: "https://placehold.co/400x225/EEE/31343C?text=Cafe+2",
+    userAvatar: "https://placehold.co/100/EEE/31343C?text=HF",
+    userName: "Hannah F.",
+    crewName: "Tomiwa and Friends",
+    reviewText: "Just what this neighborhood was missing and BYOB - We tried takeout...",
+    rating: 4.5,
+    date: "1 week ago"
+  },
+  {
+    id: 3,
+    imageUrl: "https://placehold.co/400x225/EEE/31343C?text=Bakery+3",
+    userAvatar: "https://placehold.co/100/EEE/31343C?text=JS",
+    userName: "Jacob S.",
+    crewName: "Brunch Crew",
+    reviewText: "The croissants are to die for! Perfectly flaky and buttery...",
+    rating: 5.0,
+    date: "2 days ago"
+  },
+  {
+    id: 4,
+    imageUrl: "https://placehold.co/400x225/EEE/31343C?text=Bar+4",
+    userAvatar: "https://placehold.co/100/EEE/31343C?text=MT",
+    userName: "Maya T.",
+    crewName: "Cocktail Explorers",
+    reviewText: "Creative cocktails with house-made ingredients. The bartender's choice was perfect!",
+    rating: 4.7,
+    date: "5 days ago"
+  },
+  {
+    id: 5,
+    imageUrl: "https://placehold.co/400x225/EEE/31343C?text=Pizza+5",
+    userAvatar: "https://placehold.co/100/EEE/31343C?text=DR",
+    userName: "David R.",
+    crewName: "Pizza Lovers",
+    reviewText: "Authentic Neapolitan pizza with a perfect charred crust. Worth the wait!",
+    rating: 4.9,
+    date: "1 day ago"
+  },
+  {
+    id: 6,
+    imageUrl: "https://placehold.co/400x225/EEE/31343C?text=Sushi+6",
+    userAvatar: "https://placehold.co/100/EEE/31343C?text=YK",
+    userName: "Yuki K.",
+    crewName: "Sushi Connoisseurs",
+    reviewText: "Fresh fish and expertly prepared nigiri. The omakase was a delightful experience.",
+    rating: 4.6,
+    date: "3 weeks ago"
+  },
+  {
+    id: 7,
+    imageUrl: "https://placehold.co/400x225/EEE/31343C?text=Burger+7",
+    userAvatar: "https://placehold.co/100/EEE/31343C?text=TP",
+    userName: "Taylor P.",
+    crewName: "Burger Club",
+    reviewText: "Juicy burgers with creative topping combinations. The truffle fries are a must!",
+    rating: 4.3,
+    date: "2 weeks ago"
+  },
+  {
+    id: 8,
+    imageUrl: "https://placehold.co/400x225/EEE/31343C?text=Thai+8",
+    userAvatar: "https://placehold.co/100/EEE/31343C?text=NW",
+    userName: "Nate W.",
+    crewName: "Spice Seekers",
+    reviewText: "Authentic Thai flavors with adjustable spice levels. The green curry is fantastic!",
+    rating: 4.4,
+    date: "4 days ago"
+  },
+  {
+    id: 9,
+    imageUrl: "https://placehold.co/400x225/EEE/31343C?text=Steak+9",
+    userAvatar: "https://placehold.co/100/EEE/31343C?text=EC",
+    userName: "Emma C.",
+    crewName: "Meat Masters",
+    reviewText: "Perfectly cooked ribeye with excellent wine pairings suggested by the sommelier.",
+    rating: 4.8,
+    date: "1 week ago"
+  },
+  {
+    id: 10,
+    imageUrl: "https://placehold.co/400x225/EEE/31343C?text=Brunch+10",
+    userAvatar: "https://placehold.co/100/EEE/31343C?text=LB",
+    userName: "Liam B.",
+    crewName: "Weekend Brunchers",
+    reviewText: "Bottomless mimosas and fluffy pancakes - our new Sunday tradition!",
+    rating: 4.2,
+    date: "5 days ago"
+  },
+  {
+    id: 11,
+    imageUrl: "https://placehold.co/400x225/EEE/31343C?text=Ice+Cream+11",
+    userAvatar: "https://placehold.co/100/EEE/31343C?text=SJ",
+    userName: "Sophia J.",
+    crewName: "Sweet Tooth Gang",
+    reviewText: "Unique flavors like lavender honey and matcha white chocolate. Always a line but worth it!",
+    rating: 4.7,
+    date: "2 days ago"
+  },
+  {
+    id: 12,
+    imageUrl: "https://placehold.co/400x225/EEE/31343C?text=Ramen+12",
+    userAvatar: "https://placehold.co/100/EEE/31343C?text=AK",
+    userName: "Aiden K.",
+    crewName: "Noodle Enthusiasts",
+    reviewText: "Rich tonkotsu broth with perfectly cooked noodles. The chashu melts in your mouth.",
+    rating: 4.9,
+    date: "3 days ago"
+  }
+];
+
 
    export default function Homepage() {
   const normalizeProject = (project) => ({
