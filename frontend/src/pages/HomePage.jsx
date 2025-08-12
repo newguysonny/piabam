@@ -78,12 +78,14 @@ import ReviewCard from '../components/lem/ReviewCard';
 // mockReviews
 const reviews = [
   {
+    id: 1,
     imageUrl: "/img/review1.jpg",
     userAvatar: "/img/avatar1.jpg",
     userName: "Audrey L.",
     reviewText: "Craving a delicious Mediterranean spot in the heart of the Richmond..."
   },
   {
+    id: 2,
     imageUrl: "/img/review2.jpg",
     userAvatar: "/img/avatar2.jpg",
     userName: "Hannah F.",
