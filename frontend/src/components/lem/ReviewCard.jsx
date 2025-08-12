@@ -4,7 +4,6 @@ import React from "react";
 export default function ReviewCard({ reviews }) {
   return (
     <div>
-      <h2 className="text-lg font-bold mb-4">Reviews With Photos</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {reviews.slice(0, 8).map((review, idx) => (
           <div key={idx}>
