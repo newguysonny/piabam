@@ -1,4 +1,10 @@
-export default function ReviewRating({ rating }) {
+export default function ReviewRating({ rating, date }) {
+  const timeAgo = new Date(date).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });
+  
   return (
     <div className="flex items-center space-x-1 mt-2">
       {Array.from({ length: 5 }).map((_, i) => (
