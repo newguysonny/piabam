@@ -256,7 +256,7 @@ const reviews = [
   </Link>
       </div>
            
-    <h3 className="text-2xl font-bold mb-6">Latest Reviews</h3>
+    <h3 className="text-xl font-semibold mb-6">Latest Reviews</h3>
 <div className="m-4">
    
 <ReviewCard reviews={reviews} />
