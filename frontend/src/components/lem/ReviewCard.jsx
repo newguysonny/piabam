@@ -6,7 +6,7 @@ export default function ReviewCard({ reviews }) {
     <div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {reviews.slice(0, 8).map((review, idx) => (
-          <div key={idx} className="border border-gray-200 rounded-lg shadow-sm p-2 bg-white">
+          <div key={idx} className="border border-purple-500 rounded-lg shadow-sm p-2 bg-white">
             
             <div className="relative aspect-square rounded-xl overflow-hidden">
               <img src={review.imageUrl} alt={review.userName} className="w-full h-full object-cover" />
@@ -15,7 +15,7 @@ export default function ReviewCard({ reviews }) {
                 <span className="text-white font-medium drop-shadow">{review.userName}</span>
               </div>
             </div>
-            <p className="text-sm mt-2 font-semibold text-purple-500">{review.crewName}</p>
+            <p className="text-sm mt-2 font-semibold text-gray-700">{review.crewName}</p>
             
             <p className="text-sm text-gray-600 mt-2 line-clamp-2">{review.reviewText}</p>
           </div>
