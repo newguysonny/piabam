@@ -7,10 +7,10 @@ export default function ReviewCard({ review }) {
   return (
     <div className="border rounded-lg p-4 bg-white shadow-sm">
       {/* Reviewer details */}
-      <ReviewerInfo user={review.user} date={review.date} />
+      <ReviewerInfo user={review.user} />
 
       {/* Rating */}
-      <ReviewRating rating={review.rating} />
+      <ReviewRating rating={review.rating} date={review.date} />
 
       {/* Text */}
       <p className="mt-2 text-gray-700 text-sm leading-relaxed">
