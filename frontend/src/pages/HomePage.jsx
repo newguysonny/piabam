@@ -129,11 +129,10 @@ const reviews = [
   </Link>
       </div>
            
-    <h2 className="text-2xl font-bold mb-6">🍽️ Latest Reviews</h2>
-<div className="flex flex-wrap gap-6">
-    {reviews.map((review) => (
-    <ReviewCard key={review.id} {...review} />
-  ))} 
+    <h2 className="text-2xl font-bold mb-6">Latest Reviews</h2>
+<div>
+   
+<ReviewCard reviews={reviews} />
 </div>
         
       <Footer />
