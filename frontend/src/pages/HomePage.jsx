@@ -130,7 +130,7 @@ const reviews = [
       </div>
            
     <h2 className="text-2xl font-bold mb-6">Latest Reviews</h2>
-<div>
+<div className="m-4">
    
 <ReviewCard reviews={reviews} />
 </div>
