@@ -219,6 +219,7 @@ const reviews = [
     <>
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 py-8">
+          {/* Projects Section*/}
         <h3 className="text-2xl font-bold mb-6">Featured Projects</h3>
         <div className="relative">
           <div className="hidden md:block absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10" />
@@ -234,20 +235,26 @@ const reviews = [
   View all projects <span className="ml-1">→</span>
   </Link>
       </div>
-     <div className="flex mb-4 mt-4">
-        <h3 className="text-xl font-medium">Latest Reviews</h3>
-     <Link
-  to="/review"
-  className=" text-gray-600 underline inline-flex items-center hover:text-gray-800 transition"
->
-  more <span className="ml-1">→</span>
+
+        {/* Review Section*/}
+
+        <div className="m-4">
+ <div className="flex items-center justify-between mb-4 mt-4">
+  <h3 className="text-xl font-medium">Latest Reviews</h3>
+  <Link
+    to="/review"
+    className="text-gray-600 underline inline-flex items-center hover:text-gray-800 transition group"
+  >
+    more 
+    <span className="ml-1 transform transition-transform duration-200 group-hover:translate-x-1">
+      →
+    </span>
   </Link>
-     </div >      
-    
-<div className="m-4">
-   
+</div>
 <ReviewCard reviews={reviews} />
 </div>
+    
+       
         
       <Footer />
     </>
