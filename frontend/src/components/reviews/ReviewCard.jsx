@@ -19,11 +19,11 @@ export default function ReviewCard({ review }) {
 
       {/* Photos */}
       {review.photos?.length > 0 && (
-        <ReviewPhotos photos={review.photos} />
+        <ReviewPhotos photos={review.photos} className="bg-blue-100"/>
       )}
 
       {/* Actions */}
-      <ReviewActions reactions={review.reactions} />
+      <ReviewActions reactions={review.reactions} className="bg-red-100"/>
     </div>
   );
 }
