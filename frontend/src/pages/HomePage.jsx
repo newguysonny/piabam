@@ -240,7 +240,7 @@ const reviews = [
     <>
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <h2 className="text-2xl font-bold mb-6">Featured Projects</h2>
+        <h3 className="text-2xl font-bold mb-6">Featured Projects</h3>
         <div className="relative">
           <div className="hidden md:block absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10" />
           <div className="mx-auto" style={{ maxWidth: 'calc(3 * 320px + 2 * 16px + 80px)' }}>
@@ -256,7 +256,7 @@ const reviews = [
   </Link>
       </div>
            
-    <h2 className="text-2xl font-bold mb-6">Latest Reviews</h2>
+    <h3 className="text-2xl font-bold mb-6">Latest Reviews</h3>
 <div className="m-4">
    
 <ReviewCard reviews={reviews} />
