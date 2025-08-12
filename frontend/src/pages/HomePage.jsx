@@ -76,44 +76,21 @@ import ReviewCard from '../components/lem/ReviewCard';
 
 
 // mockReviews
-const sampleReviews = [
-  {
-    id: 1,
-    imageUrl: "https://source.unsplash.com/featured/?restaurant,dinner",
-    userAvatar: "/img/avatar1.jpg",
-    userName: "Audrey L.",
-    reviewText: "Craving a delicious Mediterranean spot in the heart of the Richmond...",
-    rating: 4.2,
-    title: "Sunset Grill & Vibes",
-    reviewer: "foodiejoan",
-    
-    location: "Lagos, NG",
-    date: "Aug 2025",
-  },
-  {
-    id: 2,
-    imageUrl: "https://source.unsplash.com/featured/?party,event",
-    userAvatar: "/img/avatar2.jpg",
-    userName: "Hannah F.",
-    reviewText: "Just what this neighborhood was missing and BYOB - We tried takeout...",
-    rating: 3.9,
-    title: "Neon Night Bash",
-    location: "Abuja, NG",
-    date: "Aug 2025",
-  },
-  {
-    id: 3,
-    imageUrl: "https://source.unsplash.com/featured/?cafe,brunch",
-    userAvatar: "/img/avatar3.jpg",
-    userName: "Pedro F.",
-    reviewText: "Just what this neighborhood was missing and BYOB - We tried takeout...",
-    rating: 4.8,
-    title: "Morning Glory Café",
-    reviewer: "brunchlover",
-    location: "Ibadan, NG",
-    date: "July 2025",
-  },
-];
+const reviews = [
+‎  {
+‎    imageUrl: "/img/review1.jpg",
+‎    userAvatar: "/img/avatar1.jpg",
+‎    userName: "Audrey L.",
+‎    reviewText: "Craving a delicious Mediterranean spot in the heart of the Richmond..."
+‎  },
+‎  {
+‎    imageUrl: "/img/review2.jpg",
+‎    userAvatar: "/img/avatar2.jpg",
+‎    userName: "Hannah F.",
+‎    reviewText: "Just what this neighborhood was missing and BYOB - We tried takeout..."
+‎  },
+‎  // ...more
+‎];
 
 
    export default function Homepage() {
@@ -153,7 +130,7 @@ const sampleReviews = [
            
     <h2 className="text-2xl font-bold mb-6">🍽️ Latest Reviews</h2>
 <div className="flex flex-wrap gap-6">
-  {sampleReviews.map((review) => (
+  {reviews.map((review) => (
     <ReviewCard key={review.id} {...review} />
   ))}
 </div>
