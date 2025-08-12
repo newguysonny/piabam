@@ -82,6 +82,7 @@ const reviews = [
     imageUrl: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
     userAvatar: "https://placehold.co/400x225/EEE/31343C?text=profile+photo",
     userName: "Audrey L.",
+    crewName: "Mr P Party",
     reviewText: "Craving a delicious Mediterranean spot in the heart of the Richmond..."
   },
   {
@@ -89,6 +90,7 @@ const reviews = [
     imageUrl: "https://placehold.co/400x225/EEE/31343C?text=Smart+Widget",
     userAvatar: "https://placehold.co/400x225/EEE/31343C?text=Smart+Widget",
     userName: "Hannah F.",
+    crewName: "Tomiwa and Friends",
     reviewText: "Just what this neighborhood was missing and BYOB - We tried takeout..."
   },
   // ...more
