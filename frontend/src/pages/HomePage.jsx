@@ -255,8 +255,16 @@ const reviews = [
   View all projects <span className="ml-1">→</span>
   </Link>
       </div>
-           
-    <h3 className="text-xl font-semibold mb-6">Latest Reviews</h3>
+     <div className="flex mb-4 mt-4">
+        <h3 className="text-xl font-medium">Latest Reviews</h3>
+     <Link
+  to="/review"
+  className=" text-gray-600 underline inline-flex items-center hover:text-gray-800 transition"
+>
+  View all projects <span className="ml-1">→</span>
+  </Link>
+     </div >      
+    
 <div className="m-4">
    
 <ReviewCard reviews={reviews} />
