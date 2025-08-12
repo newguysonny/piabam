@@ -1,4 +1,4 @@
-import ReviewerCard from "../components/reviews/ReviewCard";
+import ReviewerCard from "../../components/reviews/ReviewCard";
 
 const mockReviews = [
   {
