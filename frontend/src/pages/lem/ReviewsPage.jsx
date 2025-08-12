@@ -297,7 +297,9 @@ export default function ReviewsPage() {
       <h1 className="text-2xl font-bold mb-6">Customer Reviews</h1>
       <div className="m-3 border-b">
         {mockReviews.map((review) => (
+         <div key={idx} className="border-b pb-6">
           <ReviewerCard key={review.id} review={review} />
+         </div>
         ))}
       </div>
     </div>
