@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 import ReviewCard from '../components/lem/ReviewCard';
-
+import WeeklyCard from "../components/projects/WeeklyCard";
 
 /*
     const featuredProjects = [
@@ -75,6 +75,30 @@ import ReviewCard from '../components/lem/ReviewCard';
   // Add 5-6 more
    
 ]; */
+  const shows = [
+   {
+   image: "https://via.placeholder.com/180x240/FF5733/FFFFFF?text=Weak+Hero",
+   title: "Weak Hero Class 2",
+   category: "Korean Drama",
+   },
+   {
+   image: "https://via.placeholder.com/180x240/33FF57/FFFFFF?text=Pump+Up",
+   title: "Pump Up the Healthy L...",
+   category: "Korean Drama",
+   },
+   {
+   image: "https://via.placeholder.com/180x240/3357FF/FFFFFF?text=When+Life",
+   title: "When Life Gives You Ta...",
+   category: "Korean Drama",
+   },
+   {
+   image: "https://via.placeholder.com/180x240/F333FF/FFFFFF?text=Spring",
+   title: "Spring of Youth",
+   category: "Korean Drama",
+   },
+   ];
+
+
 const featuredProjects = [
     {
       id: 1,
@@ -303,8 +327,10 @@ const reviews = [
 </div>
 <ReviewCard reviews={reviews} />
 </div>
-    
-       
+        {/* Weekly projects ending and launching*/}
+       <div className="max-w-4xl mx-auto p-4">
+   <WeeklyCard title="New on Lem" items={shows} />
+   </div>
         
       <Footer />
     </>
