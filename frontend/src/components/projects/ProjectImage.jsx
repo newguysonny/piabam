@@ -7,7 +7,7 @@ import {
   FiSearch, FiUsers, FiClock, FiMusic, 
   FiCoffee, FiStar, FiMapPin, FiX, 
   FiFilter, FiArrowUp, FiArrowDown
-} from 'react-icons/fi'; */
+} from 'react-icons/fi'; 
 
 // Categories with icons
   const categories = [
@@ -18,6 +18,13 @@ import {
     { value: 'mealparty', label: 'Meal Party', icon: <FiCoffee /> },
     { value: 'music', label: 'Music', icon: <FiMusic /> }
   ];
+*/
+const categories = [
+‎  { value: "music", label: "Music", icon: <FiMusic /> },
+‎  { value: "food", label: "Food", icon: <FiCoffee /> },
+‎  { value: "arts", label: "Arts", icon: <FiStar /> },
+‎];
+
 
 const getCategoryIcon = (type) =>
   categories.find((c) => c.value === type)?.icon;
