@@ -1,4 +1,4 @@
-
+ 
 import { useState, useEffect } from 'react';
 import { 
   FiSearch, FiUsers, FiClock, FiMusic, 
@@ -360,7 +360,6 @@ const MomentumDiscoveryPage = () => {
     project={project}
     categories={categories}
     getCategoryIcon={getCategoryIcon}
-    calculateProgress={calculateProgress}
   />
           ))
         ) : (
