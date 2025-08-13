@@ -253,12 +253,12 @@ const reviews = [
   const normalizeProject = (project) => ({
     id: project.id,
     title: project.title,
-    creator: project.host || project.creator,
-    category: project.type || project.category,
+    host: project.host || project.creator,
+    type: project.type || project.category,
     image: project.image,
     current: project.current,
     goal: project.goal,
-    backers: project.backers || project.supporters, //Math.floor(project.current / 20),
+    supporters: project.backers || project.supporters, //Math.floor(project.current / 20),
     daysLeft: project.daysLeft || 7
   });
 
