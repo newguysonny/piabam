@@ -208,16 +208,7 @@ const MomentumDiscoveryPage = () => {
       return 0;
     });
 
-  // Calculate progress percentage
-  const calculateProgress = (current, goal) => {
-    return Math.min(100, (current / goal) * 100);
-  };
-
-  // Get category icon
-  const getCategoryIcon = (type) => {
-    return categories.find(c => c.value === type)?.icon || <FiStar />;
-  };
-
+  
   return (
     <div className="bg-gray-50 min-h-screen pb-20">
       {/* Search and Location Bar */}
@@ -358,8 +349,6 @@ const MomentumDiscoveryPage = () => {
   <ProjectCards
     key={project.id}
     project={project}
-    categories={categories}
-    getCategoryIcon={getCategoryIcon}
   />
           ))
         ) : (
