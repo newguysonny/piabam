@@ -1,12 +1,23 @@
 
 // ProjectImage.jsx
 import { FiMusic, FiCoffee, FiStar } from "react-icons/fi";
+/*
+import { useState, useEffect } from 'react';
+import { 
+  FiSearch, FiUsers, FiClock, FiMusic, 
+  FiCoffee, FiStar, FiMapPin, FiX, 
+  FiFilter, FiArrowUp, FiArrowDown
+} from 'react-icons/fi'; */
 
-const categories = [
-  { value: "music", label: "Music", icon: <FiMusic /> },
-  { value: "food", label: "Food", icon: <FiCoffee /> },
-  { value: "arts", label: "Arts", icon: <FiStar /> },
-];
+// Categories with icons
+  const categories = [
+    { value: 'all', label: 'All', icon: <FiStar /> },
+    { value: 'lemcrew', label: 'Lem Crew', icon: <FiUsers /> },
+    { value: 'food', label: 'Food', icon: <FiCoffee /> },
+    { value: 'fanparty', label: 'Fan Party', icon: <FiMusic /> },
+    { value: 'mealparty', label: 'Meal Party', icon: <FiCoffee /> },
+    { value: 'music', label: 'Music', icon: <FiMusic /> }
+  ];
 
 const getCategoryIcon = (type) =>
   categories.find((c) => c.value === type)?.icon;
