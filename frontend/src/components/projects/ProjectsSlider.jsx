@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import ProjectCards from './ProjectCards';
+import ProjectCard from './ProjectCard';
 
 const ProjectsSlider = ({ projects = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0); // Added missing state
@@ -60,7 +60,7 @@ const ProjectsSlider = ({ projects = [] }) => {
               flexShrink: 0
             }}
           >
-            <ProjectCards project={project} />
+            <ProjectCard project={project} />
           </div>
         ))}
       </div>
