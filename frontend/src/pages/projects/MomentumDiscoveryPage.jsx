@@ -5,6 +5,7 @@ import {
   FiCoffee, FiStar, FiMapPin, FiX, 
   FiFilter, FiArrowUp, FiArrowDown
 } from 'react-icons/fi';
+import ProjectCards from "../../components/projects/ProjectCards"; 
 
 const MomentumDiscoveryPage = () => {
   // State management
@@ -354,7 +355,7 @@ const MomentumDiscoveryPage = () => {
       <div className="max-w-7xl mx-auto p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredProjects.length > 0 ? (
           {filteredProjects.map(project => (
-  <ProjectCard
+  <ProjectCards
     key={project.id}
     project={project}
     categories={categories}
