@@ -5,7 +5,7 @@ import ProjectLocation from "./ProjectLocation";
 import ProjectStats from "./ProjectStats";
 import ProjectCTA from "./ProjectCTA";
 
-const ProjectCards = ({ project, categories, getCategoryIcon, calculateProgress }) => {
+const ProjectCards = ({ project, categories, getCategoryIcon }) => {
   return (
     <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100">
       <ProjectImage
@@ -20,7 +20,6 @@ const ProjectCards = ({ project, categories, getCategoryIcon, calculateProgress 
         <ProjectProgress
           current={project.current}
           goal={project.goal}
-          calculateProgress={calculateProgress}
         />
 
         <ProjectInfo
