@@ -23,7 +23,12 @@ const ProjectCards = ({ project, categories, getCategoryIcon, calculateProgress 
           calculateProgress={calculateProgress}
         />
 
-        <ProjectInfo project={project} />
+        <ProjectInfo
+          title={project.title}
+          host={project.host}
+          description={project.description}
+          />
+        
         <ProjectLocation location={project.location} />
         
 
