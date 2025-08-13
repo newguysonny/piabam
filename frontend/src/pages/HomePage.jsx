@@ -258,6 +258,7 @@ const reviews = [
     image: project.image,
     current: project.current,
     goal: project.goal,
+    location: project.location,
     supporters: project.backers || project.supporters, //Math.floor(project.current / 20),
     daysLeft: project.daysLeft || 7
   });
