@@ -1,6 +1,7 @@
 import ProjectImage from "./ProjectImage";
 import ProjectProgress from "./ProjectProgress";
 import ProjectInfo from "./ProjectInfo";
+import ProjectLocation from "./ProjectLocation";
 import ProjectStats from "./ProjectStats";
 import ProjectCTA from "./ProjectCTA";
 
