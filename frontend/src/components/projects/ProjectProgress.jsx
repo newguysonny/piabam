@@ -1,8 +1,8 @@
 const ProjectProgress = ({ current, goal }) => {
-  const calculateProgress = (current, goal) => {
-    return Math.min(100, (current / goal) * 100);
+  const calculateProgress = (curr, g) => {
+    return Math.min(100, (curr / g) * 100);
   };
-‎  const progress = calculateProgress(current, goal);
+  const progress = calculateProgress(current, goal);
 
   return (
     <div className="mb-3">
