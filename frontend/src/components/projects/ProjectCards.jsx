@@ -23,6 +23,8 @@ const ProjectCards = ({ project, categories, getCategoryIcon, calculateProgress 
         />
 
         <ProjectInfo project={project} />
+        <ProjectLocation project={project.location} />
+        
 
         <ProjectStats supporters={project.supporters} daysLeft={project.daysLeft} />
 
