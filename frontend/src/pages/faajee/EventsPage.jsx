@@ -23,11 +23,33 @@ const eventsData = [
   }
 ];
 
+
 function EventsPage() {
+  const normalizeEvents = (eventsData) => ({
+    id: eventsData.id,
+    title: eventsData.title,
+    crews: eventsData.crews,
+    image: eventsData.image,
+    fanInfo: eventsData.fanInfo,
+    country: eventsData.country,
+    supporters: eventsData.backers || eventsData.supporters
+  });
+
+  const standardizedEvents = eventsData.map(normalizeEvents);
+  
+  
   return (
+    
+    {/* Upcoming Events*/}
     <div className="p-4">
-      <FanEvent events={eventsData} />
+      <FanEvent title= "Upcoming Events on Faajee" events={standardizedEvents} />
     </div>
+    
+    {/* Popular Events*/}
+    <div className="p-4">
+      <FanEvent title="Most Popular Events" events={eventsData} />
+    </div>
+    
   );
 }
 
