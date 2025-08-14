@@ -61,7 +61,7 @@ const FanEvent = ({ title = "Most Popular Event", events }) => {
                   <span>{event.rating}</span>
                 </div>
                 <div className="text-gray-500 text-sm">
-                  {event.fanInfo}
+                  {event.fanInfo}, {event.crews} crews
                 </div>
                 <div className="text-gray-500 text-sm">
                   {event.country}
