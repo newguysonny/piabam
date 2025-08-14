@@ -1,103 +1,11 @@
 import { useEffect, useState } from 'react';
-import ReviewsCarousel from '../components/lem/ReviewsCarousel';
-import ReviewCarousel1 from '../components/lem/ReviewCarousel1';
 import ProjectsSlider from '../components/projects/ProjectsSlider';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 import ReviewCard from '../components/lem/ReviewCard';
-import WeeklyCard from "../components/projects/WeeklyCard";
 import WeeklyProjects from "../components/projects/WeeklyProjects";
 
-/*
-    const featuredProjects = [
-  // Your featured projects data
-  {
-    id: 1,
-    title: "Wizkid Album Listening Party",
-    host: "Atin's Fan Club",
-    type: "music",
-    image: "https://placehold.co/600x400/7E22CE/FFFFFF?text=Wizkid+Party",
-    location: "Lagos, Nigeria",
-    goal: 5000,
-    current: 3614,
-  },
-       {
-    id: 2,
-    title: "Wizkid Album Listening Party",
-    host: "'s Fan Club",
-    type: "music",
-    image: "https://placehold.co/600x400/7E22CE/FFFFFF?text=Wizkid+Party",
-    location: "Lagos, Nigeria",
-    goal: 5000,
-    current: 3614,
-  },
-       {
-    id: 3,
-    title: "Wizkid Album Listening Party",
-    host: "tin's Fan Club",
-    type: "music",
-    image: "https://placehold.co/600x400/7E22CE/FFFFFF?text=Wizkid+Party",
-    location: "Lagos, Nigeria",
-    goal: 5000,
-    current: 3614,
-  },
-       {
-    id: 4,
-    title: "Wizkid Album Listening Party",
-    host: "As Fan Club",
-    type: "music",
-    image: "https://placehold.co/600x400/7E22CE/FFFFFF?text=Wizkid+Party",
-    location: "Lagos, Nigeria",
-    goal: 5000,
-    current: 3614,
-  },
-       {
-    id: 5,
-    title: "Wizkid Album Listening Party",
-    host: "Ati's Fan Club",
-    type: "music",
-    image: "https://placehold.co/600x400/7E22CE/FFFFFF?text=Wizkid+Party",
-    location: "Lagos, Nigeria",
-    goal: 5000,
-    current: 3614,
-  },
-        {
-    id: 6,
-    title: "New Album Recording Session",
-    creator: "Indie Band Collective",
-    category: "Music",
-    image: "https://placehold.co/600x400/7E22CE/FFFFFF?text=Album+Recording",
-    current: 12500,
-    goal: 20000,
-    backers: 342,
-    daysLeft: 14
-  },
-  // Add 5-6 more
-   
-]; */
-  const shows = [
-   {
-   image: "https://via.placeholder.com/180x240/FF5733/FFFFFF?text=Weak+Hero",
-   title: "Weak Hero Class 2",
-   category: "Korean Drama",
-   },
-   {
-   image: "https://via.placeholder.com/180x240/33FF57/FFFFFF?text=Pump+Up",
-   title: "Pump Up the Healthy L...",
-   category: "Korean Drama",
-   },
-   {
-   image: "https://via.placeholder.com/180x240/3357FF/FFFFFF?text=When+Life",
-   title: "When Life Gives You Ta...",
-   category: "Korean Drama",
-   },
-   {
-   image: "https://via.placeholder.com/180x240/F333FF/FFFFFF?text=Spring",
-   title: "Spring of Youth",
-   category: "Korean Drama",
-   },
-   ];
 
 
 const featuredProjects = [
@@ -294,7 +202,7 @@ const reviews = [
     <>
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 py-8">
-          {/* Projects Section*/}
+          {/* Featured Projects Section*/}
         <h3 className="text-2xl font-bold mb-6">Featured Projects</h3>
         <div className="relative">
           <div className="hidden md:block absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10" />
@@ -328,10 +236,7 @@ const reviews = [
 </div>
 <ReviewCard reviews={reviews} />
 </div>
-        {/* Weekly projects ending and launching*/}
-       <div className="max-w-4xl mx-auto p-4">
-   <WeeklyCard title="New on Lem" items={shows} />
-   </div>
+        
 
         {/* Weekly projects launching*/}
         <div className="max-w-6xl mx-auto p-4">
