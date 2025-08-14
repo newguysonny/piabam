@@ -94,7 +94,7 @@ const WeeklyProjects = ({ title , projects = [] }) => {
               key={idx}
               onClick={() => scrollToIndex(idx)}
               className={`w-3 h-3 rounded-full cursor-pointer transition-colors ${
-                activeIndex === idx ? "bg-gray-600" : "bg-gray-300"
+                activeIndex === idx ? "bg-gray-600" : "bg-purple-500"
               }`}
             ></div>
           ))}
