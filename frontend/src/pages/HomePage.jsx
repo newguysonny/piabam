@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 import ReviewCard from '../components/lem/ReviewCard';
 import WeeklyCard from "../components/projects/WeeklyCard";
+import WeeklyProjects from "../components/projects/WeeklyProjects";
 
 /*
     const featuredProjects = [
