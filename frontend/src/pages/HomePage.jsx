@@ -333,10 +333,17 @@ const reviews = [
    <WeeklyCard title="New on Lem" items={shows} />
    </div>
 
-        {/* Weekly projects ending and launching*/}
+        {/* Weekly projects launching*/}
         <div className="max-w-6xl mx-auto p-4">
-   <WeeklyProjects title="This Week's Projects" projects={featuredProjects} />
+   <WeeklyProjects title="Projects Starting This Week" projects={featuredProjects} />
    </div>
+
+        {/* Weekly projects launching*/}
+        <div className="max-w-6xl mx-auto p-4">
+   <WeeklyProjects title="Projects Ending This Week" projects={standardizedProjects} />
+   </div>
+        
+
         
       <Footer />
     </>
