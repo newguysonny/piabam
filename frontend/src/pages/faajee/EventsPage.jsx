@@ -36,10 +36,7 @@ function EventsPage() {
   });
 
   const standardizedEvents = eventsData.map(normalizeEvents);
-  
-  
-  return (
-    
+   return (
     {/* Upcoming Events*/}
     <div className="p-4">
       <FanEvent title= "Upcoming Events on Faajee" events={standardizedEvents} />
