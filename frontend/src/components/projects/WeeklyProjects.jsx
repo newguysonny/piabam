@@ -58,7 +58,7 @@ const WeeklyProjects = ({ title = "This Week's Projects", projects = [] }) => {
           {projects.map((project, idx) => (
             <div
               key={project.id || idx}
-              className="scroll-snap-start min-w-[280px] w-[280px] bg-white rounded-lg overflow-hidden shadow hover:shadow-md transition-transform hover:-translate-y-1"
+              className="scroll-snap-start min-w-[180px] w-[180px] bg-white rounded-lg overflow-hidden shadow hover:shadow-md transition-transform hover:-translate-y-1"
             >
               {/* Reusing existing components */}
               <ProjectImage
@@ -81,7 +81,7 @@ const WeeklyProjects = ({ title = "This Week's Projects", projects = [] }) => {
                   supporters={project.supporters}
                   daysLeft={project.daysLeft}
                 />
-                <ProjectCTA />
+                {/*   <ProjectCTA /> */}
               </div>
             </div>
           ))}
