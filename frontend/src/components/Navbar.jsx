@@ -26,7 +26,7 @@ export default function Navbar() {
   const routeMap = {
   Home: '/',
   Lem: '/map',
-  Faajee: '/faajee',
+  Faajee: '/events',
 };
   
   const ProfileDropdown = () => (
