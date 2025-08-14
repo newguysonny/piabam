@@ -3,8 +3,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SigninForm from './pages/SigninForm';
 import SignupForm from './pages/SignupForm';
 import CreateRoom from './pages/CreateRoom';
+
 import FaajeeStart from './pages/faajee/FaajeeStart';
 import RoomPage from './pages/RoomPage';
+import EventsPage from './pages/faajee/EventsPage';
+
 import EscrowFormPage from './pages/EscrowFormPage';
 import EscrowDashboard from './pages/escrow/EscrowDashboard';
 import CrewForm from './pages/CrewForm';
@@ -38,6 +41,7 @@ export default function App() {
         <Route path="/music" element={<FaajeeStart />} /> // for testing type script 
         <Route path="/room" element={<RoomPage />} />
         <Route path="/try" element={<RoomPage1 />} />
+        <Route path="/events" element={<EventsPage />} />
         <Route path="/playlist" element={<SpotifyPlaylistManager />} />
         <Route path="/party" element={<StreamingDiscoveryPage />} />
                {/*Lem and Restaurants Section */}
