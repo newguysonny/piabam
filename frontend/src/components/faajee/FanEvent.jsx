@@ -2,7 +2,7 @@
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const FanEvent = ({ events }) => {
+const FanEvent = ({ title = "Most Popular Event", events }) => {
   const renderStars = (rating) => {
     const stars = [];
     const fullStars = Math.floor(rating);
@@ -26,7 +26,7 @@ const FanEvent = ({ events }) => {
     <div className="bg-white rounded-lg shadow p-4">
       {/* Section Header */}
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-bold">Most Popular Events</h2>
+        <h2 className="text-lg font-bold">{title}</h2>
         <Link to="/events" className="text-blue-500 hover:underline text-sm">
           More
         </Link>
@@ -47,7 +47,7 @@ const FanEvent = ({ events }) => {
               <img
                 src={event.image}
                 alt={event.title}
-                className="w-14 h-14 rounded-md object-cover mr-3"
+                className="w-14 h-20 rounded-md object-cover mr-3"
               />
               <div>
                 <Link
