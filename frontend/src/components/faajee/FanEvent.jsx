@@ -2,7 +2,7 @@
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const FanEvent = ({ title = "Most Popular Event", events }) => {
+const FanEvent = ({ title, events }) => {
   const renderStars = (rating) => {
     const stars = [];
     const fullStars = Math.floor(rating);
