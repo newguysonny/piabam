@@ -39,12 +39,12 @@ function EventsPage() {
    return (
     <div>
     {/* Upcoming Events*/}
-    <div className="p-4">
-      <FanEvent title= "Upcoming Events on Faajee" events={standardizedEvents} />
+    <div className="p-2">
+      <FanEvent title= "Upcoming Events" events={standardizedEvents} />
     </div>
     
     {/* Popular Events*/}
-    <div className="p-4">
+    <div className="p-2">
       <FanEvent title="Most Popular Events" events={eventsData} />
     </div>
     </div>
