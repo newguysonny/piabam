@@ -6,7 +6,7 @@ import ProjectLocation from "./ProjectLocation";
 import ProjectStats from "./ProjectStats";
 import ProjectCTA from "./ProjectCTA";
 
-const WeeklyProjects = ({ title = "This Week's Projects", projects = [] }) => {
+const WeeklyProjects = ({ title , projects = [] }) => {
   const carouselRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -47,7 +47,7 @@ const WeeklyProjects = ({ title = "This Week's Projects", projects = [] }) => {
 
   return (
     <div className="my-6">
-      <h2 className="text-lg font-bold mb-4">{title}</h2>
+      <h2 className="text-xl font-medium mb-4">{title}</h2>
 
       <div className="relative">
         <div
@@ -58,7 +58,7 @@ const WeeklyProjects = ({ title = "This Week's Projects", projects = [] }) => {
           {projects.map((project, idx) => (
             <div
               key={project.id || idx}
-              className="scroll-snap-start min-w-[180px] w-[180px] bg-white rounded-lg overflow-hidden shadow hover:shadow-md transition-transform hover:-translate-y-1"
+              className="scroll-snap-start min-w-[240px] w-[240px] bg-white rounded-lg overflow-hidden shadow hover:shadow-md transition-transform hover:-translate-y-1"
             >
               {/* Reusing existing components */}
               <ProjectImage
