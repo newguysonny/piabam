@@ -349,6 +349,7 @@ const MomentumDiscoveryPage = () => {
   <ProjectCards
     key={project.id}
     project={project}
+    isLaunch=true
   />
           ))
         ) : (
