@@ -5,7 +5,7 @@ import ProjectLocation from "./ProjectLocation";
 import ProjectStats from "./ProjectStats";
 import ProjectCTA from "./ProjectCTA";
 
-const ProjectCards = ({project, isLaunch = true}) => {
+const ProjectCards = ({project, isLaunch = false}) => {
   return (
     <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100">
       <ProjectImage
