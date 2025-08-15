@@ -6,7 +6,7 @@ import ProjectLocation from "./ProjectLocation";
 import ProjectStats from "./ProjectStats";
 import ProjectCTA from "./ProjectCTA";
 
-const WeeklyProjects = ({ title , projects = [] }) => {
+const WeeklyProjects = ({ title, isLaunch , projects = [] }) => {
   const carouselRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -70,6 +70,7 @@ const WeeklyProjects = ({ title , projects = [] }) => {
                 <ProjectProgress
                   current={project.current}
                   goal={project.goal}
+                  isLaunch={isLaunch}
                 />
                 <ProjectInfo
                   title={project.title}
@@ -80,6 +81,7 @@ const WeeklyProjects = ({ title , projects = [] }) => {
                 <ProjectStats
                   supporters={project.supporters}
                   daysLeft={project.daysLeft}
+                  isLaunch={isLaunch}
                 />
                 {/*   <ProjectCTA /> */}
               </div>
