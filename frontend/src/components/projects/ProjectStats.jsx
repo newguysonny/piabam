@@ -1,20 +1,23 @@
 import { FiUsers, FiClock } from "react-icons/fi";
 
 const ProjectStats = ({ supporters, daysLeft, isLaunch }) => {
+  const isArray = Array.isArray(supporters);
+  const supporterCount = isArray ? supporters.length : supporters;
+
   return (
-    <div className="flex justify-between text-sm mb-4">
+    <div
+      className={`text-sm mb-4 ${
+        isLaunch ? "flex justify-between items-center" : "flex flex-col gap-1"
+      }`}
+    >
       {/* Supporters */}
       <div className="flex items-center text-gray-600">
         <FiUsers className="mr-1" />
-        <span>
-          {Array.isArray(supporters)
-            ? `${supporters.length} supporters`
-            : `${supporters} supporters`}
-        </span>
+        <span>{supporterCount} supporters</span>
       </div>
 
       {/* Days */}
-      <div className="flex items-center text-gray-600 mt-1">
+      <div className="flex items-center text-gray-600">
         <FiClock className="mr-1" />
         {isLaunch ? (
           <span>
@@ -33,27 +36,3 @@ const ProjectStats = ({ supporters, daysLeft, isLaunch }) => {
 };
 
 export default ProjectStats;
-
-
-
-
-/*
-import { FiUsers, FiClock } from "react-icons/fi";
-
-const ProjectStats = ({ supporters, daysLeft }) => (
-  <div className="flex justify-between items-center text-sm mb-4">
-    <div className="flex items-center text-gray-600">
-      <FiUsers className="mr-1" />
-      <span>{supporters.length} supporters</span>
-    </div>
-    <div className="flex items-center text-gray-600">
-      <FiClock className="mr-1" />
-      <span>
-        {daysLeft === 0 ? "Ending today" : `${daysLeft} day${daysLeft !== 1 ? "s" : ""} left`}
-      </span>
-    </div>
-  </div>
-);
-
-export default ProjectStats;
-*/
