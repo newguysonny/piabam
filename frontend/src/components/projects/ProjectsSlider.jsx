@@ -60,7 +60,7 @@ const ProjectsSlider = ({ projects = [] }) => {
               flexShrink: 0
             }}
           >
-            <ProjectCards project={project} />
+            <ProjectCards project={project} isLaunch={true} />
           </div>
         ))}
       </div>
