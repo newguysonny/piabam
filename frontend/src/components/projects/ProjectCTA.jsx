@@ -11,7 +11,7 @@ const ProjectCTA = ({ isLaunch }) => {
           </p>
         </>
       ) : (
-        <button className="w-full py-2 bg-yellow-500 text-white rounded-lg font-medium hover:bg-yellow-600 transition flex items-center justify-center gap-2">
+        <button className="w-full py-2 bg-purple-600 text-white rounded-lg font-medium hover:bg-yellow-600 transition flex items-center justify-center gap-2">
           Notify Me
         </button>
       )}
