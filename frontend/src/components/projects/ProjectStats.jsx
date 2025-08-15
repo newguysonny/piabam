@@ -2,7 +2,7 @@ import { FiUsers, FiClock } from "react-icons/fi";
 
 const ProjectStats = ({ supporters, daysLeft, isLaunch }) => {
   return (
-    <div className="flex flex-col text-sm mb-4">
+    <div className="flex justify-between text-sm mb-4">
       {/* Supporters */}
       <div className="flex items-center text-gray-600">
         <FiUsers className="mr-1" />
