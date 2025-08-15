@@ -207,7 +207,7 @@ const reviews = [
         <div className="relative">
           <div className="hidden md:block absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10" />
           <div className="mx-auto" style={{ maxWidth: 'calc(3 * 320px + 2 * 16px + 80px)' }}>
-            <ProjectsSlider projects={standardizedProjects} />
+            <ProjectsSlider projects={featuredProjects} />
           </div>
           <div className="hidden md:block absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10" />
         </div>
@@ -240,12 +240,12 @@ const reviews = [
 
         {/* Weekly projects launching*/}
         <div className="max-w-6xl mx-auto p-4">
-   <WeeklyProjects title="Projects Starting This Week" projects={featuredProjects} />
+   <WeeklyProjects title="Projects Starting This Week" isLaunch={false} projects={standardizedProjects} />
    </div>
 
         {/* Weekly projects launching*/}
         <div className="max-w-6xl mx-auto p-4">
-   <WeeklyProjects title="Projects Ending This Week" projects={standardizedProjects} />
+   <WeeklyProjects title="Projects Ending This Week" isLaunch={true} projects={featuredProjects} />
    </div>
         
 
