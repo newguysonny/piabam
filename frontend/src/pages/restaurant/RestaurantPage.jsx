@@ -1,6 +1,6 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import MenuSection from "../../components/restaurant/MenuSection";
 import FloatingCartButton from "../../components/restaurant/FloatingCartButton";
 import ItemOptions from "../../components/restaurant/ItemOptions";
@@ -8,10 +8,9 @@ import ItemOptions from "../../components/restaurant/ItemOptions";
 export default function RestaurantPage() {
   const navigate = useNavigate();
   const [cart, setCart] = useState([]);
-  const [modalItem, setModalItem] = useState(null); // track open modal
+  const [modalItem, setModalItem] = useState(null);
 
   const cartCount = cart.length;
-
 
   const items = [
     {
@@ -34,47 +33,57 @@ export default function RestaurantPage() {
       image:
         "https://placehold.co/600x400/16A34A/FFFFFF?text=Turkey+%26+Ham+Club",
       options: [
-  {
-    id: "bread",
-    name: "Choose Bread",
-    type: "single", // "single" (radio) or "multiple" (checkbox)
-    choices: [
-      { id: "white", label: "White Bread", price: 0 },
-      { id: "wheat", label: "Wheat Bread", price: 0.5 },
-      { id: "gluten", label: "Gluten Free", price: 1.0 }
-    ]
-  },
-  {
-    id: "extras",
-    name: "Add Extras",
-    type: "multiple", 
-    choices: [
-      { id: "cheese", label: "Cheese", price: 1.0 },
-      { id: "bacon", label: "Bacon", price: 1.5 }
-    ]
-  }
-]
+        {
+          id: "bread",
+          name: "Choose Bread",
+          type: "single",
+          choices: [
+            { id: "white", label: "White Bread", price: 0 },
+            { id: "wheat", label: "Wheat Bread", price: 0.5 },
+            { id: "gluten", label: "Gluten Free", price: 1.0 },
+          ],
+        },
+        {
+          id: "extras",
+          name: "Add Extras",
+          type: "multiple",
+          choices: [
+            { id: "cheese", label: "Cheese", price: 1.0 },
+            { id: "bacon", label: "Bacon", price: 1.5 },
+          ],
+        },
+      ],
     },
   ];
 
   const handleAddToCart = (item) => {
     if (item.options && item.options.length > 0) {
-      setModalItem(item); // open modal
+      setModalItem(item);
     } else {
       setCart((prev) => [...prev, { ...item, totalPrice: item.price }]);
+      toast.success(`${item.name} ₦${item.price.toFixed(2)} (1) added to cart`);
     }
   };
 
   const handleConfirmOptions = (selectedOptions, totalPrice) => {
-    setCart((prev) => [...prev, { ...modalItem, selectedOptions, totalPrice }]);
+    setCart((prev) => [
+      ...prev,
+      { ...modalItem, selectedOptions, totalPrice },
+    ]);
+    toast.success(
+      `${modalItem.name} ₦${totalPrice.toFixed(2)} (1) added to cart`
+    );
     setModalItem(null);
   };
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      <MenuSection menu="Hoagies & Specialty Sandwiches" items={items} onAdd={handleAddToCart} />
+      <MenuSection
+        menu="Hoagies & Specialty Sandwiches"
+        items={items}
+        onAdd={handleAddToCart}
+      />
 
-      {/* Floating Cart Button (hidden if modal open) */}
       {!modalItem && cartCount > 0 && (
         <FloatingCartButton
           itemCount={cartCount}
@@ -82,7 +91,6 @@ export default function RestaurantPage() {
         />
       )}
 
-      {/* Modal */}
       {modalItem && (
         <ItemOptions
           item={modalItem}
