@@ -40,6 +40,7 @@ export default function PaymentMethod({ amountDue = 7200, onComplete }) {
   };
 
   return (
+    <>
     <div className="bg-white p-4 rounded-t-2xl shadow-sm w-full max-w-md mx-auto pb-28">
       {/* Back button */}
       <button
@@ -94,5 +95,6 @@ export default function PaymentMethod({ amountDue = 7200, onComplete }) {
         {loading ? "Processing..." : "Complete pick up order"}
       </button>
     </div>
+    </>
   );
 }
