@@ -5,14 +5,14 @@ import EarningsBreakdown from "../../components/earnings/EarningsBreakdown";
 
 export default function MyEarnings() {
   const chartData = [
-    { label: "S", height: 80 },
-    { label: "M", height: 40 },
-    { label: "T", height: 90 },
-    { label: "W", height: 30 },
-    { label: "T", height: 70 },
-    { label: "F", height: 75 },
-    { label: "S", height: 20 },
-  ];
+  { label: "S", value: 120 },
+  { label: "M", value: 80 },
+  { label: "T", value: 149.56 },
+  { label: "W", value: 60 },
+  { label: "T", value: 110 },
+  { label: "F", value: 130 },
+  { label: "S", value: 40 },
+];
 
   return (
     <div className="max-w-md mx-auto p-4 space-y-4">
