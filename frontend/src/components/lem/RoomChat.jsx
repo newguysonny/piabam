@@ -2,46 +2,54 @@
 import { FiSend, FiShare2, FiShoppingBag } from "react-icons/fi";
 
 export default function RoomChat({ transaction }) {
+
+  const getPlaceholderAvatar = (username) => {
+  const colors = ['7E22CE', '3B82F6', '10B981', 'F59E0B']; // Purple, Blue, Green, Yellow
+  const color = colors[username.length % colors.length];
+  return `https://placehold.co/100x100/${color}/FFFFFF?text=${username.charAt(0).toUpperCase()}&font=roboto`;
+};
+
+  
   const [comments, setComments] = useState([
     {
       id: 1,
       user: 'cocoa22',
-      avatar: '/avatars/cocoa.png',
+      avatar: getPlaceholderAvatar('cocoa22'),
       comment: 'SEE UU',
       timestamp: 'just now'
     },
     {
       id: 2,
       user: 'benzrain',
-      avatar: '/avatars/benz.png',
+      avatar: getPlaceholderAvatar('benzrain'),
       comment: 'AHAHAHA THIS SONG HAS MY HEART',
       timestamp: 'just now'
     },
     {
       id: 3,
       user: 'moranghaever',
-      avatar: '/avatars/morang.png',
+      avatar: getPlaceholderAvatar('moranghaever'),
       comment: "i remember yeonjun's eyes while recording this",
       timestamp: 'just now'
     },
     {
       id: 4,
       user: 'cocoa22',
-      avatar: '/avatars/cocoa.png',
+      avatar: getPlaceholderAvatar('cocoa22'),
       comment: 'SEE UU',
       timestamp: 'just now'
     },
     {
       id: 5,
       user: 'benzrain',
-      avatar: '/avatars/benz.png',
+      avatar: getPlaceholderAvatar('benzrain'),
       comment: 'AHAHAHA THIS SONG HAS MY HEART',
       timestamp: 'just now'
     },
     {
       id: 6,
       user: 'moranghaever',
-      avatar: '/avatars/morang.png',
+      avatar: getPlaceholderAvatar('moranghaever'),
       comment: "i remember yeonjun's eyes while recording this",
       timestamp: 'just now'
 }
@@ -79,22 +87,13 @@ export default function RoomChat({ transaction }) {
   const handleShare = () => {
     const url = window.location.href;
     if (navigator.share) {
-      navigator.share({ title: "Live Comments", url });
+      navigator.share({ title: "lem Crew", url });
     } else {
       navigator.clipboard.writeText(url);
       alert("Link copied to clipboard!");
     }
   };
 
-  // Auto-scroll to bottom (top of reversed llist)
- /* useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    }
-  }, [comments]); */
 
   return (
     <div className="relative flex flex-col bg-neutral-900 text-white">
