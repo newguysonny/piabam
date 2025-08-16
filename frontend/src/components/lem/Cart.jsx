@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { FiTrash2, FiPlus, FiMinus } from "react-icons/fi";
 import { AiOutlinePlus } from "react-icons/ai";
 
@@ -136,8 +134,6 @@ const Cart = ({ isEditable = false }) => {
           </button>
         </div>
       )}
-
-      <ToastContainer position="bottom-center" />
     </div>
   );
 };
