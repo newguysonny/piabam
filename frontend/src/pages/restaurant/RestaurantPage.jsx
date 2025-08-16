@@ -1,6 +1,6 @@
 import MenuSection from "../../components/restaurant/MenuSection";
 
-export default function RestaurantMenu() {
+export default function RestaurantPage() {
   const items = [
     {
       id: 1,
