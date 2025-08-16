@@ -1,12 +1,22 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FiX, FiEdit, FiCalendar, FiFolder } from 'react-icons/fi';
 
-const ActionButton = ({ icon, label, fullWidth = false }) => (
-  <button className={`flex flex-col items-center justify-center ${fullWidth ? 'w-full p-4' : 'p-3'} rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors`}>
-    <span className="mb-2">{icon}</span>
-    <span className="text-sm font-medium">{label}</span>
-  </button>
-);
+const ActionButton = ({ icon, label, to, fullWidth = false }) => {
+  const navigate = useNavigate();
+
+  return (
+    <button
+      onClick={() => navigate(to)}
+      className={`flex flex-col items-center justify-center ${
+        fullWidth ? 'w-full p-4' : 'p-3'
+      } rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors`}
+    >
+      <span className="mb-2">{icon}</span>
+      <span className="text-sm font-medium">{label}</span>
+    </button>
+  );
+};
 
 export default function StartModal({ isOpen, onClose }) {
   useEffect(() => {
@@ -34,9 +44,9 @@ export default function StartModal({ isOpen, onClose }) {
         </div>
         
         <div className="grid grid-cols-3 gap-4">
-          <ActionButton icon={<FiEdit size={20} />} label="Post" />
-          <ActionButton icon={<FiCalendar size={20} />} label="Event" />
-          <ActionButton icon={<FiFolder size={20} />} label="Project" />
+          <ActionButton icon={<FiEdit size={20} />} label="Post Review" fullWidth to="/#" />
+          <ActionButton icon={<FiCalendar size={20} />} label="Host Crew" fullWidth to="/crew" />
+          <ActionButton icon={<FiFolder size={20} />} label="Start Escrow Transaction" fullWidth to="/escrow" />
         </div>
       </div>
 
@@ -50,9 +60,9 @@ export default function StartModal({ isOpen, onClose }) {
         </div>
         
         <div className="space-y-4">
-          <ActionButton icon={<FiEdit size={20} />} label="Post" fullWidth />
-          <ActionButton icon={<FiCalendar size={20} />} label="Event" fullWidth />
-          <ActionButton icon={<FiFolder size={20} />} label="Project" fullWidth />
+          <ActionButton icon={<FiEdit size={20} />} label="Post Review" fullWidth to="/#" />
+          <ActionButton icon={<FiCalendar size={20} />} label="Host Crew" fullWidth to="/crew" />
+          <ActionButton icon={<FiFolder size={20} />} label="Start Escrow Transaction" fullWidth to="/escrow" />
         </div>
       </div>
     </div>
