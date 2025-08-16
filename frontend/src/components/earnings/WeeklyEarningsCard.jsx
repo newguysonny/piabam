@@ -12,7 +12,9 @@ const WeeklyEarningsCard = ({ week, total, chartData, activeIndex }) => {
       </div>
 
       {/* Total */}
-      <p className="text-3xl font-bold text-center mb-4">${total.toFixed(2)}</p>
+      <p className="text-3xl font-bold text-center mb-4">
+        ₦{total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+      </p>
 
       {/* Chart */}
       <BarChart data={chartData} activeIndex={activeIndex} />
