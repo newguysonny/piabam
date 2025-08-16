@@ -1,5 +1,16 @@
-// src/components/lem/MapFilter.jsx
+import { useEffect } from "react";
+
 export default function MapFilter({ onClose }) {
+  // Prevent background scrolling
+  useEffect(() => {
+    const originalStyle = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = originalStyle;
+    };
+  }, []);
+
   return (
     <div className="fixed inset-0 z-[60] flex flex-col">
       {/* Overlay background */}
