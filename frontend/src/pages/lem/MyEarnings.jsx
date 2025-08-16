@@ -27,7 +27,7 @@ export default function MyEarnings() {
         activeIndex={2}
       />
 
-      <PerformanceStats trips={140} timeOnline="6d 18h" distance={45} />
+      <PerformanceStats meals={140} timeOnline="6d 18h" guests={45} />
 
       <EarningsBreakdown
         total={1959.9}
