@@ -18,7 +18,7 @@ export default function MyEarnings() {
     <div className="max-w-md mx-auto p-4 space-y-4">
       <h1 className="text-center text-lg font-bold">My Earnings</h1>
 
-      <WalletBalanceCard balance={59.9} onWithdraw={() => alert("Withdraw")} />
+      <WalletBalanceCard balance={590000.9} onWithdraw={() => alert("Withdraw")} />
 
       <WeeklyEarningsCard
         week="Dec 7 - 14"
