@@ -18,7 +18,9 @@ import ReviewsPage from './pages/lem/ReviewsPage';
 import CrewPreview from './components/lem/CrewPreview';
 import Checkout from "./components/lem/Checkout";
 import PaymentMethod from "./components/lem/PaymentMethod";
+
 import LemDiscoveryPage from './pages/lem/LemDiscoveryPage';
+import RestaurantPage from './pages/restaurant/RestaurantPage';
 import StreamingDiscoveryPage from './pages/StreamingDiscoveryPage';
 import CrowdfundingDiscoveryPage from './pages/projects/CrowdfundingDiscoveryPage';
 import MomentumDiscoveryPage from './pages/projects/MomentumDiscoveryPage';
@@ -55,6 +57,7 @@ export default function App() {
         <Route path="/lem" element={<LemDiscoveryPage />} />
         <Route path="/crew-room/:id" element={<CrewRoom />} />
         <Route path="/lem-dashboard" element={<MyEarnings />} />
+        <Route path="/store" element={<RestaurantPage />} />
         
                {/*Crowdfunding Section */}
         <Route path="/projects" element={<CrowdfundingDiscoveryPage  />} />
