@@ -9,6 +9,7 @@ export default function Checkout({ subtotal = 7200, escrowFee = 1700, discount =
   const total = subtotal + escrowFee - discount;
 
   return (
+    <>
     <div className="bg-white rounded-t-2xl shadow-lg p-4 w-full max-w-md mx-auto pb-28">
       {/* Back button */}
       <button
@@ -68,5 +69,6 @@ export default function Checkout({ subtotal = 7200, escrowFee = 1700, discount =
         Confirm order
       </button>
     </div>
+  </>
   );
 }
