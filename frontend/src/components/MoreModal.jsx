@@ -16,8 +16,18 @@ import { Link } from 'react-router-dom';
 
 // 1. Main Modal Components
 export default function UserProfileModal({ isOpen, onClose }) {
-  if (!isOpen) return null;
-
+  useEffect(() => {
+‎    if (isOpen) {
+‎      document.body.style.overflow = "hidden"; // disable scroll
+‎    } else {
+‎      document.body.style.overflow = ""; // reset
+‎    }
+‎    return () => {
+‎      document.body.style.overflow = ""; // cleanup
+‎    };
+‎  }, [isOpen]);
+‎
+‎  if (!isOpen) return null;
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-70 flex items-end md:items-center md:justify-center">
       {/* Desktop Modal */}
