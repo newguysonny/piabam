@@ -26,6 +26,27 @@ export default function RestaurantPage() {
       price: 9.39,
       image:
         "https://placehold.co/600x400/16A34A/FFFFFF?text=Turkey+%26+Ham+Club",
+      options: [
+  {
+    id: "bread",
+    name: "Choose Bread",
+    type: "single", // "single" (radio) or "multiple" (checkbox)
+    choices: [
+      { id: "white", label: "White Bread", price: 0 },
+      { id: "wheat", label: "Wheat Bread", price: 0.5 },
+      { id: "gluten", label: "Gluten Free", price: 1.0 }
+    ]
+  },
+  {
+    id: "extras",
+    name: "Add Extras",
+    type: "multiple", 
+    choices: [
+      { id: "cheese", label: "Cheese", price: 1.0 },
+      { id: "bacon", label: "Bacon", price: 1.5 }
+    ]
+  }
+]
     },
   ];
 
