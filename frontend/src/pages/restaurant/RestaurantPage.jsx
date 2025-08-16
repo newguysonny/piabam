@@ -1,6 +1,11 @@
 import MenuSection from "../../components/restaurant/MenuSection";
+import FloatingCartButton from "../../components/restaurant/FloatingCartButton";
+import { useNavigate } from "react-router-dom";
 
 export default function RestaurantPage() {
+  const navigate = useNavigate();
+‎  const cartCount = 4; // dynamically from context or state
+  
   const items = [
     {
       id: 1,
@@ -27,6 +32,12 @@ export default function RestaurantPage() {
   return (
     <div className="bg-gray-50 min-h-screen">
       <MenuSection menu="Hoagies & Specialty Sandwiches" items={items} />
+      
+      {/*Floating Cart Button*/}
+      <FloatingCartButton
+‎        itemCount={cartCount}
+‎        onClick={() => navigate("/checkout")}
+‎      />
     </div>
   );
 }
