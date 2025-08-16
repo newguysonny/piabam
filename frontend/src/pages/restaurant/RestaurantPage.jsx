@@ -1,24 +1,26 @@
-import MenuSection from "../../components/restaurant/MenuSection";
+import MenuSection from "./components/MenuSection";
 
-export default function RestaurantPage() {
+export default function RestaurantMenu() {
   const items = [
     {
       id: 1,
       name: "Custom Beef Steak Hoagie",
       price: 5.29,
-      image: "https://via.placeholder.com/300x200?text=Beef+Steak",
+      image:
+        "https://placehold.co/600x400/F97316/FFFFFF?text=Beef+Steak+Hoagie",
     },
     {
       id: 2,
       name: "Ham Hoagie",
       price: 4.99,
-      image: "https://via.placeholder.com/300x200?text=Ham+Hoagie",
+      image: "https://placehold.co/600x400/2563EB/FFFFFF?text=Ham+Hoagie",
     },
     {
       id: 3,
       name: "Turkey & Ham Club Sandwich",
       price: 9.39,
-      image: "https://via.placeholder.com/300x200?text=Turkey+Club",
+      image:
+        "https://placehold.co/600x400/16A34A/FFFFFF?text=Turkey+%26+Ham+Club",
     },
   ];
 
