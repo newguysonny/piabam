@@ -13,7 +13,7 @@ export default function FloatingCartButton({ itemCount = 0, onClick }) {
     >
       <FaShoppingCart className="text-lg" />
       <span>View Cart</span>
-      <span className="bg-white text-green-600 rounded-full px-2 py-0.5 text-sm font-bold">
+      <span className="bg-white text-purple-500 rounded-full px-2 py-0.5 text-sm font-bold">
         {itemCount}
       </span>
     </button>
