@@ -1,11 +1,18 @@
+
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MenuSection from "../../components/restaurant/MenuSection";
 import FloatingCartButton from "../../components/restaurant/FloatingCartButton";
-import { useNavigate } from "react-router-dom";
+import ItemOptions from "../../components/restaurant/ItemOptions";
 
 export default function RestaurantPage() {
   const navigate = useNavigate();
-  const cartCount = 4; // dynamically from context or state
+  const [cart, setCart] = useState([]);
+  const [modalItem, setModalItem] = useState(null); // track open modal
 
+  const cartCount = cart.length;
+
+  const items = [
   const items = [
     {
       id: 1,
@@ -50,6 +57,54 @@ export default function RestaurantPage() {
     },
   ];
 
+  const handleAddToCart = (item) => {
+    if (item.options && item.options.length > 0) {
+      setModalItem(item); // open modal
+    } else {
+      setCart((prev) => [...prev, { ...item, totalPrice: item.price }]);
+    }
+  };
+
+  const handleConfirmOptions = (selectedOptions, totalPrice) => {
+    setCart((prev) => [...prev, { ...modalItem, selectedOptions, totalPrice }]);
+    setModalItem(null);
+  };
+
+  return (
+    <div className="bg-gray-50 min-h-screen">
+      <MenuSection menu="Hoagies & Specialty Sandwiches" items={items} onAdd={handleAddToCart} />
+
+      {/* Floating Cart Button (hidden if modal open) */}
+      {!modalItem && cartCount > 0 && (
+        <FloatingCartButton
+          itemCount={cartCount}
+          onClick={() => navigate("/checkout")}
+        />
+      )}
+
+      {/* Modal */}
+      {modalItem && (
+        <ItemOptions
+          item={modalItem}
+          onClose={() => setModalItem(null)}
+          onConfirm={handleConfirmOptions}
+        />
+      )}
+    </div>
+  );
+}
+
+/*
+import MenuSection from "../../components/restaurant/MenuSection";
+import FloatingCartButton from "../../components/restaurant/FloatingCartButton";
+import { useNavigate } from "react-router-dom";
+
+export default function RestaurantPage() {
+  const navigate = useNavigate();
+  const cartCount = 4; // dynamically from context or state
+
+  
+
   return (
     <div className="bg-gray-50 min-h-screen">
       <MenuSection
@@ -57,7 +112,7 @@ export default function RestaurantPage() {
   items={items}
   onAdd={(item) => console.log("Added:", item)}
 />
-      {/* Floating Cart Button */}
+      {/* Floating Cart Button /}
       <FloatingCartButton
         itemCount={cartCount}
         onClick={() => navigate("/checkout")}
@@ -65,3 +120,4 @@ export default function RestaurantPage() {
     </div>
   );
 }
+*/
