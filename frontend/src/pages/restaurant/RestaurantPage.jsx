@@ -1,4 +1,4 @@
-import MenuSection from "../components/restaurant/MenuSection";
+import MenuSection from "../../components/restaurant/MenuSection";
 
 export default function RestaurantPage() {
   const items = [
