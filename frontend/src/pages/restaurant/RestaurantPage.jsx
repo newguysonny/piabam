@@ -31,8 +31,11 @@ export default function RestaurantPage() {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      <MenuSection menu="Hoagies & Specialty Sandwiches" items={items} />
-
+      <MenuSection
+  menu="Hoagies & Specialty Sandwiches"
+  items={items}
+  onAdd={(item) => console.log("Added:", item)}
+/>
       {/* Floating Cart Button */}
       <FloatingCartButton
         itemCount={cartCount}
