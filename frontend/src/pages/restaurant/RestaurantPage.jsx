@@ -30,7 +30,7 @@ export default function RestaurantPage() {
   ];
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-gray-50 m-4 min-h-screen">
       <MenuSection menu="Hoagies & Specialty Sandwiches" items={items} />
 
       {/* Floating Cart Button */}
