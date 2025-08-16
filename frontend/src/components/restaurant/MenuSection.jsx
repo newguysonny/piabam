@@ -26,7 +26,7 @@ const MenuSection = ({ menu, items, onAdd }) => {
             onClick={() => scroll("left")}
             className="p-2 bg-gray-200 rounded-full hover:bg-gray-300"
           >
-            <FaChevronLeft size={14} />
+            <FaChevronLeft size={14} className="text-purple-500 hover:text-purple-600" />
           </button>
           <button
             onClick={() => scroll("right")}
