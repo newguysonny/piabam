@@ -9,7 +9,7 @@ const ActionButton = ({ icon, label, fullWidth = false }) => (
 
 export default function StartModal({ isOpen, onClose }) {
   useEffect(() => {
-‎    if (isOpen) {
+‎  if (isOpen) {
       document.body.style.overflow = "hidden"; // disable scroll
     } else {
       document.body.style.overflow = ""; // reset
