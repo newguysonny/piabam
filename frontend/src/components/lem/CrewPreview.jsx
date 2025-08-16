@@ -1,11 +1,18 @@
-
-
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cart from "./Cart.jsx";
 
 export default function CrewPreview({ crew, onClose }) {
   const navigate = useNavigate();
   const progress = (crew.joined / crew.capacity) * 100;
+
+  // Prevent background scroll while modal is open
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
 
   return (
     <>
@@ -15,7 +22,8 @@ export default function CrewPreview({ crew, onClose }) {
         onClick={onClose}
       />
       {/* Modal */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl p-4 z-50 shadow-lg max-h-[80vh] overflow-y-auto">
+      <div className="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl p-4 z-50 shadow-lg max-h-[80vh] overflow-y-auto pb-24">
+        {/* Header */}
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-bold">{crew.name}</h2>
           <button onClick={onClose} className="text-gray-500">
@@ -52,25 +60,20 @@ export default function CrewPreview({ crew, onClose }) {
         </div>
 
         <Cart />
+      </div>
 
-        {/* Fixed Join Button */}
-        <div className="sticky bottom-0 left-0 right-0 bg-white py-3 mt-4">
-          <button
-            onClick={() => navigate("/checkout")}
-            className="w-full bg-black text-white py-3 rounded-xl font-semibold hover:opacity-90"
-          >
-            Join Crew
-          </button>
-        </div>
+      {/* Fixed Join Button (always visible) */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white py-3 px-4 z-[60] shadow-md">
+        <button
+          onClick={() => {
+            onClose(); // close modal
+            navigate("/checkout"); // navigate to checkout
+          }}
+          className="w-full bg-black text-white py-3 rounded-xl font-semibold hover:opacity-90"
+        >
+          Join Crew
+        </button>
       </div>
     </>
   );
 }
-
-
-
-
-
-
-
-
