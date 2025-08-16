@@ -1,7 +1,7 @@
-import WalletBalanceCard from "./components/WalletBalanceCard";
-import WeeklyEarningsCard from "./components/WeeklyEarningsCard";
-import PerformanceStats from "./components/PerformanceStats";
-import EarningsBreakdown from "./components/EarningsBreakdown";
+import WalletBalanceCard from "../../components/earnings/WalletBalanceCard";
+import WeeklyEarningsCard from "../../components/earnings/WeeklyEarningsCard";
+import PerformanceStats from "../../components/earnings/PerformanceStats";
+import EarningsBreakdown from "../../components/earnings/EarningsBreakdown";
 
 export default function MyEarnings() {
   const chartData = [
