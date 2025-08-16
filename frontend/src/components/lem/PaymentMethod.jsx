@@ -76,7 +76,7 @@ export default function PaymentMethod({ amountDue = 7200, onComplete }) {
       </div>
     </div>
 
-    /* Fixed footer */
+    
     <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-50 px-4 py-3">
       <div className="flex justify-between items-center mb-3">
         <span className="text-gray-600 font-medium">Amount due</span>
