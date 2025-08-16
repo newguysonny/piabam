@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { FaArrowLeft, FaCreditCard, FaGlobe } from "react-icons/fa"; // Generic icons
+import { FaArrowLeft, FaCreditCard, FaGlobe } from "react-icons/fa";
 
 export default function PaymentMethod({ amountDue = 7200, onComplete }) {
   const [selectedMethod, setSelectedMethod] = useState("transfer");
@@ -40,7 +40,7 @@ export default function PaymentMethod({ amountDue = 7200, onComplete }) {
   };
 
   return (
-    <div className="bg-white p-4 rounded-xl shadow-sm">
+    <div className="bg-white p-4 rounded-t-2xl shadow-sm w-full max-w-md mx-auto pb-28">
       {/* Back button */}
       <button
         onClick={() => navigate(-1)}
@@ -73,28 +73,26 @@ export default function PaymentMethod({ amountDue = 7200, onComplete }) {
           </label>
         ))}
       </div>
+    </div>
 
-      {/* Amount Due */}
-      <div className="mt-6 border-t pt-4">
-        <div className="flex justify-between items-center mb-3">
-          <span className="text-gray-600 font-medium">Amount due</span>
-          <span className="font-bold text-lg">
-            ₦{amountDue.toLocaleString()}
-          </span>
-        </div>
-
-        <button
-          onClick={handleSubmit}
-          disabled={!selectedMethod || loading}
-          className={`w-full py-3 rounded-lg font-semibold ${
-            selectedMethod && !loading
-              ? "bg-black text-white hover:opacity-90"
-              : "bg-gray-200 text-gray-400 cursor-not-allowed"
-          }`}
-        >
-          {loading ? "Processing..." : "Complete pick up order"}
-        </button>
+    /* Fixed footer */
+    <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-50 px-4 py-3">
+      <div className="flex justify-between items-center mb-3">
+        <span className="text-gray-600 font-medium">Amount due</span>
+        <span className="font-bold text-lg">₦{amountDue.toLocaleString()}</span>
       </div>
+
+      <button
+        onClick={handleSubmit}
+        disabled={!selectedMethod || loading}
+        className={`w-full py-3 rounded-lg font-semibold transition ${
+          selectedMethod && !loading
+            ? "bg-black text-white hover:opacity-90"
+            : "bg-gray-200 text-gray-400 cursor-not-allowed"
+        }`}
+      >
+        {loading ? "Processing..." : "Complete pick up order"}
+      </button>
     </div>
   );
 }
