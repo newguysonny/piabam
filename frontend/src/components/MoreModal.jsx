@@ -78,8 +78,8 @@ function ProfileSection() {
         <FiUser className="text-3xl text-gray-400" />
       </div>
       
-      <h2 className="text-xl font-bold text-white">username</h2>
-      <p className="text-gray-300">full name</p>
+      <h2 className="text-xl font-bold text-white">fullname</h2>
+      <p className="text-gray-300">username</p>
     </div>
   );
 }
@@ -134,9 +134,9 @@ function ServicesGrid({ mobile = false }) {
       bg: "bg-blue-900/30" 
     },
     { 
-      to: "/escrow-dashboard",
+      to: "/lem-dashboard",
       icon: <FiDatabase className="text-purple-400" />, 
-      label: "Lem Orders",
+      label: "Lem Dashboard",
       bg: "bg-purple-900/30" 
     },
     { 
