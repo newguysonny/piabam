@@ -8,7 +8,7 @@ export default function FloatingCartButton({ itemCount = 0, onClick }) {
     <button
       onClick={onClick}
       className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 
-                 bg-green-600 hover:bg-green-700 text-white 
+                 bg-green-600 hover:bg-green-600 text-white 
                  px-6 py-3 rounded-full shadow-lg flex items-center gap-2 font-semibold"
     >
       <FaShoppingCart className="text-lg" />
