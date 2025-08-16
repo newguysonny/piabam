@@ -12,7 +12,7 @@ export default function RestaurantPage() {
 
   const cartCount = cart.length;
 
-  const items = [
+
   const items = [
     {
       id: 1,
