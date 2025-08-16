@@ -10,16 +10,16 @@ const ActionButton = ({ icon, label, fullWidth = false }) => (
 export default function StartModal({ isOpen, onClose }) {
   useEffect(() => {
 ‎    if (isOpen) {
-‎      document.body.style.overflow = "hidden"; // disable scroll
-‎    } else {
-‎      document.body.style.overflow = ""; // reset
-‎    }
-‎    return () => {
-‎      document.body.style.overflow = ""; // cleanup
-‎    };
-‎  }, [isOpen]);
-‎
-‎  if (!isOpen) return null;
+      document.body.style.overflow = "hidden"; // disable scroll
+    } else {
+      document.body.style.overflow = ""; // reset
+    }
+    return () => {
+      document.body.style.overflow = ""; // cleanup
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       {/* Desktop: Centered Card */}
