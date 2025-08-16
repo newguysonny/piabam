@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import MenuItemCard from "./MenuItemCard";
+import MenuItem from "./MenuItem";
 
 const MenuSection = ({ menu, items, onAdd }) => {
   const scrollRef = useRef(null);
@@ -43,7 +43,7 @@ const MenuSection = ({ menu, items, onAdd }) => {
         className="flex space-x-6 overflow-x-auto scrollbar-hide scroll-smooth"
       >
         {items.map((item) => (
-          <MenuItemCard key={item.id} item={item} onAdd={onAdd} />
+          <MenuItem key={item.id} item={item} onAdd={onAdd} />
         ))}
       </div>
     </div>
