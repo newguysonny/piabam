@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 
 export default function ItemOptions({ item, onClose, onConfirm }) {
   const [selectedOptions, setSelectedOptions] = useState({});
@@ -35,7 +36,7 @@ export default function ItemOptions({ item, onClose, onConfirm }) {
     });
   };
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-50 flex justify-center items-end"
       onClick={onClose} // close on backdrop click
@@ -102,7 +103,8 @@ export default function ItemOptions({ item, onClose, onConfirm }) {
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
