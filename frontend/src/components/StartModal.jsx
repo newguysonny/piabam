@@ -1,5 +1,5 @@
+import { useEffect } from 'react';
 import { FiX, FiEdit, FiCalendar, FiFolder } from 'react-icons/fi';
-import {useEffect} from 'react';
 
 const ActionButton = ({ icon, label, fullWidth = false }) => (
   <button className={`flex flex-col items-center justify-center ${fullWidth ? 'w-full p-4' : 'p-3'} rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors`}>
@@ -10,7 +10,7 @@ const ActionButton = ({ icon, label, fullWidth = false }) => (
 
 export default function StartModal({ isOpen, onClose }) {
   useEffect(() => {
-‎  if (isOpen) {
+    if (isOpen) {
       document.body.style.overflow = "hidden"; // disable scroll
     } else {
       document.body.style.overflow = ""; // reset
@@ -21,6 +21,7 @@ export default function StartModal({ isOpen, onClose }) {
   }, [isOpen]);
 
   if (!isOpen) return null;
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       {/* Desktop: Centered Card */}
