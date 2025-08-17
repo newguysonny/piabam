@@ -21,7 +21,7 @@ export default function RestaurantInfo() {
           <FaStar className="text-yellow-500" />
           <span className="font-semibold">4.3</span>
           <span className="text-sm">(4,000+)</span>
-          <span className="font-semibold">· 1.6 mi</span>
+          <span className="font-semibold"> 1.6 mi</span>
         </div>
 
         {/* Prep Time */}
