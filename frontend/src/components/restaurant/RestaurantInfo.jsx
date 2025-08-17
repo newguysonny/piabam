@@ -37,7 +37,7 @@ export default function RestaurantInfo() {
 </div>
 
       {/* Info Section */}
-      <div className="mt-4 px-4 text-left">
+      <div className="mt-8 px-4 text-center">
         {/* Name */}
         <h1 className="text-xl font-bold">Salem&apos;s Fresh Eats</h1>
 
