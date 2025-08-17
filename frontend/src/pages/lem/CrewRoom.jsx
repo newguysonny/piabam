@@ -1,6 +1,6 @@
-/*
+
 import CrewLayout from "../../components/crew/CrewLayout";
-import CrewChat from "../../components/crew/CrewChat";
+//import CrewChat from "../../components/crew/CrewChat";
 import { useLocation } from 'react-router-dom';
 
 const CrewRoom = () => {
@@ -13,17 +13,17 @@ const CrewRoom = () => {
         <CrewLayout transaction={transaction} />
       </div>
       <div className="flex-1 overflow-y-auto">
-        <CrewChat transaction={transaction} />
+        {/* <CrewChat transaction={transaction} />*/}
       </div>
     </div>
   );
 };
 
 export default CrewRoom;
-*/
 
 
 
+/*
 import MealCrewLayout from "../../components/lem/MealCrewLayout";
 import RoomChat from "../../components/lem/RoomChat";
 import { useLocation } from 'react-router-dom';
@@ -45,3 +45,4 @@ const CrewRoom = () => {
 };
 
 export default CrewRoom;
+*/
