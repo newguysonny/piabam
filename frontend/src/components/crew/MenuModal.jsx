@@ -11,6 +11,9 @@ export default function MenuModal({ onClose, onSearch, onReport, onExit }) {
         <button onClick={onSearch} className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded">
           Search
         </button>
+        <button onClick={onRelease} className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded">
+          Release
+        </button>
         <button onClick={onReport} className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded">
           Report
         </button>
