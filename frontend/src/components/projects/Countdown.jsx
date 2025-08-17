@@ -34,11 +34,11 @@ const Countdown = ({ targetDate }) => {
       <h2 className="text-gray-600 text-lg mb-4 tracking-wide">LAUNCHING IN</h2>
       <div className="flex gap-6 text-center">
         <div>
-          <p className="text-4xl font-bold">{timeLeft.days}</p>
+          <p className="text-2xl font-bold">{timeLeft.days}</p>
           <span className="text-gray-500 text-sm">days</span>
         </div>
         <div>
-          <p className="text-4xl font-bold">{timeLeft.hours}</p>
+          <p className="text-3xl font-bold">{timeLeft.hours}</p>
           <span className="text-gray-500 text-sm">hours</span>
         </div>
         <div>
@@ -46,7 +46,7 @@ const Countdown = ({ targetDate }) => {
           <span className="text-gray-500 text-sm">min</span>
         </div>
         <div>
-          <p className="text-4xl font-bold">{timeLeft.seconds}</p>
+          <p className="text-xl font-bold">{timeLeft.seconds}</p>
           <span className="text-gray-500 text-sm">sec</span>
         </div>
       </div>
