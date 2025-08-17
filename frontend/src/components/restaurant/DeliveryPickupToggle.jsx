@@ -1,7 +1,7 @@
 export default function DeliveryPickupToggle({ mode, setMode }) {
   return (
     <div className="flex bg-gray-100 rounded-full p-1 mb-4">
-      {/* Delivery */}
+      {/* Delivery  */}
       <div className="flex-1 flex flex-col items-center">
         <button
           disabled
