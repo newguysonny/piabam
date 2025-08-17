@@ -5,7 +5,7 @@ import HostProfile from "./HostProfile";
 import MealCard from "./MealCard";
 import MenuModal from "./MenuModal";
 
-export default function MealCrewLayout({ transaction }) {
+export default function CrewLayout({ transaction }) {
   const [showMenu, setShowMenu] = useState(false);
   const [showMealModal, setShowMealModal] = useState(false);
 
