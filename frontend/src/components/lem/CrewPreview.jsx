@@ -2,6 +2,36 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cart from "./Cart.jsx";
 
+
+const CrewCart = {
+  items: [
+    {
+      id: 1,
+      name: "Sweet Chipotle BBQ Sauce",
+      price: 1000, // in Naira
+      quantity: 1,
+      image: "https://source.unsplash.com/80x80/?sauce",
+      customizations: [],
+    },
+    {
+      id: 2,
+      name: "Sweet Chipotle BBQ Crispy Chicken Wrap",
+      price: 5700, // in Naira
+      quantity: 1,
+      image: "https://source.unsplash.com/80x80/?burrito",
+      customizations: [
+        "Cheese",
+        "Lettuce",
+        "Pico De Gallo",
+        "Purple Cabbage",
+        "Spicy Ranch",
+        "Sweet Chipotle BBQ Sauce",
+      ],
+    },
+  ],
+  subtotal: 6700, // coming from DB
+};
+
 export default function CrewPreview({ crew, onClose }) {
   const navigate = useNavigate();
   const progress = (crew.joined / crew.capacity) * 100;
@@ -59,7 +89,7 @@ export default function CrewPreview({ crew, onClose }) {
           <p className="mt-3 text-gray-600">{crew.description}</p>
         </div>
 
-        <Cart />
+        <Cart cart={CrewCart}/>
       </div>
 
       {/* Fixed Join Button (always visible) */}
