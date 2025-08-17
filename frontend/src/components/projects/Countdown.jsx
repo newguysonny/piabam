@@ -38,11 +38,11 @@ const Countdown = ({ targetDate }) => {
           <span className="text-gray-500 text-sm">days</span>
         </div>
         <div>
-          <p className="text-3xl font-bold">{timeLeft.hours}</p>
+          <p className="text-2xl font-bold">{timeLeft.hours}</p>
           <span className="text-gray-500 text-sm">hours</span>
         </div>
         <div>
-          <p className="text-4xl font-bold">{timeLeft.minutes}</p>
+          <p className="text-2xl font-bold">{timeLeft.minutes}</p>
           <span className="text-gray-500 text-sm">min</span>
         </div>
         <div>
