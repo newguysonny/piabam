@@ -4,40 +4,40 @@ export default function RestaurantInfo() {
   return (
     <div className="relative w-full">
       {/* Cover image */}
-      <div className="relative">
-        <img
-          src="https://placehold.co/800x400"
-          alt="Restaurant cover"
-          className="w-full h-56 object-cover"
-        />
+<div className="relative">
+  <img
+    src="https://placehold.co/800x400"
+    alt="Restaurant cover"
+    className="w-full h-56 object-cover"
+  />
 
-        {/* Top action buttons */}
-        <div className="absolute top-3 left-3 flex space-x-2">
-          <button className="bg-black/50 text-white p-2 rounded-full">
-            <FaArrowLeft />
-          </button>
-        </div>
-        <div className="absolute top-3 right-3 flex space-x-2">
-          <button className="bg-black/50 text-white p-2 rounded-full">
-            <FaHeart />
-          </button>
-          <button className="bg-black/50 text-white p-2 rounded-full">
-            <FaEllipsisH />
-          </button>
-        </div>
-      </div>
+  {/* Top action buttons */}
+  <div className="absolute top-3 left-3 flex space-x-2">
+    <button className="bg-black/50 text-white p-2 rounded-full">
+      <FaArrowLeft />
+    </button>
+  </div>
+  <div className="absolute top-3 right-3 flex space-x-2">
+    <button className="bg-black/50 text-white p-2 rounded-full">
+      <FaHeart />
+    </button>
+    <button className="bg-black/50 text-white p-2 rounded-full">
+      <FaEllipsisH />
+    </button>
+  </div>
 
-      {/* Avatar (small circular image overlapping) */}
-      <div className="absolute left-1/2 -bottom-8 transform -translate-x-1/2">
-        <img
-          src="https://placehold.co/100x100"
-          alt="Restaurant avatar"
-          className="w-20 h-20 rounded-full border-4 border-white shadow-md"
-        />
-      </div>
+  {/* ✅ Avatar (now relative to cover image, not whole component) */}
+  <div className="absolute left-1/2 -bottom-8 transform -translate-x-1/2">
+    <img
+      src="https://placehold.co/100x100"
+      alt="Restaurant avatar"
+      className="w-20 h-20 rounded-full border-4 border-white shadow-md"
+    />
+  </div>
+</div>
 
       {/* Info Section */}
-      <div className="mt-12 px-4 text-center">
+      <div className="mt-4 px-4 text-center">
         {/* Name */}
         <h1 className="text-2xl font-bold">Salem&apos;s Fresh Eats</h1>
 
