@@ -1,5 +1,5 @@
 import CrewLayout from "../../components/crew/CrewLayout";
-import RoomChat from "../../components/crew/RoomChat";
+import CrewChat from "../../components/crew/CrewChat";
 import { useLocation } from 'react-router-dom';
 
 const CrewRoom = () => {
