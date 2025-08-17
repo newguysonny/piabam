@@ -17,7 +17,7 @@ const MenuSection = ({ menu, items, onAdd }) => {
   };
 
   return (
-    <div className="mb-8 p-4 relative">
+    <div className="mb-8 mt-4 p-4 relative">
       {/* Section title + arrows */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold">{menu}</h2>
