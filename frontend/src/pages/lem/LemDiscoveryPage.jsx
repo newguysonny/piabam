@@ -1,4 +1,4 @@
-
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { FiSearch, FiFilter, FiMapPin, FiRefreshCw, FiX, FiClock, FiBox, FiDatabase, FiMusic, FiUser, FiStar, FiSettings, FiArrowRight } from 'react-icons/fi';
 
@@ -10,6 +10,7 @@ const LemDiscoveryPage = () => {
   const [location, setLocation] = useState('');
   const [distance, setDistance] = useState('5 miles');
   const [sortBy, setSortBy] = useState('');
+  const navigate = useNavigate();
   
   // Sample data
   const [allListings] = useState([
@@ -264,7 +265,9 @@ useEffect(() => {
                   <div className="mt-1">{item.priceRange}</div>
                 </div>
               </div>
-              <button className="w-full mt-4 bg-purple-600 text-white py-2 rounded-lg font-medium">
+              <button className="w-full mt-4 bg-purple-600 text-white py-2 rounded-lg font-medium"
+                onClick={() => navigate(`/store/${item.id}`
+                >
                 View Menu
               </button>
             </div>
