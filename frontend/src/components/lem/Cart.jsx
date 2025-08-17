@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FiTrash2, FiPlus, FiMinus } from "react-icons/fi";
 import { AiOutlinePlus } from "react-icons/ai";
-/*
+
 const initialCart = {
   items: [
     {
@@ -30,9 +30,9 @@ const initialCart = {
   ],
   subtotal: 6700, // coming from DB
 };
-*/
-const Cart = ({ isEditable = false, Usercart }) => {
-  const [cart, setCart] = useState(Usercart);
+
+const Cart = ({ isEditable = false, userCart }) => {
+  const [cart, setCart] = useState(userCart||initialCart);
   
 
   const handleIncrement = (id) => {
