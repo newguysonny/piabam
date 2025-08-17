@@ -2,6 +2,7 @@ import { FaStar, FaMapMarkerAlt } from "react-icons/fa";
 import CoverImage from "./CoverImage";
 import Avatar from "./Avatar";
 
+ 
 ‎export default function RestaurantInfo() {
 ‎  return (
 ‎    <div className="relative w-full">
