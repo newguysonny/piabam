@@ -11,6 +11,7 @@ export default function RestaurantPage() {
   const navigate = useNavigate();
   const [cart, setCart] = useState([]);
   const [modalItem, setModalItem] = useState(null);
+  const [mode, setMode] = useState("pickup"); // pickup | delivery
 
   const cartCount = cart.length;
 
