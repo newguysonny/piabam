@@ -30,3 +30,4 @@ const CallToAction = () => {
     </div>
   );
 };
+export default CallToAction;
