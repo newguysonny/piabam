@@ -86,7 +86,7 @@ export default function RestaurantPage() {
       <RestaurantInfo />
       </div>
       
-      <div className="mt-4 p-4">
+      <div className="mt-4 p-10">
       <DeliveryPickupToggle mode={mode} setMode={setMode} />
       </div>
       
