@@ -12,7 +12,7 @@ const CrewRoom = () => {
         <CrewLayout transaction={transaction} />
       </div>
       <div className="flex-1 overflow-y-auto">
-        <RoomChat transaction={transaction} />
+        <CrewChat transaction={transaction} />
       </div>
     </div>
   );
