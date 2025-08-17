@@ -1,4 +1,5 @@
-‎/*  Cover Image Component */
+‎import { FaArrowLeft, FaHeart, FaEllipsisH} from "react-icons/fa";
+
 ‎export default function CoverImage({ src }) {
 ‎  return (
 ‎    <div className="relative">
