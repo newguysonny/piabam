@@ -1,4 +1,4 @@
-‎import { FaArrowLeft, FaHeart, FaEllipsisH} from "react-icons/fa";
+import { FaArrowLeft, FaHeart, FaEllipsisH} from "react-icons/fa";
 
 export default function CoverImage({ src }) {
 ‎  return (
