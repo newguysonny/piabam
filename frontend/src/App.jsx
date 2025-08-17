@@ -26,6 +26,7 @@ import RestaurantPage from './pages/restaurant/RestaurantPage';
 import StreamingDiscoveryPage from './pages/StreamingDiscoveryPage';
 import CrowdfundingDiscoveryPage from './pages/projects/CrowdfundingDiscoveryPage';
 import MomentumDiscoveryPage from './pages/projects/MomentumDiscoveryPage';
+import LaunchPage from './pages/projects/LaunchPage';
 import RoomPage1 from './pages/faajee/RoomPage1';
 import SpotifyPlaylistManager from './pages/faajee/SpotifyPlaylistManager';
 import HomePage from './pages/HomePage';
@@ -63,6 +64,7 @@ export default function App() {
         
                {/*Crowdfunding Section */}
         <Route path="/projects" element={<CrowdfundingDiscoveryPage  />} />
+        <Route path="/launch" element={<LaunchPage  />} />
         <Route path="/funding" element={<MomentumDiscoveryPage  />} />
         
        
