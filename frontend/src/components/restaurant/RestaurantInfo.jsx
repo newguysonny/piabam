@@ -37,9 +37,9 @@ export default function RestaurantInfo() {
 </div>
 
       {/* Info Section */}
-      <div className="mt-4 px-4 text-center">
+      <div className="mt-4 px-4 text-left">
         {/* Name */}
-        <h1 className="text-2xl font-bold">Salem&apos;s Fresh Eats</h1>
+        <h1 className="text-xl font-bold">Salem&apos;s Fresh Eats</h1>
 
         {/* Rating */}
         <div className="flex items-center justify-center text-gray-700 mt-1">
@@ -49,13 +49,13 @@ export default function RestaurantInfo() {
         </div>
 
         {/* Prep Time */}
-        <div className="mt-2 text-gray-700 text-sm">
+        <div className="mt-1 text-gray-700 text-sm">
           <p>Crews/Group: <span className="font-medium">4 hours</span></p>
           <p>Individual Order: <span className="font-medium">15–20 mins</span></p>
         </div>
 
         {/* Address */}
-        <div className="flex items-center justify-center mt-2 text-gray-600">
+        <div className="flex items-center justify-center mt-1 text-gray-600">
           <FaMapMarkerAlt className="mr-1" />
           <span>2015 N 50th St</span>
         </div>
