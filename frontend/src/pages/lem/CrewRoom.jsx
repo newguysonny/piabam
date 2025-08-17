@@ -1,10 +1,6 @@
-
-//import CrewLayout from "../../components/crew/CrewLayout";
+import CrewLayout from "../../components/crew/CrewLayout";
 import CrewChat from "../../components/crew/CrewChat";
 import { useLocation } from 'react-router-dom';
-import CrewHeader from "../../components/crew/CrewHeader";
-import HostProfile from "../../components/crew/HostProfile";
-import MealCard from "../../components/crew/MealCard";
 
 const CrewRoom = () => {
   const { state } = useLocation();
@@ -13,7 +9,7 @@ const CrewRoom = () => {
   return (
     <div className="flex flex-col bg-neutral-900 h-screen overflow-hidden">
       <div className="shrink-0">
-        {/* <CrewLayout transaction={transaction} />*/}
+        <CrewLayout transaction={transaction} />
       </div>
       <div className="flex-1 overflow-y-auto">
         <CrewChat transaction={transaction} />
