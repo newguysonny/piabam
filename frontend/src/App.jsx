@@ -60,7 +60,7 @@ export default function App() {
         <Route path="/lem" element={<LemDiscoveryPage />} />
         <Route path="/crew-room/:id" element={<CrewRoom />} />
         <Route path="/lem-dashboard" element={<MyEarnings />} />
-        <Route path="/store" element={<RestaurantPage />} />
+        <Route path="/store/:id" element={<RestaurantPage />} />
         
                {/*Crowdfunding Section */}
         <Route path="/projects" element={<CrowdfundingDiscoveryPage  />} />
