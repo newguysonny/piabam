@@ -1,5 +1,6 @@
 import { FaStar, FaMapMarkerAlt } from "react-icons/fa";
-
+import CoverImage from "./CoverImage";
+import Avatar from "./Avatar";
 
 ‎/* Restaurant Info Component */
 ‎export default function RestaurantInfo() {
