@@ -1,5 +1,6 @@
 import Countdown from "../../components/projects/Countdown";
 import HeaderSection from "../../components/projects/HeaderSection";
+import CallToAction from "../../components/projects/CallToAction";
 
 function LaunchPage() {
   return (
@@ -8,7 +9,10 @@ function LaunchPage() {
       <Countdown targetDate="2025-08-20T12:00:00" />
       
     </div>
-    <HeaderSection />
+     <div className="max-w-md mx-auto bg-gray-900 text-white p-8 rounded-lg shadow-xl">
+      <HeaderSection />
+      <CallToAction />
+    </div>
    </>
   );
 }
