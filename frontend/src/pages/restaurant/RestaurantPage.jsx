@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import MenuSection from "../../components/restaurant/MenuSection";
 import FloatingCartButton from "../../components/restaurant/FloatingCartButton";
 import ItemOptions from "../../components/restaurant/ItemOptions";
+import RestaurantInfo from "../../components/restaurant/RestaurantInfo";
 
 export default function RestaurantPage() {
   const navigate = useNavigate();
@@ -78,6 +79,7 @@ export default function RestaurantPage() {
 
   return (
     <div className="bg-gray-50 min-h-screen"> 
+      <RestaurantInfo />
       <MenuSection
         menu="Hoagies & Specialty Sandwiches"
         items={items}
