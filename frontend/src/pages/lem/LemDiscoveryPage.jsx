@@ -265,10 +265,12 @@ useEffect(() => {
                   <div className="mt-1">{item.priceRange}</div>
                 </div>
               </div>
-              <button className="w-full mt-4 bg-purple-600 text-white py-2 rounded-lg font-medium"
-                onClick={() => navigate(`/store/${item.id}`}
-                >
-                View Menu
+              <button 
+  className="w-full mt-4 bg-purple-600 text-white py-2 rounded-lg font-medium"
+  onClick={() => navigate(`/store/${item.id}`)}
+>
+  View Menu
+</button>
               </button>
             </div>
           ))
