@@ -79,7 +79,10 @@ export default function RestaurantPage() {
 
   return (
     <div className="bg-gray-50 min-h-screen"> 
+      <div>
       <RestaurantInfo />
+      </div>
+      
       <MenuSection
         menu="Hoagies & Specialty Sandwiches"
         items={items}
