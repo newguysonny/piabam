@@ -1,3 +1,4 @@
+/*
 import CrewLayout from "../../components/crew/CrewLayout";
 import CrewChat from "../../components/crew/CrewChat";
 import { useLocation } from 'react-router-dom';
@@ -19,9 +20,9 @@ const CrewRoom = () => {
 };
 
 export default CrewRoom;
+*/
 
 
-/*
 
 import MealCrewLayout from "../../components/lem/MealCrewLayout";
 import RoomChat from "../../components/lem/RoomChat";
@@ -44,4 +45,3 @@ const CrewRoom = () => {
 };
 
 export default CrewRoom;
-*/
