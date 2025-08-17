@@ -79,7 +79,7 @@ export default function RestaurantPage() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen"> 
+    <div className="bg-white-50 min-h-screen"> 
       
       <div>
       <RestaurantInfo />
