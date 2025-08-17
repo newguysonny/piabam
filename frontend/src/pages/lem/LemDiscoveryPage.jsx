@@ -271,7 +271,6 @@ useEffect(() => {
 >
   View Menu
 </button>
-              </button>
             </div>
           ))
         ) : (
