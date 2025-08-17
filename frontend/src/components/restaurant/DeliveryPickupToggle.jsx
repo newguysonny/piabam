@@ -1,4 +1,4 @@
-function DeliveryPickupToggle({ mode, setMode }) {
+export default function DeliveryPickupToggle({ mode, setMode }) {
   return (
     <div className="flex bg-gray-100 rounded-full p-1 mb-4">
       {/* Delivery */}
