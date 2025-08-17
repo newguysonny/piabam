@@ -1,3 +1,5 @@
+import CrewStats from "./CrewStats";
+
 export default function HostProfile() {
   return (
     <div className="flex flex-col items-center py-4">
