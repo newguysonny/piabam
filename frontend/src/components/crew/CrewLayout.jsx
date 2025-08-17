@@ -31,6 +31,7 @@ export default function CrewLayout({ transaction }) {
           onClose={closeMenu}
           onSearch={() => console.log("Search clicked")}
           onReport={() => console.log("Report clicked")}
+          onRelease={() => console.log("Release clicked")}
           onExit={closeMenu}
         />
       )}
