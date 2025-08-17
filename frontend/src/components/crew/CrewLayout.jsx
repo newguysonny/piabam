@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Cart from "./Cart";
+import Cart from "..crew/Cart";
 import CrewHeader from "./CrewHeader";
 import HostProfile from "./HostProfile";
 import MealCard from "./MealCard";
