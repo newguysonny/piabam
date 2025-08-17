@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { FiSend, FiShare2, FiShoppingBag } from "react-icons/fi";
 
-export default function RoomChat({ transaction }) {
+export default function CrewChat({ transaction }) {
   // Function to generate placeholder avatar dynamically
   const getPlaceholderAvatar = (username) => {
     const colors = ["7E22CE", "3B82F6", "10B981", "F59E0B"]; // Purple, Blue, Green, Yellow
