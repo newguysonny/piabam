@@ -3,7 +3,7 @@ import { useState } from "react";
 import CrewHeader from "./CrewHeader";
 import HostProfile from "./HostProfile";
 import MealCard from "./MealCard";
-import MenuModal from "./MenuModal";
+//import MenuModal from "./MenuModal";
 
 export default function CrewLayout({ transaction }) {
   const [showMenu, setShowMenu] = useState(false);
@@ -27,12 +27,12 @@ export default function CrewLayout({ transaction }) {
 
       {/* Modals */}
       {showMenu && (
-        <MenuModal
+      {/* <MenuModal
           onClose={closeMenu}
           onSearch={() => console.log("Search clicked")}
           onReport={() => console.log("Report clicked")}
           onExit={closeMenu}
-        />
+        /> */}
       )}
 
       {showMealModal && (
