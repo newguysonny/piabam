@@ -89,7 +89,7 @@ export default function CrewPreview({ crew, onClose }) {
           <p className="mt-3 text-gray-600">{crew.description}</p>
         </div>
 
-        <Cart cart={CrewCart}/>
+        <Cart Usercart={CrewCart}/>
       </div>
 
       {/* Fixed Join Button (always visible) */}
