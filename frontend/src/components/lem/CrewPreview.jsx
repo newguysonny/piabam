@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Cart from "./Cart.jsx";
 
 
-const CrewCart = {
+const crewCart = {
   items: [
     {
       id: 1,
@@ -89,7 +89,7 @@ export default function CrewPreview({ crew, onClose }) {
           <p className="mt-3 text-gray-600">{crew.description}</p>
         </div>
 
-        <Cart Usercart={CrewCart}/>
+        <Cart usercart={crewCart}/>
       </div>
 
       {/* Fixed Join Button (always visible) */}
