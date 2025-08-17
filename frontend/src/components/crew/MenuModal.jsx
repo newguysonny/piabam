@@ -1,4 +1,4 @@
-export default function MenuModal({ onClose, onSearch, onReport, onExit }) {
+export default function MenuModal({ onClose, onSearch, onRelease, onReport, onExit }) {
   return (
     <div
       onClick={onClose}
@@ -12,7 +12,7 @@ export default function MenuModal({ onClose, onSearch, onReport, onExit }) {
           Search
         </button>
         <button onClick={onRelease} className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded">
-          Release
+          Release/Checkout
         </button>
         <button onClick={onReport} className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded">
           Report
