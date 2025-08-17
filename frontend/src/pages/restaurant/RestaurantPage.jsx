@@ -4,7 +4,6 @@ import toast from "react-hot-toast";
 import MenuSection from "../../components/restaurant/MenuSection";
 import FloatingCartButton from "../../components/restaurant/FloatingCartButton";
 import ItemOptions from "../../components/restaurant/ItemOptions";
-import Countdown from "../../components/projects/Countdown";
 
 export default function RestaurantPage() {
   const navigate = useNavigate();
@@ -78,12 +77,7 @@ export default function RestaurantPage() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-
-    <div className="h-screen flex items-center justify-center bg-white">
-      <Countdown targetDate="2025-08-20T12:00:00" />
-    </div>
-      
+    <div className="bg-gray-50 min-h-screen"> 
       <MenuSection
         menu="Hoagies & Specialty Sandwiches"
         items={items}
