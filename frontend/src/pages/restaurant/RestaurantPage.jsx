@@ -86,7 +86,9 @@ export default function RestaurantPage() {
       <RestaurantInfo />
       </div>
       
+      <div className="mt-4 p-4">
       <DeliveryPickupToggle mode={mode} setMode={setMode} />
+      </div>
       
       <MenuSection
         menu="Hoagies & Specialty Sandwiches"
