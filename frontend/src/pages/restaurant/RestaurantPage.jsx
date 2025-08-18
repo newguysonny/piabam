@@ -139,13 +139,24 @@ const handleAddToCart = (item) => {
 };
 
 const handleConfirmOptions = (selectedOptions, totalPrice) => {
-  // Transform selectedOptions into the format you want to display
-  const displayOptions = selectedOptions.map(opt => `${opt.group}: ${opt.choice}`);
-  
+  // Group multiple options of same type
+  const groupedOptions = selectedOptions.reduce((acc, opt) => {
+    const cleanGroup = opt.group.replace(/^(Choose|Add)\s*/i, '');
+    if (!acc[cleanGroup]) {
+      acc[cleanGroup] = [];
+    }
+    acc[cleanGroup].push(opt.choice);
+    return acc;
+  }, {});
+
+  const displayOptions = Object.entries(groupedOptions).map(
+    ([group, choices]) => `${group}: ${choices.join(', ')}`
+  );
+
   addToCart({ 
     ...modalItem, 
-    options: displayOptions, // Store only the selected options as strings
-    price: totalPrice,      // Use the calculated total price
+    options: displayOptions,
+    price: totalPrice,
     quantity: 1 
   }, restaurantId);
   
