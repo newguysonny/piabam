@@ -169,6 +169,7 @@ const handleConfirmOptions = (selectedOptions, totalPrice) => {
         <FloatingCartButton
           itemCount={cartCount}
           onClick={() => navigate("/checkout")}
+          className="border border-red-500"
         />
       )}
 
