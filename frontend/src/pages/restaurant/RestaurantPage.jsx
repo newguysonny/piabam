@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
 import toast from "react-hot-toast";
 import MenuSection from "../../components/restaurant/MenuSection";
 import FloatingCartButton from "../../components/restaurant/FloatingCartButton";
@@ -9,7 +10,7 @@ import DeliveryPickupToggle from "../../components/restaurant/DeliveryPickupTogg
 
 export default function RestaurantPage() {
   const navigate = useNavigate();
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useCart(); //;switched from state useState([]);
   const [modalItem, setModalItem] = useState(null);
   const [mode, setMode] = useState("pickup"); // pickup | delivery
 
@@ -127,25 +128,20 @@ export default function RestaurantPage() {
 ];
 
   const handleAddToCart = (item) => {
-    if (item.options && item.options.length > 0) {
-      setModalItem(item);
-    } else {
-      setCart((prev) => [...prev, { ...item, totalPrice: item.price }]);
-      toast.success(`${item.name} ₦${item.price.toFixed(2)} (1) added to cart`);
-    }
-  };
+  if (item.options && item.options.length > 0) {
+    setModalItem(item);
+  } else {
+    addToCart({ ...item, totalPrice: item.price });
+    toast.success(`${item.name} ₦${item.price.toFixed(2)} (1) added to cart`);
+  }
+};
 
-  const handleConfirmOptions = (selectedOptions, totalPrice) => {
-    setCart((prev) => [
-      ...prev,
-      { ...modalItem, selectedOptions, totalPrice },
-    ]);
-    toast.success(
-      `${modalItem.name} ₦${totalPrice.toFixed(2)} (1) added to cart`
-    );
-    setModalItem(null);
-  };
-
+const handleConfirmOptions = (selectedOptions, totalPrice) => {
+  addToCart({ ...modalItem, selectedOptions, totalPrice });
+  toast.success(`${modalItem.name} ₦${totalPrice.toFixed(2)} (1) added to cart`);
+  setModalItem(null);
+};
+  
   return (
     <div className="bg-white-50 min-h-screen"> 
       
