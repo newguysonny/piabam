@@ -160,7 +160,7 @@ const handleConfirmOptions = (selectedOptions, totalPrice) => {
     key={index}
     menu={section.name}
     items={section.menu_items}
-    restaurantId={restaurantId}  // temporary for restaaurnt add this
+    restaurantId={restaurantId}  // temporarily for restaaurnt add this
     onAdd={handleAddToCart}
   />
 ))}
