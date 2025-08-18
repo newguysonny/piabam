@@ -9,48 +9,41 @@ export const CartProvider = ({ children }) => {
     return saved ? JSON.parse(saved) : { restaurantId: null, items: [] };
   });
 
-  // Persist to localStorage
+  // Persist cart in localStorage
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const normalizeItem = (item) => {
-    return {
-      ...item,
-      options: item.options || item.customizations || [], // normalize
-    };
+  const isSameOptions = (opts1 = [], opts2 = []) => {
+    if (opts1.length !== opts2.length) return false;
+    return opts1.every((opt, i) => opt === opts2[i]);
   };
 
   const addToCart = (item, restaurantId) => {
-    const normalized = normalizeItem(item);
-
     setCart((prev) => {
       // If different restaurant → reset cart
       if (prev.restaurantId && prev.restaurantId !== restaurantId) {
-        return { restaurantId, items: [normalized] };
+        return { restaurantId, items: [item] };
       }
 
-      // Check if same item (id + options)
+      // If same item + same options exists → increment
       const existing = prev.items.find(
-        (i) =>
-          i.id === normalized.id &&
-          JSON.stringify(i.options) === JSON.stringify(normalized.options)
+        (i) => i.id === item.id && isSameOptions(i.options, item.options)
       );
 
       if (existing) {
         return {
           ...prev,
           items: prev.items.map((i) =>
-            i.id === normalized.id &&
-            JSON.stringify(i.options) === JSON.stringify(normalized.options)
-              ? { ...i, quantity: i.quantity + normalized.quantity }
+            i.id === item.id && isSameOptions(i.options, item.options)
+              ? { ...i, quantity: i.quantity + item.quantity }
               : i
           ),
         };
       }
 
-      // Else add new
-      return { ...prev, restaurantId, items: [...prev.items, normalized] };
+      // Else add new variant
+      return { ...prev, restaurantId, items: [...prev.items, item] };
     });
   };
 
@@ -58,11 +51,7 @@ export const CartProvider = ({ children }) => {
     setCart((prev) => ({
       ...prev,
       items: prev.items.filter(
-        (i) =>
-          !(
-            i.id === id &&
-            JSON.stringify(i.options) === JSON.stringify(options)
-          )
+        (i) => !(i.id === id && isSameOptions(i.options, options))
       ),
     }));
 
@@ -70,8 +59,7 @@ export const CartProvider = ({ children }) => {
     setCart((prev) => ({
       ...prev,
       items: prev.items.map((i) =>
-        i.id === id &&
-        JSON.stringify(i.options) === JSON.stringify(options)
+        i.id === id && isSameOptions(i.options, options)
           ? { ...i, quantity: i.quantity + 1 }
           : i
       ),
@@ -81,8 +69,7 @@ export const CartProvider = ({ children }) => {
     setCart((prev) => ({
       ...prev,
       items: prev.items.map((i) =>
-        i.id === id &&
-        JSON.stringify(i.options) === JSON.stringify(options)
+        i.id === id && isSameOptions(i.options, options)
           ? { ...i, quantity: Math.max(1, i.quantity - 1) }
           : i
       ),
