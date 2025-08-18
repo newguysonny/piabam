@@ -34,8 +34,8 @@ import HomePage from './pages/HomePage';
 
 export default function App() {
   return (
+    <CartProvider>
     <BrowserRouter>
-      <CartProvider>
       <Routes>
         <Route path="/" element={<HomePage />} />
              {/*Escrow Section and Dashboard */}
@@ -71,8 +71,8 @@ export default function App() {
         
        
       </Routes>
-      </CartProvider>
       <Toaster position="bottom-center" reverseOrder={false} />
     </BrowserRouter>
+    </CartProvider>
   );
 }
