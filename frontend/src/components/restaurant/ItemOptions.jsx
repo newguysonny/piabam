@@ -96,11 +96,49 @@ export default function ItemOptions({ item, onClose, onConfirm }) {
         {/* Footer */}
         <div className="sticky bottom-0 bg-white p-4 border-t">
           <button
+  onClick={() => {
+    const finalOptions = [];
+
+    item.options?.forEach((opt) => {
+      const value = selectedOptions[opt.id];
+
+      if (opt.type === "single" && value) {
+        const choice = opt.choices.find((c) => c.id === value);
+        if (choice) {
+          finalOptions.push({
+            group: opt.name,
+            choice: choice.label,
+            price: choice.price,
+          });
+        }
+      }
+
+      if (opt.type === "multiple" && Array.isArray(value)) {
+        value.forEach((val) => {
+          const choice = opt.choices.find((c) => c.id === val);
+          if (choice) {
+            finalOptions.push({
+              group: opt.name,
+              choice: choice.label,
+              price: choice.price,
+            });
+          }
+        });
+      }
+    });
+
+    onConfirm(finalOptions, totalPrice);
+  }}
+  className="w-full bg-black text-white py-3 rounded-xl font-semibold"
+>
+  Add to Cart • ₦{totalPrice.toLocaleString()}
+</button>
+          {/* <button
             onClick={() => onConfirm(selectedOptions, totalPrice)}
             className="w-full bg-black text-white py-3 rounded-xl font-semibold"
           >
             Add to Cart • ₦{totalPrice.toLocaleString()}
-          </button>
+          </button> */}
         </div>
       </div>
     </div>,
