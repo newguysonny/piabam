@@ -1,96 +1,84 @@
-// src/context/CartContext.jsx
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const CartContext = createContext();
 
-export const CartProvider = ({ children }) => {
+const DEFAULT_CART = {
+  restaurantId: null,
+  items: [],
+};
+
+export function CartProvider({ children }) {
   const [cart, setCart] = useState(() => {
-    const saved = localStorage.getItem("cart");
-    return saved ? JSON.parse(saved) : { restaurantId: null, items: [] };
+    try {
+      const stored = localStorage.getItem("cart");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+
+        // ✅ Normalize shape to prevent blank screen
+        return {
+          restaurantId: parsed.restaurantId ?? null,
+          items: Array.isArray(parsed.items) ? parsed.items : [],
+        };
+      }
+    } catch (e) {
+      console.error("Failed to parse cart from localStorage:", e);
+    }
+    return DEFAULT_CART;
   });
 
-  // Persist cart in localStorage
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const isSameOptions = (opts1 = [], opts2 = []) => {
-    if (opts1.length !== opts2.length) return false;
-    return opts1.every((opt, i) => opt === opts2[i]);
+  // --- Actions ---
+  const addToCart = (item) => {
+    setCart((prev) => ({
+      ...prev,
+      items: [...prev.items, item],
+    }));
   };
 
-  const addToCart = (item, restaurantId) => {
-    setCart((prev) => {
-      // If different restaurant → reset cart
-      if (prev.restaurantId && prev.restaurantId !== restaurantId) {
-        return { restaurantId, items: [item] };
-      }
-
-      // If same item + same options exists → increment
-      const existing = prev.items.find(
-        (i) => i.id === item.id && isSameOptions(i.options, item.options)
-      );
-
-      if (existing) {
-        return {
-          ...prev,
-          items: prev.items.map((i) =>
-            i.id === item.id && isSameOptions(i.options, item.options)
-              ? { ...i, quantity: i.quantity + item.quantity }
-              : i
-          ),
-        };
-      }
-
-      // Else add new variant
-      return { ...prev, restaurantId, items: [...prev.items, item] };
-    });
-  };
-
-  const removeFromCart = (id, options = []) =>
+  const removeFromCart = (id, options) => {
     setCart((prev) => ({
       ...prev,
       items: prev.items.filter(
-        (i) => !(i.id === id && isSameOptions(i.options, options))
+        (i) =>
+          !(i.id === id && JSON.stringify(i.options) === JSON.stringify(options))
       ),
     }));
+  };
 
-  const incrementItem = (id, options = []) =>
+  const incrementItem = (id, options) => {
     setCart((prev) => ({
       ...prev,
       items: prev.items.map((i) =>
-        i.id === id && isSameOptions(i.options, options)
+        i.id === id && JSON.stringify(i.options) === JSON.stringify(options)
           ? { ...i, quantity: i.quantity + 1 }
           : i
       ),
     }));
+  };
 
-  const decrementItem = (id, options = []) =>
+  const decrementItem = (id, options) => {
     setCart((prev) => ({
       ...prev,
-      items: prev.items.map((i) =>
-        i.id === id && isSameOptions(i.options, options)
-          ? { ...i, quantity: Math.max(1, i.quantity - 1) }
-          : i
-      ),
+      items: prev.items
+        .map((i) =>
+          i.id === id && JSON.stringify(i.options) === JSON.stringify(options)
+            ? { ...i, quantity: i.quantity - 1 }
+            : i
+        )
+        .filter((i) => i.quantity > 0),
     }));
-
-  const clearCart = () => setCart({ restaurantId: null, items: [] });
+  };
 
   return (
     <CartContext.Provider
-      value={{
-        cart,
-        addToCart,
-        removeFromCart,
-        incrementItem,
-        decrementItem,
-        clearCart,
-      }}
+      value={{ cart, setCart, addToCart, removeFromCart, incrementItem, decrementItem }}
     >
       {children}
     </CartContext.Provider>
   );
-};
+}
 
 export const useCart = () => useContext(CartContext);
