@@ -16,7 +16,7 @@ export default function RestaurantPage() {
   const [modalItem, setModalItem] = useState(null);
   const [mode, setMode] = useState("pickup"); // pickup | delivery
 
-  const cartCount = cart.length;
+  const cartCount = cart.items.length;
 
   const menu = [
   {
@@ -129,17 +129,17 @@ export default function RestaurantPage() {
   }
 ];
 
-  const handleAddToCart = (item) => {
+const handleAddToCart = (item) => {
   if (item.options && item.options.length > 0) {
     setModalItem(item);
   } else {
-    addToCart({ ...item, totalPrice: item.price });
+    addToCart({ ...item, totalPrice: item.price, quantity: 1 }, restaurantId);
     toast.success(`${item.name} ₦${item.price.toFixed(2)} (1) added to cart`);
   }
 };
 
 const handleConfirmOptions = (selectedOptions, totalPrice) => {
-  addToCart({ ...modalItem, selectedOptions, totalPrice });
+  addToCart({ ...modalItem, selectedOptions, totalPrice, quantity: 1 }, restaurantId);
   toast.success(`${modalItem.name} ₦${totalPrice.toFixed(2)} (1) added to cart`);
   setModalItem(null);
 };
