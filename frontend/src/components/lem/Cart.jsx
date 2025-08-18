@@ -30,7 +30,7 @@ const Cart = ({ isEditable = false }) => {
       )}
 
       <p className="text-sm font-semibold mt-1">
-        ₦{item.price?.toLocaleString?.()}
+        ₦{item.totalPrice || item.price?.toLocaleString?.()}
       </p>
     </div>
 
