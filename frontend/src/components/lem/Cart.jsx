@@ -1,6 +1,6 @@
 import { FiTrash2, FiPlus, FiMinus } from "react-icons/fi";
 import { AiOutlinePlus } from "react-icons/ai";
-import { useCart } from "../context/CartContext"; // 👈 new import
+import { useCart } from "../../components/context/CartContext"; // 👈 new import
 
 const Cart = ({ isEditable = false }) => {
   const { cart, removeFromCart, incrementItem, decrementItem } = useCart();
