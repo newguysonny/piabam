@@ -1,7 +1,7 @@
 import { useCart } from "../../context/CartContext";
 
 export default function MenuItem({ item, onAdd, restaurantId }) {
-  const { onAdd } = useCart();
+  const { useAddCart } = useCart();
 
   const handleAddClick = () => {
     onAdd(
