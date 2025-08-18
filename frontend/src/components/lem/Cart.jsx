@@ -7,7 +7,7 @@ const Cart = ({ isEditable = false }) => {
 
   return (
     <div className="max-w-md mx-auto p-4">
-      {cart.map((item) => (
+      {cart.items.map((item) => (
         <div
           key={item.id}
           className="flex items-start justify-between py-4 border-b"
