@@ -1,4 +1,5 @@
 import { useCart } from "../../context/CartContext";
+import { toast } from "react-hot-toast"; // or your toast library
 
 export default function MenuItem({ item, restaurantId }) {
   const { addToCart } = useCart();
@@ -15,6 +16,8 @@ export default function MenuItem({ item, restaurantId }) {
       },
       restaurantId
     );
+
+    toast.success(`${item.name} added to cart`);
   };
 
   return (
