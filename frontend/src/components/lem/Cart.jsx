@@ -18,20 +18,32 @@ alt={item.name}
 className="w-16 h-16 object-cover rounded-md"  
 />
 
-<div className="flex-1 mx-3">  
-        <h4 className="font-medium text-sm line-clamp-1">{item.name}</h4>  
-        {item.options?.length > 0 && (  
-          <ul className="text-xs text-gray-500 mt-1 space-y-0.5">  
-            {item.options.map((note, index) => (  
-              <li key={index}>{note}</li>  
-            ))}  
-          </ul>  
-        )}  
-        <p className="text-sm font-semibold mt-1">  
-          ₦{item.price.toLocaleString()}  
-        </p>  
-      </div>  
+<div className="flex-1 mx-3">
+  <h4 className="font-medium text-sm line-clamp-1">{item.name}</h4>
 
+  {/* ✅ Safely render options */}
+  {item.options && (
+    <ul className="text-xs text-gray-500 mt-1 space-y-0.5">
+      {Array.isArray(item.options)
+        ? item.options.map((note, index) => (
+            <li key={index}>{note}</li>
+          ))
+        : typeof item.options === "object"
+        ? Object.entries(item.options).map(([key, val], index) => (
+            <li key={index}>
+              {key}: {val}
+            </li>
+          ))
+        : (
+            <li>{String(item.options)}</li> // fallback if it's a string or number
+          )}
+    </ul>
+  )}
+
+  <p className="text-sm font-semibold mt-1">
+    ₦{item.price.toLocaleString()}
+  </p>
+</div>
       <div className="flex items-center bg-gray-100 rounded-full px-2 py-1 space-x-2">  
         {isEditable && (  
           <button  
