@@ -9,6 +9,8 @@ import RestaurantInfo from "../../components/restaurant/RestaurantInfo";
 import DeliveryPickupToggle from "../../components/restaurant/DeliveryPickupToggle";
 
 export default function RestaurantPage() {
+  const restaurantId = "1"; // mock for now, later you can get it from params
+  
   const navigate = useNavigate();
   const [cart, setCart] = useCart(); //;switched from state useState([]);
   const [modalItem, setModalItem] = useState(null);
@@ -158,6 +160,7 @@ const handleConfirmOptions = (selectedOptions, totalPrice) => {
     key={index}
     menu={section.name}
     items={section.menu_items}
+    restaurantId={restaurantId}  // temporary for restaaurnt add this
     onAdd={handleAddToCart}
   />
 ))}
