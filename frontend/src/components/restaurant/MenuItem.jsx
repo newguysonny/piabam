@@ -16,7 +16,7 @@ export default function MenuItem({ item, restaurantId, onAdd }) {
           name: item.name,
           price: item.price,
           image: item.image,
-          customizations: item.customizations || [],
+          options: item.options || [],
           quantity: 1,
         },
         restaurantId
