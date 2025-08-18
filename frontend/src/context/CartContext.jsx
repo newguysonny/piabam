@@ -14,50 +14,77 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  const normalizeItem = (item) => {
+    return {
+      ...item,
+      options: item.options || item.customizations || [], // normalize
+    };
+  };
+
   const addToCart = (item, restaurantId) => {
+    const normalized = normalizeItem(item);
+
     setCart((prev) => {
       // If different restaurant → reset cart
       if (prev.restaurantId && prev.restaurantId !== restaurantId) {
-        return { restaurantId, items: [item] };
+        return { restaurantId, items: [normalized] };
       }
 
-      // If item already exists → increment quantity
-      const existing = prev.items.find((i) => i.id === item.id);
+      // Check if same item (id + options)
+      const existing = prev.items.find(
+        (i) =>
+          i.id === normalized.id &&
+          JSON.stringify(i.options) === JSON.stringify(normalized.options)
+      );
+
       if (existing) {
         return {
           ...prev,
           items: prev.items.map((i) =>
-            i.id === item.id
-              ? { ...i, quantity: i.quantity + item.quantity }
+            i.id === normalized.id &&
+            JSON.stringify(i.options) === JSON.stringify(normalized.options)
+              ? { ...i, quantity: i.quantity + normalized.quantity }
               : i
           ),
         };
       }
 
       // Else add new
-      return { ...prev, restaurantId, items: [...prev.items, item] };
+      return { ...prev, restaurantId, items: [...prev.items, normalized] };
     });
   };
 
-  const removeFromCart = (id) =>
+  const removeFromCart = (id, options = []) =>
     setCart((prev) => ({
       ...prev,
-      items: prev.items.filter((i) => i.id !== id),
-    }));
-
-  const incrementItem = (id) =>
-    setCart((prev) => ({
-      ...prev,
-      items: prev.items.map((i) =>
-        i.id === id ? { ...i, quantity: i.quantity + 1 } : i
+      items: prev.items.filter(
+        (i) =>
+          !(
+            i.id === id &&
+            JSON.stringify(i.options) === JSON.stringify(options)
+          )
       ),
     }));
 
-  const decrementItem = (id) =>
+  const incrementItem = (id, options = []) =>
     setCart((prev) => ({
       ...prev,
       items: prev.items.map((i) =>
-        i.id === id ? { ...i, quantity: Math.max(1, i.quantity - 1) } : i
+        i.id === id &&
+        JSON.stringify(i.options) === JSON.stringify(options)
+          ? { ...i, quantity: i.quantity + 1 }
+          : i
+      ),
+    }));
+
+  const decrementItem = (id, options = []) =>
+    setCart((prev) => ({
+      ...prev,
+      items: prev.items.map((i) =>
+        i.id === id &&
+        JSON.stringify(i.options) === JSON.stringify(options)
+          ? { ...i, quantity: Math.max(1, i.quantity - 1) }
+          : i
       ),
     }));
 
