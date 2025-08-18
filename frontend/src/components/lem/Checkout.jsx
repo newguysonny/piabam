@@ -27,7 +27,7 @@ export default function Checkout({ subtotal = 7200, escrowFee = 1700, discount =
       <hr className="my-3 h-[20px] bg-gray-200 border-0 rounded" />
 
       {/* Cart Summary */}
-      <Cart isEditable={false} />
+      <Cart isEditable={true} />
 
       <hr className="my-3 h-[20px] bg-gray-200 border-0 rounded" />
 
