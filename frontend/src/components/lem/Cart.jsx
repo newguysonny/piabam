@@ -52,7 +52,7 @@ className="w-16 h-16 object-cover rounded-md"
         <span className="text-sm">{item.quantity}</span>  
         {isEditable && (  
           <button  
-            onClick={() => incrementItem(item.id), item.options}  
+            onClick={() => incrementItem(item.id, item.options)}  
             className="text-gray-600 hover:text-green-500"  
           >  
             <FiPlus size={16} />  
