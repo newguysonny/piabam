@@ -1,7 +1,20 @@
 import { useCart } from "../../context/CartContext";
-export default function MenuItem({ item, onAdd, restaurantId }) {
+
+export default function MenuItem({ item, restaurantId }) {
+  const { addToCart } = useCart();
+
   const handleAddClick = () => {
-    onAdd({ ...item, restaurantId });
+    addToCart(
+      {
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        image: item.image,
+        customizations: item.customizations || [],
+        quantity: 1,
+      },
+      restaurantId
+    );
   };
 
   return (
