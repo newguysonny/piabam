@@ -1,11 +1,12 @@
 // components/FloatingCartButton.jsx
-// components/FloatingCartButton.jsx
 import { FaShoppingCart } from "react-icons/fa";
 import { useCart } from "../../context/CartContext";
 
 export default function FloatingCartButton({ onClick }) {
   const { cart } = useCart();
-  const itemCount = cart.items.reduce((sum, i) => sum + i.quantity, 0);
+
+  // cart is an array, not { items: [...] }
+  const itemCount = cart.reduce((sum, i) => sum + (i.quantity || 1), 0);
 
   if (itemCount === 0) return null; // hide if empty
 
