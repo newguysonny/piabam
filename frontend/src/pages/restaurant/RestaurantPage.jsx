@@ -12,7 +12,7 @@ export default function RestaurantPage() {
   const restaurantId = "1"; // mock for now, later you can get it from params
   
   const navigate = useNavigate();
-  const [cart, setCart] = useCart(); //;switched from state useState([]);
+  const { cart, addToCart } = useCart(); //;switched from state useState([]);
   const [modalItem, setModalItem] = useState(null);
   const [mode, setMode] = useState("pickup"); // pickup | delivery
 
