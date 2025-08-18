@@ -1,79 +1,77 @@
 import { FiTrash2, FiPlus, FiMinus } from "react-icons/fi";
 import { AiOutlinePlus } from "react-icons/ai";
-import { useCart } from "../../context/CartContext"; // 👈 import
+import { useCart } from "../../context/CartContext"; // 👈 new import
 
 const Cart = ({ isEditable = false }) => {
-  const { cart, removeFromCart, incrementItem, decrementItem } = useCart();
+const { cart, removeFromCart, incrementItem, decrementItem } = useCart();
 
-  return (
-    <div className="max-w-md mx-auto p-4">
-      {cart.items.map((item, idx) => (
-        <div
-          key={`${item.id}-${idx}`} // unique key since same id can have diff options
-          className="flex items-start justify-between py-4 border-b"
-        >
-          <img
-            src={item.image}
-            alt={item.name}
-            className="w-16 h-16 object-cover rounded-md"
-          />
+return (
+<div className="max-w-md mx-auto p-4">
+{cart.items.map((item) => (
+<div  
+key={item.id}  
+className="flex items-start justify-between py-4 border-b"  
+>
+<img  
+src={item.image}  
+alt={item.name}  
+className="w-16 h-16 object-cover rounded-md"  
+/>
 
-          <div className="flex-1 mx-3">
-            <h4 className="font-medium text-sm line-clamp-1">{item.name}</h4>
+<div className="flex-1 mx-3">  
+        <h4 className="font-medium text-sm line-clamp-1">{item.name}</h4>  
+        {item.customizations?.length > 0 && (  
+          <ul className="text-xs text-gray-500 mt-1 space-y-0.5">  
+            {item.customizations.map((note, index) => (  
+              <li key={index}>{note}</li>  
+            ))}  
+          </ul>  
+        )}  
+        <p className="text-sm font-semibold mt-1">  
+          ₦{item.price.toLocaleString()}  
+        </p>  
+      </div>  
 
-            {/* Render options if available */}
-            {item.options?.length > 0 && (
-              <ul className="text-xs text-gray-500 mt-1 space-y-0.5">
-                {item.options.map((opt, index) => (
-                  <li key={index}>{opt}</li>
-                ))}
-              </ul>
-            )}
+      <div className="flex items-center bg-gray-100 rounded-full px-2 py-1 space-x-2">  
+        {isEditable && (  
+          <button  
+            onClick={() => removeFromCart(item.id)}  
+            className="text-gray-600 hover:text-red-500"  
+          >  
+            <FiTrash2 size={16} />  
+          </button>  
+        )}  
+        {isEditable && (  
+          <button  
+            onClick={() => decrementItem(item.id)}  
+            className="text-gray-600 hover:text-gray-800"  
+          >  
+            <FiMinus size={16} />  
+          </button>  
+        )}  
+        <span className="text-sm">{item.quantity}</span>  
+        {isEditable && (  
+          <button  
+            onClick={() => incrementItem(item.id)}  
+            className="text-gray-600 hover:text-green-500"  
+          >  
+            <FiPlus size={16} />  
+          </button>  
+        )}  
+      </div>  
+    </div>  
+  ))}  
 
-            <p className="text-sm font-semibold mt-1">
-              ₦{item.price.toLocaleString()}
-            </p>
-          </div>
+  {isEditable && (  
+    <div className="mt-4 flex justify-end">  
+      <button className="flex items-center bg-gray-100 px-3 py-1 rounded-full hover:bg-gray-200 transition">  
+        <AiOutlinePlus size={16} className="mr-1" /> Add items  
+      </button>  
+    </div>  
+  )}  
+</div>
 
-          <div className="flex items-center bg-gray-100 rounded-full px-2 py-1 space-x-2">
-            {isEditable && (
-              <button
-                onClick={() => removeFromCart(item.id, item.options)}
-                className="text-gray-600 hover:text-red-500"
-              >
-                <FiTrash2 size={16} />
-              </button>
-            )}
-            {isEditable && (
-              <button
-                onClick={() => decrementItem(item.id, item.options)}
-                className="text-gray-600 hover:text-gray-800"
-              >
-                <FiMinus size={16} />
-              </button>
-            )}
-            <span className="text-sm">{item.quantity}</span>
-            {isEditable && (
-              <button
-                onClick={() => incrementItem(item.id, item.options)}
-                className="text-gray-600 hover:text-green-500"
-              >
-                <FiPlus size={16} />
-              </button>
-            )}
-          </div>
-        </div>
-      ))}
-
-      {isEditable && (
-        <div className="mt-4 flex justify-end">
-          <button className="flex items-center bg-gray-100 px-3 py-1 rounded-full hover:bg-gray-200 transition">
-            <AiOutlinePlus size={16} className="mr-1" /> Add items
-          </button>
-        </div>
-      )}
-    </div>
-  );
+);
 };
 
 export default Cart;
