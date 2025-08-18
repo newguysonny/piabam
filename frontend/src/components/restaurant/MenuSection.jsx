@@ -43,7 +43,7 @@ const MenuSection = ({ menu, items, restaurantId, onAdd }) => {
         className="flex space-x-6 overflow-x-auto scrollbar-hide scroll-smooth"
       >
         {items.map((item) => (
-          <MenuItem key={item.id} item={item} onAdd={onAdd} restaurantId={restaurantId}  />
+          <MenuItem key={item.id} item={item}  restaurantId={restaurantId}  />
         ))}
       </div>
     </div>
