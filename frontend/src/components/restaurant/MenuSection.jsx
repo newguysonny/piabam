@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import MenuItem from "./MenuItem";
 
-const MenuSection = ({ menu, items, restaurantId, onAdd }) => {
+const MenuSection = ({ menu, items, restaurantId }) => {
   const scrollRef = useRef(null);
 
   const scroll = (direction) => {
