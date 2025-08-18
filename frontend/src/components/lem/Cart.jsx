@@ -8,62 +8,62 @@ const Cart = ({ isEditable = false }) => {
   return (
     <div className="max-w-md mx-auto p-4">
       {cart.items.map((item) => (
-        <div
-          key={item.id}
-          className="flex items-start justify-between py-4 border-b"
+      {Array.isArray(cart?.items) && cart.items.map((item) => (
+  <div
+    key={`${item.id}-${JSON.stringify(item.options)}`} // safer unique key
+    className="flex items-start justify-between py-4 border-b"
+  >
+    <img
+      src={item.image}
+      alt={item.name}
+      className="w-16 h-16 object-cover rounded-md"
+    />
+
+    <div className="flex-1 mx-3">
+      <h4 className="font-medium text-sm line-clamp-1">{item.name}</h4>
+
+      {Array.isArray(item.options) && item.options.length > 0 && (
+        <ul className="text-xs text-gray-500 mt-1 space-y-0.5">
+          {item.options.map((opt, index) => (
+            <li key={index}>{opt}</li>
+          ))}
+        </ul>
+      )}
+
+      <p className="text-sm font-semibold mt-1">
+        ₦{item.price?.toLocaleString?.()}
+      </p>
+    </div>
+
+    <div className="flex items-center bg-gray-100 rounded-full px-2 py-1 space-x-2">
+      {isEditable && (
+        <button
+          onClick={() => removeFromCart(item.id, item.options)}
+          className="text-gray-600 hover:text-red-500"
         >
-          <img
-            src={item.image}
-            alt={item.name}
-            className="w-16 h-16 object-cover rounded-md"
-          />
-
-          <div className="flex-1 mx-3">
-            <h4 className="font-medium text-sm line-clamp-1">{item.name}</h4>
-
-            {/* ✅ options are always array of strings now */}
-            {item.options?.length > 0 && (
-              <ul className="text-xs text-gray-500 mt-1 space-y-0.5">
-                {item.options.map((opt, index) => (
-                  <li key={index}>{opt}</li>
-                ))}
-              </ul>
-            )}
-
-            <p className="text-sm font-semibold mt-1">
-              ₦{item.price.toLocaleString()}
-            </p>
-          </div>
-
-          <div className="flex items-center bg-gray-100 rounded-full px-2 py-1 space-x-2">
-            {isEditable && (
-              <button
-                onClick={() => removeFromCart(item.id, item.options)}
-                className="text-gray-600 hover:text-red-500"
-              >
-                <FiTrash2 size={16} />
-              </button>
-            )}
-            {isEditable && (
-              <button
-                onClick={() => decrementItem(item.id, item.options)}
-                className="text-gray-600 hover:text-gray-800"
-              >
-                <FiMinus size={16} />
-              </button>
-            )}
-            <span className="text-sm">{item.quantity}</span>
-            {isEditable && (
-              <button
-                onClick={() => incrementItem(item.id, item.options)}
-                className="text-gray-600 hover:text-green-500"
-              >
-                <FiPlus size={16} />
-              </button>
-            )}
-          </div>
-        </div>
-      ))}
+          <FiTrash2 size={16} />
+        </button>
+      )}
+      {isEditable && (
+        <button
+          onClick={() => decrementItem(item.id, item.options)}
+          className="text-gray-600 hover:text-gray-800"
+        >
+          <FiMinus size={16} />
+        </button>
+      )}
+      <span className="text-sm">{item.quantity}</span>
+      {isEditable && (
+        <button
+          onClick={() => incrementItem(item.id, item.options)}
+          className="text-gray-600 hover:text-green-500"
+        >
+          <FiPlus size={16} />
+        </button>
+      )}
+    </div>
+  </div>
+))}
 
       {isEditable && (
         <div className="mt-4 flex justify-end">
