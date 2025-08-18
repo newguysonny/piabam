@@ -1,10 +1,10 @@
 import { useCart } from "../../context/CartContext";
 
-export default function MenuItem({ item, restaurantId }) {
-  const { addToCart } = useCart();
+export default function MenuItem({ item, onAdd, restaurantId }) {
+  const { onAdd } = useCart();
 
   const handleAddClick = () => {
-    addToCart(
+    onAdd(
       {
         id: item.id,
         name: item.name,
