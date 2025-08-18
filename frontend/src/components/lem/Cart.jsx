@@ -35,7 +35,7 @@ className="w-16 h-16 object-cover rounded-md"
       <div className="flex items-center bg-gray-100 rounded-full px-2 py-1 space-x-2">  
         {isEditable && (  
           <button  
-            onClick={() => removeFromCart(item.id)}  
+            onClick={() => removeFromCart(item.id, item.options)}  
             className="text-gray-600 hover:text-red-500"  
           >  
             <FiTrash2 size={16} />  
@@ -43,7 +43,7 @@ className="w-16 h-16 object-cover rounded-md"
         )}  
         {isEditable && (  
           <button  
-            onClick={() => decrementItem(item.id)}  
+            onClick={() => decrementItem(item.id, item.options)}  
             className="text-gray-600 hover:text-gray-800"  
           >  
             <FiMinus size={16} />  
@@ -52,7 +52,7 @@ className="w-16 h-16 object-cover rounded-md"
         <span className="text-sm">{item.quantity}</span>  
         {isEditable && (  
           <button  
-            onClick={() => incrementItem(item.id)}  
+            onClick={() => incrementItem(item.id), item.options}  
             className="text-gray-600 hover:text-green-500"  
           >  
             <FiPlus size={16} />  
