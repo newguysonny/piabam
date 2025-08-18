@@ -20,9 +20,9 @@ className="w-16 h-16 object-cover rounded-md"
 
 <div className="flex-1 mx-3">  
         <h4 className="font-medium text-sm line-clamp-1">{item.name}</h4>  
-        {item.options?.length > 0 && (  
+        {item.customizations?.length > 0 && (  
           <ul className="text-xs text-gray-500 mt-1 space-y-0.5">  
-            {item.options.map((note, index) => (  
+            {item.customizations.map((note, index) => (  
               <li key={index}>{note}</li>  
             ))}  
           </ul>  
