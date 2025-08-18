@@ -4,9 +4,7 @@ import { useCart } from "../../context/CartContext";
 
 export default function FloatingCartButton({ onClick }) {
   const { cart } = useCart();
-
-  // cart is an array, not { items: [...] }
-  const itemCount = cart.reduce((sum, i) => sum + (i.quantity || 1), 0);
+  const itemCount = cart.items.reduce((sum, i) => sum + (i.quantity || 1), 0);
 
   if (itemCount === 0) return null; // hide if empty
 
