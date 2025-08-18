@@ -165,7 +165,7 @@ const handleConfirmOptions = (selectedOptions, totalPrice) => {
   />
 ))}
 
-      {!modalItem && cartCount > 0 && (
+      {cartCount > 0 && (
         <FloatingCartButton
           itemCount={cartCount}
           onClick={() => navigate("/checkout")}
