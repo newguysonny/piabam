@@ -1,23 +1,28 @@
 import { useCart } from "../../context/CartContext";
-import { toast } from "react-hot-toast"; // or your toast library
+import { toast } from "react-hot-toast";
 
-export default function MenuItem({ item, restaurantId }) {
+export default function MenuItem({ item, restaurantId, onAdd }) {
   const { addToCart } = useCart();
 
   const handleAddClick = () => {
-    addToCart(
-      {
-        id: item.id,
-        name: item.name,
-        price: item.price,
-        image: item.image,
-        customizations: item.customizations || [],
-        quantity: 1,
-      },
-      restaurantId
-    );
-
-    toast.success(`${item.name} added to cart`);
+    if (onAdd) {
+      // ✅ Use the parent-provided handler (RestaurantPage controls modal)
+      onAdd(item);
+    } else {
+      // ✅ Fallback: add directly to cart if no onAdd is passed
+      addToCart(
+        {
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          image: item.image,
+          customizations: item.customizations || [],
+          quantity: 1,
+        },
+        restaurantId
+      );
+      toast.success(`${item.name} added to cart`);
+    }
   };
 
   return (
