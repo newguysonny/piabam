@@ -1,4 +1,134 @@
 // src/context/CartContext.jsx
+import { createContext, useContext, useEffect, useState } from "react";
+
+const CartContext = createContext();
+
+export const CartProvider = ({ children }) => {
+  const [cart, setCart] = useState(() => {
+    const saved = localStorage.getItem("cart");
+    return saved ? JSON.parse(saved) : { restaurantId: null, items: [] };
+  });
+
+  // persist
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  // Helper to compare options
+  const sameOptions = (a, b) =>
+    JSON.stringify(a ?? []) === JSON.stringify(b ?? []);
+
+  // ✅ sanitize options before saving
+  const normalizeOptions = (options) => {
+    if (!options) return null;
+
+    if (Array.isArray(options)) {
+      return options.map((opt) =>
+        typeof opt === "object" ? JSON.stringify(opt) : String(opt)
+      );
+    }
+
+    if (typeof options === "object") {
+      return Object.entries(options).map(
+        ([key, val]) => `${key}: ${String(val)}`
+      );
+    }
+
+    return [String(options)];
+  };
+
+  // ✅ Add to cart
+  const addToCart = (item, restaurantId) => {
+    const sanitizedItem = {
+      ...item,
+      options: normalizeOptions(item.options), // 🔥 always clean
+      quantity: item.quantity ?? 1,
+    };
+
+    setCart((prev) => {
+      if (prev.restaurantId && prev.restaurantId !== restaurantId) {
+        // reset if switching restaurants
+        return { restaurantId, items: [sanitizedItem] };
+      }
+
+      const existing = prev.items.find(
+        (i) =>
+          i.id === sanitizedItem.id &&
+          sameOptions(i.options, sanitizedItem.options)
+      );
+
+      if (existing) {
+        return {
+          ...prev,
+          items: prev.items.map((i) =>
+            i.id === sanitizedItem.id &&
+            sameOptions(i.options, sanitizedItem.options)
+              ? { ...i, quantity: i.quantity + sanitizedItem.quantity }
+              : i
+          ),
+        };
+      }
+
+      return { ...prev, restaurantId, items: [...prev.items, sanitizedItem] };
+    });
+  };
+
+  // ✅ Remove specific item
+  const removeFromCart = (id, options) =>
+    setCart((prev) => ({
+      ...prev,
+      items: prev.items.filter(
+        (i) => !(i.id === id && sameOptions(i.options, normalizeOptions(options)))
+      ),
+    }));
+
+  // ✅ Increment
+  const incrementItem = (id, options) =>
+    setCart((prev) => ({
+      ...prev,
+      items: prev.items.map((i) =>
+        i.id === id && sameOptions(i.options, normalizeOptions(options))
+          ? { ...i, quantity: i.quantity + 1 }
+          : i
+      ),
+    }));
+
+  // ✅ Decrement
+  const decrementItem = (id, options) =>
+    setCart((prev) => ({
+      ...prev,
+      items: prev.items
+        .map((i) =>
+          i.id === id && sameOptions(i.options, normalizeOptions(options))
+            ? { ...i, quantity: i.quantity - 1 }
+            : i
+        )
+        .filter((i) => i.quantity > 0),
+    }));
+
+  const clearCart = () => setCart({ restaurantId: null, items: [] });
+
+  return (
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        incrementItem,
+        decrementItem,
+        clearCart,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
+};
+
+export const useCart = () => useContext(CartContext);
+
+
+
+/*
 // src/context/CartContext.jsx
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -98,7 +228,7 @@ export const CartProvider = ({ children }) => {
 };
 
 export const useCart = () => useContext(CartContext);
-
+*/
 
 
 /*
