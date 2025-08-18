@@ -139,10 +139,26 @@ const handleAddToCart = (item) => {
 };
 
 const handleConfirmOptions = (selectedOptions, totalPrice) => {
-  addToCart({ ...modalItem, selectedOptions, totalPrice, quantity: 1 }, restaurantId);
+  // Transform selectedOptions into the format you want to display
+  const displayOptions = selectedOptions.map(opt => `${opt.group}: ${opt.choice}`);
+  
+  addToCart({ 
+    ...modalItem, 
+    options: displayOptions, // Store only the selected options as strings
+    price: totalPrice,      // Use the calculated total price
+    quantity: 1 
+  }, restaurantId);
+  
   toast.success(`${modalItem.name} ₦${totalPrice.toFixed(2)} (1) added to cart`);
   setModalItem(null);
 };
+  
+  {/*
+const handleConfirmOptions = (selectedOptions, totalPrice) => {
+  addToCart({ ...modalItem, selectedOptions, totalPrice, quantity: 1 }, restaurantId);
+  toast.success(`${modalItem.name} ₦${totalPrice.toFixed(2)} (1) added to cart`);
+  setModalItem(null);
+}; */}
   
   return (
     <div className="bg-white-50 min-h-screen"> 
