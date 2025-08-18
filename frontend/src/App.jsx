@@ -1,6 +1,7 @@
 // App.jsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from "react-hot-toast";
+import { CartProvider } from "./context/CartContext";
 
 import SigninForm from './pages/SigninForm';
 import SignupForm from './pages/SignupForm';
@@ -34,6 +35,7 @@ import HomePage from './pages/HomePage';
 export default function App() {
   return (
     <BrowserRouter>
+      <CartProvider>
       <Routes>
         <Route path="/" element={<HomePage />} />
              {/*Escrow Section and Dashboard */}
@@ -69,6 +71,7 @@ export default function App() {
         
        
       </Routes>
+      </CartProvider>
       <Toaster position="bottom-center" reverseOrder={false} />
     </BrowserRouter>
   );
