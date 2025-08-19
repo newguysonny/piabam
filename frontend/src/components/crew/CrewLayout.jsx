@@ -46,7 +46,7 @@ export default function CrewLayout({ transaction }) {
             className="bg-neutral-800 text-white p-6 rounded-lg w-80"
           >
             <h3 className="text-lg font-semibold mb-4">Meal Details</h3>
-            <Cart isEditable={false} />
+            <CartPreview isEditable={false} />
             <p className="text-sm">
               You can order extra or find more items using the store button on the bottom page..
             </p>
