@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Cart from "./Cart.jsx";
+import Cart from "./CartPreview.jsx";
 
 
 const crewCart = {
@@ -89,7 +89,7 @@ export default function CrewPreview({ crew, onClose }) {
           <p className="mt-3 text-gray-600">{crew.description}</p>
         </div>
 
-        <Cart />
+        <CartPreview />
       </div>
 
       {/* Fixed Join Button (always visible) */}
