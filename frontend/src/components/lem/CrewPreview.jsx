@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Cart from "./CartPreview.jsx";
+import CartPreview from "./CartPreview.jsx";
 
 
 const crewCart = {
