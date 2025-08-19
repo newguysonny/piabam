@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom';
+import CoverImage from './CoverImage';
 
 const RestaurantCard = ({ item }) => {
   const navigate = useNavigate();
 
   return (
     <div className="bg-white rounded-xl p-4 shadow-sm">
+      <CoverImage src="https://placehold.co/800x400" />
       <div className="flex justify-between items-start">
         <div>
           <h3 className="font-bold text-lg">{item.name}</h3>
