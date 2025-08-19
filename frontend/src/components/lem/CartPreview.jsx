@@ -31,7 +31,7 @@ const initialCart = {
   subtotal: 6700, // coming from DB
 };
 
-const Cart = ({ isEditable = false, userCart }) => {
+const CartPreview = ({ isEditable = false, userCart }) => {
   const [cart, setCart] = useState(userCart||initialCart);
   
 
@@ -138,4 +138,4 @@ const Cart = ({ isEditable = false, userCart }) => {
   );
 };
 
-export default Cart;
+export default CartPreview;
