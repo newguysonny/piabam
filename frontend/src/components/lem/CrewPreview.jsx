@@ -19,7 +19,7 @@ const crewCart = {
       price: 5700, // in Naira
       quantity: 1,
       image: "https://source.unsplash.com/80x80/?burrito",
-      customizations: [
+      options: [
         "Cheese",
         "Lettuce",
         "Pico De Gallo",
