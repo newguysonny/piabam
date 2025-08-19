@@ -2,6 +2,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from "react-hot-toast";
 import { CartProvider } from "./context/CartContext";
+import ScrollToTop from './components/ScrollToTop';
 
 import SigninForm from './pages/SigninForm';
 import SignupForm from './pages/SignupForm';
@@ -37,6 +38,7 @@ export default function App() {
   return (
     <CartProvider>
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
              {/*Escrow Section and Dashboard */}
