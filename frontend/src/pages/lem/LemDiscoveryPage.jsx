@@ -20,9 +20,44 @@ const LemDiscoveryPage = () => {
 
   // Sample data
   const [allListings] = useState([
-    // ... (your sample data remains the same)
+    {
+      id: 1,
+      name: "Healthy Bites",
+      type: "restaurant",
+      category: "weight loss",
+      rating: 4.8,
+      orders: 1964,
+      completionRate: 99,
+      priceRange: "$$",
+      distance: "0.5 miles",
+      deliveryTime: "15 mins"
+    },
+    {
+      id: 2,
+      name: "Muscle Fuel Kitchen",
+      type: "restaurant", 
+      category: "weight gain",
+      rating: 4.5,
+      orders: 2616,
+      completionRate: 95,
+      priceRange: "$$$",
+      distance: "1.2 miles",
+      deliveryTime: "20 mins"
+    },
+    {
+      id: 3,
+      name: "Chef Ade's Meal Prep",
+      type: "crew",
+      category: "custom",
+      rating: 4.2,
+      orders: 1355,
+      completionRate: 88,
+      priceRange: "$$",
+      distance: "2.5 miles",
+      deliveryTime: "30 mins"
+    }
   ]);
-
+  
   // Configuration for dropdowns and tabs (avoids hardcoding in JSX)
   const tabOptions = [
     { id: 'restaurants', label: 'Restaurants' },
