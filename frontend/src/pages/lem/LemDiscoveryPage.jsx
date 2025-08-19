@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { FiFilter } from 'react-icons/fi';
-import SearchBox from '../../components/restaurants/SearchBox';
-import MainTabs from '../../components/restaurants/MainTabs';
-import FilterBar from '../../components/restaurants/FilterBar';
-import CategoryDropdown from '../../components/restaurants/CategoryDropdown';
-import LocationInput from '../../components/restaurants/LocationInput';
-import DistanceDropdown from '../../components/restaurants/DistanceDropdown';
-import SortOptions from '../../components/restaurants/SortOptions';
-import RestaurantCard from '../../components/restaurants/RestaurantCard';
+import SearchBox from '../../components/restaurant/SearchBox';
+import MainTabs from '../../components/restaurant/MainTabs';
+import FilterBar from '../../components/restaurant/FilterBar';
+import CategoryDropdown from '../../components/restaurant/CategoryDropdown';
+import LocationInput from '../../components/restaurant/LocationInput';
+import DistanceDropdown from '../../components/restaurant/DistanceDropdown';
+import SortOptions from '../../components/restaurant/SortOptions';
+import RestaurantCard from '../../components/restaurant/RestaurantCard';
 
 const LemDiscoveryPage = () => {
   // State management
