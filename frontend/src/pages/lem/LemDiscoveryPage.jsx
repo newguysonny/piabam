@@ -10,8 +10,7 @@ import SortOptions from '../../components/restaurant/SortOptions';
 import RestaurantCard from '../../components/restaurant/RestaurantCard';
 
 const LemDiscoveryPage = () => {
-  // State management
-  const [activeTab, setActiveTab] = useState('restaurants');
+  // State management (removed activeTab)
   const [searchQuery, setSearchQuery] = useState('');
   const [category, setCategory] = useState('');
   const [location, setLocation] = useState('');
@@ -30,7 +29,8 @@ const LemDiscoveryPage = () => {
       completionRate: 99,
       priceRange: "$$",
       distance: "0.5 miles",
-      deliveryTime: "15 mins"
+      deliveryTime: "15 mins",
+      location: "123 Main St, Cityville"
     },
     {
       id: 2,
@@ -42,7 +42,8 @@ const LemDiscoveryPage = () => {
       completionRate: 95,
       priceRange: "$$$",
       distance: "1.2 miles",
-      deliveryTime: "20 mins"
+      deliveryTime: "20 mins",
+      location: "456 Oak Ave, Townsville"
     },
     {
       id: 3,
@@ -54,17 +55,12 @@ const LemDiscoveryPage = () => {
       completionRate: 88,
       priceRange: "$$",
       distance: "2.5 miles",
-      deliveryTime: "30 mins"
+      deliveryTime: "30 mins",
+      location: "789 Pine Rd, Villageton"
     }
   ]);
-  
-  // Configuration for dropdowns and tabs (avoids hardcoding in JSX)
-  const tabOptions = [
-    { id: 'restaurants', label: 'Restaurants' },
-    { id: 'crews', label: 'Crews' },
-    { id: 'projects', label: 'Lem Projects' },
-  ];
 
+  // Configuration for dropdowns (removed tabOptions)
   const categoryOptions = [
     { value: 'weight loss', label: 'Weight Loss' },
     { value: 'weight gain', label: 'Weight Gain' },
@@ -88,90 +84,69 @@ const LemDiscoveryPage = () => {
     { value: 'Price (low to high)', label: 'Price (low to high)' },
   ];
 
-  // Filtered listings logic (useEffect remains the same)
-  // ... imports and state declarations remain the same ...
+  // Filtered listings logic - SIMPLIFIED (removed tab filtering)
+  const [filteredListings, setFilteredListings] = useState(allListings);
 
-// Filtered listings logic - UPDATED AND FIXED
-const [filteredListings, setFilteredListings] = useState(allListings);
+  useEffect(() => {
+    let results = allListings;
+    
+    // Apply search filter
+    if (searchQuery) {
+      results = results.filter(item => 
+        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.category.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+    
+    // REMOVED: Tab filter section entirely
+    
+    // Apply category filter
+    if (category) {
+      results = results.filter(item => 
+        item.category.toLowerCase() === category.toLowerCase()
+      );
+    }
+    
+    // Apply distance filter
+    if (distance) {
+      const distanceValue = parseFloat(distance);
+      results = results.filter(item => {
+        const itemDistance = parseFloat(item.distance);
+        return itemDistance <= distanceValue;
+      });
+    }
+    
+    // Apply location filter
+    if (location) {
+      results = results.filter(item => 
+        item.location && item.location.toLowerCase().includes(location.toLowerCase())
+      );
+    }
+    
+    // Apply sorting
+    if (sortBy) {
+      results = [...results].sort((a, b) => {
+        switch (sortBy) {
+          case 'Ratings':
+            return b.rating - a.rating;
+          case 'Completed Orders':
+            return b.orders - a.orders;
+          case 'Completion Rate':
+            return b.completionRate - a.completionRate;
+          case 'Price (low to high)':
+            return a.priceRange.length - b.priceRange.length;
+          default:
+            return 0;
+        }
+      });
+    }
+    
+    setFilteredListings(results);
+  }, [searchQuery, allListings, category, distance, location, sortBy]); // Removed activeTab from dependencies
 
-useEffect(() => {
-  let results = allListings;
-  
-  // Apply search filter
-  if (searchQuery) {
-    results = results.filter(item => 
-      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.category.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }
-  
-  // Apply tab filter - FIXED: Check for both 'restaurants' and 'crews'
-  if (activeTab === 'restaurants') {
-    results = results.filter(item => item.type === 'restaurant');
-  } else if (activeTab === 'crews') {
-    results = results.filter(item => item.type === 'crew');
-  }
-  // If activeTab is 'projects', you might want to filter differently
-  // For now, let's assume it shows all or something else
-  
-  // Apply category filter - FIXED: Only filter if category is not empty
-  if (category) {
-    results = results.filter(item => 
-      item.category.toLowerCase() === category.toLowerCase()
-    );
-  }
-  
-  // Apply distance filter - FIXED: Proper numeric comparison
-  if (distance) {
-    const distanceValue = parseFloat(distance); // Extracts the number from "5 miles"
-    results = results.filter(item => {
-      const itemDistance = parseFloat(item.distance); // Extracts number from "0.5 miles"
-      return itemDistance <= distanceValue;
-    });
-  }
-  
-  // Apply location filter - FIXED: Handle cases where item might not have location
-  if (location) {
-    results = results.filter(item => 
-      item.location && item.location.toLowerCase().includes(location.toLowerCase())
-    );
-  }
-  
-  // Apply sorting - FIXED: Handle price range sorting better
-  if (sortBy) {
-    results = [...results].sort((a, b) => {
-      switch (sortBy) {
-        case 'Ratings':
-          return b.rating - a.rating;
-        case 'Completed Orders':
-          return b.orders - a.orders;
-        case 'Completion Rate':
-          return b.completionRate - a.completionRate;
-        case 'Price (low to high)':
-          // Simple approach: compare length of priceRange string ($$$ > $$ > $)
-          return a.priceRange.length - b.priceRange.length;
-        default:
-          return 0;
-      }
-    });
-  }
-  
-  setFilteredListings(results);
-}, [searchQuery, activeTab, allListings, category, distance, location, sortBy]);
-
-  // Search input handler
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  // Clear search
-  const clearSearch = () => {
-    setSearchQuery('');
-  };
   // Handler for the "Use Current Location" button
   const handleUseCurrentLocation = () => {
     setLocation("Current Location");
-    // You would integrate a real geolocation API here
   };
 
   return (
@@ -186,12 +161,7 @@ useEffect(() => {
         />
       </div>
 
-      {/* Main Tabs */}
-      <MainTabs
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-        tabs={tabOptions}
-      />
+      {/* REMOVED: MainTabs component */}
 
       {/* Filter Bar */}
       <FilterBar>
