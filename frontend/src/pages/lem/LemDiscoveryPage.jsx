@@ -89,11 +89,85 @@ const LemDiscoveryPage = () => {
   ];
 
   // Filtered listings logic (useEffect remains the same)
-  const [filteredListings, setFilteredListings] = useState(allListings);
-  useEffect(() => {
-    // ... (your filtering logic remains exactly the same)
-  }, [searchQuery, activeTab, allListings, category, distance, location, sortBy]);
+  // ... imports and state declarations remain the same ...
 
+// Filtered listings logic - UPDATED AND FIXED
+const [filteredListings, setFilteredListings] = useState(allListings);
+
+useEffect(() => {
+  let results = allListings;
+  
+  // Apply search filter
+  if (searchQuery) {
+    results = results.filter(item => 
+      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.category.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }
+  
+  // Apply tab filter - FIXED: Check for both 'restaurants' and 'crews'
+  if (activeTab === 'restaurants') {
+    results = results.filter(item => item.type === 'restaurant');
+  } else if (activeTab === 'crews') {
+    results = results.filter(item => item.type === 'crew');
+  }
+  // If activeTab is 'projects', you might want to filter differently
+  // For now, let's assume it shows all or something else
+  
+  // Apply category filter - FIXED: Only filter if category is not empty
+  if (category) {
+    results = results.filter(item => 
+      item.category.toLowerCase() === category.toLowerCase()
+    );
+  }
+  
+  // Apply distance filter - FIXED: Proper numeric comparison
+  if (distance) {
+    const distanceValue = parseFloat(distance); // Extracts the number from "5 miles"
+    results = results.filter(item => {
+      const itemDistance = parseFloat(item.distance); // Extracts number from "0.5 miles"
+      return itemDistance <= distanceValue;
+    });
+  }
+  
+  // Apply location filter - FIXED: Handle cases where item might not have location
+  if (location) {
+    results = results.filter(item => 
+      item.location && item.location.toLowerCase().includes(location.toLowerCase())
+    );
+  }
+  
+  // Apply sorting - FIXED: Handle price range sorting better
+  if (sortBy) {
+    results = [...results].sort((a, b) => {
+      switch (sortBy) {
+        case 'Ratings':
+          return b.rating - a.rating;
+        case 'Completed Orders':
+          return b.orders - a.orders;
+        case 'Completion Rate':
+          return b.completionRate - a.completionRate;
+        case 'Price (low to high)':
+          // Simple approach: compare length of priceRange string ($$$ > $$ > $)
+          return a.priceRange.length - b.priceRange.length;
+        default:
+          return 0;
+      }
+    });
+  }
+  
+  setFilteredListings(results);
+}, [searchQuery, activeTab, allListings, category, distance, location, sortBy]);
+
+  // Search input handler
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // Clear search
+  const clearSearch = () => {
+    setSearchQuery('');
+  };
   // Handler for the "Use Current Location" button
   const handleUseCurrentLocation = () => {
     setLocation("Current Location");
