@@ -9,7 +9,7 @@ const Cart = ({ isEditable = false }) => {
     <div className="max-w-md mx-auto p-4">
      {Array.isArray(cart?.items) && cart.items.map((item) => (
   <div
-    key={`${item.id}-${JSON.stringify(item.options)}`} // safer unique key
+    key={`${item.id}-${JSON.stringify(item.options)}`} // a safer unique key
     className="flex items-start justify-between py-4 border-b"
   >
     <img
