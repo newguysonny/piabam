@@ -21,7 +21,7 @@ export default function Checkout({ subtotal = 7200, escrowFee = 1700, discount =
 
       <h1 className="text-xl font-bold">Checkout</h1>
 
-      {/* Store/Restaurants Details */}
+      {/* Store/Restaurants Details*/}
       <StoreDetails />
 
       <hr className="my-3 h-[20px] bg-gray-200 border-0 rounded" />
