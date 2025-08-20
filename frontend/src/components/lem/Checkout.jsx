@@ -8,7 +8,8 @@ import { FaArrowLeft } from "react-icons/fa";
 export default function Checkout({ escrowFee = 1700, discount = 1500 }) {
   const navigate = useNavigate();
   
-  const { subtotal} = useCart();
+  const { cartTotal} = useCart();
+  const subtotal= cartTotal;
   const total = subtotal + escrowFee - discount;
 
   return (
