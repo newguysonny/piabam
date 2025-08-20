@@ -2,11 +2,14 @@
 import { useNavigate } from "react-router-dom";
 import Cart from "./Cart.jsx";
 import StoreDetails from "./StoreDetails";
+import { useCart } from "../../context/CartContext"; 
 import { FaArrowLeft } from "react-icons/fa";
 
-export default function Checkout({ subtotal = 7200, escrowFee = 1700, discount = 1500 }) {
+export default function Checkout({ escrowFee = 1700, discount = 1500 }) {
   const navigate = useNavigate();
-  const total = subtotal + escrowFee - discount;
+  
+  const { subtotal} = useCart();
+  const total = { subtotal} + escrowFee - discount;
 
   return (
     <>
@@ -55,7 +58,7 @@ export default function Checkout({ subtotal = 7200, escrowFee = 1700, discount =
       <hr className="my-3 h-4 bg-gray-200 border-0 rounded" />
     </div>
 
-    /* Fixed Order Total + Confirm Button */
+    
     <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-50 px-4 py-3">
       <div className="flex justify-between font-bold text-lg mb-4">
         <span>Order total</span>
