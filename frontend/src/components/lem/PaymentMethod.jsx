@@ -1,12 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { FaArrowLeft, FaCreditCard, FaGlobe } from "react-icons/fa";
 
-export default function PaymentMethod({ amountDue = 7200, onComplete }) {
+export default function PaymentMethod({ onComplete }) {
   const [selectedMethod, setSelectedMethod] = useState("transfer");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { total} = location.state || {};
+  const amountDue = total;
 
+// Add safety check
+  if (!location.state) {
+    return <div>No order data found. Please go back and confirm your order.</div>;
+  }
+  
   const methods = [
     { id: "card", label: "Add bank card", icon: <FaCreditCard className="text-green-600" /> },
     { id: "paystack", label: "Pay with Paystack", icon: <FaGlobe className="text-blue-500" /> },
@@ -79,7 +88,7 @@ export default function PaymentMethod({ amountDue = 7200, onComplete }) {
     
     <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-50 px-4 py-3">
       <div className="flex justify-between items-center mb-3">
-        <span className="text-gray-600 font-medium">Amount due</span>
+        <span className="text-gray-600 font-medium">Order due</span>
         <span className="font-bold text-lg">₦{amountDue.toLocaleString()}</span>
       </div>
 
