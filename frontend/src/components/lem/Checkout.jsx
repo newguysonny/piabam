@@ -9,7 +9,7 @@ export default function Checkout({ escrowFee = 1700, discount = 1500 }) {
   const navigate = useNavigate();
   
   const { subtotal} = useCart();
-  const total = { subtotal} + escrowFee - discount;
+  const total = subtotal + escrowFee - discount;
 
   return (
     <>
