@@ -1,6 +1,6 @@
 const FilterBar = ({ children }) => {
   return (
-    <div className="p-4 bg-white sticky top-28 z-10 shadow-sm">
+    <div className="p-4 bg-white sticky top-16 z-10 shadow-sm">
       {children}
     </div>
   );
