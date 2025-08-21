@@ -50,60 +50,64 @@ export default function CrewPreview({ crew, onClose }) {
         className="fixed inset-0 bg-black bg-opacity-40 z-50"
         onClick={onClose}
       />
+      
+      {/* Outer container with margin/padding */}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Modal - Updated dimensions to match reference card */}
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl p-4 z-50 shadow-lg w-full max-w-sm mx-auto h-[80vh] max-h-[600px] overflow-y-auto">
-        {/* Header */}
-        <div className="flex justify-between items-center">
-          <h2 className="text-xl font-bold">{crew.name}</h2>
-          <button onClick={onClose} className="text-gray-500">
-            ✕
-          </button>
-        </div>
-
-        <img
-          src={crew.avatar}
-          alt={crew.name}
-          className="w-full h-48 object-cover rounded-lg mt-3"
-        />
-        <div className="text-left">
-          <div className="text-xl mt-2 font-bold text-gray-800">
-            ₦{crew.subtotal.toLocaleString()}
+        {/* Modal - Updated with margin from corners */}
+        <div className="bg-white rounded-2xl shadow-lg w-full max-w-sm max-h-[90vh] overflow-y-auto">
+          {/* Header */}
+          <div className="flex justify-between items-center p-4 border-b border-gray-100">
+            <h2 className="text-xl font-bold">{crew.name}</h2>
+            <button onClick={onClose} className="text-gray-500 text-xl">
+              ✕
+            </button>
           </div>
-          <div className="text-sm text-gray-500">30% discount on checkout</div>
-        </div>
 
-        {/* Progress Bar */}
-        <div className="w-full bg-gray-200 rounded-full h-2 mt-4">
-          <div
-            className="bg-green-600 h-2 rounded-full transition-all duration-300"
-            style={{ width: `${progress}%` }}
-          ></div>
-        </div>
-        <p className="mt-3 text-gray-600">
-          {crew.joined}/{crew.capacity} joined
-        </p>
+          <div className="p-4">
+            <img
+              src={crew.avatar}
+              alt={crew.name}
+              className="w-full h-48 object-cover rounded-lg"
+            />
+            <div className="text-left mt-3">
+              <div className="text-xl font-bold text-gray-800">
+                ₦{crew.subtotal.toLocaleString()}
+              </div>
+              <div className="text-sm text-gray-500">30% discount on checkout</div>
+            </div>
 
-        <div className="mt-4 mb-3">
-          <span className="font-bold text-lg">Description</span>
-          <p className="mt-3 text-gray-600">{crew.description}</p>
-        </div>
+            {/* Progress Bar */}
+            <div className="w-full bg-gray-200 rounded-full h-2 mt-4">
+              <div
+                className="bg-green-600 h-2 rounded-full transition-all duration-300"
+                style={{ width: `${progress}%` }}
+              ></div>
+            </div>
+            <p className="mt-3 text-gray-600">
+              {crew.joined}/{crew.capacity} joined
+            </p>
 
-        <CartPreview />
-        
-        {/* Join Button inside modal (not fixed) */}
-        <div className="mt-6 pb-4">
-          <button
-            onClick={() => {
-              onClose(); // close modal
-              navigate("/checkout"); // navigate to checkout
-            }}
-            className="w-full bg-black text-white py-3 rounded-xl font-semibold hover:opacity-90"
-          >
-            Join Crew
-          </button>
+            <div className="mt-4 mb-3">
+              <span className="font-bold text-lg">Description</span>
+              <p className="mt-3 text-gray-600">{crew.description}</p>
+            </div>
+
+            <CartPreview />
+            
+            {/* Join Button inside modal */}
+            <div className="mt-6 pb-2">
+              <button
+                onClick={() => {
+                  onClose(); // close modal
+                  navigate("/checkout"); // navigate to checkout
+                }}
+                className="w-full bg-black text-white py-3 rounded-xl font-semibold hover:opacity-90"
+              >
+                Join Crew
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
       </div>
     </>
   );
