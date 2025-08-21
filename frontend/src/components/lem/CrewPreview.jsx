@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion, useMotionValue, useTransform } from "framer-motion";
 import CartPreview from "./CartPreview.jsx";
 
 const crewCart = {
@@ -36,11 +35,13 @@ export default function CrewPreview({ crew, onClose }) {
   const navigate = useNavigate();
   const progress = (crew.joined / crew.capacity) * 100;
   const [isSwiping, setIsSwiping] = useState(false);
+  const [swipeOffset, setSwipeOffset] = useState(0);
+  const cardRef = useRef(null);
 
-  // Motion values for swipe animation
-  const x = useMotionValue(0);
-  const rotate = useTransform(x, [-200, 200], [-15, 15]);
-  const opacity = useTransform(x, [-200, -100, 0, 100, 200], [0, 1, 1, 1, 0]);
+  // Touch start positions
+  const startX = useRef(0);
+  const startY = useRef(0);
+  const isHorizontalSwipe = useRef(false);
 
   // Prevent background scroll while modal is open
   useEffect(() => {
@@ -50,6 +51,64 @@ export default function CrewPreview({ crew, onClose }) {
     };
   }, []);
 
+  const handleTouchStart = (e) => {
+    startX.current = e.touches[0].clientX;
+    startY.current = e.touches[0].clientY;
+    isHorizontalSwipe.current = false;
+    setIsSwiping(true);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isSwiping) return;
+
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    
+    const deltaX = currentX - startX.current;
+    const deltaY = currentY - startY.current;
+    
+    // Calculate angle in degrees (0° = pure horizontal, 90° = pure vertical)
+    const angle = Math.abs(Math.atan2(deltaY, deltaX) * 180 / Math.PI);
+    
+    // If we haven't determined swipe direction yet, check the angle
+    if (!isHorizontalSwipe.current) {
+      if (angle < 45) {
+        // Primarily horizontal swipe - prevent default to avoid scrolling
+        isHorizontalSwipe.current = true;
+        e.preventDefault();
+      } else {
+        // Primarily vertical swipe - allow scrolling, don't handle as dismiss
+        return;
+      }
+    }
+    
+    // If it's a horizontal swipe, update the offset for animation
+    if (isHorizontalSwipe.current) {
+      setSwipeOffset(deltaX);
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    if (!isSwiping) return;
+    
+    setIsSwiping(false);
+    
+    if (isHorizontalSwipe.current) {
+      const currentX = e.changedTouches[0].clientX;
+      const deltaX = currentX - startX.current;
+      
+      // If swiped beyond threshold, close the modal
+      if (Math.abs(deltaX) > 100) {
+        onClose();
+      } else {
+        // Return to center if not swiped far enough
+        setSwipeOffset(0);
+      }
+    }
+    
+    isHorizontalSwipe.current = false;
+  };
+
   // Handle overlay click to close modal
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -57,36 +116,39 @@ export default function CrewPreview({ crew, onClose }) {
     }
   };
 
-  // Handle swipe end
-  const handleDragEnd = (event, info) => {
-    setIsSwiping(false);
+  // Calculate transform styles for swipe animation
+  const getTransformStyle = () => {
+    if (!isSwiping || !isHorizontalSwipe.current) return {};
     
-    // If swiped beyond threshold, close the modal
-    if (Math.abs(info.offset.x) > 100) {
-      onClose();
-    }
+    const rotate = swipeOffset * 0.05; // Rotate based on swipe distance
+    const opacity = 1 - Math.abs(swipeOffset) / 300; // Fade out when swiping far
+    
+    return {
+      transform: `translateX(${swipeOffset}px) rotate(${rotate}deg)`,
+      opacity: Math.max(0.7, opacity),
+      transition: isSwiping ? 'none' : 'transform 0.3s ease, opacity 0.3s ease'
+    };
   };
 
   return (
     <>
-      {/* Overlay  */}
+      {/* Overlay */}
       <div
         className="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center p-2"
         onClick={handleOverlayClick}
       >
-        {/* Swipeable Modal container */}
-        <motion.div 
+        {/* Modal container with touch handlers */}
+        <div 
+          ref={cardRef}
           className="bg-white rounded-2xl shadow-lg w-full max-w-sm max-h-[70vh] overflow-y-auto flex flex-col"
           onClick={(e) => e.stopPropagation()}
-          drag="x" // Enable horizontal dragging
-          dragConstraints={{ left: 0, right: 0 }} // Keep centered when not actively dragging
-          onDragStart={() => setIsSwiping(true)}
-          onDragEnd={handleDragEnd}
-          style={{ x, rotate, opacity }}
-          whileTap={{ cursor: "grabbing" }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          style={getTransformStyle()}
         >
           {/* Swipe indicator */}
-          {isSwiping && (
+          {isSwiping && isHorizontalSwipe.current && (
             <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 text-white px-3 py-1 rounded-full text-sm">
               Swipe to dismiss
             </div>
@@ -145,7 +207,7 @@ export default function CrewPreview({ crew, onClose }) {
               Join Crew
             </button>
           </div>
-        </motion.div>
+        </div>
       </div>
     </>
   );
