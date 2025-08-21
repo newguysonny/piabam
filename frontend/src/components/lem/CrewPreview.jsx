@@ -50,7 +50,7 @@ export default function CrewPreview({ crew, onClose }) {
         className="fixed inset-0 bg-black bg-opacity-40 z-50"
         onClick={onClose}
       />
-      
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Modal - Updated dimensions to match reference card */}
       <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl p-4 z-50 shadow-lg w-full max-w-sm mx-auto h-[80vh] max-h-[600px] overflow-y-auto">
         {/* Header */}
@@ -103,6 +103,7 @@ export default function CrewPreview({ crew, onClose }) {
             Join Crew
           </button>
         </div>
+      </div>
       </div>
     </>
   );
