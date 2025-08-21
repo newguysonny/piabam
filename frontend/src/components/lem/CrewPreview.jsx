@@ -191,6 +191,7 @@ export default function CrewPreview({ crew, onClose }) {
             <div className="mt-4 mb-3">
               <span className="font-bold text-lg">Description</span>
               <p className="mt-3 text-gray-600">{crew.description}</p>
+              <p className="mt-3 text-gray-600">{crew.id}</p>
             </div>
 
             <CartPreview />
