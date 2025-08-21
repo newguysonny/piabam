@@ -39,7 +39,7 @@ function LaunchPage() {
         <ProjectProgress
                   current={project.current}
                   goal={project.goal}
-                  isLaunch={isLaunch}
+                  isLaunch={true}
                 />
         
         <ProjectStats
