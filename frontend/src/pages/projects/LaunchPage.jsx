@@ -19,7 +19,7 @@ function LaunchPage() {
         <HeaderSection />
         <CallToAction />
         <ProjectProgress />
-        <ProjectStats />
+        <ProjectStats isLaunch={isLaunch}/>
       </div>
 
       <BackItFooter endDate="Aug 15, 2025 at 9:59pm WAST." />
