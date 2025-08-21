@@ -13,7 +13,9 @@ function LaunchPage() {
      <div className="max-w-md mx-auto bg-gray-900 text-white p-8 rounded-lg shadow-xl">
       <HeaderSection />
       <CallToAction />
+       <div className=" mt-4 flex items-center justify-center bg-white">
       <BackItFooter endDate="Aug 15, 2025 at 9:59pm WAST." />
+       </div>
     </div>
    </>
   );
