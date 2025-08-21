@@ -1,0 +1,109 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import CartPreview from "./CartPreview.jsx";
+
+const crewCart = {
+  items: [
+    {
+      id: 1,
+      name: "Sweet Chipotle BBQ Sauce",
+      price: 1000, // in Naira
+      quantity: 1,
+      image: "https://source.unsplash.com/80x80/?sauce",
+      customizations: [],
+    },
+    {
+      id: 2,
+      name: "Sweet Chipotle BBQ Crispy Chicken Wrap",
+      price: 5700, // in Naira
+      quantity: 1,
+      image: "https://source.unsplash.com/80x80/?burrito",
+      options: [
+        "Cheese",
+        "Lettuce",
+        "Pico De Gallo",
+        "Purple Cabbage",
+        "Spicy Ranch",
+        "Sweet Chipotle BBQ Sauce",
+      ],
+    },
+  ],
+  subtotal: 6700, // coming from DB
+};
+
+export default function CrewPreview({ crew, onClose }) {
+  const navigate = useNavigate();
+  const progress = (crew.joined / crew.capacity) * 100;
+
+  // Prevent background scroll while modal is open
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  return (
+    <>
+      {/* Overlay */}
+      <div
+        className="fixed inset-0 bg-black bg-opacity-40 z-50"
+        onClick={onClose}
+      />
+      
+      {/* Modal - Updated dimensions to match reference card */}
+      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl p-4 z-50 shadow-lg w-full max-w-sm mx-auto h-[80vh] max-h-[600px] overflow-y-auto">
+        {/* Header */}
+        <div className="flex justify-between items-center">
+          <h2 className="text-xl font-bold">{crew.name}</h2>
+          <button onClick={onClose} className="text-gray-500">
+            ✕
+          </button>
+        </div>
+
+        <img
+          src={crew.avatar}
+          alt={crew.name}
+          className="w-full h-48 object-cover rounded-lg mt-3"
+        />
+        <div className="text-left">
+          <div className="text-xl mt-2 font-bold text-gray-800">
+            ₦{crew.subtotal.toLocaleString()}
+          </div>
+          <div className="text-sm text-gray-500">30% discount on checkout</div>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="w-full bg-gray-200 rounded-full h-2 mt-4">
+          <div
+            className="bg-green-600 h-2 rounded-full transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          ></div>
+        </div>
+        <p className="mt-3 text-gray-600">
+          {crew.joined}/{crew.capacity} joined
+        </p>
+
+        <div className="mt-4 mb-3">
+          <span className="font-bold text-lg">Description</span>
+          <p className="mt-3 text-gray-600">{crew.description}</p>
+        </div>
+
+        <CartPreview />
+        
+        {/* Join Button inside modal (not fixed) */}
+        <div className="mt-6 pb-4">
+          <button
+            onClick={() => {
+              onClose(); // close modal
+              navigate("/checkout"); // navigate to checkout
+            }}
+            className="w-full bg-black text-white py-3 rounded-xl font-semibold hover:opacity-90"
+          >
+            Join Crew
+          </button>
+        </div>
+      </div>
+    </>
+  );
+}
