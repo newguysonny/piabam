@@ -54,7 +54,7 @@ export default function CrewPreview({ crew, onClose }) {
       {/* Outer container with margin/padding */}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-2">
         {/* Modal - Updated with margin from corners */}
-        <div className="bg-white rounded-2xl shadow-lg w-full max-w-sm max-h-[90vh] overflow-y-auto">
+        <div className="bg-white rounded-2xl shadow-lg w-full max-w-sm max-h-[70vh] overflow-y-auto">
           {/* Header */}
           <div className="flex justify-between items-center p-4 border-b border-gray-100">
             <h2 className="text-xl font-bold">{crew.name}</h2>
