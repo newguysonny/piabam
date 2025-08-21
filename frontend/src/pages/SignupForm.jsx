@@ -68,7 +68,7 @@ const SignupForm = () => {
         email: formData.email,
         password: formData.password,
         options: {
-          emailRedirectTo: `${window.location.origin}/account`,
+          emailRedirectTo: `${window.location.origin}`,
           data: { username: formData.username }
         }
       });
@@ -93,7 +93,7 @@ const SignupForm = () => {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/account`
+          redirectTo: `${window.location.origin}`
         }
       });
       if (error) throw error;
