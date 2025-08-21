@@ -1,3 +1,183 @@
+
+import { useState, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
+import { Link, useNavigate } from 'react-router-dom';
+import { FiMail, FiLock, FiUser, FiCheck } from 'react-icons/fi';
+import { FcGoogle } from 'react-icons/fc';
+
+const SignupForm = () => {
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    agreeToTerms: false
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validation
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords don't match!");
+      return;
+    }
+
+    if (!/^[a-z0-9_]{3,20}$/i.test(formData.username)) {
+      alert('Username must be 3-20 chars (letters, numbers, _)');
+      return;
+    }
+
+    if (!formData.agreeToTerms) {
+      alert('You must agree to the terms');
+      return;
+    }
+
+    try {
+      // 1. Auth sign-up
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/account`,
+          data: {
+            username: formData.username
+          }
+        }
+      });
+
+      if (authError) throw authError;
+
+      // 2. Create user profile
+      const { error: profileError } = await supabase
+        .from('users')
+        .insert([{
+          id: authData.user.id,
+          email: formData.email,
+          username: formData.username,
+          created_at: new Date().toISOString()
+        }]);
+
+      if (profileError) throw profileError;
+
+      alert('Sign-up successful! Check your email for confirmation.');
+    } catch (error) {
+      alert(`Error: ${error.message}`);
+      console.error(error);
+    }
+  };
+
+  // 🚀 Handle Google Signup
+  const handleGoogleSignup = async () => {
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/account`
+        }
+      });
+      if (error) throw error;
+    } catch (err) {
+      console.error("Google sign-in error:", err.message);
+      alert("Google sign-in failed. Try again.");
+    }
+  };
+
+  // 👀 After redirect from Google, insert profile if needed
+  useEffect(() => {
+    const checkAndInsertProfile = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: existing } = await supabase
+          .from('users')
+          .select('id')
+          .eq('id', user.id)
+          .single();
+
+        if (!existing) {
+          await supabase.from('users').insert([{
+            id: user.id,
+            email: user.email,
+            username: user.user_metadata?.username || user.email.split('@')[0],
+            created_at: new Date().toISOString()
+          }]);
+        }
+      }
+    };
+
+    checkAndInsertProfile();
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-gray-800 rounded-xl overflow-hidden shadow-2xl">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-purple-600 to-blue-500 p-6 text-center">
+          <h1 className="text-2xl font-bold flex items-center justify-center gap-2">
+            <FiUser className="text-white" /> 
+            Create New Account
+          </h1>
+        </div>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          {/* ... your existing fields ... */}
+
+          {/* Sign Up Button */}
+          <button
+            type="submit"
+            disabled={!formData.agreeToTerms}
+            className={`w-full py-3 rounded-lg font-medium transition-colors ${formData.agreeToTerms ? 'bg-purple-600 hover:bg-purple-700' : 'bg-gray-600 cursor-not-allowed'}`}
+          >
+            Create Account
+          </button>
+
+          {/* Divider */}
+          <div className="flex items-center my-6">
+            <div className="flex-1 border-t border-gray-700"></div>
+            <span className="px-4 text-gray-400 text-sm">OR</span>
+            <div className="flex-1 border-t border-gray-700"></div>
+          </div>
+
+          {/* Google Sign Up */}
+          <button
+            type="button"
+            onClick={handleGoogleSignup}
+            className="w-full py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
+          >
+            <FcGoogle size={20} />
+            Sign up with Google
+          </button>
+
+          {/* Sign In Link */}
+          <div className="text-center text-gray-400 text-sm">
+            Already have an account?{' '}
+            <Link to="/signin" className="text-purple-400 hover:text-purple-300">
+              Sign in
+            </Link>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default SignupForm;
+
+
+
+/*
+
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { Link } from 'react-router-dom';
@@ -78,7 +258,7 @@ const SignupForm = () => {
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-gray-800 rounded-xl overflow-hidden shadow-2xl">
-        {/* Header */}
+        {/* Header /}
         <div className="bg-gradient-to-r from-purple-600 to-blue-500 p-6 text-center">
           <h1 className="text-2xl font-bold flex items-center justify-center gap-2">
             <FiUser className="text-white" /> 
@@ -86,9 +266,9 @@ const SignupForm = () => {
           </h1>
         </div>
 
-        {/* Form */}
+        {/* Form /}
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
-          {/* Username Field */}
+          {/* Username Field /}
           <div className="space-y-2">
             <label htmlFor="username" className="block text-sm font-medium text-gray-300">
               Username
@@ -108,7 +288,7 @@ const SignupForm = () => {
             </div>
           </div>
 
-          {/* Email Field */}
+          {/* Email Field /}
           <div className="space-y-2">
             <label htmlFor="email" className="block text-sm font-medium text-gray-300">
               Email Address
@@ -128,7 +308,7 @@ const SignupForm = () => {
             </div>
           </div>
 
-          {/* Password Field */}
+          {/* Password Field /}
           <div className="space-y-2">
             <label htmlFor="password" className="block text-sm font-medium text-gray-300">
               Password
@@ -149,7 +329,7 @@ const SignupForm = () => {
             </div>
           </div>
 
-          {/* Confirm Password Field */}
+          {/* Confirm Password Field /}
           <div className="space-y-2">
             <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300">
               Confirm Password
@@ -170,7 +350,7 @@ const SignupForm = () => {
             </div>
           </div>
 
-          {/* Terms Agreement */}
+          {/* Terms Agreement /}
           <div className="flex items-start pt-2">
             <button
               type="button"
@@ -184,7 +364,7 @@ const SignupForm = () => {
             </label>
           </div>
 
-          {/* Sign Up Button */}
+          {/* Sign Up Button /}
           <button
             type="submit"
             disabled={!formData.agreeToTerms}
@@ -193,14 +373,14 @@ const SignupForm = () => {
             Create Account
           </button>
 
-          {/* Divider */}
+          {/* Divider /}
           <div className="flex items-center my-6">
             <div className="flex-1 border-t border-gray-700"></div>
             <span className="px-4 text-gray-400 text-sm">OR</span>
             <div className="flex-1 border-t border-gray-700"></div>
           </div>
 
-          {/* Google Sign Up */}
+          {/* Google Sign Up /}
           <button
             type="button"
             className="w-full py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
@@ -209,7 +389,7 @@ const SignupForm = () => {
             Sign up with Google
           </button>
 
-          {/* Sign In Link */}
+          {/* Sign In Link /}
           <div className="text-center text-gray-400 text-sm">
             Already have an account?{' '}
             
@@ -224,7 +404,7 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
-
+*/
 
 
 
