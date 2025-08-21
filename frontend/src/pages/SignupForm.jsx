@@ -183,7 +183,22 @@ const SignupForm = () => {
             />
           </div>
 
-          {/* Terms Checkbox */}
+          ‎{/* Terms Agreement */}
+‎          <div className="flex items-start pt-2">
+‎            <button
+‎              type="button"
+‎              onClick={() => setFormData(prev => ({ ...prev, agreeToTerms: !prev.agreeToTerms }))}
+‎onChange={handleChange}
+‎              className={`mt-1 w-5 h-5 rounded-md border ${formData.agreeToTerms ? 'bg-purple-600 border-purple-600' : 'border-gray-500'} flex items-center justify-center mr-2`}
+‎            >
+‎              {formData.agreeToTerms && <FiCheck className="text-white text-xs" />}
+‎            </button>
+‎            <label htmlFor="agreeToTerms" className="text-sm text-gray-300">
+‎              I agree to the <a href="#" className="text-purple-400 hover:text-purple-300">Terms of Service</a> and <a href="#" className="text-purple-400 hover:text-purple-300">Privacy Policy</a>
+‎            </label>
+‎          </div>
+
+          {/* Terms Checkbox /}
           <label className="flex items-center gap-2 text-sm text-gray-400">
             <input
               type="checkbox"
@@ -195,6 +210,7 @@ const SignupForm = () => {
             <FiCheck className="text-gray-400" />
             I agree to the Terms and Privacy Policy
           </label>
+          */}
 
           {/* Sign Up Button */}
           <button
