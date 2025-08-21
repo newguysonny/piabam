@@ -1,3 +1,6 @@
+
+
+/*
 import { useState } from "react";
 import MapWrapper from "../../components/lem/MapWrapper";
 import MapFilter from "../../components/lem/MapFilter";
@@ -38,10 +41,10 @@ export default function CrewMap() {
   const [selectedCrew, setSelectedCrew] = useState(null);
 
   return ( 
-      /* <div className="relative w-full h-auto"> */
+      /* <div className="relative w-full h-auto"> /
       <div className="flex flex-col h-screen">
         <Navbar />
-      {/* Map */}
+      {/* Map /}
        <div className="relative" style={{ height: 'calc(100vh - 64px)' }}>
       <MapWrapper>
         {mockCrews.map((crew) => (
@@ -52,7 +55,7 @@ export default function CrewMap() {
           />
         ))}
       </MapWrapper>
-         {/* Filter Button */}
+         {/* Filter Button /}
       <button
         className="absolute top-4 right-4 z-40 bg-white rounded-full shadow-md p-2 hover:bg-gray-100 transition"
         title="Filter"
@@ -64,7 +67,7 @@ export default function CrewMap() {
       </div>
 
      
-      {/* Slide-in filter modal */}
+      {/* Slide-in filter modal /}
       {showFilter && (
         <>
           <div
@@ -75,7 +78,7 @@ export default function CrewMap() {
         </>
       )}
 
-      {/* Crew Preview  Modal */}
+      {/* Crew Preview  Modal /}
       {selectedCrew && (
         <CrewPreview
           crew={selectedCrew}
@@ -89,6 +92,7 @@ export default function CrewMap() {
   );
 }
 
+*/
 
 
 
@@ -99,16 +103,15 @@ export default function CrewMap() {
 
 
 
-
-/*
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import MapWrapper from "../../components/lem/MapWrapper";
 import MapFilter from "../../components/lem/MapFilter";
 import CrewMarker from "../../components/lem/CrewMarker";
+import CrewPreview from "../../components/lem/CrewPreview";
 import Navbar from "../../components/Navbar";
 import { SlidersHorizontal } from "lucide-react";
 
-// 🧪 Mock data for now
 const mockCrews = [
   {
     id: 1,
@@ -116,7 +119,11 @@ const mockCrews = [
     avatar: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
     joined: 12,
     capacity: 30,
-    location: { lat: 6.5244, lng: 3.3792 }, // Lagos
+    address: "Yaba Lagos",
+    subtotal: 7200,
+    distance: "1 mile",
+    location: { lat: 6.5244, lng: 3.3792 },
+    description: "Hey! Join the Meal Crew – where good food and great vibes come together. Let's eat, share, and enjoy every bite. You in? 🍽️😋",
   },
   {
     id: 2,
@@ -124,52 +131,110 @@ const mockCrews = [
     avatar: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
     joined: 25,
     capacity: 50,
-    location: { lat: 6.4551, lng: 3.3942 }, // Victoria Island
+    address: "Presto Close, Victoria Island",
+    subtotal: 5200,
+    distance: "0.5 mile",
+    location: { lat: 6.4551, lng: 3.3942 },
+    description: "Healthy meal prep for busy professionals. Fresh ingredients, delicious recipes!",
+  },
+  {
+    id: 3,
+    name: "Lagos Foodies Club",
+    avatar: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
+    joined: 8,
+    capacity: 20,
+    address: "Ikeja Lagos",
+    subtotal: 8500,
+    distance: "2 miles",
+    location: { lat: 6.5244, lng: 3.3792 },
+    description: "Gourmet meals for food enthusiasts. Join us for exclusive culinary experiences!",
   },
 ];
 
 export default function CrewMap() {
   const [showFilter, setShowFilter] = useState(false);
+  const [selectedCrew, setSelectedCrew] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Check for crew parameter on mount and URL changes
+  useEffect(() => {
+    const crewId = searchParams.get('crew');
+    if (crewId) {
+      const crew = mockCrews.find(c => c.id === parseInt(crewId));
+      if (crew) {
+        setSelectedCrew(crew);
+      }
+    }
+  }, [searchParams]);
+
+  // Handle browser back/forward navigation
+  useEffect(() => {
+    const handlePopState = () => {
+      const crewId = new URLSearchParams(window.location.search).get('crew');
+      if (!crewId && selectedCrew) {
+        setSelectedCrew(null);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [selectedCrew]);
+
+  const handleCrewSelect = (crew) => {
+    setSelectedCrew(crew);
+    setSearchParams({ crew: crew.id });
+  };
+
+  const handleCloseModal = () => {
+    setSelectedCrew(null);
+    setSearchParams({});
+  };
 
   return (
-    
+    <div className="flex flex-col h-screen">
+      <Navbar />
       
-    <div className="relative w-full h-screen">
-      
-      {/* Map /}
-      <MapWrapper>
-        {mockCrews.map((crew) => (
-          <CrewMarker key={crew.id} crew={crew} />
-        ))}
-      </MapWrapper>
-      
-      
+      {/* Map */}
+      <div className="relative" style={{ height: 'calc(100vh - 64px)' }}>
+        <MapWrapper>
+          {mockCrews.map((crew) => (
+            <CrewMarker
+              key={crew.id}
+              crew={crew}
+              onSelect={() => handleCrewSelect(crew)}
+            />
+          ))}
+        </MapWrapper>
+        
+        {/* Filter Button */}
+        <button
+          className="absolute top-4 right-4 z-40 bg-white rounded-full shadow-md p-2 hover:bg-gray-100 transition"
+          title="Filter"
+          onClick={() => setShowFilter(true)}
+        >
+          <SlidersHorizontal className="w-5 h-5 text-gray-700" />
+        </button>
+      </div>
 
-      {/* Filter Button /}
-      <button
-        className="absolute top-4 right-4 z-40 bg-white rounded-full shadow-md p-2 hover:bg-gray-100 transition"
-        title="Filter"
-        onClick={() => setShowFilter(true)}
-      >
-        <SlidersHorizontal className="w-5 h-5 text-gray-700" />
-      </button>
-
-      {/* Slide-in filter modal /}
+      {/* Slide-in filter modal */}
       {showFilter && (
         <>
-          {/* Overlay /}
           <div
             className="fixed inset-0 bg-black bg-opacity-40 z-40"
             onClick={() => setShowFilter(false)}
           />
-          {/* Modal /}
           <MapFilter onClose={() => setShowFilter(false)} />
         </>
       )}
-      <Navbar />
+
+      {/* Crew Preview Modal */}
+      {selectedCrew && (
+        <CrewPreview
+          crews={mockCrews}
+          initialIndex={mockCrews.findIndex(c => c.id === selectedCrew.id)}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
-    
-      
   );
 }
-*/
