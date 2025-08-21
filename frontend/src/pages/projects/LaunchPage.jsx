@@ -2,6 +2,9 @@ import Countdown from "../../components/projects/Countdown";
 import HeaderSection from "../../components/projects/HeaderSection";
 import CallToAction from "../../components/projects/CallToAction";
 import BackItFooter from "../../components/projects/BackItFooter";
+import ProjectProgress from "../../components/projects/ProjectProgress";
+import ProjectStats from "../../components/projects/ProjectStats";
+
 
 
 function LaunchPage() {
@@ -15,6 +18,8 @@ function LaunchPage() {
         {/* 👆 add bottom padding (same height as footer) */}
         <HeaderSection />
         <CallToAction />
+        <ProjectProgress />
+        <ProjectStats />
       </div>
 
       <BackItFooter endDate="Aug 15, 2025 at 9:59pm WAST." />
