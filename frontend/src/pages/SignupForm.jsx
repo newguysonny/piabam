@@ -115,6 +115,119 @@ const SignupForm = () => {
       }
     };
 
+import { useState, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
+import { Link } from 'react-router-dom';
+import { FiMail, FiLock, FiUser, FiCheck } from 'react-icons/fi';
+import { FcGoogle } from 'react-icons/fc';
+
+const SignupForm = () => {
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    agreeToTerms: false
+  });
+
+  // ✅ Helper: insert user into "users" table if not exists
+  const createUserProfile = async (user) => {
+    try {
+      const { data: existing } = await supabase
+        .from('users')
+        .select('id')
+        .eq('id', user.id)
+        .single();
+
+      if (!existing) {
+        await supabase.from('users').insert([{
+          id: user.id,
+          email: user.email,
+          username: user.user_metadata?.username || user.email.split('@')[0],
+          created_at: new Date().toISOString()
+        }]);
+      }
+    } catch (err) {
+      console.error("Profile insert error:", err.message);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validation
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords don't match!");
+      return;
+    }
+
+    if (!/^[a-z0-9_]{3,20}$/i.test(formData.username)) {
+      alert('Username must be 3-20 chars (letters, numbers, _)');
+      return;
+    }
+
+    if (!formData.agreeToTerms) {
+      alert('You must agree to the terms');
+      return;
+    }
+
+    try {
+      // 1. Auth sign-up
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/account`,
+          data: { username: formData.username }
+        }
+      });
+
+      if (authError) throw authError;
+
+      // 2. Insert profile
+      if (authData.user) {
+        await createUserProfile(authData.user);
+      }
+
+      alert('Sign-up successful! Check your email for confirmation.');
+    } catch (error) {
+      alert(`Error: ${error.message}`);
+      console.error(error);
+    }
+  };
+
+  // 🚀 Google Signup
+  const handleGoogleSignup = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/account`
+        }
+      });
+      if (error) throw error;
+    } catch (err) {
+      console.error("Google sign-in error:", err.message);
+      alert("Google sign-in failed. Try again.");
+    }
+  };
+
+  // 👀 After Google redirect: ensure profile exists
+  useEffect(() => {
+    const checkAndInsertProfile = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        await createUserProfile(user);
+      }
+    };
     checkAndInsertProfile();
   }, []);
 
@@ -131,13 +244,84 @@ const SignupForm = () => {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
-          {/* ... your existing fields ... */}
+          {/* Username */}
+          <div className="relative">
+            <FiUser className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={formData.username}
+              onChange={handleChange}
+              className="w-full pl-10 pr-3 py-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500"
+              required
+            />
+          </div>
+
+          {/* Email */}
+          <div className="relative">
+            <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full pl-10 pr-3 py-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500"
+              required
+            />
+          </div>
+
+          {/* Password */}
+          <div className="relative">
+            <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full pl-10 pr-3 py-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500"
+              required
+            />
+          </div>
+
+          {/* Confirm Password */}
+          <div className="relative">
+            <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              className="w-full pl-10 pr-3 py-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500"
+              required
+            />
+          </div>
+
+          {/* Terms Checkbox */}
+          <label className="flex items-center gap-2 text-sm text-gray-400">
+            <input
+              type="checkbox"
+              name="agreeToTerms"
+              checked={formData.agreeToTerms}
+              onChange={handleChange}
+              className="w-4 h-4 rounded border-gray-600 text-purple-600 focus:ring-purple-500"
+            />
+            <FiCheck className="text-gray-400" />
+            I agree to the Terms and Privacy Policy
+          </label>
 
           {/* Sign Up Button */}
           <button
             type="submit"
             disabled={!formData.agreeToTerms}
-            className={`w-full py-3 rounded-lg font-medium transition-colors ${formData.agreeToTerms ? 'bg-purple-600 hover:bg-purple-700' : 'bg-gray-600 cursor-not-allowed'}`}
+            className={`w-full py-3 rounded-lg font-medium transition-colors ${
+              formData.agreeToTerms
+                ? 'bg-purple-600 hover:bg-purple-700'
+                : 'bg-gray-600 cursor-not-allowed'
+            }`}
           >
             Create Account
           </button>
@@ -173,7 +357,6 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
-
 
 
 /*
