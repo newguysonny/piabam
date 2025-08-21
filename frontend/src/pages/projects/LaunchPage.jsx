@@ -5,7 +5,7 @@ import BackItFooter from "../../components/projects/BackItFooter";
 import ProjectProgress from "../../components/projects/ProjectProgress";
 import ProjectStats from "../../components/projects/ProjectStats";
 
-const projects = [
+const project = [
     {
       id: 1,
       type: 'fanparty',
