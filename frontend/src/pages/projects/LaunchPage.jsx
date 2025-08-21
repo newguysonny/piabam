@@ -5,8 +5,7 @@ import BackItFooter from "../../components/projects/BackItFooter";
 import ProjectProgress from "../../components/projects/ProjectProgress";
 import ProjectStats from "../../components/projects/ProjectStats";
 
-const project = [
-    {
+const project = {
       id: 1,
       type: 'fanparty',
       title: "Wizkid Album Listening Party",
@@ -20,8 +19,7 @@ const project = [
       daysLeft: 2,
       supporters: ["user1", "user2", "user3"],
       createdAt: "2023-10-15"
-    }
-    ];
+    };
     
 
 
