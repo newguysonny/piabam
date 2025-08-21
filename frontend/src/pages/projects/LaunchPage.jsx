@@ -1,3 +1,23 @@
+function LaunchPage() {
+  return (
+    <>
+      <div className="mt-6 flex items-center justify-center bg-white">
+        <Countdown targetDate="2025-08-20T12:00:00" />
+      </div>
+
+      <div className="max-w-md mx-auto bg-gray-900 text-white p-8 rounded-lg shadow-xl pb-32">
+        {/* 👆 add bottom padding (same height as footer) */}
+        <HeaderSection />
+        <CallToAction />
+      </div>
+
+      <BackItFooter endDate="Aug 15, 2025 at 9:59pm WAST." />
+    </>
+  );
+}
+
+
+/*
 import Countdown from "../../components/projects/Countdown";
 import HeaderSection from "../../components/projects/HeaderSection";
 import CallToAction from "../../components/projects/CallToAction";
@@ -22,3 +42,5 @@ function LaunchPage() {
 }
 
 export default LaunchPage;
+
+*/
