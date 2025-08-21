@@ -1,5 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import CartPreview from "./CartPreview.jsx";
 
 const crewCart = {
@@ -34,6 +35,12 @@ const crewCart = {
 export default function CrewPreview({ crew, onClose }) {
   const navigate = useNavigate();
   const progress = (crew.joined / crew.capacity) * 100;
+  const [isSwiping, setIsSwiping] = useState(false);
+
+  // Motion values for swipe animation
+  const x = useMotionValue(0);
+  const rotate = useTransform(x, [-200, 200], [-15, 15]);
+  const opacity = useTransform(x, [-200, -100, 0, 100, 200], [0, 1, 1, 1, 0]);
 
   // Prevent background scroll while modal is open
   useEffect(() => {
@@ -50,18 +57,41 @@ export default function CrewPreview({ crew, onClose }) {
     }
   };
 
+  // Handle swipe end
+  const handleDragEnd = (event, info) => {
+    setIsSwiping(false);
+    
+    // If swiped beyond threshold, close the modal
+    if (Math.abs(info.offset.x) > 100) {
+      onClose();
+    }
+  };
+
   return (
     <>
-      {/* Overlay - now handles click to close */}
+      {/* Overlay */}
       <div
         className="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center p-2"
         onClick={handleOverlayClick}
       >
-        {/* Modal container - STOP event propagation so clicks inside don't close modal */}
-        <div 
+        {/* Swipeable Modal container */}
+        <motion.div 
           className="bg-white rounded-2xl shadow-lg w-full max-w-sm max-h-[70vh] overflow-y-auto flex flex-col"
-          onClick={(e) => e.stopPropagation()} // This prevents clicks inside from closing modal
+          onClick={(e) => e.stopPropagation()}
+          drag="x" // Enable horizontal dragging
+          dragConstraints={{ left: 0, right: 0 }} // Keep centered when not actively dragging
+          onDragStart={() => setIsSwiping(true)}
+          onDragEnd={handleDragEnd}
+          style={{ x, rotate, opacity }}
+          whileTap={{ cursor: "grabbing" }}
         >
+          {/* Swipe indicator */}
+          {isSwiping && (
+            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 text-white px-3 py-1 rounded-full text-sm">
+              Swipe to dismiss
+            </div>
+          )}
+
           {/* Header */}
           <div className="flex justify-between items-center p-4 border-b border-gray-100">
             <h2 className="text-xl font-bold">{crew.name}</h2>
@@ -115,11 +145,15 @@ export default function CrewPreview({ crew, onClose }) {
               Join Crew
             </button>
           </div>
-        </div>
+        </motion.div>
       </div>
     </>
   );
 }
+
+
+
+
 
 /*
 import { useEffect } from "react";
@@ -178,14 +212,14 @@ export default function CrewPreview({ crew, onClose }) {
     <>
       {/* Overlay - now handles click to close /}
       <div
-        className="fixed inset-0 bg-black bg-opacity-40 z-50"
+        className="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center p-2"
         onClick={handleOverlayClick}
-      />
-      
-      {/* Outer container with margin/padding /}
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-2">
-        {/* Modal container /}
-        <div className="bg-white rounded-2xl shadow-lg w-full max-w-sm max-h-[70vh] overflow-y-auto flex flex-col">
+      >
+        {/* Modal container - STOP event propagation so clicks inside don't close modal /}
+        <div 
+          className="bg-white rounded-2xl shadow-lg w-full max-w-sm max-h-[70vh] overflow-y-auto flex flex-col"
+          onClick={(e) => e.stopPropagation()} // This prevents clicks inside from closing modal
+        >
           {/* Header /}
           <div className="flex justify-between items-center p-4 border-b border-gray-100">
             <h2 className="text-xl font-bold">{crew.name}</h2>
@@ -194,7 +228,7 @@ export default function CrewPreview({ crew, onClose }) {
             </button>
           </div>
 
-          {/* Scrollable content area *l/}
+          {/* Scrollable content area /}
           <div className="p-4 flex-1 overflow-y-auto">
             <img
               src={crew.avatar}
@@ -208,7 +242,7 @@ export default function CrewPreview({ crew, onClose }) {
               <div className="text-sm text-gray-500">30% discount on checkout</div>
             </div>
 
-            {/* Progress Bar *l/}
+            {/* Progress Bar /}
             <div className="w-full bg-gray-200 rounded-full h-2 mt-4">
               <div
                 className="bg-green-600 h-2 rounded-full transition-all duration-300"
