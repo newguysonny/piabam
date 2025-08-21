@@ -43,18 +43,25 @@ export default function CrewPreview({ crew, onClose }) {
     };
   }, []);
 
+  // Handle overlay click to close modal
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
     <>
-      {/* Overlay */}
+      {/* Overlay - now handles click to close */}
       <div
         className="fixed inset-0 bg-black bg-opacity-40 z-50"
-        onClick={onClose}
+        onClick={handleOverlayClick}
       />
       
       {/* Outer container with margin/padding */}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-2">
-        {/* Modal - Updated with margin from corners */}
-        <div className="bg-white rounded-2xl shadow-lg w-full max-w-sm max-h-[70vh] overflow-y-auto">
+        {/* Modal container */}
+        <div className="bg-white rounded-2xl shadow-lg w-full max-w-sm max-h-[70vh] overflow-y-auto flex flex-col">
           {/* Header */}
           <div className="flex justify-between items-center p-4 border-b border-gray-100">
             <h2 className="text-xl font-bold">{crew.name}</h2>
@@ -63,7 +70,8 @@ export default function CrewPreview({ crew, onClose }) {
             </button>
           </div>
 
-          <div className="p-4">
+          {/* Scrollable content area */}
+          <div className="p-4 flex-1 overflow-y-auto">
             <img
               src={crew.avatar}
               alt={crew.name}
@@ -93,19 +101,19 @@ export default function CrewPreview({ crew, onClose }) {
             </div>
 
             <CartPreview />
-            
-            {/* Join Button inside modal */}
-            <div className="mt-6 pb-2">
-              <button
-                onClick={() => {
-                  onClose(); // close modal
-                  navigate("/checkout"); // navigate to checkout
-                }}
-                className="w-full bg-black text-white py-3 rounded-xl font-semibold hover:opacity-90"
-              >
-                Join Crew
-              </button>
-            </div>
+          </div>
+          
+          {/* Fixed Join Button at bottom of modal */}
+          <div className="sticky bottom-0 bg-white border-t border-gray-100 p-4">
+            <button
+              onClick={() => {
+                onClose(); // close modal
+                navigate("/checkout"); // navigate to checkout
+              }}
+              className="w-full bg-black text-white py-3 rounded-xl font-semibold hover:opacity-90"
+            >
+              Join Crew
+            </button>
           </div>
         </div>
       </div>
