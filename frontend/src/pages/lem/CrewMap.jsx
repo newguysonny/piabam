@@ -112,44 +112,68 @@ import CrewPreview from "../../components/lem/CrewPreview";
 import Navbar from "../../components/Navbar";
 import { SlidersHorizontal } from "lucide-react";
 
-const mockCrews = [
-  {
-    id: 1,
-    name: "Tomiwa & Friends",
-    avatar: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
-    joined: 12,
-    capacity: 30,
-    address: "Yaba Lagos",
-    subtotal: 7200,
-    distance: "1 mile",
-    location: { lat: 6.5244, lng: 3.3792 },
-    description: "Hey! Join the Meal Crew – where good food and great vibes come together. Let's eat, share, and enjoy every bite. You in? 🍽️😋",
-  },
-  {
-    id: 2,
-    name: "Nneka Meal Party",
-    avatar: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
-    joined: 25,
-    capacity: 50,
-    address: "Presto Close, Victoria Island",
-    subtotal: 5200,
-    distance: "0.5 mile",
-    location: { lat: 6.4551, lng: 3.3942 },
-    description: "Healthy meal prep for busy professionals. Fresh ingredients, delicious recipes!",
-  },
-  {
-    id: 3,
-    name: "Lagos Foodies Club",
-    avatar: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
-    joined: 8,
-    capacity: 20,
-    address: "Ikeja Lagos",
-    subtotal: 8500,
-    distance: "2 miles",
-    location: { lat: 6.5244, lng: 3.3792 },
-    description: "Gourmet meals for food enthusiasts. Join us for exclusive culinary experiences!",
-  },
-];
+const mockCrews= [
+    {
+      "id": 1,
+      "name": "Tomiwa & Friends",
+      "avatar": "https://placehold.co/400x400/3b82f6/ffffff?text=T+F",
+      "joined": 12,
+      "capacity": 30,
+      "address": "Yaba Lagos",
+      "subtotal": 7200,
+      "distance": "1 mile",
+      "location": { "lat": 6.5244, "lng": 3.3792 },
+      "description": "Hey! Join the Meal Crew – where good food and great vibes come together. Let's eat, share, and enjoy every bite. You in? 🍽️😋"
+    },
+    {
+      "id": 2,
+      "name": "Nneka Meal Party",
+      "avatar": "https://placehold.co/400x400/10b981/ffffff?text=NMP",
+      "joined": 25,
+      "capacity": 50,
+      "address": "Presto Close, Victoria Island",
+      "subtotal": 5200,
+      "distance": "0.5 mile",
+      "location": { "lat": 6.4551, "lng": 3.3942 },
+      "description": "Healthy meal prep for busy professionals. Fresh ingredients, delicious recipes!"
+    },
+    {
+      "id": 3,
+      "name": "Lagos Foodies Club",
+      "avatar": "https://placehold.co/400x400/ef4444/ffffff?text=LFC",
+      "joined": 8,
+      "capacity": 20,
+      "address": "Ikeja Lagos",
+      "subtotal": 8500,
+      "distance": "2 miles",
+      "location": { "lat": 6.5244, "lng": 3.3792 },
+      "description": "Gourmet meals for food enthusiasts. Join us for exclusive culinary experiences!"
+    },
+    {
+      "id": 4,
+      "name": "Spice Masters",
+      "avatar": "https://placehold.co/400x400/f97316/ffffff?text=SM",
+      "joined": 18,
+      "capacity": 40,
+      "address": "Surulere Lagos",
+      "subtotal": 6300,
+      "distance": "1.2 miles",
+      "location": { "lat": 6.5005, "lng": 3.3581 },
+      "description": "Love spicy food? We specialize in fiery dishes from around the world. Bring your heat tolerance!"
+    },
+    {
+      "id": 5,
+      "name": "Veggie Delight",
+      "avatar": "https://placehold.co/400x400/22c55e/ffffff?text=VD",
+      "joined": 15,
+      "capacity": 25,
+      "address": "GRA Ikeja",
+      "subtotal": 6800,
+      "distance": "1.8 miles",
+      "location": { "lat": 6.5985, "lng": 3.3491 },
+      "description": "100% plant-based meals that will make you forget about meat. Healthy, sustainable and delicious!"
+    }
+  ];
 
 export default function CrewMap() {
   const [showFilter, setShowFilter] = useState(false);
