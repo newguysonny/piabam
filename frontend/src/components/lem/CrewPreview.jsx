@@ -1,3 +1,253 @@
+
+import { useEffect, useState, useRef } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import CartPreview from "./CartPreview.jsx";
+import { Share, ChevronLeft, ChevronRight } from "lucide-react";
+
+const crewCart = {
+  items: [
+    {
+      id: 1,
+      name: "Sweet Chipotle BBQ Sauce",
+      price: 1000, // in Naira
+      quantity: 1,
+      image: "https://source.unsplash.com/80x80/?sauce",
+      customizations: [],
+    },
+    {
+      id: 2,
+      name: "Sweet Chipotle BBQ Crispy Chicken Wrap",
+      price: 5700, // in Naira
+      quantity: 1,
+      image: "https://source.unsplash.com/80x80/?burrito",
+      options: [
+        "Cheese",
+        "Lettuce",
+        "Pico De Gallo",
+        "Purple Cabbage",
+        "Spicy Ranch",
+        "Sweet Chipotle BBQ Sauce",
+      ],
+    },
+  ],
+  subtotal: 6700, // coming from DB
+};
+
+
+
+export default function CrewPreview({ crews, initialIndex, onClose }) {
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const [isSwiping, setIsSwiping] = useState(false);
+  const [swipeOffset, setSwipeOffset] = useState(0);
+
+  const currentCrew = crews[currentIndex];
+  const progress = (currentCrew.joined / currentCrew.capacity) * 100;
+
+  // Touch handlers for carousel navigation
+  const startX = useRef(0);
+  const isHorizontalSwipe = useRef(false);
+
+  // Update URL when navigating between crews
+  const navigateToCrew = (index) => {
+    setCurrentIndex(index);
+    setSearchParams({ crew: crews[index].id });
+  };
+
+  const handleTouchStart = (e) => {
+    startX.current = e.touches[0].clientX;
+    setIsSwiping(true);
+    isHorizontalSwipe.current = false;
+    setSwipeOffset(0);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isSwiping) return;
+
+    const currentX = e.touches[0].clientX;
+    const deltaX = currentX - startX.current;
+
+    if (Math.abs(deltaX) > 10 && !isHorizontalSwipe.current) {
+      isHorizontalSwipe.current = true;
+      e.preventDefault();
+    }
+
+    if (isHorizontalSwipe.current) {
+      setSwipeOffset(deltaX);
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    if (!isSwiping) return;
+
+    const currentX = e.changedTouches[0].clientX;
+    const deltaX = currentX - startX.current;
+
+    setIsSwiping(false);
+    isHorizontalSwipe.current = false;
+
+    // Navigate to next/previous crew on swipe
+    if (Math.abs(deltaX) > 100) {
+      if (deltaX > 0 && currentIndex > 0) {
+        // Swipe right - previous crew
+        navigateToCrew(currentIndex - 1);
+      } else if (deltaX < 0 && currentIndex < crews.length - 1) {
+        // Swipe left - next crew
+        navigateToCrew(currentIndex + 1);
+      }
+    }
+    
+    setSwipeOffset(0);
+  };
+
+  // Share functionality
+  const handleShare = async () => {
+    const shareUrl = `${window.location.origin}${window.location.pathname}?crew=${currentCrew.id}`;
+    
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: `Join ${currentCrew.name}'s Meal Crew`,
+          text: currentCrew.description || `Check out this meal crew on Lem!`,
+          url: shareUrl,
+        });
+      } else {
+        await navigator.clipboard.writeText(shareUrl);
+        alert('Link copied to clipboard! 📋\nShare it with your friends!');
+      }
+    } catch (error) {
+      console.log('Sharing cancelled or failed', error);
+    }
+  };
+
+  // Prevent background scroll
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+  return (
+    <>
+      <div
+        className="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center p-2"
+        onClick={handleOverlayClick}
+      >
+        <div 
+          className="bg-white rounded-2xl shadow-lg w-full max-w-sm max-h-[70vh] overflow-y-auto flex flex-col relative"
+          onClick={(e) => e.stopPropagation()}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          {/* Navigation Arrows */}
+          <div className="absolute top-1/2 transform -translate-y-1/2 left-2 right-2 flex justify-between z-10 pointer-events-none">
+            <button
+              onClick={() => navigateToCrew(currentIndex - 1)}
+              disabled={currentIndex === 0}
+              className="bg-black/50 text-white p-2 rounded-full disabled:opacity-30 pointer-events-auto hover:bg-black/70 transition"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              onClick={() => navigateToCrew(currentIndex + 1)}
+              disabled={currentIndex === crews.length - 1}
+              className="bg-black/50 text-white p-2 rounded-full disabled:opacity-30 pointer-events-auto hover:bg-black/70 transition"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+
+          {/* Card Indicator */}
+          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+            {crews.map((_, index) => (
+              <div
+                key={index}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  index === currentIndex ? 'bg-gray-700 scale-125' : 'bg-gray-300'
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Header with Share button */}
+          <div className="flex justify-between items-center p-4 border-b border-gray-100 sticky top-0 bg-white z-10">
+            <h2 className="text-xl font-bold">{currentCrew.name}</h2>
+            <div className="flex items-center space-x-3">
+              <button
+                onClick={handleShare}
+                className="text-gray-600 hover:text-blue-600 transition"
+                title="Share this crew"
+              >
+                <Share size={20} />
+              </button>
+              <button onClick={onClose} className="text-gray-500 text-xl">
+                ✕
+              </button>
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="p-4 flex-1 overflow-y-auto">
+            <img
+              src={currentCrew.avatar}
+              alt={currentCrew.name}
+              className="w-full h-48 object-cover rounded-lg"
+            />
+            <div className="text-left mt-3">
+              <div className="text-xl font-bold text-gray-800">
+                ₦{currentCrew.subtotal.toLocaleString()}
+              </div>
+              <div className="text-sm text-gray-500">30% discount on checkout</div>
+            </div>
+
+            <div className="w-full bg-gray-200 rounded-full h-2 mt-4">
+              <div
+                className="bg-green-600 h-2 rounded-full transition-all duration-300"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+            <p className="mt-3 text-gray-600">
+              {currentCrew.joined}/{currentCrew.capacity} joined
+            </p>
+
+            <div className="mt-4 mb-3">
+              <span className="font-bold text-lg">Description</span>
+              <p className="mt-3 text-gray-600">{currentCrew.description}</p>
+            </div>
+
+            <CartPreview items={currentCrew.items || []} />
+          </div>
+          
+          {/* Join Button */}
+          <div className="sticky bottom-0 bg-white border-t border-gray-100 p-4">
+            <button
+              onClick={() => {
+                onClose();
+                navigate("/checkout", { state: { crew: currentCrew } });
+              }}
+              className="w-full bg-black text-white py-3 rounded-xl font-semibold hover:opacity-90 transition"
+            >
+              Join Crew
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+
+
+/*
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import CartPreview from "./CartPreview.jsx";
@@ -133,12 +383,12 @@ export default function CrewPreview({ crew, onClose }) {
 
   return (
     <>
-      {/* Overlay */}
+      {/* Overlay /}
       <div
         className="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center p-2"
         onClick={handleOverlayClick}
       >
-        {/* Modal container with touch handlers */}
+        {/* Modal container with touch handlers /}
         <div 
           ref={cardRef}
           className="bg-white rounded-2xl shadow-lg w-full max-w-sm max-h-[70vh] overflow-y-auto flex flex-col"
@@ -148,14 +398,14 @@ export default function CrewPreview({ crew, onClose }) {
           onTouchEnd={handleTouchEnd}
           style={getTransformStyle()}
         >
-          {/* Swipe indicator */}
+          {/* Swipe indicator /}
           {isSwiping && isHorizontalSwipe.current && (
             <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 text-white px-3 py-1 rounded-full text-sm">
               Swipe to dismiss
             </div>
           )}
 
-          {/* Header */}
+          {/* Header /}
           <div className="flex justify-between items-center p-4 border-b border-gray-100">
             <h2 className="text-xl font-bold">{crew.name}</h2>
             <button onClick={onClose} className="text-gray-500 text-xl">
@@ -163,7 +413,7 @@ export default function CrewPreview({ crew, onClose }) {
             </button>
           </div>
 
-          {/* Scrollable content area */}
+          {/* Scrollable content area /}
           <div className="p-4 flex-1 overflow-y-auto">
             <img
               src={crew.avatar}
@@ -177,7 +427,7 @@ export default function CrewPreview({ crew, onClose }) {
               <div className="text-sm text-gray-500">30% discount on checkout</div>
             </div>
 
-            {/* Progress Bar */}
+            {/* Progress Bar /}
             <div className="w-full bg-gray-200 rounded-full h-2 mt-4">
               <div
                 className="bg-green-600 h-2 rounded-full transition-all duration-300"
@@ -197,7 +447,7 @@ export default function CrewPreview({ crew, onClose }) {
             <CartPreview />
           </div>
           
-          {/* Fixed Join Button at bottom of modal */}
+          {/* Fixed Join Button at bottom of modal /}
           <div className="sticky bottom-0 bg-white border-t border-gray-100 p-4">
             <button
               onClick={() => {
@@ -214,7 +464,7 @@ export default function CrewPreview({ crew, onClose }) {
     </>
   );
 }
-
+*/
 
 
 
