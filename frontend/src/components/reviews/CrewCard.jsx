@@ -12,7 +12,7 @@ export default function CrewCard({ image, title="Lagos Foodie Club" }) {
 
       {/* Right side: Title +  Stats */}
       <div className="flex flex-col flex-1">
-        <h3 className="text-sm font-semibold ">{title}</h3>
+        <h3 className="text-sm font-semibold hover:text-purple-600 active:text-purple-500">{title}</h3>
         <CrewStats />
       </div>
     </div>
