@@ -4,8 +4,10 @@ import { FiMail, FiLock, FiUser, FiCheck } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook, FaTwitter } from 'react-icons/fa';
 import { supabase } from '../lib/supabase'; // Adjust path to your supabase client
+import { useAuth } from '../context/AuthContext';
 
 const SigninForm = () => {
+  const { signIn } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     usernameOrEmail: '',
@@ -28,24 +30,20 @@ const SigninForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
-
+    
     try {
-      // Sign in with email
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: formData.usernameOrEmail, // Supabase uses email, not username
-        password: formData.password,
-      });
-
+      const { error } = await signIn(
+        formData.usernameOrEmail, 
+        formData.password
+      );
+      
       if (error) throw error;
-
-      // Successful sign in
-      console.log('Signed in successfully:', data);
-      navigate('/'); // Redirect to home or dashboard
-
+      
+      // Navigation happens automatically because AuthContext
+      // updates and your routes will redirect based on user state
+      
     } catch (error) {
-      console.error('Sign in error:', error);
-      setError(error.message || 'Failed to sign in');
+      setError(error.message);
     } finally {
       setLoading(false);
     }
