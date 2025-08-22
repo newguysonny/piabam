@@ -102,7 +102,7 @@ function ProfileSection() {
         <p>Please sign in</p>
       )}
     </div>
-  );
+  )
     </div>
   );
 }
