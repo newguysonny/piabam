@@ -67,13 +67,13 @@ function ModalHeader({ onClose, mobile = false }) {
   return (
     <div className={`flex justify-between items-center p-4 ${mobile ? 'border-b border-gray-800' : ''}`}>
       <h2 className="text-xl font-bold text-white">User Profile</h2>
-      <button 
+    {user && (<button 
 ‎            onClick={handleSignOut}
 ‎            className="bg-red-600 px-4 py-2 rounded"
 ‎          >
 ‎            <AiOutlineLogout />
 ‎          </button>
-      
+      )}
       <button 
         onClick={onClose}
         className="p-1 rounded-full hover:bg-gray-800 transition-colors text-gray-400 hover:text-white"
