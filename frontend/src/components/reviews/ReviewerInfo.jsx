@@ -16,7 +16,7 @@ export default function ReviewerInfo({ user }) {
         <div className="flex items-center space-x-2">
           <span className="font-bold">{user.name}</span>
           {user.badge && (
-            <span className="bg-red-600 text-white text-xs px-2 py-0.5 rounded-full">
+            <span className="bg-purple-600 text-white text-xs px-2 py-0.5 rounded-full">
               {user.badge}
             </span>
           )}
