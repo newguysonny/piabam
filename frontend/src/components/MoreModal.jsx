@@ -53,36 +53,42 @@ export default function UserProfileModal({ isOpen, onClose }) {
 
 // 2. Modal Header
 function ModalHeader({ onClose, mobile = false }) {
-  ‎  const { user, signOut } = useAuth();
-‎
-‎  const handleSignOut = async () => {
-‎    try {
-‎      await signOut();
-‎      // User will be automatically redirected by ProtectedRoute
-‎    } catch (error) {
-‎      console.error('Sign out error:', error);
-‎    }
-‎  };
+  const { user, signOut } = useAuth(); // ← Add 'user' here
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      // User will be automatically redirected by ProtectedRoute
+    } catch (error) {
+      console.error('Sign out error:', error);
+    }
+  };
   
   return (
     <div className={`flex justify-between items-center p-4 ${mobile ? 'border-b border-gray-800' : ''}`}>
       <h2 className="text-xl font-bold text-white">User Profile</h2>
-    {user && (<button 
-‎            onClick={handleSignOut}
-‎            className="bg-red-600 px-4 py-2 rounded"
-‎          >
-‎            <AiOutlineLogout />
-‎          </button>
-      )}
-      <button 
-        onClick={onClose}
-        className="p-1 rounded-full hover:bg-gray-800 transition-colors text-gray-400 hover:text-white"
-        aria-label="Close modal"
-      >
-        <FiX className="text-xl" />
-      </button>
+      <div className="flex items-center gap-2">
+        {user && (
+          <button 
+            onClick={handleSignOut}
+            className="p-2 bg-red-600/20 hover:bg-red-600/30 rounded-full transition-colors text-red-400 hover:text-red-300"
+            title="Sign out"
+          >
+            <AiOutlineLogout className="text-lg" />
+          </button>
+        )}
+        <button 
+          onClick={onClose}
+          className="p-2 rounded-full hover:bg-gray-800 transition-colors text-gray-400 hover:text-white"
+          aria-label="Close modal"
+          title="Close"
+        >
+          <FiX className="text-xl" />
+        </button>
+      </div>
     </div>
   );
+}
 }
 
 // 3. Modal Content
