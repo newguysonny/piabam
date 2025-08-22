@@ -35,6 +35,41 @@ const SigninForm = () => {
           </h1>
         </div>
 
+        {/* Google Sign In */}
+          <button
+            type="button"
+            className="w-full py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
+          >
+            <FcGoogle size={20} />
+            Sign in with Google
+          </button>
+        
+        {/* Facebook Sign In */}
+          <button
+            type="button"
+            className="w-full py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
+          >
+            <FcGoogle size={20} />
+            Sign in with Facebook 
+          </button>
+
+        {/* Twitter Sign In */}
+          <button
+            type="button"
+            className="w-full py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
+          >
+            <FcGoogle size={20} />
+            Sign in with Twitter/X
+          </button>
+        
+        
+        {/* Divider */}
+          <div className="flex items-center my-6">
+            <div className="flex-1 border-t border-gray-700"></div>
+            <span className="px-4 text-gray-400 text-sm">OR</span>
+            <div className="flex-1 border-t border-gray-700"></div>
+          </div>
+        
         {/* Form */}
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           {/* Username/Email Field */}
