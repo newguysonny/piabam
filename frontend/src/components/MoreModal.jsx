@@ -13,6 +13,7 @@ import {
   FiSettings,
   FiArrowRight
 } from 'react-icons/fi';
+import { AiOutlineLogout } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
@@ -52,9 +53,27 @@ export default function UserProfileModal({ isOpen, onClose }) {
 
 // 2. Modal Header
 function ModalHeader({ onClose, mobile = false }) {
+  ‎  const { signOut } = useAuth();
+‎
+‎  const handleSignOut = async () => {
+‎    try {
+‎      await signOut();
+‎      // User will be automatically redirected by ProtectedRoute
+‎    } catch (error) {
+‎      console.error('Sign out error:', error);
+‎    }
+‎  };
+  
   return (
     <div className={`flex justify-between items-center p-4 ${mobile ? 'border-b border-gray-800' : ''}`}>
       <h2 className="text-xl font-bold text-white">User Profile</h2>
+      <button 
+‎            onClick={handleSignOut}
+‎            className="bg-red-600 px-4 py-2 rounded"
+‎          >
+‎            <AiOutlineLogout />
+‎          </button>
+      
       <button 
         onClick={onClose}
         className="p-1 rounded-full hover:bg-gray-800 transition-colors text-gray-400 hover:text-white"
