@@ -1,6 +1,6 @@
 import CrewStats from "../crew/CrewStats";
 
-export default function CrewCard({ image, title }) {
+export default function CrewCard({ image, title="Lagos Foodie Club" }) {
   return (
     <div className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-md">
       {/* Crew Image */}
