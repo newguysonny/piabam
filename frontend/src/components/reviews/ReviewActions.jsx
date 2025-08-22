@@ -1,9 +1,9 @@
-import { Lightbulb, Hand, Heart, Frown } from "lucide-react";
+import { Lightbulb, AlarmClockCheck, Heart, Frown } from "lucide-react";
 
 export default function ReviewActions({ reactions }) {
   const actions = [
     { icon: <Lightbulb size={18} />, label: "Helpful", count: reactions.helpful },
-    { icon: <Hand size={18} />, label: "Thanks", count: reactions.thanks },
+    { icon: <AlarmClockCheck size={18} />, label: "Set Reminder", count: reactions.thanks },
     { icon: <Heart size={18} />, label: "Love this", count: reactions.love },
     { icon: <Frown size={18} />, label: "Oh no", count: reactions.ohNo }
   ];
