@@ -1,15 +1,19 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FiMail, FiLock, FiUser, FiCheck } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook, FaTwitter } from 'react-icons/fa';
+import { supabase } from '../../lib/supabase'; // Adjust path to your supabase client
 
 const SigninForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     usernameOrEmail: '',
     password: '',
     rememberMe: false
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -17,12 +21,104 @@ const SigninForm = () => {
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
+    // Clear error when user starts typing
+    if (error) setError('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle sign in submission
-    console.log(formData);
+    setLoading(true);
+    setError('');
+
+    try {
+      // Sign in with email
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: formData.usernameOrEmail, // Supabase uses email, not username
+        password: formData.password,
+      });
+
+      if (error) throw error;
+
+      // Successful sign in
+      console.log('Signed in successfully:', data);
+      navigate('/'); // Redirect to home or dashboard
+
+    } catch (error) {
+      console.error('Sign in error:', error);
+      setError(error.message || 'Failed to sign in');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Social sign in handlers
+  const handleGoogleSignIn = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback` // Create this route
+        }
+      });
+      if (error) throw error;
+    } catch (error) {
+      console.error('Google sign in error:', error);
+      setError(error.message || 'Failed to sign in with Google');
+    }
+  };
+
+  const handleFacebookSignIn = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'facebook',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`
+        }
+      });
+      if (error) throw error;
+    } catch (error) {
+      console.error('Facebook sign in error:', error);
+      setError(error.message || 'Failed to sign in with Facebook');
+    }
+  };
+
+  const handleTwitterSignIn = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'twitter',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`
+        }
+      });
+      if (error) throw error;
+    } catch (error) {
+      console.error('Twitter sign in error:', error);
+      setError(error.message || 'Failed to sign in with Twitter');
+    }
+  };
+
+  // Forgot password handler
+  const handleForgotPassword = async () => {
+    if (!formData.usernameOrEmail) {
+      setError('Please enter your email first');
+      return;
+    }
+
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(
+        formData.usernameOrEmail,
+        {
+          redirectTo: `${window.location.origin}/reset-password`,
+        }
+      );
+      
+      if (error) throw error;
+      
+      alert('Password reset instructions sent to your email!');
+    } catch (error) {
+      console.error('Password reset error:', error);
+      setError(error.message || 'Failed to send reset instructions');
+    }
   };
 
   return (
@@ -36,12 +132,21 @@ const SigninForm = () => {
           </h1>
         </div>
 
+        {/* Error Message */}
+        {error && (
+          <div className="mx-6 mt-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg">
+            <p className="text-red-300 text-sm">{error}</p>
+          </div>
+        )}
+
         {/* Social Sign In Buttons - ABOVE the form */}
         <div className="p-6 space-y-4">
           {/* Google Sign In */}
           <button
             type="button"
-            className="w-full py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
+            onClick={handleGoogleSignIn}
+            disabled={loading}
+            className="w-full py-3 bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
           >
             <FcGoogle size={20} />
             Sign in with Google
@@ -50,7 +155,9 @@ const SigninForm = () => {
           {/* Facebook Sign In */}
           <button
             type="button"
-            className="w-full py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
+            onClick={handleFacebookSignIn}
+            disabled={loading}
+            className="w-full py-3 bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
           >
             <FaFacebook className="text-blue-500" size={20} />
             Sign in with Facebook
@@ -59,7 +166,9 @@ const SigninForm = () => {
           {/* Twitter Sign In */}
           <button
             type="button"
-            className="w-full py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
+            onClick={handleTwitterSignIn}
+            disabled={loading}
+            className="w-full py-3 bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
           >
             <FaTwitter className="text-blue-400" size={20} />
             Sign in with Twitter/X
@@ -91,6 +200,7 @@ const SigninForm = () => {
                 className="w-full pl-10 pr-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 placeholder="Enter your username or email"
                 required
+                disabled={loading}
               />
             </div>
           </div>
@@ -111,6 +221,7 @@ const SigninForm = () => {
                 className="w-full pl-10 pr-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 placeholder="Enter your password"
                 required
+                disabled={loading}
               />
             </div>
           </div>
@@ -122,6 +233,7 @@ const SigninForm = () => {
                 type="button"
                 onClick={() => setFormData(prev => ({ ...prev, rememberMe: !prev.rememberMe }))}
                 className={`w-5 h-5 rounded-md border ${formData.rememberMe ? 'bg-purple-600 border-purple-600' : 'border-gray-500'} flex items-center justify-center mr-2`}
+                disabled={loading}
               >
                 {formData.rememberMe && <FiCheck className="text-white text-xs" />}
               </button>
@@ -129,17 +241,23 @@ const SigninForm = () => {
                 Remember me
               </label>
             </div>
-            <a href="#" className="text-sm text-purple-400 hover:text-purple-300">
+            <button
+              type="button"
+              onClick={handleForgotPassword}
+              className="text-sm text-purple-400 hover:text-purple-300 disabled:opacity-50"
+              disabled={loading}
+            >
               Forgot your password?
-            </a>
+            </button>
           </div>
 
           {/* Sign In Button */}
           <button
             type="submit"
-            className="w-full py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-medium transition-colors"
+            disabled={loading}
+            className="w-full py-3 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg font-medium transition-colors"
           >
-            Sign In
+            {loading ? 'Signing in...' : 'Sign In'}
           </button>
 
           {/* Sign Up Link */}
@@ -157,11 +275,13 @@ const SigninForm = () => {
 
 export default SigninForm;
 
+
 /*
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMail, FiLock, FiUser, FiCheck } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
+import { FaFacebook, FaTwitter } from 'react-icons/fa';
 
 const SigninForm = () => {
   const [formData, setFormData] = useState({
@@ -195,7 +315,9 @@ const SigninForm = () => {
           </h1>
         </div>
 
-        {/* Google Sign In /}
+        {/* Social Sign In Buttons - ABOVE the form /}
+        <div className="p-6 space-y-4">
+          {/* Google Sign In /}
           <button
             type="button"
             className="w-full py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
@@ -203,33 +325,33 @@ const SigninForm = () => {
             <FcGoogle size={20} />
             Sign in with Google
           </button>
-        
-        {/* Facebook Sign In /}
+
+          {/* Facebook Sign In /}
           <button
             type="button"
             className="w-full py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
           >
-            <FcGoogle size={20} />
-            Sign in with Facebook 
+            <FaFacebook className="text-blue-500" size={20} />
+            Sign in with Facebook
           </button>
 
-        {/* Twitter Sign In /}
+          {/* Twitter Sign In /}
           <button
             type="button"
             className="w-full py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
           >
-            <FcGoogle size={20} />
+            <FaTwitter className="text-blue-400" size={20} />
             Sign in with Twitter/X
           </button>
-        
-        
+        </div>
+
         {/* Divider /}
-          <div className="flex items-center my-6">
-            <div className="flex-1 border-t border-gray-700"></div>
-            <span className="px-4 text-gray-400 text-sm">OR</span>
-            <div className="flex-1 border-t border-gray-700"></div>
-          </div>
-        
+        <div className="flex items-center px-6">
+          <div className="flex-1 border-t border-gray-700"></div>
+          <span className="px-4 text-gray-400 text-sm">OR</span>
+          <div className="flex-1 border-t border-gray-700"></div>
+        </div>
+
         {/* Form /}
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           {/* Username/Email Field /}
@@ -297,22 +419,6 @@ const SigninForm = () => {
             className="w-full py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-medium transition-colors"
           >
             Sign In
-          </button>
-
-          {/* Divider /}
-          <div className="flex items-center my-6">
-            <div className="flex-1 border-t border-gray-700"></div>
-            <span className="px-4 text-gray-400 text-sm">OR</span>
-            <div className="flex-1 border-t border-gray-700"></div>
-          </div>
-
-          {/* Google Sign In /}
-          <button
-            type="button"
-            className="w-full py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
-          >
-            <FcGoogle size={20} />
-            Sign in with Google
           </button>
 
           {/* Sign Up Link /}
