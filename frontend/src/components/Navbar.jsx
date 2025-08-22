@@ -75,14 +75,24 @@ export default function Navbar() {
               <FiBell className="w-5 h-5" /> {/* 🔔 */}
               <span className="absolute top-0 right-0 w-2 h-2 bg-red-600 rounded-full"></span>
             </button>
-            <button className="text-sm font-medium">
-               <Link 
-             to="/signin" 
-             className="text-white hover:text-purple-600 transition-colors"
-                >
-                  Sign in
-                </Link>
-           </button>
+            {user ? (
+  <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-white">
+    <img 
+      src={user.user_metadata?.avatar_url || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=288&q=80"} 
+      alt="Profile" 
+      className="w-full h-full object-cover"
+    />
+  </div>
+) : (
+  <button className="text-sm font-medium">
+    <Link 
+      to="/signin" 
+      className="text-white hover:text-purple-600 transition-colors"
+    >
+      Sign in
+    </Link>
+  </button>
+)}
           </div>
         </div>
       </nav>
@@ -128,17 +138,23 @@ export default function Navbar() {
       </button>
       
       {user ? (
-      <ProfileDropdown />
-      ) : (
-      <div className="flex gap-3">
-      <button className="border border-red-600 text-red-600 px-4 py-1.5 rounded-full text-sm hover:bg-red-50">
+  <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-white">
+    <img 
+      src={user.user_metadata?.avatar_url || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=288&q=80"} 
+      alt="Profile" 
+      className="w-full h-full object-cover"
+    />
+  </div>
+) : (
+  <div className="flex gap-3">
+    <button className="border border-red-600 text-red-600 px-4 py-1.5 rounded-full text-sm hover:bg-red-50">
       Sign In
-      </button>
-      <button className="bg-red-600 text-white px-4 py-1.5 rounded-full text-sm hover:bg-red-700">
+    </button>
+    <button className="bg-red-600 text-white px-4 py-1.5 rounded-full text-sm hover:bg-red-700">
       Sign Up
-      </button>
-      </div>
-      )}
+    </button>
+  </div>
+)}
       </div>
       </div>
       
