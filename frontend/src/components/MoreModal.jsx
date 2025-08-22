@@ -53,7 +53,7 @@ export default function UserProfileModal({ isOpen, onClose }) {
 
 // 2. Modal Header
 function ModalHeader({ onClose, mobile = false }) {
-  ‎  const { signOut } = useAuth();
+  ‎  const { user, signOut } = useAuth();
 ‎
 ‎  const handleSignOut = async () => {
 ‎    try {
