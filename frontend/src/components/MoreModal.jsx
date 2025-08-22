@@ -136,37 +136,6 @@ function ProfileSection() {
   );
 }
 
-{/*
-// 4. Profile Section
-function ProfileSection() {
-  const { user } = useAuth();
-  return (
-    <div className="p-6 text-center relative">
-      <div className="absolute top-4 right-4 flex gap-3">
-        <FiStar className="text-yellow-400 text-xl" />
-        <FiSettings className="text-gray-400 text-xl hover:text-white transition-colors" />
-      </div>
-      
-      <div className="mx-auto w-20 h-20 bg-gray-800 rounded-full mb-3 flex items-center justify-center">
-        <FiUser className="text-3xl text-gray-400" />
-      </div>
-  {user?(
-      <div>
-      <h2>Welcome, {user.email}!</h2>
-      <p className="text-xl font-bold text-white">fullname</p>
-      <p className="text-gray-300">username</p>
-      <p className="text-gray-300">User ID: {user.id}</p>
-    <p className="text-gray-300">Signed up: {new Date(user.created_at).toLocaleDateString()}</p>
-     ) : (
-        <p>Please sign in</p>
-      )}
-    </div>
-  )
-    </div>
-  );
-}
-*/}
-
 // 5. Status Bar
 function StatusBar({ mobile = false }) {
   return (
