@@ -2,6 +2,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from "react-hot-toast";
 import { CartProvider } from "./context/CartContext";
+import { AuthProvider } from "./context/AuthContext";
 import AuthCallback from "./auth/AuthCallback";
 import ScrollToTop from './components/ScrollToTop';
 
@@ -37,6 +38,7 @@ import HomePage from './pages/HomePage';
 
 export default function App() {
   return (
+    <AuthProvider>
     <CartProvider>
     <BrowserRouter>
       <ScrollToTop />
@@ -80,5 +82,6 @@ export default function App() {
       <Toaster position="bottom-center" reverseOrder={false} />
     </BrowserRouter>
     </CartProvider>
+    </AuthProvider>
   );
 }
