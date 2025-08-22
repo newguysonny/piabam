@@ -14,7 +14,7 @@ import {
   FiArrowRight
 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 // 1. Main Modal Components
 export default function UserProfileModal({ isOpen, onClose }) {
