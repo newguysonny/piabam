@@ -6,7 +6,7 @@ import CrewCard from "./CrewCard";
 export default function ReviewCard({ review }) {
   return (
     <div className=" m-1 ">
-      <div className=" bg-neutral-900">
+      <div className=" mb-2">
       <CrewCard />
       </div >
       
