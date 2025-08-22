@@ -62,7 +62,6 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="w-8 h-8 bg-red-600 rounded mr-2"></div>
             <span className="font-bold text-white text-lg">PIABAM</span>
           </div>
 
