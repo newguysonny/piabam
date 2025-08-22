@@ -89,7 +89,6 @@ function ModalHeader({ onClose, mobile = false }) {
     </div>
   );
 }
-}
 
 // 3. Modal Content
 function ModalContent({ mobile = false }) {
