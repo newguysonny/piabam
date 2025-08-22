@@ -78,6 +78,41 @@ function ModalContent({ mobile = false }) {
   );
 }
 
+function ProfileSection() {
+  const { user } = useAuth();
+  
+  return (
+    <div className="p-6 text-center relative">
+      <div className="absolute top-4 right-4 flex gap-3">
+        <FiStar className="text-yellow-400 text-xl" />
+        <FiSettings className="text-gray-400 text-xl hover:text-white transition-colors" />
+      </div>
+      
+      <div className="mx-auto w-20 h-20 bg-gray-800 rounded-full mb-3 flex items-center justify-center">
+        <FiUser className="text-3xl text-gray-400" />
+      </div>
+      
+      {user ? (
+        <div>
+          <h2 className="text-lg font-semibold text-white">Welcome, {user.email}!</h2>
+          {user.user_metadata?.full_name && (
+            <p className="text-xl font-bold text-white mt-2">
+              {user.user_metadata.full_name}
+            </p>
+          )}
+          <p className="text-gray-300 text-sm mt-1">@{user.user_metadata?.username || 'user'}</p>
+          <p className="text-gray-400 text-xs mt-3">
+            Member since {new Date(user.created_at).toLocaleDateString()}
+          </p>
+        </div>
+      ) : (
+        <p className="text-gray-400">Please sign in to view your profile</p>
+      )}
+    </div>
+  );
+}
+
+{/*
 // 4. Profile Section
 function ProfileSection() {
   const { user } = useAuth();
@@ -106,6 +141,7 @@ function ProfileSection() {
     </div>
   );
 }
+*/}
 
 // 5. Status Bar
 function StatusBar({ mobile = false }) {
