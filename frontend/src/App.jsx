@@ -2,6 +2,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from "react-hot-toast";
 import { CartProvider } from "./context/CartContext";
+import AuthCallback from "./auth/AuthCallback";
 import ScrollToTop from './components/ScrollToTop';
 
 import SigninForm from './pages/SigninForm';
@@ -45,6 +46,7 @@ export default function App() {
         <Route path="/escrow" element={<EscrowFormPage />} />
         <Route path="/escrow-dashboard" element={<EscrowDashboard />} />
              {/*Auths Section*/}
+        <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/signin" element={<SigninForm />} />   // Not signin.html!
         <Route path="/signup" element={<SignupForm />} /> // Not signup.html!
               {/*Room and party streaming Section and Dashboard */}
