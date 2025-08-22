@@ -93,7 +93,6 @@ export default function Navbar() {
       <div className="container mx-auto px-6 py-3 flex items-center justify-between">
       {/* Left: Logo */}
       <div className="flex items-center">
-      <div className="w-8 h-8 bg-red-600 rounded mr-2"></div>
       <span className="font-bold text-red-600 text-xl">PIABAM</span>
       </div>
       
@@ -227,33 +226,7 @@ export default function Navbar() {
     </Link>
   );
 })}
-        
-        { /*
-      {['Home', 'Lem', 'Start', 'Faajee', 'More'].map((item) => (
-      <button
-      key={item}
-      onClick={() => {
-      if (item === 'Start') setShowStartModal(true);
-      else if (item === 'More') setShowMoreModal(true);
-      else setActiveTab(item);
-      }}
-      className={`flex flex-col items-center justify-center py-1 ${
-      activeTab === item ? 'text-purple-700' : 'text-gray-600'
-      }`}
-      >
-      {item === 'Start' ? (
-      <div className="bg-purple-600 rounded-full p-2 -mt-6">
-      <FiPlus className="w-6 h-6 text-white" />
-      </div>
-      ) : item === 'More' ? (
-      <FiMoreHorizontal className="w-5 h-5" />
-      ) : (
-      <NavIcon name={item} />
-      )}
-      <span className="text-xs mt-1">{item}</span>
-      </button>
-      ))}
-      */}
+      
       </div>
       </div>
       
