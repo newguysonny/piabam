@@ -2,10 +2,11 @@ import ReviewerInfo from "./ReviewerInfo";
 import ReviewRating from "./ReviewRating";
 import ReviewPhotos from "./ReviewPhotos";
 import ReviewActions from "./ReviewActions";
-
+import CrewStats from "./CrewStats";
 export default function ReviewCard({ review }) {
   return (
     <div className=" m-1 ">
+      <CrewStats />
       {/* Reviewer details */}
       <ReviewerInfo user={review.user}  date={review.date} />
 
