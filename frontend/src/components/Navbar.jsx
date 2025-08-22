@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';  // Add this import
+import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import { throttle } from 'lodash';
 import { 
   FiSearch, 
@@ -16,13 +17,13 @@ import  StartModal  from './StartModal';
 import  MoreModal  from './MoreModal';
 
 export default function Navbar() {
+  const { user } = useAuth();
   const [showBottomNav, setShowBottomNav] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const bottomNavRef = useRef(null);
   const [showStartModal, setShowStartModal] = useState(false);
   const [showMoreModal, setShowMoreModal] = useState(false);
   const [activeTab, setActiveTab] = useState('Home');
-  const [user, setUser] = useState(null); // Add user state or get from context
   const routeMap = {
   Home: '/',
   Lem: '/map',
