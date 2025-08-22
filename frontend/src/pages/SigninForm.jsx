@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FiMail, FiLock, FiUser, FiCheck } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook, FaTwitter } from 'react-icons/fa';
-import { supabase } from '../../lib/supabase'; // Adjust path to your supabase client
+import { supabase } from '../lib/supabase'; // Adjust path to your supabase client
 
 const SigninForm = () => {
   const navigate = useNavigate();
