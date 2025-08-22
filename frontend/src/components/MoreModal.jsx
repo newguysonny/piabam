@@ -14,6 +14,7 @@ import {
   FiArrowRight
 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 // 1. Main Modal Components
 export default function UserProfileModal({ isOpen, onClose }) {
@@ -79,6 +80,7 @@ function ModalContent({ mobile = false }) {
 
 // 4. Profile Section
 function ProfileSection() {
+  const { user } = useAuth();
   return (
     <div className="p-6 text-center relative">
       <div className="absolute top-4 right-4 flex gap-3">
@@ -89,9 +91,18 @@ function ProfileSection() {
       <div className="mx-auto w-20 h-20 bg-gray-800 rounded-full mb-3 flex items-center justify-center">
         <FiUser className="text-3xl text-gray-400" />
       </div>
-      
-      <h2 className="text-xl font-bold text-white">fullname</h2>
+  {user?(
+      <div>
+      <h2>Welcome, {user.email}!</h2>
+      <p className="text-xl font-bold text-white">fullname</p>
       <p className="text-gray-300">username</p>
+      <p className="text-gray-300">User ID: {user.id}</p>
+    <p className="text-gray-300">Signed up: {new Date(user.created_at).toLocaleDateString()}</p>
+     ) : (
+        <p>Please sign in</p>
+      )}
+    </div>
+  );
     </div>
   );
 }
