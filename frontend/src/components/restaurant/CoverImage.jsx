@@ -3,6 +3,7 @@ import { FaArrowLeft, FaHeart } from "react-icons/fa";
 import { MdMoreVert } from "react-icons/md";
 
 export default function CoverImage({ src }) {
+  const navigate = useNavigate();
   return (
     <div className="relative">
       <img
@@ -15,7 +16,7 @@ export default function CoverImage({ src }) {
       <div className="absolute top-3 left-3 flex space-x-2">
         <button
           onClick={() => navigate(-1)}
-          className="bg-black/50 text-white p-2 rounded-full">
+          className="bg-black/50 text-white p-2 rounded-full hover:text-black">
           <FaArrowLeft />
         </button>
       </div>
