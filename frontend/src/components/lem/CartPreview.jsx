@@ -34,7 +34,7 @@ const initialCart = {
 */
 
 const CartPreview = ({ isEditable = false, userCart }) => {
-  const [cart, setCart] = useState(userCart||initialCart);
+  const [cart, setCart] = useState(userCart);
   
 
   const handleIncrement = (id) => {
