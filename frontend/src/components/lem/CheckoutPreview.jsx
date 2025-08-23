@@ -8,6 +8,19 @@ export default function CheckoutPreview({ subtotal = 7200, escrowFee = 1700, dis
   const navigate = useNavigate();
   const total = subtotal + escrowFee - discount;
 
+  const handleConfirmOrder = () => {
+  const orderData = {
+    total,
+    subtotal,
+    escrowFee,
+    discount,
+    timestamp: new Date().toISOString(),
+    // any other metadata
+  };
+  
+  navigate("/payment-method", { state: orderData });
+};
+
   return (
     <>
     <div className="bg-white rounded-t-2xl shadow-lg p-4 w-full max-w-md mx-auto pb-28">
@@ -63,7 +76,7 @@ export default function CheckoutPreview({ subtotal = 7200, escrowFee = 1700, dis
       </div>
 
       <button
-        onClick={() => navigate("/payment-method")}
+        onClick={handleConfirmOrder}
         className="w-full bg-green-500 text-white rounded-lg py-3 font-semibold hover:bg-green-600 transition"
       >
         Confirm order
