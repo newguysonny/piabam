@@ -224,7 +224,9 @@ export default function CrewPreview({ crews, initialIndex, onClose }) {
               <p className="mt-3 text-gray-600">{currentCrew.description}</p>
             </div>
 
-            <CartPreview items={currentCrew.items || []} />
+            <CartPreview isEditable = {true} userCart={crewCart} />
+
+            {/* <CartPreview items={currentCrew.items || []} /> */}
           </div>
           
           {/* Join Button */}
