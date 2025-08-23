@@ -5,13 +5,9 @@ import ReviewActions from "./ReviewActions";
 import CrewLinkCard from "./CrewLinkCard";
 export default function ReviewCard({ review, crewId=1 }) {
   return (
-    <Link 
-‎      to={`/map?crew=${crewId}`} // This will open the modal on the map page
-‎      className="block hover:bg-gray-200 transition-colors"
-      >
     <div className=" m-1 ">
       <div className=" mb-2">
-      <CrewLinkCard />
+      <CrewLinkCard crewId={crewId} />
       </div >
       
       {/* Reviewer details */}
