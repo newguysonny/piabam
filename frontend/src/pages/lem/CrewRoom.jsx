@@ -1,6 +1,5 @@
 import CrewLayout from "../../components/crew/CrewLayout";
 import CrewChat from "../../components/crew/CrewChat";
-import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
