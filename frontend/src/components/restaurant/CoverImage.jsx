@@ -1,4 +1,5 @@
-import { FaArrowLeft, FaHeart, FaEllipsisH } from "react-icons/fa";
+import { FaArrowLeft, FaHeart } from "react-icons/fa";
+import { MdMoreVert } from "react-icons/md";
 
 export default function CoverImage({ src }) {
   return (
@@ -22,7 +23,7 @@ export default function CoverImage({ src }) {
           <FaHeart />
         </button>
            <button className="bg-black/50 text-white p-2 rounded-full">
-          <FaEllipsisH />
+          <MdMoreVert />
         </button>
       </div>
     </div>
