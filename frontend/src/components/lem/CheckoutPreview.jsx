@@ -13,6 +13,11 @@ export default function CheckoutPreview({ escrowFee = 1700, discount = 1500 }) {
   const subtotal = crew.subtotal;
   const total = subtotal + escrowFee - discount;
 
+  // Add safety check
+  if (!location.state) {
+    return <div>No order data found. Please go back and confirm your order.</div>;
+  }
+  
   const handleConfirmOrder = () => {
   const orderData = {
     total,
