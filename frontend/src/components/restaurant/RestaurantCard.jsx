@@ -6,7 +6,7 @@ const RestaurantCard = ({ item }) => {
 
   return (
     <div className="bg-white rounded-xl p-4 shadow-sm">
-      <CoverImage src="https://placehold.co/800x400" />
+      <CoverImage src="https://placehold.co/800x400" isStore={false} />
       <div className="flex justify-between items-start">
         <div>
           <h3 className="font-normal text-lg">{item.name}</h3>
