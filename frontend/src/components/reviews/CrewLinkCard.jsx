@@ -1,6 +1,6 @@
 import CrewStats from "../crew/CrewStats";
 
-export default function CrewLinkCard({ image, title="Lagos Foodie Club" }) {
+export default function CrewLinkCard({ image, crewId, title="Lagos Foodie Club" }) {
   return (
     <Link 
 ‎      to={`/map?crew=${crewId}`} // This will open the modal on the map page
