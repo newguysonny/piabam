@@ -29,6 +29,5 @@ export default function ReviewCard({ review, crewId=1 }) {
       {/* Actions */}
       <ReviewActions reactions={review.reactions} className="bg-red-100 w-full"/>
     </div>
-    </Link>
   );
 }
