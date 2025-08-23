@@ -1,11 +1,15 @@
 //components/Checkout.jsx
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
 import CartPreview from "./CartPreview.jsx";
 import StoreDetails from "./StoreDetails";
 import { FaArrowLeft } from "react-icons/fa";
 
-export default function CheckoutPreview({ subtotal = 7200, escrowFee = 1700, discount = 1500 }) {
+export default function CheckoutPreview({ crew, escrowFee = 1700, discount = 1500 }) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { subtotal} = location.state || {};
   const total = subtotal + escrowFee - discount;
 
   const handleConfirmOrder = () => {
