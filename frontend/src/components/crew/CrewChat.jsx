@@ -1,7 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { FiSend, FiShare2, FiShoppingBag } from "react-icons/fi";
+import { useParams, useNavigate } from 'react-router-dom';
 
 export default function CrewChat({ transaction }) {
+  ‎  const { id } = useParams(); // Get the crew ID from URL
+‎  const navigate = useNavigate();
+  useEffect(() => {
+‎    // Redirect to map page with crew ID as query parameter
+‎    navigate(`/map?crew=${id}`, { replace: true });
+‎  }, [id, navigate]);
   // Function to generate placeholder avatar dynamically
   const getPlaceholderAvatar = (username) => {
     const colors = ["7E22CE", "3B82F6", "10B981", "F59E0B"]; // Purple, Blue, Green, Yellow
