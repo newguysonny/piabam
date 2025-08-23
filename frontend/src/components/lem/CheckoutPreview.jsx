@@ -45,7 +45,7 @@ export default function CheckoutPreview({ escrowFee = 1700, discount = 1500 }) {
       <hr className="my-3 h-[20px] bg-gray-200 border-0 rounded" />
 
       {/* Cart Summary */}
-      <CartPreview isEditable={true} />
+      <CartPreview isEditable={true} userCart={crew.items}/>
 
       <hr className="my-3 h-[20px] bg-gray-200 border-0 rounded" />
 
