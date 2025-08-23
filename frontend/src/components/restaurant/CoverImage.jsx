@@ -19,9 +19,9 @@ export default function CoverImage({ src }) {
         <button className="bg-black/50 text-white p-2 rounded-full">
           <FaHeart />
         </button>
-        <button className="bg-black/50 text-white p-2 rounded-full">
+        {/*    <button className="bg-black/50 text-white p-2 rounded-full">
           <FaEllipsisH />
-        </button>
+        </button> */}
       </div>
     </div>
   );
