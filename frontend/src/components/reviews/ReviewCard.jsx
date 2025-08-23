@@ -5,6 +5,10 @@ import ReviewActions from "./ReviewActions";
 import CrewLinkCard from "./CrewLinkCard";
 export default function ReviewCard({ review }) {
   return (
+    <Link 
+‎      to={`/map?crew=${crew.id}`} // This will open the modal on the map page
+‎      className="block hover:bg-gray-200 transition-colors"
+      >
     <div className=" m-1 ">
       <div className=" mb-2">
       <CrewLinkCard />
@@ -29,5 +33,6 @@ export default function ReviewCard({ review }) {
       {/* Actions */}
       <ReviewActions reactions={review.reactions} className="bg-red-100 w-full"/>
     </div>
+    </Link>
   );
 }
