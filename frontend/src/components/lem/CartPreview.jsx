@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FiTrash2, FiPlus, FiMinus } from "react-icons/fi";
 import { AiOutlinePlus } from "react-icons/ai";
-
+{/*
 const initialCart = {
   items: [
     {
@@ -30,6 +30,7 @@ const initialCart = {
   ],
   subtotal: 6700, // coming from DB
 };
+*/}
 
 const CartPreview = ({ isEditable = false, userCart }) => {
   const [cart, setCart] = useState(userCart||initialCart);
