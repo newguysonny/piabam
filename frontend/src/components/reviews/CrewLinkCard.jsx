@@ -5,7 +5,7 @@ export default function CrewLinkCard({ image, crewId, title = "Lagos Foodie Club
   return (
     <Link 
       to={`/map?crew=${crewId}`}
-      className="block hover:bg-gray-200 transition-colors"
+      className="block hover:bg-gray-300 transition-colors"
     >
       <div className="flex items-center gap-3 p-3 bg-gray-100 rounded-lg shadow-md">
         {/* Crew Image */}
