@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaHeart } from "react-icons/fa";
 import { MdMoreVert } from "react-icons/md";
 
