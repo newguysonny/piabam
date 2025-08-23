@@ -2,12 +2,12 @@ import ReviewerInfo from "./ReviewerInfo";
 import ReviewRating from "./ReviewRating";
 import ReviewPhotos from "./ReviewPhotos";
 import ReviewActions from "./ReviewActions";
-import CrewCard from "./CrewCard";
+import CrewLinkCard from "./CrewLinkCard";
 export default function ReviewCard({ review }) {
   return (
     <div className=" m-1 ">
       <div className=" mb-2">
-      <CrewCard />
+      <CrewLinkCard />
       </div >
       
       {/* Reviewer details */}
