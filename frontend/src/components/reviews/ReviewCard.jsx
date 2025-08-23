@@ -26,7 +26,7 @@ export default function ReviewCard({ review, crewId = 1 }) {
   };
 
   // Determine if text needs truncation (e.g., more than 150 characters)
-  const needsTruncation = review.text.length > 150;
+  const needsTruncation = review.text.length > 50;
   const displayText = isExpanded 
     ? review.text 
     : needsTruncation 
@@ -34,7 +34,7 @@ export default function ReviewCard({ review, crewId = 1 }) {
       : review.text;
   
   return (
-    <div className="m-1 p-4 bg-white rounded-lg shadow-sm">
+    <div className="m-1 p-2 bg-white rounded-lg shadow-sm">
       <div className="mb-3">
         <CrewLinkCard crewId={crewId} />
       </div>
