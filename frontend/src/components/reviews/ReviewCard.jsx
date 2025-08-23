@@ -3,10 +3,10 @@ import ReviewRating from "./ReviewRating";
 import ReviewPhotos from "./ReviewPhotos";
 import ReviewActions from "./ReviewActions";
 import CrewLinkCard from "./CrewLinkCard";
-export default function ReviewCard({ review, crew.id=1 }) {
+export default function ReviewCard({ review, crewId=1 }) {
   return (
     <Link 
-‎      to={`/map?crew=${crew.id}`} // This will open the modal on the map page
+‎      to={`/map?crew=${crewId}`} // This will open the modal on the map page
 ‎      className="block hover:bg-gray-200 transition-colors"
       >
     <div className=" m-1 ">
