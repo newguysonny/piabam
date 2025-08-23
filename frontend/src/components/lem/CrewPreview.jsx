@@ -232,7 +232,7 @@ export default function CrewPreview({ crews, initialIndex, onClose }) {
             <button
               onClick={() => {
                 onClose();
-                navigate("/checkout", { state: { crew: currentCrew } });
+                navigate("/checkout-preview", { state: { crew: crewCart } });
               }}
               className="w-full bg-black text-white py-3 rounded-xl font-semibold hover:opacity-90 transition"
             >
