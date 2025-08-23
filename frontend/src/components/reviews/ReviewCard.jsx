@@ -46,7 +46,7 @@ export default function ReviewCard({ review, crewId = 1 }) {
       <ReviewRating rating={review.rating} date={review.date} />
 
       {/* Text with expand/collapse */}
-      <div className="mt-2">
+      <div className="mt-2 transition-all duration-300">
         <p className="text-gray-700 text-sm leading-relaxed">
           {displayText}
         </p>
