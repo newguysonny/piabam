@@ -5,7 +5,7 @@ import ReviewActions from "./ReviewActions";
 import CrewLinkCard from "./CrewLinkCard";
 export default function ReviewCard({ review, crewId=1 }) {
   return (
-    <div className=" m-1 border border-gray-200">
+    <div className=" m-1">
       <div className=" mb-2">
       <CrewLinkCard crewId={crewId} />
       </div >
