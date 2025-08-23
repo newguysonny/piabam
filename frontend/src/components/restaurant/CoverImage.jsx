@@ -11,7 +11,9 @@ export default function CoverImage({ src }) {
 
       {/* Top action buttons */}
       <div className="absolute top-3 left-3 flex space-x-2">
-        <button className="bg-black/50 text-white p-2 rounded-full">
+        <button
+          onClick={() => navigate(-1)}
+          className="bg-black/50 text-white p-2 rounded-full">
           <FaArrowLeft />
         </button>
       </div>
@@ -19,9 +21,9 @@ export default function CoverImage({ src }) {
         <button className="bg-black/50 text-white p-2 rounded-full">
           <FaHeart />
         </button>
-        {/*    <button className="bg-black/50 text-white p-2 rounded-full">
+           <button className="bg-black/50 text-white p-2 rounded-full">
           <FaEllipsisH />
-        </button> */}
+        </button>
       </div>
     </div>
   );
