@@ -3,7 +3,7 @@ import ReviewRating from "./ReviewRating";
 import ReviewPhotos from "./ReviewPhotos";
 import ReviewActions from "./ReviewActions";
 import CrewLinkCard from "./CrewLinkCard";
-export default function ReviewCard({ review }) {
+export default function ReviewCard({ review, crew.id=1 }) {
   return (
     <Link 
 ‎      to={`/map?crew=${crew.id}`} // This will open the modal on the map page
