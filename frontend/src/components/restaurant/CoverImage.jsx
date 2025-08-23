@@ -10,7 +10,7 @@ export default function CoverImage({ src, isStore = true }) {
       <img
         src={src}
         alt="Restaurant cover"
-        className="w-full h-56 object-cover"
+        className="w-full h-46 object-cover"
       />
 
       {/* Top action buttons */}
