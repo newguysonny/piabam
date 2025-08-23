@@ -5,6 +5,7 @@ import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
 import AuthCallback from "./auth/AuthCallback";
 import ScrollToTop from './components/ScrollToTop';
+import ProtectedRoute from './components/ProtectedRoute';
 
 import SigninForm from './pages/SigninForm';
 import SignupForm from './pages/SignupForm';
@@ -61,14 +62,14 @@ export default function App() {
         <Route path="/party" element={<StreamingDiscoveryPage />} />
                {/*Lem and Restaurants Section */}
         <Route path="/preview" element={<CrewPreview />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/payment-method" element={<PaymentMethod />} />
+        <Route path="/payment-method" element={<ProtectedRoute><PaymentMethod /></ProtectedRoute>} />
         <Route path="/crew" element={<CrewForm />} />
         <Route path="/map" element={<CrewMap />} />
         <Route path="/review" element={<ReviewsPage />} />
         <Route path="/lem" element={<LemDiscoveryPage />} />
-        <Route path="/crew-room/:id" element={<CrewRoom />} />
+        <Route path="/crew-room/:id" element={<ProtectedRoute><CrewRoom /></ProtectedRoute>} />
         <Route path="/lem-dashboard" element={<MyEarnings />} />
         <Route path="/store/:id" element={<RestaurantPage />} />
         
