@@ -164,12 +164,6 @@ const handleConfirmOptions = (selectedOptions, totalPrice) => {
   setModalItem(null);
 };
   
-  {/*
-const handleConfirmOptions = (selectedOptions, totalPrice) => {
-  addToCart({ ...modalItem, selectedOptions, totalPrice, quantity: 1 }, restaurantId);
-  toast.success(`${modalItem.name} ₦${totalPrice.toFixed(2)} (1) added to cart`);
-  setModalItem(null);
-}; */}
   
   return (
     <div className="bg-white-50 min-h-screen"> 
@@ -178,7 +172,7 @@ const handleConfirmOptions = (selectedOptions, totalPrice) => {
       <RestaurantInfo />
       </div>
       
-      <div className="mt-4 p-10">
+      <div className="mt-4 pl-10 pr-10">
   <DeliveryPickupToggle mode={mode} setMode={setMode} />
 </div>
 
