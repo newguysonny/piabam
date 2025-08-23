@@ -1,75 +1,44 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react"; // ← Add useEffect
 import { FiTrash2, FiPlus, FiMinus } from "react-icons/fi";
 import { AiOutlinePlus } from "react-icons/ai";
-/*
-const initialCart = {
-  items: [
-    {
-      id: 1,
-      name: "Sweet Chipotle BBQ Sauce",
-      price: 1000, // in Naira
-      quantity: 1,
-      image: "https://source.unsplash.com/80x80/?sauce",
-      customizations: [],
-    },
-    {
-      id: 2,
-      name: "Sweet Chipotle BBQ Crispy Chicken Wrap",
-      price: 5700, // in Naira
-      quantity: 1,
-      image: "https://source.unsplash.com/80x80/?burrito",
-      customizations: [
-        "Cheese",
-        "Lettuce",
-        "Pico De Gallo",
-        "Purple Cabbage",
-        "Spicy Ranch",
-        "Sweet Chipotle BBQ Sauce",
-      ],
-    },
-  ],
-  subtotal: 6700, // coming from DB
-};
-*/
 
-const CartPreview = ({ isEditable = false, userCart }) => {
-  const [cart, setCart] = useState(userCart);
-  
+const CartPreview = ({ isEditable = false, userCart = [] }) => {
+  const [cart, setCart] = useState(userCart); // ← Remove initialCart fallback
+
+  // Add useEffect to update when userCart changes
+  useEffect(() => {
+    setCart(userCart);
+  }, [userCart]);
 
   const handleIncrement = (id) => {
     if (!isEditable) return;
-    setCart((prev) => ({
-      ...prev,
-      items: prev.items.map((item) =>
+    setCart((prev) => 
+      prev.map((item) =>
         item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      ),
-    }));
+      )
+    );
   };
 
   const handleDecrement = (id) => {
     if (!isEditable) return;
-    setCart((prev) => ({
-      ...prev,
-      items: prev.items.map((item) =>
+    setCart((prev) =>
+      prev.map((item) =>
         item.id === id
           ? { ...item, quantity: item.quantity > 1 ? item.quantity - 1 : 1 }
           : item
-      ),
-    }));
+      )
+    );
   };
 
   const handleRemove = (id) => {
     if (!isEditable) return;
-    setCart((prev) => ({
-      ...prev,
-      items: prev.items.filter((item) => item.id !== id),
-    }));
+    setCart((prev) => prev.filter((item) => item.id !== id));
   };
 
   return (
     <div className="max-w-md mx-auto p-4">
-      {cart.items.map((item) => (
+      {cart.map((item) => ( // ← Change cart.items to just cart
         <div
           key={item.id}
           className="flex items-start justify-between py-4 border-b"
@@ -82,7 +51,7 @@ const CartPreview = ({ isEditable = false, userCart }) => {
 
           <div className="flex-1 mx-3">
             <h4 className="font-medium text-sm line-clamp-1">{item.name}</h4>
-            {item.customizations.length > 0 && (
+            {item.customizations && item.customizations.length > 0 && ( // ← Add safety check
               <ul className="text-xs text-gray-500 mt-1 space-y-0.5">
                 {item.customizations.map((note, index) => (
                   <li key={index}>{note}</li>
