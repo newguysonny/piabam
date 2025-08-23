@@ -30,11 +30,11 @@ export default function ReviewCard({ review, crewId = 1 }) {
   const displayText = isExpanded 
     ? review.text 
     : needsTruncation 
-      ? review.text.slice(0, 150) + '...' 
+      ? review.text.slice(0, 50) + '...' 
       : review.text;
   
   return (
-    <div className="m-1 p-2 bg-white rounded-lg shadow-sm">
+    <div className=" p-2 bg-white rounded-lg shadow-sm">
       <div className="mb-3">
         <CrewLinkCard crewId={crewId} />
       </div>
