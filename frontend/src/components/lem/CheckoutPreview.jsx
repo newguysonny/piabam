@@ -1,6 +1,6 @@
 // components/Checkout.jsx
 import { useNavigate } from "react-router-dom";
-import Cart from "./Cart.jsx";
+import CartPreview from "./CartPreview.jsx";
 import StoreDetails from "./StoreDetails";
 import { FaArrowLeft } from "react-icons/fa";
 
