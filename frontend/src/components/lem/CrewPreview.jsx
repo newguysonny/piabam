@@ -224,7 +224,7 @@ export default function CrewPreview({ crews, initialIndex, onClose }) {
               <p className="mt-3 text-gray-600">{currentCrew.description}</p>
             </div>
 
-            <CartPreview isEditable = {true} userCart={crewCart.items} />
+            <CartPreview isEditable = {false} userCart={crewCart.items} />
 
             {/* <CartPreview items={currentCrew.items || []} /> */}
           </div>
