@@ -1,6 +1,6 @@
 export default function ReviewPhotos({ photos, onPhotoClick }) {
   return (
-    <div className="flex space-x-2 mt-3">
+    <div className="flex space-x-1 mt-3">
       {photos.slice(0, 4).map((photo, idx) => (
         <img
           key={idx}
