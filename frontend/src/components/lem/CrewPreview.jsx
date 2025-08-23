@@ -9,7 +9,7 @@ const crewCart = {
     {
       id: 1,
       name: "Sweet Chipotle BBQ Sauce",
-      price: 1000, // in Naira
+      price: 2000, // in Naira
       quantity: 1,
       image: "https://source.unsplash.com/80x80/?sauce",
       customizations: [],
@@ -30,7 +30,7 @@ const crewCart = {
       ],
     },
   ],
-  subtotal: 6700, // coming from DB
+  subtotal: 7700, // coming from DB
 };
 
 
