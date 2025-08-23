@@ -7,8 +7,11 @@ const EscrowCard = ({ transaction }) => {
 
   const handleViewDetails = () => {
     navigate(`/crew-room/${transaction.id}`, {
-      state: { transactionData: transaction }
-    },{ state: { fromApp: true } });
+      state: { 
+        transactionData: transaction 
+        fromApp: true
+       }
+    });
   };
 
   return (
