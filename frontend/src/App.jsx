@@ -24,6 +24,7 @@ import MyEarnings from './pages/lem/MyEarnings';
 import ReviewsPage from './pages/lem/ReviewsPage';
 import CrewPreview from './components/lem/CrewPreview';
 import Checkout from "./components/lem/Checkout";
+import CheckoutPreview from "./components/lem/CheckoutPreview";
 import Cart from "./components/lem/Cart";
 import PaymentMethod from "./components/lem/PaymentMethod";
 
@@ -63,6 +64,7 @@ export default function App() {
                {/*Lem and Restaurants Section */}
         <Route path="/preview" element={<CrewPreview />} />
         <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
+        <Route path="/checkout-preview" element={<ProtectedRoute><CheckoutPreview /></ProtectedRoute>} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/payment-method" element={<ProtectedRoute><PaymentMethod /></ProtectedRoute>} />
         <Route path="/crew" element={<CrewForm />} />
