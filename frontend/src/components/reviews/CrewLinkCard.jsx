@@ -2,6 +2,10 @@ import CrewStats from "../crew/CrewStats";
 
 export default function CrewLinkCard({ image, title="Lagos Foodie Club" }) {
   return (
+    <Link 
+‎      to={`/map?crew=${crewId}`} // This will open the modal on the map page
+‎      className="block hover:bg-gray-200 transition-colors"
+      >
     <div className="flex items-center gap-3 p-3 bg-gray-100  rounded-lg shadow-md">
       {/* Crew Image */}
       <img
@@ -16,5 +20,6 @@ export default function CrewLinkCard({ image, title="Lagos Foodie Club" }) {
         <CrewStats />
       </div>
     </div>
+    </Link>
   );
 }
