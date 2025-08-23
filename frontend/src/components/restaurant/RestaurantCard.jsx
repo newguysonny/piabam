@@ -16,16 +16,7 @@ const RestaurantCard = ({ item }) => {
               • {item.orders} orders
             </span>
           </div>
-          {/*
-          <div className="flex gap-2 mt-2">
-            <span className="bg-purple-100 text-purple-600 text-xs px-2 py-1 rounded-full">
-              {item.category}
-            </span>
-            
-            <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">
-              {item.distance}
-            </span> 
-          </div> */}
+          
         </div>
         <div className="text-right">
           <span className="text-gray-500 text-sm">{item.deliveryTime}</span>
