@@ -171,7 +171,6 @@ export default function CrewChat({ transaction }) {
             {/* Modal Content */}
             <div className="p-4 overflow-y-auto max-h-[60vh]">
               <div className="text-gray-800 bg-white text-center py-8">
-                Store content will go here...
                 <LemDiscoveryPage />
               </div>
               {/* You can add your store items, menu, etc. here */}
