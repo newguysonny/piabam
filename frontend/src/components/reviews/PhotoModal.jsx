@@ -14,7 +14,7 @@ export default function PhotoModal({ photos, initialIndex = 0, onClose }) {
   };
 
   // Handle browser back button
-‎  useEffect(() => {
+  useEffect(() => {
 ‎    const handlePopState = () => {
 ‎      onClose(); // Close modal when back button is pressed
 ‎    };
