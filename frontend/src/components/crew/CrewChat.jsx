@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { FiSend, FiShare2, FiShoppingBag, FiX } from "react-icons/fi";
 import { useParams, useNavigate } from 'react-router-dom';
+import LemDiscoveryPage from "../../pages/lem/LemDiscoveryPage";
 
 export default function CrewChat({ transaction }) {
   // Function to generate placeholder avatar dynamically
@@ -173,6 +174,7 @@ export default function CrewChat({ transaction }) {
                 Store content will go here...
               </p>
               {/* You can add your store items, menu, etc. here */}
+              <LemDiscoveryPage />
             </div>
 
             {/* Modal Footer */}
