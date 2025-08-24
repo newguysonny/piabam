@@ -13,6 +13,26 @@ export default function PhotoModal({ photos, initialIndex = 0, onClose }) {
     setCurrentIndex((prev) => (prev - 1 + photos.length) % photos.length);
   };
 
+  // Handle browser back button
+‎  useEffect(() => {
+‎    const handlePopState = () => {
+‎      onClose(); // Close modal when back button is pressed
+‎    };
+‎
+‎    // Push a new state to prevent immediately going back in history
+‎    window.history.pushState({ isModalOpen: true }, '');
+‎
+‎    window.addEventListener('popstate', handlePopState);
+‎
+‎    return () => {
+‎      window.removeEventListener('popstate', handlePopState);
+‎      // Clean up the state we added if modal closes normally
+‎      if (window.history.state?.isModalOpen) {
+‎        window.history.back();
+‎      }
+‎    };
+‎  }, [onClose]);
+  
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
