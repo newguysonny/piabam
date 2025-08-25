@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
+import { ChevronUp, ChevronDown, Check } from "lucide-react";
 
 export default function ItemOptions({ item, onClose, onConfirm }) {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [totalPrice, setTotalPrice] = useState(item.price);
+  const [openGroups, setOpenGroups] = useState({}); // for collapsible groups
 
   // update price whenever selections change
   useEffect(() => {
@@ -59,50 +61,63 @@ export default function ItemOptions({ item, onClose, onConfirm }) {
           </div>
 
           {/* Options */}
-          {item.options?.map((opt) => (
-            <div key={opt.id} className="mb-4">
-              {/* Option Title - 56px gray background */}
-              <div className="h-14 bg-gray-100 flex items-center px-4 rounded-t-lg mb-1">
-                <p className="font-medium">{opt.name}</p>
+          {item.options?.map((opt) => {
+            const isOpen = openGroups[opt.id] ?? true;
+            return (
+              <div key={opt.id} className="mb-4 border rounded-lg overflow-hidden">
+                {/* Option Title */}
+                <button
+                  className="w-full h-14 flex justify-between items-center px-4 bg-gray-50"
+                  onClick={() =>
+                    setOpenGroups((prev) => ({
+                      ...prev,
+                      [opt.id]: !isOpen,
+                    }))
+                  }
+                >
+                  <p className="font-medium">{opt.name}</p>
+                  {isOpen ? (
+                    <ChevronUp className="w-5 h-5 text-gray-500" />
+                  ) : (
+                    <ChevronDown className="w-5 h-5 text-gray-500" />
+                  )}
+                </button>
+
+                {/* Option Choices */}
+                {isOpen && (
+                  <div className="divide-y">
+                    {opt.choices.map((choice) => {
+                      const selected =
+                        opt.type === "single"
+                          ? selectedOptions[opt.id] === choice.id
+                          : (selectedOptions[opt.id] || []).includes(choice.id);
+
+                      return (
+                        <div
+                          key={choice.id}
+                          className="flex items-center justify-between h-12 px-4 cursor-pointer"
+                          onClick={() => handleChange(opt.id, choice.id, opt.type)}
+                        >
+                          <div className="flex flex-col">
+                            <span className="font-medium">{choice.label}</span>
+                            {choice.price > 0 && (
+                              <span className="text-gray-500 text-sm">
+                                +₦{choice.price.toLocaleString()}
+                              </span>
+                            )}
+                          </div>
+
+                          {selected && (
+                            <Check className="w-5 h-5 text-red-500" strokeWidth={3} />
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
-              
-              {/* Option Choices */}
-              <div className="space-y-1">
-                {opt.choices.map((choice) => (
-                  <label 
-                    key={choice.id} 
-                    className="flex items-center justify-between h-19 bg-white px-4 rounded-lg border border-gray-200"
-                  >
-                    <div className="flex flex-col">
-                      <span className="font-medium">{choice.label}</span>
-                      {choice.price > 0 && (
-                        <span className="text-gray-500 text-sm">
-                          +₦{choice.price}
-                        </span>
-                      )}
-                    </div>
-                    
-                    <div className="flex items-center">
-                      <input
-                        type={opt.type === "single" ? "radio" : "checkbox"}
-                        name={opt.id}
-                        value={choice.id}
-                        checked={
-                          opt.type === "single"
-                            ? selectedOptions[opt.id] === choice.id
-                            : (selectedOptions[opt.id] || []).includes(choice.id)
-                        }
-                        onChange={() =>
-                          handleChange(opt.id, choice.id, opt.type)
-                        }
-                        className="w-5 h-5"
-                      />
-                    </div>
-                  </label>
-                ))}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Footer */}
